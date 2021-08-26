@@ -1,0 +1,23 @@
+{
+  "name": "menzel-fahrzeugtechnick-website",
+  "version": "1.0.0",
+  "description": "The website of the Company Menzel-Fahrzeugtechnick",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chikseen/menzel-fahrzeugtechnick-website.git"
+  },
+  "author": "Tim Menzel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chikseen/menzel-fahrzeugtechnick-website/issues"
+  },
+  "homepage": "https://github.com/Chikseen/menzel-fahrzeugtechnick-website#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}

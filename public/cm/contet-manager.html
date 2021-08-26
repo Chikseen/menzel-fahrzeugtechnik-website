@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server/Client Content Mangertest</title>
+</head>
+
+<body>
+    <h1>Content-Manager für MFT</h1>
+
+    <div class="login">
+        <label>Benutzername</label>
+        <input id="user" type="text">
+        <label>Passwort</label>
+        <input type="password" id="passwort">
+    </div>
+    <div class="selection">
+        <label>Operator</label>
+        <select name="Operant" id="Operant">
+            <option value="add">Hinzufügen</option>
+            <option value="edit">Bearbeiten</option>
+            <option value="delete">Löschen</option>
+        </select>
+        <label>Bereich</label>
+        <select name="field" id="field">
+            <option value="home">Home</option>
+            <option value="offering">Leistungen</option>
+            <option value="about">Kontakt</option>
+            <option value="impressum">Impressum</option>
+        </select>
+    </div>
+    
+    <button id="btn" onclick="exe()"> Auf gehts</button>
+    <script src="/../menzel-fahrzeugtechnick-website/settings-logic.js"></script>
+</body>
+
+</html>
