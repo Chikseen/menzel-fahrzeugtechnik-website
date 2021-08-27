@@ -27,13 +27,29 @@ app.get("/api", (request, response) => {
     })
 });
 
+let valid;
+
 app.post("/login", (request, response) => {
 
     const data = request.body;
+    
 
     database.insert(data);
 
-    response.json({
-        status: "success",
-    });
+    console.log(data);
+
+    if ((data.username === "tim") && (data.passwort === "123")) {
+        console.log("login is valid");
+        valid = true;
+    }
+    else {
+        console.log("login is not valid");
+        valid = false;
+    }
+});
+
+app.get("/login", (request, response) => {
+    database.find({}, (err, data) => {
+        response.json({valid});
+    })
 });
