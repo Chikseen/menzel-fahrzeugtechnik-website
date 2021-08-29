@@ -20,19 +20,19 @@ loginBTNAL.addEventListener("click", function () {
     getData();
 });
 
-const test = document.createElement("label");
+text = document.getElementById("feedback");
 
 async function getData() {
     const response = await fetch("/login");
     const data = await response.json();
 
     if (data.valid) {
-        test.textContent = "true";
+        text.textContent = "Die Anmeldedaten sind korref´kt";
+        text.classList.toggle("messagetrue");
     }
     else {
-        test.textContent = "false";
+        text.textContent = "Die Anmeldedaten sind falsch";
+        text.classList.toggle("messagefalse");
     }
-
-    document.body.append(test);
     console.log(data);
 }
