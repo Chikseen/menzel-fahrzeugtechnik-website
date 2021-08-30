@@ -1,20 +1,24 @@
 const { request, response } = require("express");
 const express = require("express");
 const app = express();
-const Datastore = require("nedb");
+const Datastore = require("mysql");
 
 app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 
-const database = new Datastore("content.db");
-const loginlog = new Datastore("loginlog.db");
-database.loadDatabase();
-loginlog.loadDatabase();
+
+const con = Datastore.createConnection({
+    host: "localhost",
+    user: "yourusername",
+    password: "yourpassword"
+});
+
+
 
 app.post("/datatoserver", (request, response) => {
     console.log("ive got a request");
-   
+
     const data = request.body;
 
     console.log(data);
@@ -24,6 +28,15 @@ app.post("/datatoserver", (request, response) => {
     response.json({
         statusme: "success"
     });
+});
+
+app.post("/removedata", (request, response) => {
+    console.log("ive will remove data");
+
+    const data = request.body;
+
+    console.log(data);
+
 });
 
 app.get("/api", (request, response) => {
