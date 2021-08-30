@@ -7,17 +7,22 @@ app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 
-const database = new Datastore("database.db");
+const database = new Datastore("content.db");
+const loginlog = new Datastore("loginlog.db");
 database.loadDatabase();
+loginlog.loadDatabase();
 
-app.post("/test", (request, response) => {
+app.post("/datatoserver", (request, response) => {
     console.log("ive got a request");
-
+   
     const data = request.body;
 
+    console.log(data);
+
     database.insert(data);
+
     response.json({
-        status: "success",
+        statusme: "success"
     });
 });
 
@@ -32,9 +37,7 @@ let valid;
 app.post("/login", (request, response) => {
 
     const data = request.body;
-    
-
-    database.insert(data);
+    loginlog.insert(data);
 
     console.log(data);
 
@@ -49,7 +52,5 @@ app.post("/login", (request, response) => {
 });
 
 app.get("/login", (request, response) => {
-    database.find({}, (err, data) => {
-        response.json({valid});
-    })
+    response.json({ valid });
 });

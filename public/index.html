@@ -5,24 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menzel-Fahrzeugtechnick</title>
+    <title>Menzel-Fahrzeugtechnik</title>
 </head>
 
 <body>
-    <h1>data</h1>
+    <h1>Menzel-Fahrzeugtechnik</h1>
+    <button id="btn" onclick="exe()"> Save</button>
+    <button id="btn" onclick="getData()"> get</button>
+    <input type="text" id="header">
+    <input type="text" id="content">
+    <input type="text" id="image">
+
     <script>
-        getData();
+        async function exe() {
+            console.log("Ive Been Clicked");
+
+            const header = document.getElementById("header").value;
+            const content = document.getElementById("content").value;
+            const image = document.getElementById("image").value;
+
+            const data = {header, content, image};
+
+            console.log(data);
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            };
+            const response = await fetch("/datatoserver", options)
+            const json = await response.json();
+            console.log(json);
+            
+        };
+    </script>
+    <script>
+       
         async function getData() {
             const response = await fetch("/api");
             const data = await response.json();
 
-            for( item of data) {
-                const test = document.createElement("div");
-               test.textContent = `${item.content}`;
+            for (item of data) {
+                const dispaly = document.createElement("div");
 
-               document.body.append(test);
+                dispaly.textContent = `${item.header}, ${item.content}, ${item.image}`;
 
-            console.log(data);
+                document.body.append(dispaly);
+
+                console.log(data);
             }
         }
     </script>

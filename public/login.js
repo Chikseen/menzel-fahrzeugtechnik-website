@@ -29,6 +29,7 @@ async function getData() {
     if (data.valid) {
         text.textContent = "Die Anmeldedaten sind korref´kt";
         text.classList.toggle("messagetrue");
+        window.location.replace("/cm/contet-manager.html");
     }
     else {
         text.textContent = "Die Anmeldedaten sind falsch";
