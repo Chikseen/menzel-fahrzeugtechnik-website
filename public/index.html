@@ -6,25 +6,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menzel-Fahrzeugtechnik</title>
+    <link rel="stylesheet" type="text/css" href="/css/mainpage.css">
 </head>
 
-<body>
-    <h1>Menzel-Fahrzeugtechnik</h1>
-    <button id="btn" onclick="exe()"> Save</button>
-    <button id="btn" onclick="getData()"> get</button>
-    <input type="text" id="header">
-    <input type="text" id="content">
-    <input type="text" id="image">
+<body onload="onloaddata()">
+    <div class="header">
+        <div id="title">
+            <h1>Menzel-Fahrzeugtechnik</h1>
+
+        </div>
+        <div class="nav-bar">
+            <nav id="nav-header">
+                <h2>Home</h2>
+                <h2>Leistungen</h2>
+                <h2>Konntakt</h2>
+            </nav>
+        </div>
+    </div>
+    </div>
+    <div class="content" id="maincontent">
+        <div class="add-content">
+            <p>Hover me</p>
+            <div class="dropdown">
+                <input type="text" id="header"> header
+                <input type="text" id="content"> content
+                <input type="text" id="image"> image
+                <div>
+                    <button id="btn" onclick="exe()"> Save</button>
+                </div>
+
+                <div class="test">
+                    <button id="btn" onclick="removedata()"> remove</button>
+                    <label>delete with ID</label>
+                    <input type="text" id="remove">
+                </div>
+                <div class="chosesubnav">
+                    <p>select the nav sub cat</p>
+                    <div class="selectsubnav">
+                        <input type="radio" id="home"> Home
+                        <input type="radio" id="service"> Leistungen
+                        <input type="radio" id="Contact"> Contact
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div id="Copyright">
+            <p>Copyright</p>
+        </div>
+        <div>
+            <p>Impresum</p>
+        </div>
+        <div>
+            <p>Datenschutz</p>
+        </div>
+    </div>
 
     <script>
         async function exe() {
-            console.log("Ive Been Clicked");
-
+            const subNavElement = 0;
             const header = document.getElementById("header").value;
             const content = document.getElementById("content").value;
             const image = document.getElementById("image").value;
 
-            const data = {header, content, image};
+            const data = { header, content, image };
 
             console.log(data);
 
@@ -38,24 +84,76 @@
             const response = await fetch("/datatoserver", options)
             const json = await response.json();
             console.log(json);
-            
+            getData(json);
+        };
+    </script>
+
+    <script>
+
+        async function getData(data) {
+
+            document.querySelectorAll('.dynacontent').forEach(e => e.remove());
+
+            for (item of data) {
+                const display = document.createElement("div");
+                display.classList.add('dynacontent');
+                display.textContent = `${item.header}, ${item.content}, ${item.image}, ${item._id} `;
+
+                document.getElementById("maincontent").append(display);
+            }
+            console.log(data);
+        }
+
+    </script>
+
+    <script>
+        async function removedata() {
+
+            const toremove = document.getElementById("remove").value;
+
+            console.log(toremove);
+
+            const data = { toremove };
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data),
+            };
+            const response = await fetch("/removedata", options)
+            const json = await response.json();
+            console.log(json);
+            getData(json);
+
         };
     </script>
     <script>
-       
-        async function getData() {
-            const response = await fetch("/api");
+        async function onloaddata() {
+
+            const response = await fetch("/onloaddata");
             const data = await response.json();
 
             for (item of data) {
-                const dispaly = document.createElement("div");
+                const display = document.createElement("div");
+                const header = document.createElement("h1");
+                const content = document.createElement("p");
+                const image = document.createElement("p");
+                const id = document.createElement("h1");
 
-                dispaly.textContent = `${item.header}, ${item.content}, ${item.image}`;
 
-                document.body.append(dispaly);
+                display.classList.add('dynacontent');
+                display.textContent = `${item.content}, ${item.image}, ${item._id} `;
+                header.textContent = `${item.header}`;
 
-                console.log(data);
+                document.getElementById("maincontent").append(display);
+                document.querySelector(".dynacontent").append(header);
+
+
+
             }
+            console.log(data);
         }
     </script>
 </body>

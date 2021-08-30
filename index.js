@@ -12,24 +12,46 @@ const loginlog = new Datastore("loginlog.db");
 database.loadDatabase();
 loginlog.loadDatabase();
 
+function getandsend( response) {
+    console.log("DATALOG")
+
+    database.find({}, (err, data) => {
+        response.json(data);
+    })
+}
+
+app.get("/onloaddata", (request, response) => {
+    console.log("IS LOADED")
+
+    database.find({}, (err, data) => {
+        response.json(data);
+    })
+});
+
 app.post("/datatoserver", (request, response) => {
     console.log("ive got a request");
-   
+
     const data = request.body;
 
     console.log(data);
 
     database.insert(data);
 
-    response.json({
-        statusme: "success"
-    });
+    getandsend(response);
 });
 
-app.get("/api", (request, response) => {
-    database.find({}, (err, data) => {
-        response.json(data);
-    })
+app.post("/removedata", (request, response) => {
+    console.log("ive will remove data");
+
+    const data = request.body;
+    console.log("WILL BE REMOVED " + data.toremove);
+
+    database.remove({ _id: data.toremove }, {}, function (err, numRemoved) {
+        // numRemoved = 1
+    });
+
+    getandsend(response);
+
 });
 
 let valid;

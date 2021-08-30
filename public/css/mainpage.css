@@ -1,0 +1,103 @@
+
+body {
+    background-color: lightseagreen;
+    position: relative;
+}
+
+#title {
+    align-items: center;
+    text-align: center;
+
+}
+
+.header {
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding-top:100px;
+    padding-bottom: 100px;
+    background-color: lightcyan;
+}
+.nav-bar {
+    display: flex;
+    justify-content: center;
+}
+
+#nav-header {
+    flex-direction: row;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+#nav-header h2 {
+    padding: 20px;
+}
+
+.footer {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer div{
+    background-color: lemonchiffon;
+    padding: 50px;
+}
+
+.content {
+    position: relative;
+    margin: 50px;
+    background-color: khaki;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-content, .chosesubnav {
+    align-self: flex-end;
+    margin-right: 100px;
+    align-content: flex-end;
+    display: inline-block;
+}
+
+
+.dropdown, .selectsubnav {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+  
+  .add-content:hover .dropdown {
+    background-color: #b18080;
+      position: absolute;
+    display: block;
+}
+
+  .chosesubnav:hover .selectsubnav {
+    background-color: #b9dfb9;
+    display: block;
+}
+
+
+.dynacontent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    background-color: cornsilk;
+}
+
+.test {  
+    padding: 20px;
+}
+
