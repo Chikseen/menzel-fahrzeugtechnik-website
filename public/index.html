@@ -6,67 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menzel-Fahrzeugtechnik</title>
-    <link rel="stylesheet" type="text/css" href="/css/mainpage.css">
 </head>
 
 <body>
-    <div class="header">
-        <div id="title">
-            <h1>Menzel-Fahrzeugtechnik</h1>
-
-        </div>
-        <div class="nav-bar">
-            <nav id="nav-header">
-                <h2>Home</h2>
-                <h2>Leistungen</h2>
-                <h2>Konntakt</h2>
-            </nav>
-        </div>
-    </div>
-    </div>
-    <div class="content">
-        <div class="add-content">
-            <p>Hover me</p>
-            <div class="dropdown">
-                <label>header</label>
-                <input type="text" id="header">
-                <label>content</label>
-                <input type="text" id="content">
-                <label>image</label>
-                <input type="text" id="image">
-                <div>
-                    <button id="btn" onclick="exe()"> Save</button>
-                    <button id="btn" onclick="getData()"> get</button>
-                </div>
-
-                <div class="test">
-                    <button id="btn" onclick="removedata()"> remove</button>
-                    <label>delete with ID</label>
-                    <input type="text" id="remove">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <div id="Copyright">
-            <p>Copyright</p>
-        </div>
-        <div>
-            <p>Impresum</p>
-        </div>
-        <div>
-            <p>Datenschutz</p>
-        </div>
-    </div>
+    <h1>Menzel-Fahrzeugtechnik</h1>
+    <button id="btn" onclick="exe()"> Save</button>
+    <button id="btn" onclick="getData()"> get</button>
+    <input type="text" id="header">
+    <input type="text" id="content">
+    <input type="text" id="image">
 
     <script>
         async function exe() {
+            console.log("Ive Been Clicked");
 
             const header = document.getElementById("header").value;
             const content = document.getElementById("content").value;
             const image = document.getElementById("image").value;
 
-            const data = { header, content, image };
+            const data = {header, content, image};
 
             console.log(data);
 
@@ -80,51 +38,25 @@
             const response = await fetch("/datatoserver", options)
             const json = await response.json();
             console.log(json);
-
+            
         };
     </script>
-
     <script>
-
+       
         async function getData() {
-            document.querySelectorAll('.content').forEach(e => e.remove());
-
             const response = await fetch("/api");
             const data = await response.json();
 
             for (item of data) {
-                const display = document.createElement("div");
-                display.classList.add('content');
-                display.textContent = `${item.header}, ${item.content}, ${item.image}, ${item._id} `;
+                const dispaly = document.createElement("div");
 
-                document.body.append(display);
+                dispaly.textContent = `${item.header}, ${item.content}, ${item.image}`;
+
+                document.body.append(dispaly);
+
+                console.log(data);
             }
-            console.log(data);
         }
-
-    </script>
-
-    <script>
-        async function removedata() {
-
-            const toremove = document.getElementById("remove").value;
-
-            console.log(toremove);
-
-            const data = { toremove };
-
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data),
-            };
-            const response = await fetch("/removedata", options)
-            const json = await response.json();
-            console.log(json);
-
-        };
     </script>
 </body>
 
