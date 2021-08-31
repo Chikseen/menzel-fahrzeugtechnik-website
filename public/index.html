@@ -10,10 +10,12 @@
 </head>
 
 <body onload="onloaddata()">
+    <div class="login">
+        <a href="/cm-login.html"> Login</a>
+    </div>
     <div class="header">
         <div id="title">
             <h1>Menzel-Fahrzeugtechnik</h1>
-
         </div>
         <div class="nav-bar">
             <nav id="nav-header">
@@ -96,10 +98,25 @@
 
             for (item of data) {
                 const display = document.createElement("div");
+                const header = document.createElement("h1");
+                const content = document.createElement("p");
+                const image = document.createElement("p");
+                const id = document.createElement("h1");
+
+
                 display.classList.add('dynacontent');
-                display.textContent = `${item.header}, ${item.content}, ${item.image}, ${item._id} `;
+                display.setAttribute("id", `${item._id}`);
+
+                header.textContent = `${item.header}`;
+                content.textContent = `${item.content}`;
+                image.textContent = `${item.image}`;
+                id.textContent = `${item._id}`;
 
                 document.getElementById("maincontent").append(display);
+                document.getElementById(`${item._id}`).append(header);
+                document.getElementById(`${item._id}`).append(content);
+                document.getElementById(`${item._id}`).append(image);
+                document.getElementById(`${item._id}`).append(id );  
             }
             console.log(data);
         }
@@ -132,8 +149,29 @@
     <script>
         async function onloaddata() {
 
-            const response = await fetch("/onloaddata");
-            const data = await response.json();
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            console.log(urlParams.get("id"));
+
+            const cs = urlParams.get("id");
+            const sendData = { cs };
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(sendData),
+            };
+            const responseSession = await fetch("/getSession", options)
+            const session = await responseSession.json();
+
+            console.log("SID: " + session);
+
+
+
+            const responseOnLoad = await fetch("/onloaddata");
+            const data = await responseOnLoad.json();
 
             for (item of data) {
                 const display = document.createElement("div");
@@ -144,14 +182,18 @@
 
 
                 display.classList.add('dynacontent');
-                display.textContent = `${item.content}, ${item.image}, ${item._id} `;
+                display.setAttribute("id", `${item._id}`);
+
                 header.textContent = `${item.header}`;
+                content.textContent = `${item.content}`;
+                image.textContent = `${item.image}`;
+                id.textContent = `${item._id}`;
 
                 document.getElementById("maincontent").append(display);
-                document.querySelector(".dynacontent").append(header);
-
-
-
+                document.getElementById(`${item._id}`).append(header);
+                document.getElementById(`${item._id}`).append(content);
+                document.getElementById(`${item._id}`).append(image);
+                document.getElementById(`${item._id}`).append(id );  
             }
             console.log(data);
         }

@@ -7,8 +7,6 @@ loginBTNAL.addEventListener("click", function () {
 
     const data = { username, passwort };
 
-    console.log(data);
-
     const options = {
         method: "POST",
         headers: {
@@ -29,11 +27,35 @@ async function getData() {
     if (data.valid) {
         text.textContent = "Die Anmeldedaten sind korref´kt";
         text.classList.toggle("messagetrue");
-        window.location.replace("/cm/contet-manager.html");
+        const SID = sessionID(10);
+
+        datao = {SID}
+
+        console.log("Session ID is send: " + datao.SID)
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datao),
+        };
+        const response = fetch("/createSession", options);
+        window.location.replace("/index.html?id=" + SID);
     }
+
     else {
         text.textContent = "Die Anmeldedaten sind falsch";
         text.classList.toggle("messagefalse");
     }
-    console.log(data);
+}
+
+function sessionID(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }

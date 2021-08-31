@@ -12,7 +12,7 @@ const loginlog = new Datastore("loginlog.db");
 database.loadDatabase();
 loginlog.loadDatabase();
 
-function getandsend( response) {
+function getandsend(response) {
     console.log("DATALOG")
 
     database.find({}, (err, data) => {
@@ -21,8 +21,6 @@ function getandsend( response) {
 }
 
 app.get("/onloaddata", (request, response) => {
-    console.log("IS LOADED")
-
     database.find({}, (err, data) => {
         response.json(data);
     })
@@ -75,4 +73,43 @@ app.post("/login", (request, response) => {
 
 app.get("/login", (request, response) => {
     response.json({ valid });
+});
+
+
+
+
+
+let SID;
+
+app.post("/createSession", (request, response) => {
+
+    SID = request.body;
+    console.log(SID);
+    response.json({ SID });
+
+});
+
+app.post("/getSession", (request, response) => {
+
+    const sessions = request.body;
+    console.log(sessions);
+
+    let valid = false
+
+    if (SID != undefined) {
+
+        console.log("To Compare");
+        console.log(sessions.cs);
+        console.log(SID.SID);
+        if (sessions.cs === SID.SID) {
+            valid = true;
+            console.log("session = SID")
+            response.json({valid});
+        }
+        else {
+            valid = false;
+            console.log("ungelich")
+            response.json({valid});
+        }
+    }
 });

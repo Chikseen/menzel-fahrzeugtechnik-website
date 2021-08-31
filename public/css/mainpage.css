@@ -10,6 +10,12 @@ body {
 
 }
 
+.login {
+    position: absolute;
+    right: 100px;
+    top: 50px;
+}
+
 .header {
     margin: 50px;
     display: flex;
