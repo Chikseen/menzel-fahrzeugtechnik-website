@@ -107,3 +107,7 @@ body {
     padding: 20px;
 }
 
+.logo svg {
+    position: box;
+    fill:#b9dfb9;
+}

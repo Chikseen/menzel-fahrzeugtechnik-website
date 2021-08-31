@@ -38,14 +38,13 @@ async function getData(data) {
             const image = document.createElement("p");
             const id = document.createElement("h1");
 
-
             display.classList.add('dynacontent');
             display.setAttribute("id", `${item._id}`);
 
             header.textContent = `${item.header}`;
             content.textContent = `${item.content}`;
             image.textContent = `${item.image}`;
-            id.textContent = `${item._id}`;
+            id.textContent = "ID: " + `${item._id}`;
 
             document.getElementById("maincontent").append(display);
             document.getElementById(`${item._id}`).append(header);
@@ -56,7 +55,6 @@ async function getData(data) {
         console.log(data);
     }
 }
-
 
 async function removedata() {
     if (session.valid) {
@@ -88,6 +86,8 @@ async function onloaddata() {
     const cs = urlParams.get("id");
     const sendData = { cs };
 
+    
+
     const options = {
         method: "POST",
         headers: {
@@ -95,13 +95,17 @@ async function onloaddata() {
         },
         body: JSON.stringify(sendData),
     };
+
+    console.log("P1");
     const responseSession = await fetch("/getSession", options)
+    console.log("P2");
     session = await responseSession.json();
 
     console.log(session);
 
 
     const responseOnLoad = await fetch("/onloaddata");
+    
     const data = await responseOnLoad.json();
 
     for (item of data) {
@@ -127,7 +131,6 @@ async function onloaddata() {
         document.getElementById(`${item._id}`).append(id);
     }
     console.log(data);
-
 
     const displayAdminMenu = document.getElementById("admin");
     if (session.valid) {

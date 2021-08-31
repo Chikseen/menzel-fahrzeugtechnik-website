@@ -104,14 +104,12 @@ app.post("/getSession", (request, response) => {
         if (sessions.cs === SID.SID) {
             valid = true;
             console.log("session = SID");
-            response.json({valid});
-            console.log({valid});
-        }
-        else {
-            valid = false;
-            console.log("ungelich");
-            response.json({valid});
-            console.log({valid});
+            response.json({ valid });
+            console.log({ valid });
         }
     }
+    valid = false;
+    console.log("ungelich");
+    response.json({ valid });
+    console.log({ valid });
 });
