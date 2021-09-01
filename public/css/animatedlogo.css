@@ -1,0 +1,117 @@
+
+
+.logo svg {
+    left: calc(50% - 200px);
+    position: absolute;
+}
+
+#leftside {
+    animation: bulidcar-cas 4s alternate infinite;
+    fill: aquamarine;
+}
+#leftside path {
+    animation: bulidcar-cas-cp 4s alternate infinite;
+}
+
+#upperDot {
+    animation: bulidcar-rightwheel 4s alternate infinite;
+    fill: rgb(255, 204, 127);
+}
+#lowerDot {
+    animation: bulidcar-lefttwheel 4s alternate infinite;
+    fill: rgb(155, 127, 255);
+}
+#svgp4 {
+    fill: rgb(255, 127, 238);
+}
+#d-shadow {
+    animation: bulidcar-bwall 4s alternate infinite;
+    fill: rgb(53, 71, 43);
+}
+#d-shadow path{
+    animation: bulidcar-bwall-cp 4s alternate infinite;
+}
+#svgp6 {
+    fill: rgb(69, 43, 71);
+}
+
+@keyframes bulidcar-cas{
+    15%{
+        transform: rotate(90deg);
+        fill: rgb(112, 29, 29);
+    }
+    35%{
+        transform: translateY(80%) rotate(90deg);
+        fill: black;
+    }
+    100%{
+        transform: translateY(80%) rotate(90deg);
+    }
+}
+@keyframes bulidcar-cas-cp{
+    30%{
+        d: path("M 50 1000 L 50 0 L 150 50 L 150 150 L 250 250 L 250 750 L 150 900 L 150 950 Z");
+    }
+    100%{
+        d: path("M 50 1000 L 50 0 L 150 50 L 150 150 L 250 250 L 250 750 L 150 900 L 150 950 Z");
+    }
+}
+
+@keyframes bulidcar-rightwheel{
+    10% {
+        transform: translateX(67.5%);
+    }
+    30% {
+        transform: translateY(70%) translateX(50%);
+        fill: rgb(112, 29, 29);
+    }
+    30% {
+        transform: scale(2) translateY(70%) translateX(50%);
+    }
+    100% {
+        transform: scale(2) translateY(70%) translateX(50%);
+        fill: black;
+    }
+}
+@keyframes bulidcar-lefttwheel{
+    10% {
+        transform: translateX(-15%);
+    }
+    30% {
+        transform: scale(2) translateY(-15%) translateX(5%);
+    }
+    100% {
+        transform: scale(2) translateY(-15%) translateX(5%);
+        fill: black;
+    }
+}
+@keyframes  bulidcar-bwall{
+    30% {
+        transform: translateX(0%);
+    }
+    40% {
+        transform: translateX(15%);
+    }
+    45% {
+        transform: translateY(2.5%) translateX(15%);
+    }
+    100% {
+        transform: translateY(2.5%) translateX(15%);
+        fill: black;
+    }
+}
+@keyframes  bulidcar-bwall-cp{
+    0%{
+        d: path("M 300 200 L 400 200 L 400 800 L 300 800 Z");
+    }
+    30%{
+        d: path("M 300 200 L 400 200 L 400 800 L 300 800 Z");
+    }
+    40%{
+        d: path("M 300 500 L 400 500 L 400 800 L 300 800 Z");
+    }
+    100%{
+        d: path("M 300 500 L 400 500 L 400 800 L 300 800 Z");
+    }
+}
+

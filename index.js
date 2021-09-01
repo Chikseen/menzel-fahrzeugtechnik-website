@@ -107,9 +107,18 @@ app.post("/getSession", (request, response) => {
             response.json({ valid });
             console.log({ valid });
         }
+        else {
+            valid = false;
+            console.log("ungelich");
+            response.json({ valid });
+            console.log({ valid });
+        }
     }
-    valid = false;
-    console.log("ungelich");
-    response.json({ valid });
-    console.log({ valid });
+    else {
+        valid = false;
+        console.log("ungelich");
+        response.json({ valid });
+        console.log({ valid });
+    }
+    
 });
