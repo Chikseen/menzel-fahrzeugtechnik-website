@@ -40,8 +40,11 @@ body {
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
-#nav-header h2 {
+#nav-header button {
+    border: none;
+    background-color: rgba(250, 235, 215, 0);
     padding: 20px;
+    font-size: 2rem;
 }
 
 .footer {
@@ -105,4 +108,9 @@ body {
 
 .test {  
     padding: 20px;
+}
+
+
+.getvis {
+    display: none;
 }

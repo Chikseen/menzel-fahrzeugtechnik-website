@@ -29,7 +29,8 @@
                 </path>
             </svg>
             <svg width="400px" hieght="00px" viewBox="0 0 1000 1000" id="d-curve">
-                <path d="M 300 50 L 700 50 L 850 200 L 850 800 L 700 950 L 300 950 L 300 850 L 650 850 L 750 750 L 750 250 L 650 150 L 300 150 Z">
+                <path
+                    d="M 300 50 L 700 50 L 850 200 L 850 800 L 700 950 L 300 950 L 300 850 L 650 850 L 750 750 L 750 250 L 650 150 L 300 150 Z">
                 </path>
             </svg>
             <svg width="400px" hieght="00px" viewBox="0 0 1000 1000" id="d-shadow">
@@ -46,10 +47,11 @@
         </div>
         <div class="nav-bar">
             <nav id="nav-header">
-                <h2>Home</h2>
-                <h2>Leistungen</h2>
-                <h2>Konntakt</h2>
-                <h2>Handel</h2>
+                <button id="home" onclick="loadview(home)">Home</button>
+                <button id="service" onclick="loadview(service)">Leistungen</button>
+                <button id="kontakt" onclick="loadview(kontakt)">Kontakt</button>
+                <button id="trade" onclick="loadview(trade)">Handel</button>
+                <button id="termine" onclick="loadview(termine)">Termine</button>
             </nav>
         </div>
     </div>
@@ -69,14 +71,6 @@
                     <button id="btn" onclick="removedata()"> remove</button>
                     <label>delete with ID</label>
                     <input type="text" id="remove">
-                </div>
-                <div class="chosesubnav">
-                    <p>select the nav sub cat</p>
-                    <div class="selectsubnav">
-                        <input type="radio" id="home"> Home
-                        <input type="radio" id="service"> Leistungen
-                        <input type="radio" id="Contact"> Contact
-                    </div>
                 </div>
             </div>
         </div>
