@@ -114,3 +114,7 @@ body {
 .getvis {
     display: none;
 }
+
+#nav-header button {
+    background-color: aqua;
+}
