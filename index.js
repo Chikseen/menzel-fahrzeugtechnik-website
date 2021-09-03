@@ -8,8 +8,8 @@ app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 
-const database = new Datastore("content.db");
-const loginlog = new Datastore("loginlog.db");
+const database = new Datastore("database/content.db");
+const loginlog = new Datastore("database/loginlog.db");
 database.loadDatabase();
 loginlog.loadDatabase();
 
