@@ -39,17 +39,19 @@ app.post("/datatoserver", (request, response) => {
 });
 
 app.post("/removedata", (request, response) => {
-    console.log("ive will remove data");
 
     const data = request.body;
-    console.log("WILL BE REMOVED " + data.toremove);
+    console.log("Try to remove data with ID: " + data._id);
 
-    database.remove({ _id: data.toremove }, {}, function (err, numRemoved) {
-        // numRemoved = 1
+    database.remove({ _id: data._id }, {}, function (err, numRemoved) {
+        console.log(numRemoved)
+        if (numRemoved === 0) {
+            response.json({ status: "removing failed" });
+        }
+        if (numRemoved === 1) {
+            getandsend(response);
+        }
     });
-
-    getandsend(response);
-
 });
 
 let valid;
@@ -74,9 +76,6 @@ app.post("/login", (request, response) => {
 app.get("/login", (request, response) => {
     response.json({ valid });
 });
-
-
-
 
 
 let SID;
@@ -120,5 +119,4 @@ app.post("/getSession", (request, response) => {
         response.json({ valid });
         console.log({ valid });
     }
-    
 });

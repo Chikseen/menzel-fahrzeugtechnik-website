@@ -33,7 +33,6 @@ body {
 
 #nav-header {
     flex-direction: row;
-    z-index: 2;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -65,7 +64,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 .add-content, .chosesubnav {
     align-self: flex-end;
     margin-right: 100px;
@@ -75,13 +73,13 @@ body {
 
 
 .dropdown, .selectsubnav {
+    z-index: 5;
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
-    z-index: 1;
 }
   
   .add-content:hover .dropdown {
@@ -97,6 +95,7 @@ body {
 
 
 .dynacontent{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,4 +116,33 @@ body {
 
 #nav-header button {
     background-color: aqua;
+}
+
+.editable {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 50px;
+    width: 50px;
+    background-color: blueviolet;
+    font-size: 10px;
+}
+
+.editable:hover .dropdown{
+    background-color: #b18080;
+    position: absolute;
+    display: block;
+}
+
+.remove {
+    display: none;
+}
+
+.editable:hover .remove {
+    display: block;
+}
+
+.editBTNs {
+    width: 100px;
+    height: 20px;
 }

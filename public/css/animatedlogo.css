@@ -171,18 +171,22 @@
 }
 @keyframes  underliner{
     10% {
-        transform: translateY(-30%) translateX(10%);
+        transform: translateY(-30%) translateX(10%) ;
+    }
+    50% {
+        transform: translateY(-1000%) translateX(10%) ;
     }
     60% {
-        transform: translateY(-30%) translateX(10%);
+        transform: translateY(-1000%) translateX(10%);
+        fill:rgba(240, 248, 255, 0);  
     }
     80% {
         transform: rotate(45deg) translateY(35%) translateX(-75%);
-        fill: black;
+        fill:rgba(240, 248, 255, 0);
     }
     100% {
         transform: rotate(45deg) translateY(35%) translateX(-75%);
-        fill: black;
+        fill: rgba(240, 248, 255, 0);
     }
 }
 @keyframes  underliner-cp{
