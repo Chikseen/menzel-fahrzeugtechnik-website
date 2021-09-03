@@ -2,6 +2,7 @@ const { request, response } = require("express");
 const express = require("express");
 const app = express();
 const Datastore = require("nedb");
+let SID;
 
 app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
@@ -12,30 +13,24 @@ const loginlog = new Datastore("loginlog.db");
 database.loadDatabase();
 loginlog.loadDatabase();
 
-function getandsend(response) {
-    console.log("DATALOG")
+app.post("/savedata", (request, response) => {
 
-    database.find({}, (err, data) => {
-        response.json(data);
-    })
-}
-
-app.get("/onloaddata", (request, response) => {
-    database.find({}, (err, data) => {
-        response.json(data);
-    })
+    console.log("Data get saved");
+    const data = request.body;
+    console.log(data);
+    database.insert(data);
+    response.json({status: "success" });
 });
 
-app.post("/datatoserver", (request, response) => {
-    console.log("ive got a request");
+app.post("/fetchdata", (request, response) => {
 
-    const data = request.body;
+    const tocall = request.body;
 
-    console.log(data);
+    console.log("data get called: " + tocall.currentview)
 
-    database.insert(data);
-
-    getandsend(response);
+    database.find({window: tocall.currentview}, (err, data) => {
+        response.json(data);
+    })
 });
 
 app.post("/removedata", (request, response) => {
@@ -46,16 +41,18 @@ app.post("/removedata", (request, response) => {
     database.remove({ _id: data._id }, {}, function (err, numRemoved) {
         console.log(numRemoved)
         if (numRemoved === 0) {
-            response.json({ status: "removing failed" });
+            response.json({status: "failed" });
         }
         if (numRemoved === 1) {
-            getandsend(response);
+            response.json({status: "success" });
         }
     });
 });
 
 let valid;
 
+
+//REWORK LOGIN WITH NEW KNOWLEGDE
 app.post("/login", (request, response) => {
 
     const data = request.body;
@@ -76,9 +73,7 @@ app.post("/login", (request, response) => {
 app.get("/login", (request, response) => {
     response.json({ valid });
 });
-
-
-let SID;
+//REWORK LOGIN WITH NEW KNOWLEGDE
 
 app.post("/createSession", (request, response) => {
 
@@ -88,7 +83,7 @@ app.post("/createSession", (request, response) => {
 
 });
 
-app.post("/getSession", (request, response) => {
+app.post("/validateSession", (request, response) => {
 
     const sessions = request.body;
     console.log(sessions);

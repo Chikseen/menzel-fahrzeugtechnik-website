@@ -1,6 +1,6 @@
 
 let session;
-let currentview = "service";
+let currentview = "home";
 
 
 async function saveData() {
@@ -12,7 +12,7 @@ async function saveData() {
         const image = document.getElementById("image").value;
         const timestemp = (new Date().getTime());
 
-        const data = {window, header, content, image, timestemp};
+        const data = { window, header, content, image, timestemp };
 
         console.log(data);
 
@@ -23,9 +23,9 @@ async function saveData() {
             },
             body: JSON.stringify(data),
         };
-        const response = await fetch("/datatoserver", options)
+        const response = await fetch("/savedata", options)
         const json = await response.json();
-        loadcontent(json);
+        loadcontent();
     }
 };
 
@@ -47,7 +47,7 @@ async function removedata(_id) {
         const response = await fetch("/removedata", options)
         const json = await response.json();
 
-        if(json.status === "removing failed") {
+        if (json.status === "failed") {
             console.log("Löschen Fehlgeschalgen")
         }
         else {
@@ -55,7 +55,7 @@ async function removedata(_id) {
             loadcontent(json);
             document.getElementById(_id).remove();
         }
-       
+
     }
 };
 
@@ -74,14 +74,10 @@ async function onloaddata() {
         body: JSON.stringify(sendData),
     };
 
-    const responseSession = await fetch("/getSession", options)
+    const responseSession = await fetch("/validateSession", options)
     session = await responseSession.json();
 
-    const responseOnLoad = await fetch("/onloaddata");
-
-    const data = await responseOnLoad.json();
-
-    loadcontent(data);
+    loadcontent();
 
     const displayAdminMenu = document.getElementById("admin");
     if (session.valid) {
@@ -92,13 +88,24 @@ async function onloaddata() {
     }
 }
 
-function loadcontent(data) {
+async function loadcontent() {
 
+    const tosend = {currentview};
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(tosend),
+    };
+
+    const response = await fetch("/fetchdata", options)
+    const data = await response.json();
 
     console.log(data);
 
-    for (item of data) {
-        const removecurrent = document.getElementById(`${item._id}`);
+    while (document.querySelector(".dynacontent") != null) {
+        const removecurrent = document.querySelector(".dynacontent");
         if (removecurrent != null) {
             removecurrent.remove();
         }
@@ -147,7 +154,7 @@ function edit(_id) {
     const removeBTN = document.createElement("button");
     remove.setAttribute("id", "remove" + _id);
     removeBTN.setAttribute("id", "removeBTN" + _id);
-    removeBTN.onclick = function() {removedata(_id)};
+    removeBTN.onclick = function () { removedata(_id) };
     remove.classList.add("remove");
     removeBTN.classList.add("editBTNs");
     removeBTN.textContent = "Remove";
@@ -161,9 +168,7 @@ function edit(_id) {
 }
 
 async function loadview(toload) {
-
-    const responseOnLoad = await fetch("/onloaddata");
-    const data = await responseOnLoad.json();
+    console.log(toload)
     switch (toload.textContent) {
         case "Home":
             currentview = "home";
@@ -181,5 +186,5 @@ async function loadview(toload) {
             currentview = "termine";
             break;
     }
-    loadcontent(data);
+    loadcontent();
 }
