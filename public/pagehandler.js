@@ -102,6 +102,22 @@ async function loadcontent() {
     const response = await fetch("/fetchdata", options)
     const data = await response.json();
 
+    console.log("UNSORTED")
+
+    console.log(data);
+
+    data.sort(function(a, b) {
+        let keyA = new Date(a.timestemp);
+        let keyB = new Date(b.timestemp);
+        
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+      });
+    data.reverse();
+
+    console.log("SORTED")
+
     console.log(data);
 
     while (document.querySelector(".dynacontent") != null) {
