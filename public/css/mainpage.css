@@ -26,27 +26,7 @@ body {
     padding-bottom: 100px;
     background-color: rgb(221, 238, 238);
 }
-.nav-bar {
-    top: 0px;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-}
 
-#nav-header {
-    flex-direction: row;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 5px 5px 15px 5px #000000;
-}
-
-#nav-header button {
-    border: none;
-    background-color: rgba(250, 235, 215, 0);
-    padding: 20px;
-    font-size: 2rem;
-}
 
 .footer {
     margin: 50px;
@@ -69,10 +49,12 @@ body {
 
 #addContentBtn {
     position: absolute;
+    background:  linear-gradient(135deg, #9ac59e 0%, #457e4e 100%);
     top: -70px;
     right: 25px;
     width: 100px;
     height: 100px;
+    border-radius: var(--borderradius);
 }
 
 
@@ -89,6 +71,9 @@ body {
 .dynacontent img {
     width: 300px;
 }
+.dynacontent p {
+    display: inline;
+}
 
 .test {  
     padding: 20px;
@@ -99,32 +84,15 @@ body {
     display: none;
 }
 
-#nav-header button {
-    background-color: aqua;
-}
-
-.editable {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    height: 50px;
-    width: 50px;
-    background-color: blueviolet;
-    font-size: 10px;
-}
-
-.editable:hover .dropdown{
-    background-color: #b18080;
-    position: absolute;
-    display: block;
-}
-
 .remove {
-    display: none;
+    position: absolute;
+    right: 25px;
+    top: 25px;
 }
-
-.editable:hover .remove {
-    display: block;
+.remove button{
+    height: 30px;
+    border-radius: var(--borderradius);
+    background: crimson;
 }
 
 .editBTNs {
