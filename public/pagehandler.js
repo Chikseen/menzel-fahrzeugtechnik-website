@@ -39,9 +39,7 @@ async function saveData() {
 function saveIMG() {
 
     if (togglepreview) {
-        video = createCapture(VIDEO);
-        video.size(720, 480);
-        video.parent("IMGpreview");
+
 
         video.loadPixels();
         imagePreview = video.canvas.toDataURL();
@@ -49,17 +47,19 @@ function saveIMG() {
         document.getElementById("saveIMG").textContent = "New Pic/Upload without pic"
         togglepreview = false;
 
-        
+        video.remove();
     }
     else {
         document.getElementById("saveIMG").textContent = " Save img"
         document.getElementById("IMGpreviewSPV").src = "";
         imagePreview = null;
         togglepreview = true;
-        
-        video.remove();
+
+        video = createCapture(VIDEO);
+        video.size(720, 480);
+        video.parent("IMGpreview");
     }
-   
+
 }
 
 async function removedata(_id) {
@@ -146,11 +146,11 @@ async function loadcontent() {
             display.classList.add("dynacontent");
             display.setAttribute("id", `${item._id}`);
 
-            const window = document.createElement("h1");
+            const window = document.createElement("p");
             const header = document.createElement("h1");
             const content = document.createElement("p");
             const image = document.createElement("img");
-            const id = document.createElement("h1");
+            const id = document.createElement("p");
 
             header.textContent = `${item.header}`;
             content.textContent = `${item.content}`;
@@ -166,10 +166,11 @@ async function loadcontent() {
             if (image.getAttribute('src') != "undefined") {
                 document.getElementById(`${item._id}`).append(image);
             }
-            document.getElementById(`${item._id}`).append(id);
-            document.getElementById(`${item._id}`).append(window);
+
             if (session.valid) {
                 edit(`${item._id}`);
+                document.getElementById(`${item._id}`).append(id);
+                document.getElementById(`${item._id}`).append(window);
             }
         }
     }
@@ -234,7 +235,13 @@ function setup() {
 
 function addContentWindow() {
     if (session.valid) {
+        if (video != undefined) {
+            video.remove();
+        }
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
+        video = createCapture(VIDEO);
+        video.size(720, 480);
+        video.parent("IMGpreview");
     }
 }
