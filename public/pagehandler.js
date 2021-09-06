@@ -39,18 +39,27 @@ async function saveData() {
 function saveIMG() {
 
     if (togglepreview) {
+        video = createCapture(VIDEO);
+        video.size(720, 480);
+        video.parent("IMGpreview");
+
         video.loadPixels();
         imagePreview = video.canvas.toDataURL();
         document.getElementById("IMGpreviewSPV").src = imagePreview;
         document.getElementById("saveIMG").textContent = "New Pic/Upload without pic"
         togglepreview = false;
+
+        
     }
     else {
         document.getElementById("saveIMG").textContent = " Save img"
         document.getElementById("IMGpreviewSPV").src = "";
         imagePreview = null;
         togglepreview = true;
+        
+        video.remove();
     }
+   
 }
 
 async function removedata(_id) {
@@ -221,9 +230,6 @@ async function loadview(toload) {
 
 function setup() {
     noCanvas();
-    video = createCapture(VIDEO);
-    video.size(1280, 720);
-    video.parent("IMGpreview");
 }
 
 function addContentWindow() {
