@@ -24,9 +24,10 @@ body {
     align-content: center;
     padding-top:100px;
     padding-bottom: 100px;
-    background-color: lightcyan;
+    background-color: rgb(221, 238, 238);
 }
 .nav-bar {
+    top: 0px;
     display: flex;
     justify-content: center;
 }
