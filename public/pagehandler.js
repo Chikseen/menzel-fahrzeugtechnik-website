@@ -2,18 +2,25 @@
 let session;
 let currentview = "home";
 
+let video;
+let image64;
+let imagePreview;
+let togglepreview = true;
+
 
 async function saveData() {
     if (session.valid) {
-        const subNavElement = 0;
         const window = currentview;
-        const header = document.getElementById("header").value;
-        const content = document.getElementById("content").value;
-        const image = document.getElementById("image").value;
+        const header = document.getElementById("headertext").value;
+        const content = document.getElementById("contenttext").value;
+
+
+        video.loadPixels();
         const timestemp = (new Date().getTime());
 
-        const data = { window, header, content, image, timestemp };
+        const data = { window, header, content, timestemp, imagePreview };
 
+        console.log("Save Data: ");
         console.log(data);
 
         const options = {
@@ -29,14 +36,27 @@ async function saveData() {
     }
 };
 
+function saveIMG() {
+
+    if (togglepreview) {
+        video.loadPixels();
+        imagePreview = video.canvas.toDataURL();
+        document.getElementById("IMGpreviewSPV").src = imagePreview;
+        document.getElementById("saveIMG").textContent = "New Pic/Upload without pic"
+        togglepreview = false;
+    }
+    else {
+        document.getElementById("saveIMG").textContent = " Save img"
+        document.getElementById("IMGpreviewSPV").src = "";
+        imagePreview = null;
+        togglepreview = true;
+    }
+}
+
 async function removedata(_id) {
-    console.log("RMOVE IS CALLED")
     if (session.valid) {
 
-        console.log(_id);
-
         const data = { _id };
-
         const options = {
             method: "POST",
             headers: {
@@ -51,7 +71,6 @@ async function removedata(_id) {
             console.log("Löschen Fehlgeschalgen")
         }
         else {
-            console.log(json)
             loadcontent(json);
             document.getElementById(_id).remove();
         }
@@ -78,19 +97,11 @@ async function onloaddata() {
     session = await responseSession.json();
 
     loadcontent();
-
-    const displayAdminMenu = document.getElementById("admin");
-    if (session.valid) {
-        displayAdminMenu.style.display = "realativ";
-    }
-    else {
-        displayAdminMenu.style.display = "none";
-    }
 }
 
 async function loadcontent() {
 
-    const tosend = {currentview};
+    const tosend = { currentview };
     const options = {
         method: "POST",
         headers: {
@@ -102,23 +113,15 @@ async function loadcontent() {
     const response = await fetch("/fetchdata", options)
     const data = await response.json();
 
-    console.log("UNSORTED")
-
-    console.log(data);
-
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
         let keyA = new Date(a.timestemp);
         let keyB = new Date(b.timestemp);
-        
+
         if (keyA < keyB) return -1;
         if (keyA > keyB) return 1;
         return 0;
-      });
+    });
     data.reverse();
-
-    console.log("SORTED")
-
-    console.log(data);
 
     while (document.querySelector(".dynacontent") != null) {
         const removecurrent = document.querySelector(".dynacontent");
@@ -137,25 +140,32 @@ async function loadcontent() {
             const window = document.createElement("h1");
             const header = document.createElement("h1");
             const content = document.createElement("p");
-            const image = document.createElement("p");
+            const image = document.createElement("img");
             const id = document.createElement("h1");
 
             header.textContent = `${item.header}`;
             content.textContent = `${item.content}`;
-            image.textContent = `${item.image}`;
+            if (image.getAttribute('src') != "undefined") {
+                image.src = item.imagePreview;
+            }
             id.textContent = "ID: " + `${item._id}`;
             window.textContent = "IN: " + `${item.window}`;
 
             document.getElementById("maincontent").append(display);
             document.getElementById(`${item._id}`).append(header);
             document.getElementById(`${item._id}`).append(content);
-            document.getElementById(`${item._id}`).append(image);
+            if (image.getAttribute('src') != "undefined") {
+                document.getElementById(`${item._id}`).append(image);
+            }
             document.getElementById(`${item._id}`).append(id);
             document.getElementById(`${item._id}`).append(window);
             if (session.valid) {
                 edit(`${item._id}`);
             }
         }
+    }
+    if (session.valid) {
+        document.getElementById("addContentBtn").style.display = "block";
     }
 }
 
@@ -184,6 +194,7 @@ function edit(_id) {
 }
 
 async function loadview(toload) {
+    console.log("Load Window:")
     console.log(toload)
     switch (toload.textContent) {
         case "Home":
@@ -201,6 +212,23 @@ async function loadview(toload) {
         case "Termine":
             currentview = "termine";
             break;
+        default:
+            currentview = "home";
+            break;
     }
     loadcontent();
+}
+
+function setup() {
+    noCanvas();
+    video = createCapture(VIDEO);
+    video.size(1280, 720);
+    video.parent("IMGpreview");
+}
+
+function addContentWindow() {
+    if (session.valid) {
+        const showContent = document.getElementById("content-add");
+        showContent.classList.toggle("setv");
+    }
 }

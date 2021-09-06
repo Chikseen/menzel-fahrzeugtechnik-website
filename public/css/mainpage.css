@@ -30,6 +30,7 @@ body {
     top: 0px;
     display: flex;
     justify-content: center;
+    z-index: 10;
 }
 
 #nav-header {
@@ -65,33 +66,13 @@ body {
     display: flex;
     flex-direction: column;
 }
-.add-content, .chosesubnav {
-    align-self: flex-end;
-    margin-right: 100px;
-    align-content: flex-end;
-    display: inline-block;
-}
 
-
-.dropdown, .selectsubnav {
-    z-index: 5;
-    display: none;
+#addContentBtn {
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-}
-  
-  .add-content:hover .dropdown {
-    background-color: #b18080;
-      position: absolute;
-    display: block;
-}
-
-  .chosesubnav:hover .selectsubnav {
-    background-color: #b9dfb9;
-    display: block;
+    top: -70px;
+    right: 25px;
+    width: 100px;
+    height: 100px;
 }
 
 
@@ -147,3 +128,57 @@ body {
     width: 100px;
     height: 20px;
 }
+
+.content-add {
+    visibility: hidden;
+    position: absolute;
+}
+
+.content-add.setv {
+    display: inline-block;
+    visibility: visible;
+    z-index: 15;
+    top: 20px;
+    height: inherit;
+    width: 90%;
+    left: calc(50% - 45%);
+    background-color: rgba(119, 104, 104, 0.733);
+    backdrop-filter: blur(25px);
+}
+.content-add-input {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: burlywood;
+    width: initial;
+    margin: 20px
+}
+#addContentIMG{
+    display: flex;
+    flex-direction: row;
+}
+
+#IMGpreview {
+    height: inherit;
+}
+
+#IMGpreview img{
+    position: absolute;
+    top: 18px;
+    left: 0px;
+    width: 1280px;
+    height: 720px;
+    height: inherit;
+}
+
+
+.saveBTN {
+    width: 250px;
+    height:40%;
+    margin: 10%;
+}
+
+textarea { 
+    /* will prevent resizing horizontally */
+    resize:vertical;
+ }

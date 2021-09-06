@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menzel-Fahrzeugtechnik</title>
     <link rel="stylesheet" type="text/css" href="/css/mainpage.css">
     <link rel="stylesheet" type="text/css" href="/css/animatedlogo.css">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+    <title>Menzel-Fahrzeugtechnik</title>
 </head>
 
 <body onload="onloaddata()">
@@ -57,17 +58,7 @@
     </div>
     </div>
     <div class="content" id="maincontent">
-        <div class="add-content" id="admin" hidden>
-            <p>Hover me</p>
-            <div class="dropdown">
-                <input type="text" id="header"> header
-                <input type="text" id="content"> content
-                <input type="text" id="image"> image
-                <div>
-                    <button id="btn" onclick="saveData()"> Save</button>
-                </div>
-            </div>
-        </div>
+        <button id="addContentBtn" onclick="addContentWindow()" hidden>add content</button>
     </div>
     <div class="footer">
         <div id="Copyright">
@@ -78,6 +69,28 @@
         </div>
         <div>
             <p>Datenschutz</p>
+        </div>
+    </div>
+    <div class="content-add" id="content-add">
+        <div class="content-add-input">
+            <label for="saveHeadert" id="sdti">Header</label>
+            <textarea name="saveHeader" cols="100" rows="10" class="add-content-ta" id="headertext"></textarea>
+        </div>
+        <div class="content-add-input">
+            <label for="SaveText" id="sdti">Content</label>
+            <textarea name="SaveText" cols="100" rows="10" class="add-content-ta" id="contenttext"></textarea>
+        </div>
+        <div class="content-add-input" id="addContentIMG">
+            <div class="content-add-input">
+                <label>Live Preview</label>
+                <div class="IMGpreview" id="IMGpreview">
+                    <img src="" alt="" id="IMGpreviewSPV">
+                </div>
+            </div>
+            <div class="content-add-input">
+                <button class="saveBTN" onclick="saveIMG()" id="saveIMG">Save img</button>
+                <button class="saveBTN" onclick="saveData()" id="savedata">SEND DATA</button>
+            </div>
         </div>
     </div>
     <script src="/pagehandler.js"></script>
