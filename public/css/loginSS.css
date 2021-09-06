@@ -1,5 +1,6 @@
 
 html, body {
+    font-family:'Times New Roman', Times, serif;
     position: relative;
     display: flex;
     flex-direction: column;

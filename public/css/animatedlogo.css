@@ -3,12 +3,14 @@
 .logo svg {
     left: calc(50% - 200px);
     position: absolute;
+    
 }
 
 .logo:hover #leftside {
     animation: bulidcar-cas 2s ease-in-out;
     animation-fill-mode: forwards; 
 }
+
 .logo:hover #leftside path {
     animation: bulidcar-cas-cp 2s ease-in-out;
     animation-fill-mode: forwards; 
