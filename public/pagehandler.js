@@ -56,7 +56,7 @@ function saveIMG() {
         togglepreview = true;
 
         video = createCapture(VIDEO);
-        video.size(720, 480);
+        video.size(720, 405);
         video.parent("IMGpreview");
     }
 
@@ -83,7 +83,6 @@ async function removedata(_id) {
             loadcontent(json);
             document.getElementById(_id).remove();
         }
-
     }
 };
 
@@ -188,22 +187,30 @@ function edit(_id) {
 
     const remove = document.createElement("div");
     const removeBTN = document.createElement("button");
+    const editBTN = document.createElement("button");
     remove.setAttribute("id", "remove" + _id);
+
     removeBTN.setAttribute("id", "removeBTN" + _id);
+    editBTN.setAttribute("id", "editBTN" + _id);
+
     removeBTN.onclick = function () { removedata(_id) };
+    editBTN.onclick = function () { editdata(_id) };
+
     remove.classList.add("remove");
+
     removeBTN.classList.add("editBTNs");
+    editBTN.classList.add("editBTNs");
+
     removeBTN.textContent = "Remove";
+    editBTN.textContent = "Edit";
 
     document.getElementById("edit" + _id).append(remove);
     document.getElementById("remove" + _id).append(removeBTN);
-
-    const id = document.createElement("h1");
-    document.getElementById("remove" + _id).append(id);
-
+    document.getElementById("remove" + _id).append(editBTN);
 }
 
 async function loadview(toload) {
+
     console.log("Load Window:")
     console.log(toload)
     switch (toload.textContent) {
@@ -241,7 +248,8 @@ function addContentWindow() {
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
         video = createCapture(VIDEO);
-        video.size(720, 480);
+        video.size(720, 405);
         video.parent("IMGpreview");
+        video.style.borderRadius = "10px";
     }
 }

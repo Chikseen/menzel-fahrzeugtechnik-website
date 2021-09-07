@@ -2,4 +2,5 @@ body {
     --akzentcolor: rgb(26,46,88);
     --acshadow: rgb(18, 31, 58);
     --borderradius: 10px;
+    --shadow: 3px 3px 10px 3px rgb(41, 46, 51);
 }

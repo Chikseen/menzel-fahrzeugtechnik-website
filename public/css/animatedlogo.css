@@ -3,7 +3,6 @@
 .logo svg {
     left: calc(50% - 200px);
     position: absolute;
-    
 }
 
 .logo:hover #leftside {

@@ -1,6 +1,10 @@
 
+html{
+    background:  linear-gradient(135deg, #8ca3f0 0%, #333f61 80%, #515d80 100%);
+    background-repeat: no-repeat;
+    height: inherit;
+}
 body {
-    background-color: lightseagreen;
     position: relative;
 }
 
@@ -16,18 +20,6 @@ body {
     top: 50px;
 }
 
-.header {
-    margin: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    padding-top:100px;
-    padding-bottom: 100px;
-    background-color: rgb(221, 238, 238);
-}
-
-
 .footer {
     margin: 50px;
     display: flex;
@@ -36,13 +28,13 @@ body {
 
 .footer div{
     background-color: lemonchiffon;
-    padding: 50px;
+    padding: 20px;
+    border-radius: var(--borderradius);
 }
 
 .content {
     position: relative;
     margin: 50px;
-    background-color: khaki;
     display: flex;
     flex-direction: column;
 }
@@ -67,9 +59,14 @@ body {
     padding: 10px;
     margin: 20px;
     background-color: cornsilk;
+    border-radius: var(--borderradius);
+    box-shadow: var(--shadow);
+    animation: 1s ease-out 0s 1 contentLoadAnimation;
+    transition: 0.3s ease-in-out;
 }
 .dynacontent img {
     width: 300px;
+    border-radius: var(--borderradius);
 }
 .dynacontent p {
     display: inline;
@@ -92,17 +89,32 @@ body {
 .remove button{
     height: 30px;
     border-radius: var(--borderradius);
-    background: crimson;
+    background: linear-gradient(135deg, #ad4e62 0%, #e9445a 100%);
 }
 
 .editBTNs {
     width: 100px;
     height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
 }
 
 .content-add {
+    display: inline-block;
+    z-index: 15;
+    width: 90%;
+    left: calc(50% - 45%);
     visibility: hidden;
     position: absolute;
+    background: linear-gradient(155deg, #eeebeb9b 0%rgba(128, 124, 124, 0.808)5a 100%);
+    border-radius: var(--borderradius);
+    border: 5px solid rgba(7, 7, 7, 0.507);
+    backdrop-filter:blur(20px) ;
+    top: 1000px;
+    opacity: 0;
+    transition: 1s ease-in-out;
 }
 
 .dynacontent img{
@@ -110,23 +122,20 @@ body {
 }
 
 .content-add.setv {
-    display: inline-block;
-    visibility: visible;
-    z-index: 15;
     top: 20px;
+    visibility: visible;
+    opacity: 1;
     height: inherit;
-    width: 90%;
-    left: calc(50% - 45%);
-    background-color: rgba(119, 104, 104, 0.733);
-    backdrop-filter: blur(25px);
 }
 .content-add-input {
     display: flex;
     flex-direction: column;
     position: relative;
-    background-color: burlywood;
-    width: initial;
-    margin: 20px
+    justify-content: center;
+    width: inherit;
+    margin: 20px;
+    height: inherit;
+
 }
 #addContentIMG{
     display: flex;
@@ -137,14 +146,48 @@ body {
     height: inherit;
 }
 
-
 .saveBTN {
-    width: 250px;
-    height:20%;
-    margin: 10%;
+    height: 75px;
+    margin: 5%;
+    border-radius: var(--borderradius);
 }
 
-textarea { 
-    /* will prevent resizing horizontally */
-    resize:vertical;
+ .add-content-ta {
+    border-radius: var(--borderradius);
+    resize: vertical;
  }
+
+ #IMGpreviewSPV {
+    border-radius: var(--borderradius);
+    width: 720px;
+ }
+ #VIDEOpreviewSPV {
+    border-radius: var(--borderradius);
+ }
+
+.dynacontent:hover {
+    background-color: rgb(240, 226, 173);
+}
+
+.dynacontent.fadetoleft {
+    animation: 0.5s ease-out 0s 1 swipetoright;
+}
+
+ @keyframes contentLoadAnimation {
+    0% {
+        transform: rotateX(90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes swipetoright {
+    0% {
+        transform: translateX(0px)
+    }
+    100% {
+        transform: translateX(-150%)
+    }
+}
+
