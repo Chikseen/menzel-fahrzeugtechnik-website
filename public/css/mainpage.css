@@ -65,8 +65,9 @@ body {
     transition: 0.3s ease-in-out;
 }
 .dynacontent img {
-    width: 300px;
+    width: 75%;
     border-radius: var(--borderradius);
+    align-self: center;
 }
 .dynacontent p {
     display: inline;
@@ -116,11 +117,6 @@ body {
     opacity: 0;
     transition: 1s ease-in-out;
 }
-
-.dynacontent img{
-    align-self: center;
-}
-
 .content-add.setv {
     top: 20px;
     visibility: visible;
@@ -142,10 +138,6 @@ body {
     flex-direction: row;
 }
 
-#IMGpreview {
-    height: inherit;
-}
-
 .saveBTN {
     height: 75px;
     margin: 5%;
@@ -159,10 +151,7 @@ body {
 
  #IMGpreviewSPV {
     border-radius: var(--borderradius);
-    width: 720px;
- }
- #VIDEOpreviewSPV {
-    border-radius: var(--borderradius);
+    width: 100%;
  }
 
 .dynacontent:hover {
@@ -171,6 +160,12 @@ body {
 
 .dynacontent.fadetoleft {
     animation: 0.5s ease-out 0s 1 swipetoright;
+}
+
+#maincontent {
+    background: #333f61;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px,1fr));
 }
 
  @keyframes contentLoadAnimation {

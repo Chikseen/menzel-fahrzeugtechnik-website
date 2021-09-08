@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/css/animatedlogo.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/vars.css">
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
     <title>Menzel-Fahrzeugtechnik</title>
 </head>
 
@@ -85,9 +84,12 @@
         <div class="content-add-input" id="addContentIMG">
             <div class="content-add-input">
                 <label>Live Preview</label>
+                <form action="/upload-target" class="dropzone"></form>
                 <div class="IMGpreview" id="IMGpreview">
                     <img src="" alt="" id="IMGpreviewSPV">
+                    <canvas></canvas>
                 </div>
+                <input type="file" id="imageUpload" onchange="previewIMG()"/>
             </div>
             <div class="content-add-input">
                 <button class="saveBTN" onclick="saveIMG()" id="saveIMG">Save img</button>

@@ -2,23 +2,16 @@
 let session;
 let currentview = "home";
 
-let video;
-let image64;
-let imagePreview;
-let togglepreview = true;
-
 
 async function saveData() {
     if (session.valid) {
         const window = currentview;
         const header = document.getElementById("headertext").value;
         const content = document.getElementById("contenttext").value;
-
-
-        video.loadPixels();
+        const image = previewIMG();
         const timestemp = (new Date().getTime());
 
-        const data = { window, header, content, timestemp, imagePreview };
+        const data = { window, header, content, timestemp, image};
 
         console.log("Save Data: ");
         console.log(data);
@@ -36,31 +29,30 @@ async function saveData() {
     }
 };
 
-function saveIMG() {
+function previewIMG() {
 
-    if (togglepreview) {
+    const image = document.getElementById('IMGpreviewSPV');
+    const image64 = getDataUrl(image);
+    const input = document.getElementById('imageUpload');;
 
-
-        video.loadPixels();
-        imagePreview = video.canvas.toDataURL();
-        document.getElementById("IMGpreviewSPV").src = imagePreview;
-        document.getElementById("saveIMG").textContent = "New Pic/Upload without pic"
-        togglepreview = false;
-
-        video.remove();
+    const [file] = input.files;
+    if (file) {
+        image.src = URL.createObjectURL(file)
     }
-    else {
-        document.getElementById("saveIMG").textContent = " Save img"
-        document.getElementById("IMGpreviewSPV").src = "";
-        imagePreview = null;
-        togglepreview = true;
-
-        video = createCapture(VIDEO);
-        video.size(720, 405);
-        video.parent("IMGpreview");
-    }
-
+    return image64;
 }
+
+function getDataUrl(img) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL('image/jpeg');
+ }
+
 
 async function removedata(_id) {
     if (session.valid) {
@@ -104,6 +96,9 @@ async function onloaddata() {
     const responseSession = await fetch("/validateSession", options)
     session = await responseSession.json();
 
+    if (session) {
+        previewIMG();
+    }
     loadcontent();
 }
 
@@ -154,7 +149,7 @@ async function loadcontent() {
             header.textContent = `${item.header}`;
             content.textContent = `${item.content}`;
             if (image.getAttribute('src') != "undefined") {
-                image.src = item.imagePreview;
+                image.src = item.image;
             }
             id.textContent = "ID: " + `${item._id}`;
             window.textContent = "IN: " + `${item.window}`;
@@ -236,20 +231,9 @@ async function loadview(toload) {
     loadcontent();
 }
 
-function setup() {
-    noCanvas();
-}
-
 function addContentWindow() {
     if (session.valid) {
-        if (video != undefined) {
-            video.remove();
-        }
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
-        video = createCapture(VIDEO);
-        video.size(720, 405);
-        video.parent("IMGpreview");
-        video.style.borderRadius = "10px";
     }
 }
