@@ -9,7 +9,12 @@ async function saveData() {
         const header = document.getElementById("headertext").value;
         const content = document.getElementById("contenttext").value;
         const image = previewIMG();
-        const timestemp = (new Date().getTime());
+        
+        let timestemp = (new Date().getTime());
+        if (document.getElementById("savedata").textContent == "Update Data") {
+            timestemp = getTimeStemp();
+            removedata(getid());
+        }
 
         const data = { window, header, content, timestemp, image };
 
@@ -26,6 +31,7 @@ async function saveData() {
         const response = await fetch("/savedata", options)
         const json = await response.json();
         loadcontent();
+        addContentWindow();
     }
 };
 
@@ -158,12 +164,13 @@ async function loadcontent() {
             document.getElementById("maincontent").append(display);
             document.getElementById(`${item._id}`).append(header);
             document.getElementById(`${item._id}`).append(content);
-            if (image.getAttribute('src') != "undefined") {
+
+            if (image.getAttribute('src') != "data:,") {
                 document.getElementById(`${item._id}`).append(image);
             }
 
             if (session.valid) {
-                edit(`${item._id}`);
+                edit(item);
                 document.getElementById(`${item._id}`).append(id);
                 document.getElementById(`${item._id}`).append(window);
             }
@@ -174,7 +181,10 @@ async function loadcontent() {
     }
 }
 
-function edit(_id) {
+function edit(data) {
+
+    const _id = data._id
+
     const editselect = document.createElement("div");
     editselect.classList.add("editable");
     editselect.setAttribute("id", "edit" + _id);
@@ -190,7 +200,7 @@ function edit(_id) {
     editBTN.setAttribute("id", "editBTN" + _id);
 
     removeBTN.onclick = function () { removedata(_id) };
-    editBTN.onclick = function () { editdata(_id) };
+    editBTN.onclick = function () { editdata(_id, data) };
 
     remove.classList.add("remove");
 
@@ -203,6 +213,37 @@ function edit(_id) {
     document.getElementById("edit" + _id).append(remove);
     document.getElementById("remove" + _id).append(removeBTN);
     document.getElementById("remove" + _id).append(editBTN);
+}
+
+let movets;
+let moveid;
+function editdata(id, data) {
+    console.log("hi")
+    console.log(id)
+    console.log(data)
+    addContentWindow()
+    document.getElementById("headertext").textContent = data.header
+    document.getElementById("contenttext").textContent = data.content
+    document.getElementById("savedata").textContent = "Update Data"
+
+    const image = data.image;
+    console.log("FF");
+    console.log(image);
+
+    document.getElementById("IMGpreviewSPV").src = data.image;
+
+    movets = data.timestemp;
+    moveid = data._id;
+    console.log("TS: " + data.timestemp)
+    console.log("ID: " + data._id)
+}
+
+function getTimeStemp() {
+    return movets;
+}
+
+function getid() {
+    return moveid;
 }
 
 async function loadview(toload) {
@@ -233,6 +274,10 @@ async function loadview(toload) {
 }
 
 function addContentWindow() {
+    document.getElementById("headertext").textContent = "";
+    document.getElementById("contenttext").textContent = "";
+    document.getElementById("IMGpreviewSPV").src ="";
+    document.getElementById("savedata").textContent = "Save Data";
     if (session.valid) {
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
