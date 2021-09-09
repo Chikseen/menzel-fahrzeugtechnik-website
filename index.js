@@ -1,8 +1,13 @@
 const { request, response } = require("express");
 const express = require("express");
 const app = express();
+
 const Datastore = require("nedb");
+
+const bcrypt = require("bcrypt");
+
 let SID;
+let valid;
 
 app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
@@ -19,7 +24,7 @@ app.post("/savedata", (request, response) => {
     const data = request.body;
     console.log(data);
     database.insert(data);
-    response.json({status: "success" });
+    response.json({ status: "success" });
 });
 
 app.post("/fetchdata", (request, response) => {
@@ -28,7 +33,7 @@ app.post("/fetchdata", (request, response) => {
 
     console.log("data get called: " + tocall.currentview)
 
-    database.find({window: tocall.currentview}, (err, data) => {
+    database.find({ window: tocall.currentview }, (err, data) => {
         response.json(data);
     })
 });
@@ -41,26 +46,21 @@ app.post("/removedata", (request, response) => {
     database.remove({ _id: data._id }, {}, function (err, numRemoved) {
         console.log(numRemoved)
         if (numRemoved === 0) {
-            response.json({status: "failed" });
+            response.json({ status: "failed" });
         }
         if (numRemoved === 1) {
-            response.json({status: "success" });
+            response.json({ status: "success" });
         }
     });
 });
 
-let valid;
-
-
-//REWORK LOGIN WITH NEW KNOWLEGDE
-app.post("/login", (request, response) => {
+app.post("/login", async (request, response) => {
 
     const data = request.body;
-    loginlog.insert(data);
-
+    console.log("Try with: ");
     console.log(data);
 
-    if ((data.username === "tim") && (data.passwort === "123")) {
+    if ((data.username === "tim") && (await bcrypt.compare(data.passwort, "$2b$10$mR08g4wG4mUogWneHnmC6uAjdYjoUuQ9IAhmsVYZkx3SbNJXO5fAq"))) {
         console.log("login is valid");
         valid = true;
     }
@@ -73,7 +73,6 @@ app.post("/login", (request, response) => {
 app.get("/login", (request, response) => {
     response.json({ valid });
 });
-//REWORK LOGIN WITH NEW KNOWLEGDE
 
 app.post("/createSession", (request, response) => {
 
