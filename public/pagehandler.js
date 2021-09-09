@@ -11,7 +11,7 @@ async function saveData() {
         const image = previewIMG();
         const timestemp = (new Date().getTime());
 
-        const data = { window, header, content, timestemp, image};
+        const data = { window, header, content, timestemp, image };
 
         console.log("Save Data: ");
         console.log(data);
@@ -43,15 +43,16 @@ function previewIMG() {
 }
 
 function getDataUrl(img) {
-    const canvas = document.createElement('canvas');
+
+    const canvas = document.createElement("canvas")
     const ctx = canvas.getContext('2d');
 
     canvas.width = img.width;
     canvas.height = img.height;
 
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0, canvas.width, img.height);
     return canvas.toDataURL('image/jpeg');
- }
+}
 
 
 async function removedata(_id) {
