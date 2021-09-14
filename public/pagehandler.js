@@ -1,7 +1,5 @@
 
-let session;
 let currentview = "home";
-
 
 async function saveData() {
     if (session.valid) {
@@ -101,7 +99,7 @@ async function onloaddata() {
     };
 
     const responseSession = await fetch("/validateSession", options)
-    session = await responseSession.json();
+    globalThis.session = await responseSession.json();
 
     if (session) {
         previewIMG();
