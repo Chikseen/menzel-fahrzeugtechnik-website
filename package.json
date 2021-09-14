@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/Chikseen/menzel-fahrzeugtechnick-website#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "nedb": "^1.8.0"
   }

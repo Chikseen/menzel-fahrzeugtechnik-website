@@ -1,6 +1,6 @@
 let loginBTNAL = document.getElementById("login-btn");
 
-loginBTNAL.addEventListener("click", function () {
+loginBTNAL.addEventListener("click", async function () {
 
     const username = document.getElementById("user").value;
     const passwort = document.getElementById("passwort").value;
@@ -29,9 +29,9 @@ async function getData() {
         text.classList.toggle("messagetrue");
         const SID = sessionID(10);
 
-        datao = {SID}
+        let datao = {SID};
 
-        console.log("Session ID is send: " + datao.SID)
+        console.log("Session ID is send: " + datao.SID);
 
         const options = {
             method: "POST",
@@ -40,7 +40,7 @@ async function getData() {
             },
             body: JSON.stringify(datao),
         };
-        const response = fetch("/createSession", options);
+        const response = await fetch("/createSession", options);
         window.location.replace("/index.html?id=" + SID);
     }
 

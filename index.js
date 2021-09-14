@@ -4,7 +4,7 @@ const app = express();
 
 const Datastore = require("nedb");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 let SID;
 let valid;
