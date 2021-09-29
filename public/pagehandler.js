@@ -7,7 +7,7 @@ async function saveData() {
         const header = document.getElementById("headertext").value;
         const content = document.getElementById("contenttext").value;
         const image = previewIMG();
-        
+
         let timestemp = (new Date().getTime());
         if (document.getElementById("savedata").textContent == "Update Data") {
             timestemp = getTimeStemp();
@@ -37,8 +37,7 @@ function previewIMG() {
 
     const image = document.getElementById('IMGpreviewSPV');
     const image64 = getDataUrl(image);
-    const input = document.getElementById('imageUpload');;
-
+    const input = document.getElementById('imageUpload');
     const [file] = input.files;
     if (file) {
         image.src = URL.createObjectURL(file)
@@ -215,6 +214,7 @@ function edit(data) {
 
 let movets;
 let moveid;
+
 function editdata(id, data) {
     console.log("hi")
     console.log(id)
@@ -274,9 +274,10 @@ async function loadview(toload) {
 function addContentWindow() {
     document.getElementById("headertext").textContent = "";
     document.getElementById("contenttext").textContent = "";
-    document.getElementById("IMGpreviewSPV").src ="";
+    document.getElementById("IMGpreviewSPV").src = "";
     document.getElementById("savedata").textContent = "Save Data";
     if (session.valid) {
+
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
     }

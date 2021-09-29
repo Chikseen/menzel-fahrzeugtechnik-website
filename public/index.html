@@ -13,52 +13,72 @@
 </head>
 
 <body onload="onloaddata()">
-    <div class="login">
-        <a href="/cm-login.html"> Login</a>
-    </div>
     <div class="header">
         <div class="logo">
-            <svg width="400px" viewBox="0 0 1000 1000" id="leftside" fill="var(--akzentcolor)">
-                <path d="M 50 950 L 50 50 L 150 50 L 150 150 L 250 150 L 250 850 L 150 850 L 150 950 Z">
-                </path>
-            </svg>
-            <svg width="400px" viewBox="0 0 1000 1000" id="upperDot">
-                <path d="M 200 50 L 250 50 L 250 100 L 200 100 Z">
-                </path>
-            </svg>
-            <svg width="400px" viewBox="0 0 1000 1000" id="lowerDot">
-                <path d="M 200 900 L 250 900 L 250 950 L 200 950 Z">
-                </path>
-            </svg>
-            <svg width="400px" viewBox="0 0 1000 1000" id="d-curve" fill="var(--akzentcolor)">
-                <path
-                    d="M 300 50 L 700 50 L 850 200 L 850 800 L 700 950 L 300 950 L 300 850 L 650 850 L 750 750 L 750 250 L 650 150 L 300 150 Z">
-                </path>
-            </svg>
-            <svg width="400px" viewBox="0 0 1000 1000" id="d-shadow">
-                <path d="M 300 200 L 400 200 L 400 800 L 300 800 Z">
-                </path>
-            </svg>
-            <svg width="400px" viewBox="0 0 1000 1000" id="d-curve-shadow" >
-                <path d="M 750 50 L 900 50 L 1000 150 L 1000 850 L 900 950 L 750 950 L 900 800 L 900 200 Z">
-                </path>
+            <svg height="100%" viewBox="0 0 1020 1000" id="leftside">
+                <path stroke-linejoin="round" stroke="var(--akzentcolor)" fill="none" stroke-width="25"
+                    d="M 50 950 L 50 50 L 150 50 L 150 150 L 250 150 L 250 850 L 150 850 L 150 950 z" />
+                <path stroke-linejoin="round" stroke="var(--akzentcolor)" fill="none" stroke-width="25"
+                    d="M 200 50 L 250 50 L 250 100 L 200 100 z" />
+                <path stroke-linejoin="round" stroke="var(--acshadow)" fill="none" stroke-width="25"
+                    d="M 200 900 L 250 900 L 250 950 L 200 950 z" />
+                <path stroke-linejoin="round" stroke="var(--acshadow)" fill="none" stroke-width="25"
+                    d="M 300 50 L 700 50 L 850 200 L 850 800 L 700 950 L 300 950 L 300 850 L 650 850 L 750 750 L 750 250 L 650 150 L 300 150 z" />
+                <path stroke-linejoin="round" stroke="var(--akzentcolor)" fill="none" stroke-width="25"
+                    d="M 300 200 L 400 200 L 400 800 L 300 800 z" />
+                <path stroke-linejoin="round" stroke="var(--acshadow)" fill="none" stroke-width="25"
+                    d="M 750 50 L 900 50 L 1000 150 L 1000 850 L 900 950 L 750 950 L 900 800 L 900 200 z" />
             </svg>
         </div>
-        <div id="title">
+        <div class="header-area" id="tile-wrapper">
             <h1>Menzel-Fahrzeugtechnik</h1>
         </div>
-        <div class="nav-bar">
-            <nav id="nav-header">
-                <button id="home" onclick="loadview(home)">Home</button>
-                <button id="service" onclick="loadview(service)">Leistungen</button>
-                <button id="kontakt" onclick="loadview(kontakt)">Kontakt</button>
-                <button id="trade" onclick="loadview(trade)">Handel</button>
-            </nav>
+        <div class="header-area">
+            <p class="header-icon">(CALL)</p>
+            <p>Anrufen</p>
+            <p>49 0011223344</p>
+        </div>
+        <div class="header-area">
+            <p class="header-icon">(NAV)</p>
+            <p>Str. MyStreat, 23</p>
+            <p>04416 M-Berg</p>
+        </div>
+        <div class="header-area" id="login-wrapper">
+            <a href="/cm-login.html"> Login</a>
         </div>
     </div>
-    </div>
+    <nav id="nav-header">
+        <button id="home" onclick="loadview(home)">Home</button>
+        <button id="service" onclick="loadview(service)">Leistungen</button>
+        <button id="kontakt" onclick="loadview(kontakt)">Kontakt</button>
+        <button id="trade" onclick="loadview(trade)">Handel</button>
+    </nav>
     <div class="content" id="maincontent">
         <button id="addContentBtn" onclick="addContentWindow()" hidden>add content</button>
+        <div class="content-add" id="content-add">
+            <div class="content-add-input">
+                <label for="saveHeadert" id="sdti">Header</label>
+                <textarea name="saveHeader" cols="100" rows="10" class="add-content-ta" id="headertext"></textarea>
+            </div>
+            <div class="content-add-input">
+                <label for="SaveText" id="sdti">Content</label>
+                <textarea name="SaveText" cols="100" rows="10" class="add-content-ta" id="contenttext"></textarea>
+            </div>
+            <div class="content-add-input" id="addContentIMG">
+                <div id="content-add-input-imgagearea">
+                    <label>Live Preview</label>
+                    <form action="/upload-target" class="dropzone"></form>
+                    <div class="IMGpreview" id="IMGpreview">
+                        <img src="" alt="" id="IMGpreviewSPV">
+                    </div>
+                    <input type="file" id="imageUpload" onchange="previewIMG()" />
+                </div>
+                <div class="content-add-input">
+                    <button class="saveBTN" onclick="saveData()" id="savedata">Send Data</button>
+                    <button class="saveBTN" onclick="addContentWindow()">exit</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="footer">
         <div id="Copyright">
@@ -69,30 +89,6 @@
         </div>
         <div>
             <p>Datenschutz</p>
-        </div>
-    </div>
-    <div class="content-add" id="content-add">
-        <div class="content-add-input">
-            <label for="saveHeadert" id="sdti">Header</label>
-            <textarea name="saveHeader" cols="100" rows="10" class="add-content-ta" id="headertext"></textarea>
-        </div>
-        <div class="content-add-input">
-            <label for="SaveText" id="sdti">Content</label>
-            <textarea name="SaveText" cols="100" rows="10" class="add-content-ta" id="contenttext"></textarea>
-        </div>
-        <div class="content-add-input" id="addContentIMG">
-            <div class="content-add-input">
-                <label>Live Preview</label>
-                <form action="/upload-target" class="dropzone"></form>
-                <div class="IMGpreview" id="IMGpreview">
-                    <img src="" alt="" id="IMGpreviewSPV">
-                </div>
-                <input type="file" id="imageUpload" onchange="previewIMG()"/>
-            </div>
-            <div class="content-add-input">
-                <button class="saveBTN" onclick="saveData()" id="savedata">Send Data</button>
-                <button class="saveBTN" onclick="addContentWindow()">exit</button>
-            </div>
         </div>
     </div>
     <script src="/pagehandler.js"></script>
