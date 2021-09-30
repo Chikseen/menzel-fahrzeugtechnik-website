@@ -7,7 +7,6 @@ const Datastore = require("nedb");
 const bcrypt = require("bcryptjs");
 
 let SID;
-let valid;
 
 app.listen(3000, () => console.log("Connecet with Port:3000"));
 app.use(express.static("public"));
@@ -57,31 +56,69 @@ app.post("/removedata", (request, response) => {
 app.post("/login", async (request, response) => {
 
     const data = request.body;
-    console.log("Try with: ");
+    console.log("Login Data:");
     console.log(data);
 
     if ((data.username === "tim") && (await bcrypt.compare(data.passwort, "$2b$10$mR08g4wG4mUogWneHnmC6uAjdYjoUuQ9IAhmsVYZkx3SbNJXO5fAq"))) {
-        console.log("login is valid");
-        valid = true;
+        console.log("Login is valid");
+        response.json({ status: true });
     }
     else {
-        console.log("login is not valid");
-        valid = false;
+        console.log("Login is invalid");
+        response.json({ status: false });
     }
 });
 
-app.get("/login", (request, response) => {
-    response.json({ valid });
+let validSessions = [];
+app.post("/checkSession", (request, response) => {
+
+    const data = request.body;
+    console.log("data:")
+    console.log(data)
+
+
+
+    if (data.toCreate) {
+        console.log("Session will be created")
+        data.sid = sessionID(10);
+        console.log("Session ID is: " + data.sid)
+        validSessions.push(data.sid)
+        response.json({ sessionStatus: true, sid: data.sid });
+    }
+    else {
+        let foundSession = false
+        for (let i = 0; i < validSessions.length; i++) {
+            if (validSessions[i] == data.sid) {
+                foundSession = true;
+            }
+        }
+        if (foundSession) {
+            response.json({ sessionStatus: true, sid: data.sid });
+        }
+        else {
+            response.json({ sessionStatus: false, sid: "-1" });
+        }
+    }
+
+    if (validSessions.length > 5) {
+        console.log("Session will be deleted");
+        validSessions.shift();
+    }
+    console.log("session IDs: " + validSessions);
 });
 
-app.post("/createSession", (request, response) => {
 
-    SID = request.body;
-    console.log(SID);
-    response.json({ SID });
+function sessionID(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
-});
-
+/*
 app.post("/validateSession", (request, response) => {
 
     const sessions = request.body;
@@ -113,4 +150,4 @@ app.post("/validateSession", (request, response) => {
         response.json({ valid });
         console.log({ valid });
     }
-});
+});*/

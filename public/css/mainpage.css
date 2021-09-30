@@ -172,7 +172,7 @@ input[type=file]::file-selector-button {
 
 #maincontent {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(750px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(600px,1fr));
 }
 
  @keyframes contentLoadAnimation {

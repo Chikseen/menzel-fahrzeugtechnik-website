@@ -12,6 +12,14 @@
     background: linear-gradient(80deg, rgb(124, 134, 155) 0%, rgb(158, 171, 197) 15%,  rgb(168, 184, 216) 85%, rgb(135, 148, 175) 100%);
 }
 
+.header-area {
+    margin-left: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #nav-header {
     position: sticky;
     z-index: 10;
@@ -51,18 +59,8 @@
     width: inherit;
 }
 
-.header-area {
-    margin-left: 100px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 #tile-wrapper {
     margin: 0;
-}
-#login-wrapper {
-  right: 0px;  
 }
 .header-area p{
     margin: 0;

@@ -6,24 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login für CMFT</title>
-    <link rel="stylesheet" type="text/css" href="/css/loginSS.css">
-
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
 </head>
 
 <body>
     <h1>Content-Manager für MFT</h1>
-    <div class="login">
-        <label>Benutzername (tim)</label>
+    <div id="login">
+        <label for="user">Benutzername (tim)</label>
         <input id="user" type="text">
-        <label>Passwort (123)</label>
+        <label for="passwort">Passwort (123)</label>
         <input type="password" id="passwort">
-    </div>
-    <div>
+   
         <button id="login-btn"> Login</button>
     </div>
-    <div class="feedback" id="feedback">
         <label id="feedback"></label>    
-    </div>
     <script src="/login.js"></script>
 </body>
 

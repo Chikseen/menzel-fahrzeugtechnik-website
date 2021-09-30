@@ -2,7 +2,7 @@
 let currentview = "home";
 
 async function saveData() {
-    if (session.valid) {
+    if (await validate()) {
         const window = currentview;
         const header = document.getElementById("headertext").value;
         const content = document.getElementById("contenttext").value;
@@ -59,7 +59,7 @@ function getDataUrl(img) {
 
 
 async function removedata(_id) {
-    if (session.valid) {
+    if (await validate()) {
 
         const data = { _id };
         const options = {
@@ -84,26 +84,41 @@ async function removedata(_id) {
 
 async function onloaddata() {
 
+    console.log("Check SESION: " + await validate())
+
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
 
-    const cs = urlParams.get("id");
-    const sendData = { cs };
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(sendData),
-    };
-
-    const responseSession = await fetch("/validateSession", options)
-    globalThis.session = await responseSession.json();
-
-    if (session) {
+    if (await validate()) {
         previewIMG();
     }
     loadcontent();
+}
+
+async function validate() {
+
+    const sid = JSON.parse(sessionStorage.getItem("session"))
+
+    if (sid != null) {
+        const toSend = { sid:sid.sid, toCreate:false }
+
+        console.log("Check with sid: " + sid.sid)
+    
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(toSend),
+        };
+        const sessionResponse = await fetch("/checkSession", options);
+        const sessionData = await sessionResponse.json();
+
+        return sessionData.sessionStatus;
+    }
+    else {
+        return false;
+    }
 }
 
 async function loadcontent() {
@@ -166,14 +181,14 @@ async function loadcontent() {
                 document.getElementById(`${item._id}`).append(image);
             }
 
-            if (session.valid) {
+            if (await validate()) {
                 edit(item);
                 document.getElementById(`${item._id}`).append(id);
                 document.getElementById(`${item._id}`).append(window);
             }
         }
     }
-    if (session.valid) {
+    if (await validate()) {
         document.getElementById("addContentBtn").style.display = "block";
     }
 }
@@ -271,14 +286,20 @@ async function loadview(toload) {
     loadcontent();
 }
 
-function addContentWindow() {
+async function addContentWindow() {
     document.getElementById("headertext").textContent = "";
     document.getElementById("contenttext").textContent = "";
     document.getElementById("IMGpreviewSPV").src = "";
     document.getElementById("savedata").textContent = "Save Data";
-    if (session.valid) {
-
+    if (await validate()) {
         const showContent = document.getElementById("content-add");
         showContent.classList.toggle("setv");
     }
 }
+
+document.getElementById("open-login").addEventListener("click", function() {
+    document.getElementById("login").classList.toggle("show")
+})
+document.getElementById("close-login-btn").addEventListener("click", function() {
+    document.getElementById("login").classList.toggle("show", false)
+})

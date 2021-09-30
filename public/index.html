@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/mainpage.css">
-    <link rel="stylesheet" type="text/css" href="/css/animatedlogo.css">
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/vars.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
     <title>Menzel-Fahrzeugtechnik</title>
 </head>
 
@@ -43,8 +43,23 @@
             <p>Str. MyStreat, 23</p>
             <p>04416 M-Berg</p>
         </div>
-        <div class="header-area" id="login-wrapper">
-            <a href="/cm-login.html"> Login</a>
+        <div class="header-area">
+            <button id="open-login">Login</button>
+        </div>
+        <div id="login">
+            <div class="login-area">
+                <label for="user">Benutzername (tim)</label>
+                <input id="user" type="text">
+            </div>
+            <div class="login-area">
+                <label for="passwort">Passwort (123)</label>
+                <input type="password" id="passwort">
+            </div>
+            <div class="login-area">
+                <button class="login-btn-hander" id="login-btn">Login</button>
+                <button class="login-btn-hander" id="close-login-btn">X</button>
+            </div>
+            <label id="feedback"></label>
         </div>
     </div>
     <nav id="nav-header">
@@ -92,6 +107,7 @@
         </div>
     </div>
     <script src="/pagehandler.js"></script>
+    <script src="/login.js"></script>
 </body>
 
 </html>
