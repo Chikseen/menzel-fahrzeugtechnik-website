@@ -78,14 +78,23 @@ app.post("/checkSession", (request, response) => {
 
 
 
-    if (data.toCreate) {
+    if (data.toCreate == true) {
         console.log("Session will be created")
         data.sid = sessionID(10);
         console.log("Session ID is: " + data.sid)
         validSessions.push(data.sid)
         response.json({ sessionStatus: true, sid: data.sid });
     }
+    else if (data.toCreate == "remove") {
+        for (let i = 0; i < validSessions.length; i++) {
+            if (validSessions[i] == data.sid) {
+                validSessions.splice(i, 1);
+            }
+        }
+        response.json({ sessionStatus: false, sid: "-1" });
+    }
     else {
+
         let foundSession = false
         for (let i = 0; i < validSessions.length; i++) {
             if (validSessions[i] == data.sid) {

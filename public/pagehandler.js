@@ -190,6 +190,7 @@ async function loadcontent() {
     }
     if (await validate()) {
         document.getElementById("addContentBtn").style.display = "block";
+        document.getElementById("open-login").textContent = "Logout";
     }
 }
 
