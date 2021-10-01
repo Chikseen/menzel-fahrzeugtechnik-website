@@ -75,9 +75,3 @@
 #feedback.messagetrue {
     background-color: rgb(85, 156, 103);
 }
-
-@media only screen and (max-width: 500px) {
-    #login {
-        width: 100%;
-    }
-  }

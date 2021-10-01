@@ -9,13 +9,15 @@
     <link rel="stylesheet" type="text/css" href="/css/header.css">
     <link rel="stylesheet" type="text/css" href="/css/vars.css">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="/css/staticContent.css">
     <title>Menzel-Fahrzeugtechnik</title>
 </head>
 
 <body onload="onloaddata()">
     <div class="header">
         <div class="logo">
-            <svg height="100%" viewBox="0 0 1020 1000" id="leftside">
+            <svg height="100%" viewBox="0 0 1020 1000" id="animatedLogo">
                 <path stroke-linejoin="round" stroke="var(--akzentcolor)" fill="none" stroke-width="25"
                     d="M 50 950 L 50 50 L 150 50 L 150 150 L 250 150 L 250 850 L 150 850 L 150 950 z" />
                 <path stroke-linejoin="round" stroke="var(--akzentcolor)" fill="none" stroke-width="25"
@@ -33,20 +35,20 @@
         <div class="header-area" id="tile-wrapper">
             <h1>Menzel-Fahrzeugtechnik</h1>
         </div>
-        <div class="header-area">
+        <div class="header-area" id="header-call">
             <p class="header-icon">(CALL)</p>
             <p>Anrufen</p>
             <p>49 0011223344</p>
         </div>
-        <div class="header-area">
+        <div class="header-area" id="header-find">
             <p class="header-icon">(NAV)</p>
             <p>Str. MyStreat, 23</p>
             <p>04416 M-Berg</p>
         </div>
-        <div class="header-area">
+        <div class="header-area" id="header-login">
             <button id="open-login">Login</button>
         </div>
-        <div id="login">
+        <div id="login" >
             <div class="login-area">
                 <label for="user">Benutzername (tim)</label>
                 <input id="user" type="text">
@@ -55,7 +57,7 @@
                 <label for="passwort">Passwort (123)</label>
                 <input type="password" id="passwort">
             </div>
-            <div class="login-area">
+            <div class="login-area" >
                 <button class="login-btn-hander" id="login-btn">Login</button>
                 <button class="login-btn-hander" id="close-login-btn">X</button>
             </div>
@@ -64,11 +66,15 @@
     </div>
     <nav id="nav-header">
         <button id="home" onclick="loadview(home)">Home</button>
+        <button id="news" onclick="loadview(news)">Aktuelles</button>
         <button id="service" onclick="loadview(service)">Leistungen</button>
         <button id="kontakt" onclick="loadview(kontakt)">Kontakt</button>
         <button id="trade" onclick="loadview(trade)">Handel</button>
     </nav>
     <div class="content" id="maincontent">
+        <div class="static-content" id="static-home">
+            <p>hello iam home text</p>
+        </div>
         <button id="addContentBtn" onclick="addContentWindow()" hidden>add content</button>
         <div class="content-add" id="content-add">
             <div class="content-add-input">

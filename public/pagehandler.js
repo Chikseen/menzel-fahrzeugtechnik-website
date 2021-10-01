@@ -3,9 +3,13 @@ let currentview = "home";
 
 async function saveData() {
     if (await validate()) {
+
+        let content = {}
+
+        if (currentview = "news") {
+            content = {header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value}
+        }
         const window = currentview;
-        const header = document.getElementById("headertext").value;
-        const content = document.getElementById("contenttext").value;
         const image = previewIMG();
 
         let timestemp = (new Date().getTime());
@@ -14,7 +18,7 @@ async function saveData() {
             removedata(getid());
         }
 
-        const data = { window, header, content, timestemp, image };
+        const data = { window, content, timestemp, image };
 
         console.log("Save Data: ");
         console.log(data);
@@ -92,7 +96,7 @@ async function onloaddata() {
     if (await validate()) {
         previewIMG();
     }
-    loadcontent();
+    loadview(document.getElementById("home"));
 }
 
 async function validate() {
@@ -100,10 +104,10 @@ async function validate() {
     const sid = JSON.parse(sessionStorage.getItem("session"))
 
     if (sid != null) {
-        const toSend = { sid:sid.sid, toCreate:false }
+        const toSend = { sid: sid.sid, toCreate: false }
 
         console.log("Check with sid: " + sid.sid)
-    
+
         const options = {
             method: "POST",
             headers: {
@@ -145,15 +149,13 @@ async function loadcontent() {
     });
     data.reverse();
 
-    while (document.querySelector(".dynacontent") != null) {
-        const removecurrent = document.querySelector(".dynacontent");
-        if (removecurrent != null) {
-            removecurrent.remove();
-        }
-    }
+    cleanSite();
 
     for (item of data) {
         if (`${item.window}` === currentview) {
+
+
+            //!!!   TO-DO   !!! ADD NEW FUNCTION TO SPERATE BETWEEN DIFFRENT CONTENT.CONTENT
 
             const display = document.createElement("div");
             display.classList.add("dynacontent");
@@ -165,8 +167,12 @@ async function loadcontent() {
             const image = document.createElement("img");
             const id = document.createElement("p");
 
-            header.textContent = `${item.header}`;
-            content.textContent = `${item.content}`;
+            console.log("contentData.header")
+            console.log(item.content.header)
+            console.log(item.content.text)
+
+            header.textContent = `${item.content.header}`;
+            content.textContent = `${item.content.text}`;
             if (image.getAttribute('src') != "undefined") {
                 image.src = item.image;
             }
@@ -252,6 +258,16 @@ function editdata(id, data) {
     console.log("ID: " + data._id)
 }
 
+function cleanSite() {
+    while (document.querySelector(".dynacontent") != null) {
+        const removecurrent = document.querySelector(".dynacontent");
+        if (removecurrent != null) {
+            removecurrent.remove();
+        }
+    }
+    document.getElementById("static-home").classList.toggle("show", false)
+}
+
 function getTimeStemp() {
     return movets;
 }
@@ -260,31 +276,42 @@ function getid() {
     return moveid;
 }
 
-async function loadview(toload) {
+function loadview(toload) {
 
     console.log("Load Window:")
     console.log(toload)
     switch (toload.textContent) {
         case "Home":
             currentview = "home";
+            cleanSite()
+            document.getElementById("static-home").classList.toggle("show", true);
+            break;
+        case "Aktuelles":
+            currentview = "news";
+            loadcontent();
             break;
         case "Leistungen":
             currentview = "service";
+            cleanSite()
             break;
         case "Kontakt":
             currentview = "kontakt";
+            cleanSite()
             break;
         case "Handel":
             currentview = "trade";
+            loadcontent();
             break;
         case "Termine":
             currentview = "termine";
+            cleanSite()
             break;
         default:
             currentview = "home";
+            cleanSite()
             break;
     }
-    loadcontent();
+    
 }
 
 async function addContentWindow() {
@@ -298,9 +325,9 @@ async function addContentWindow() {
     }
 }
 
-document.getElementById("open-login").addEventListener("click", function() {
+document.getElementById("open-login").addEventListener("click", function () {
     document.getElementById("login").classList.toggle("show")
 })
-document.getElementById("close-login-btn").addEventListener("click", function() {
+document.getElementById("close-login-btn").addEventListener("click", function () {
     document.getElementById("login").classList.toggle("show", false)
 })

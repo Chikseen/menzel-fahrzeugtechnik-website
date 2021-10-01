@@ -13,11 +13,14 @@
 }
 
 .header-area {
-    margin-left: 100px;
+    margin-left: 75px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+#header-login {
+    margin-left: 10px;
 }
 
 #nav-header {
@@ -35,6 +38,8 @@
     border-radius: 0px 0px 10px 10px;
     background: rgba(119, 136, 153, 0.75);
     backdrop-filter: blur(10px);
+
+    transition: 0.5s ease-in-out;
 }
 
 #nav-header button {

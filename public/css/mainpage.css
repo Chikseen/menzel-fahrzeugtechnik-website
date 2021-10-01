@@ -1,8 +1,9 @@
 
-html{
-    background:  linear-gradient(135deg, #eaeffd 0%, #8394c7 80%, #353e58 100%);
+html, body {
+    height: auto;
     background-repeat: no-repeat;
-    height: inherit;
+    background:  linear-gradient(135deg, #eaeffd 0%, #8394c7 80%, #353e58 100%);
+    font-size: 1rem;
 }
 body {
     position: relative;
@@ -12,6 +13,7 @@ body {
 
 
 .footer {
+    top: calc(100% - 50px);
     margin: 50px;
     display: flex;
     justify-content: center;
@@ -19,7 +21,7 @@ body {
 
 .footer div{
     background-color: lemonchiffon;
-    padding: 20px;
+    padding: 0;
     border-radius: var(--borderradius);
 }
 
@@ -179,8 +181,11 @@ input[type=file]::file-selector-button {
     0% {
         transform: rotateX(90deg);
     }
-    100% {
+    25% {
         transform: rotateX(0deg);
+    }
+    100% {
+        /*Add Animated Logo*/
     }
 }
 

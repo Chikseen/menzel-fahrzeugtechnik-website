@@ -1,0 +1,8 @@
+.static-content {
+    display: none;
+    background-color: lawngreen;
+}
+
+#static-home.show {
+    display: flex;
+}

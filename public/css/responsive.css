@@ -1,0 +1,44 @@
+@media only screen and (max-width: 750px) {
+    #login {
+        width: 100%;
+    }
+    #header-call, #header-find {
+        display: none;
+    }
+    .header-area {
+        margin: 5px;
+    }
+    #nav-header {
+        margin: 0px;
+        width: 5rem;
+        right: 0;
+        left: calc(100% - 5rem);
+
+        overflow: hidden;
+        flex-direction: column;
+        height: 5rem;
+    }
+    #nav-header:hover {
+        left: calc(100% - 15rem);
+        width: 15rem;
+        height: 25rem;
+    }
+    #maincontent {
+        margin: 0px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 100%);
+    }
+  }
+
+  @media only screen and (max-width: 420px) {
+    #tile-wrapper {
+        display: none;
+    }
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    .foter div {
+        padding: 0px;
+    }
+  }

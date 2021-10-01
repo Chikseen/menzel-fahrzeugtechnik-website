@@ -126,37 +126,3 @@ function sessionID(length) {
     }
     return result;
 }
-
-/*
-app.post("/validateSession", (request, response) => {
-
-    const sessions = request.body;
-    console.log(sessions);
-
-    let valid = false
-
-    if (SID != undefined) {
-
-        console.log("To Compare");
-        console.log(sessions.cs);
-        console.log(SID.SID);
-        if (sessions.cs === SID.SID) {
-            valid = true;
-            console.log("session = SID");
-            response.json({ valid });
-            console.log({ valid });
-        }
-        else {
-            valid = false;
-            console.log("ungelich");
-            response.json({ valid });
-            console.log({ valid });
-        }
-    }
-    else {
-        valid = false;
-        console.log("ungelich");
-        response.json({ valid });
-        console.log({ valid });
-    }
-});*/
