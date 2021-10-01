@@ -1,8 +1,29 @@
-.static-content {
+
+.static-content div{
+    width: 100%;
+}
+
+
+#static-home {
     display: none;
     background-color: lawngreen;
 }
 
 #static-home.show {
     display: flex;
+}
+
+#static-contact {
+    display: none;
+    background-color: rgb(161, 135, 185);
+}
+
+#static-contact.show {
+    display: flex;
+}
+
+#frameHereMap {
+    width: 100%;
+    height: 15rem;
+    border: 0;
 }

@@ -266,6 +266,9 @@ function cleanSite() {
         }
     }
     document.getElementById("static-home").classList.toggle("show", false)
+    document.getElementById("static-contact").classList.toggle("show", false);
+    document.getElementById("addContentBtn").style.display = "none";
+    
 }
 
 function getTimeStemp() {
@@ -297,6 +300,7 @@ function loadview(toload) {
         case "Kontakt":
             currentview = "kontakt";
             cleanSite()
+            document.getElementById("static-contact").classList.toggle("show", true);
             break;
         case "Handel":
             currentview = "trade";
