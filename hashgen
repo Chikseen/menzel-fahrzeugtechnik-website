@@ -9,22 +9,4 @@
         response.status(500).send();
     }
     console.log("1");
-/*
-    try {
-        console.log("2");
-        console.log("TO COMPARE")
-        console.log(data.passwort)
-        console.log(temp)
-        await bcrypt.compare(data.passwort, temp);
-        console.log("is true");
-        console.log("3");
-        /* }
-         else {
-             console.log("is false")
-             console.log("4");
-         }
-    }
-    catch {
-        console.log("Error comporeing")
-    }
-*/
+    

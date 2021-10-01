@@ -7,10 +7,12 @@ async function saveData() {
         let content = {}
 
         if (currentview = "news") {
-            content = {header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value}
+            content = { header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value, image: previewIMG() }
+        }
+        if (currentview = "trade") {
+            content = { header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value, image: previewIMG() }
         }
         const window = currentview;
-        const image = previewIMG();
 
         let timestemp = (new Date().getTime());
         if (document.getElementById("savedata").textContent == "Update Data") {
@@ -18,7 +20,7 @@ async function saveData() {
             removedata(getid());
         }
 
-        const data = { window, content, timestemp, image };
+        const data = { window, content, timestemp };
 
         console.log("Save Data: ");
         console.log(data);
@@ -153,8 +155,6 @@ async function loadcontent() {
 
     for (item of data) {
         if (`${item.window}` === currentview) {
-
-
             //!!!   TO-DO   !!! ADD NEW FUNCTION TO SPERATE BETWEEN DIFFRENT CONTENT.CONTENT
 
             const display = document.createElement("div");
@@ -173,9 +173,7 @@ async function loadcontent() {
 
             header.textContent = `${item.content.header}`;
             content.textContent = `${item.content.text}`;
-            if (image.getAttribute('src') != "undefined") {
-                image.src = item.image;
-            }
+
             id.textContent = "ID: " + `${item._id}`;
             window.textContent = "IN: " + `${item.window}`;
 
@@ -183,8 +181,11 @@ async function loadcontent() {
             document.getElementById(`${item._id}`).append(header);
             document.getElementById(`${item._id}`).append(content);
 
-            if (image.getAttribute('src') != "data:,") {
-                document.getElementById(`${item._id}`).append(image);
+            if (image.getAttribute('src') != "undefined") {
+                image.src = item.content.image;
+                if (image.getAttribute('src') != "data:,") {
+                    document.getElementById(`${item._id}`).append(image);
+                }
             }
 
             if (await validate()) {
@@ -194,9 +195,22 @@ async function loadcontent() {
             }
         }
     }
+    console.log("currentview")
+    console.log(currentview)
     if (await validate()) {
-        document.getElementById("addContentBtn").style.display = "block";
+        document.getElementById("content-add").classList.toggle("show", true);
         document.getElementById("open-login").textContent = "Logout";
+
+        if ((currentview == "news") || (currentview == "trade")) {
+            console.log(currentview)
+            console.log("aba bin hier")
+            document.getElementById("addContentBtn").classList.toggle("show", true);
+            if (currentview == "trade") {
+                console.log("reval div")
+                document.getElementById("price-div").classList.toggle("show", true);
+                document.getElementById("spec-div").classList.toggle("show", true);
+            }
+        }
     }
 }
 
@@ -265,10 +279,18 @@ function cleanSite() {
             removecurrent.remove();
         }
     }
+    while (document.querySelector(".news-pre-view") != null) {
+        const removecurrent = document.querySelector(".news-pre-view");
+        if (removecurrent != null) {
+            removecurrent.remove();
+        }
+    }
     document.getElementById("static-home").classList.toggle("show", false)
     document.getElementById("static-contact").classList.toggle("show", false);
-    document.getElementById("addContentBtn").style.display = "none";
-    
+    document.getElementById("hide-adder").classList.toggle("show", false);
+    document.getElementById("content-add").classList.toggle("show", false);
+    document.getElementById("price-div").classList.toggle("show", false);
+    document.getElementById("spec-div").classList.toggle("show", false);
 }
 
 function getTimeStemp() {
@@ -287,6 +309,7 @@ function loadview(toload) {
         case "Home":
             currentview = "home";
             cleanSite()
+            loadNewsPreview();
             document.getElementById("static-home").classList.toggle("show", true);
             break;
         case "Aktuelles":
@@ -315,7 +338,54 @@ function loadview(toload) {
             cleanSite()
             break;
     }
-    
+
+}
+
+async function loadNewsPreview() {
+    const response = await fetch("/newspreview")
+    const data = await response.json();
+
+    console.log("data for preview: ")
+    console.log(data)
+
+    let count = 0;
+
+    for (let i = 0; i < data.length; i++) {
+        if (data[i] != null) {
+            const div = document.createElement("div")
+            div.setAttribute("class", "news-pre-view")
+            document.getElementById("show-news-preview").append(div)
+
+            const header = document.createElement("h4")
+            header.textContent = data[i].content.header
+            div.append(header)
+
+            const image = document.createElement("img");
+            if (image.getAttribute('src') != "undefined") {
+                image.src = data[i].content.image;
+                if (image.getAttribute('src') != "data:,") {
+                    div.append(image);
+                }
+            }
+        }
+        else {
+            count++;
+        }
+    }
+
+    console.log(count)
+
+    if (count == 3) {
+        console.log("hi")
+        const div = document.createElement("div")
+        div.setAttribute("class", "news-pre-view")
+        document.getElementById("show-news-preview").append(div)
+
+        const header = document.createElement("h4")
+        header.textContent = "Es scheint einige Schwirigkeiten zu geben, wir arbeiten dran"
+        div.append(header)
+    }
+
 }
 
 async function addContentWindow() {
@@ -324,14 +394,23 @@ async function addContentWindow() {
     document.getElementById("IMGpreviewSPV").src = "";
     document.getElementById("savedata").textContent = "Save Data";
     if (await validate()) {
-        const showContent = document.getElementById("content-add");
-        showContent.classList.toggle("setv");
+        document.getElementById("hide-adder").classList.toggle("show");
     }
 }
 
 document.getElementById("open-login").addEventListener("click", function () {
-    document.getElementById("login").classList.toggle("show")
-})
+    document.getElementById("login").classList.toggle("show");
+});
 document.getElementById("close-login-btn").addEventListener("click", function () {
-    document.getElementById("login").classList.toggle("show", false)
-})
+    document.getElementById("login").classList.toggle("show", false);
+});
+document.getElementById("preview-news").addEventListener("click", function () {
+    loadview(document.getElementById("news"));
+});
+
+
+var marker = new khtml.maplib.overlay.Marker({
+    position: new khtml.maplib.LatLng(-25.363882,131.044922), 
+    map: map,
+    title:"static marker"
+});

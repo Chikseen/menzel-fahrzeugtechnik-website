@@ -1,16 +1,12 @@
 
-.static-content div{
-    width: 100%;
-}
-
-
 #static-home {
     display: none;
-    background-color: lawngreen;
+    background-color: rgb(141, 146, 135);
 }
 
-#static-home.show {
+#static-home.show,  #static-contact.show{
     display: flex;
+    flex-direction: column;
 }
 
 #static-contact {
@@ -18,12 +14,30 @@
     background-color: rgb(161, 135, 185);
 }
 
-#static-contact.show {
+#show-news-preview{
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+
+    background: linear-gradient(90deg, rgba(241, 241, 241, 0.4)60%, rgba(0,0,0, 0.8)100%);
+    width: 100%;
+    height: auto;
 }
 
-#frameHereMap {
-    width: 100%;
-    height: 15rem;
-    border: 0;
+.static-field {
+    margin: 20px;
+    border-radius: var(--borderradius);
+    box-shadow: var(--shadow);
+}
+
+.news-pre-view {
+    text-align: center;
+    padding: 10px;
+    margin: 15px;
+    border-radius: var(--borderradius);
+    box-shadow: var(--shadow);
+}
+.news-pre-view img{
+   width: 80%;
 }

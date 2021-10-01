@@ -21,7 +21,7 @@ document.getElementById("open-login").addEventListener("click", async function (
             const response = await fetch("/login", options);
             const login = await response.json();
             checkSession(null, login);
-            loadview("home");
+            loadview(document.getElementById("home"));
             document.getElementById("open-login").textContent = "Logout";
             isLogedin = true;
             console.log("logstate: " + isLogedin)
@@ -84,8 +84,7 @@ document.getElementById("open-login").addEventListener("click", async function (
         sessionStorage.removeItem("session")
         isLogedin = false;
         document.getElementById("open-login").textContent = "Login";
-        loadview("home");
-        document.getElementById("addContentBtn").style.display = "none";
+        loadview(document.getElementById("home"));
         document.getElementById("login").classList.toggle("show", false)
     }
 });
