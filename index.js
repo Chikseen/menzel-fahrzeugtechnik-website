@@ -53,17 +53,16 @@ app.post("/removedata", (request, response) => {
     });
 });
 
-app.get("/newspreview", async (request, response) => {
-
+app.get("/preview/news", async (request, response) => {
     let getarr = [];
     let toSend = [];
 
-    database.find({ window: "news"}, (err, data) => {
-       
+    database.find({ window: "news" }, (err, data) => {
+
         data.sort(function (a, b) {
             let keyA = new Date(a.timestemp);
             let keyB = new Date(b.timestemp);
-    
+
             if (keyA < keyB) return -1;
             if (keyA > keyB) return 1;
             return 0;
@@ -72,12 +71,38 @@ app.get("/newspreview", async (request, response) => {
 
         getarr = data;
 
-        for(let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             toSend.push(getarr[i])
         }
         console.log("send data")
         console.log(toSend)
-        response.send(toSend);
+        response.send(toSend)
+     })
+});
+app.get("/preview/trade", async (request, response) => {
+    let getarr = [];
+    let toSend = [];
+
+    database.find({ window: "trade" }, (err, data) => {
+
+        data.sort(function (a, b) {
+            let keyA = new Date(a.timestemp);
+            let keyB = new Date(b.timestemp);
+
+            if (keyA < keyB) return -1;
+            if (keyA > keyB) return 1;
+            return 0;
+        });
+        data.reverse();
+
+        getarr = data;
+
+        for (let i = 0; i < 3; i++) {
+            toSend.push(getarr[i])
+        }
+        console.log("send data")
+        console.log(toSend)
+        response.send(toSend)
     })
 });
 

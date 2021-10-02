@@ -6,11 +6,21 @@ async function saveData() {
 
         let content = {}
 
-        if (currentview = "news") {
-            content = { header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value, image: previewIMG() }
+
+        if (currentview == "news") {
+            content = {
+                header: document.getElementById("headertext").value,
+                text: document.getElementById("contenttext").value, 
+                image: previewIMG()
+            }
         }
-        if (currentview = "trade") {
-            content = { header: document.getElementById("headertext").value, text: document.getElementById("contenttext").value, image: previewIMG() }
+        if (currentview == "trade") {
+            content = { 
+                header: document.getElementById("headertext").value, 
+                text: document.getElementById("contenttext").value,
+                spec: document.getElementById("specialtext").value, 
+                price: document.getElementById("pricetext").value,  
+                image: previewIMG() }
         }
         const window = currentview;
 
@@ -167,10 +177,6 @@ async function loadcontent() {
             const image = document.createElement("img");
             const id = document.createElement("p");
 
-            console.log("contentData.header")
-            console.log(item.content.header)
-            console.log(item.content.text)
-
             header.textContent = `${item.content.header}`;
             content.textContent = `${item.content.text}`;
 
@@ -187,6 +193,16 @@ async function loadcontent() {
                     document.getElementById(`${item._id}`).append(image);
                 }
             }
+            if (`${item.window}` == "trade") {
+                const spec = document.createElement("p");
+                const price = document.createElement("p");
+
+                spec.textContent = `${item.content.spec}`;
+                price.textContent = `${item.content.price}` + " €";
+
+                document.getElementById(`${item._id}`).append(spec);
+                document.getElementById(`${item._id}`).append(price);
+            }
 
             if (await validate()) {
                 edit(item);
@@ -195,18 +211,16 @@ async function loadcontent() {
             }
         }
     }
-    console.log("currentview")
-    console.log(currentview)
+
+    console.log("currentview: " + currentview)
+
     if (await validate()) {
         document.getElementById("content-add").classList.toggle("show", true);
         document.getElementById("open-login").textContent = "Logout";
 
         if ((currentview == "news") || (currentview == "trade")) {
-            console.log(currentview)
-            console.log("aba bin hier")
             document.getElementById("addContentBtn").classList.toggle("show", true);
             if (currentview == "trade") {
-                console.log("reval div")
                 document.getElementById("price-div").classList.toggle("show", true);
                 document.getElementById("spec-div").classList.toggle("show", true);
             }
@@ -252,17 +266,12 @@ let movets;
 let moveid;
 
 function editdata(id, data) {
-    console.log("hi")
-    console.log(id)
-    console.log(data)
     addContentWindow()
     document.getElementById("headertext").textContent = data.header
     document.getElementById("contenttext").textContent = data.content
     document.getElementById("savedata").textContent = "Update Data"
 
     const image = data.image;
-    console.log("FF");
-    console.log(image);
 
     document.getElementById("IMGpreviewSPV").src = data.image;
 
@@ -303,8 +312,6 @@ function getid() {
 
 function loadview(toload) {
 
-    console.log("Load Window:")
-    console.log(toload)
     switch (toload.textContent) {
         case "Home":
             currentview = "home";
@@ -341,53 +348,6 @@ function loadview(toload) {
 
 }
 
-async function loadNewsPreview() {
-    const response = await fetch("/newspreview")
-    const data = await response.json();
-
-    console.log("data for preview: ")
-    console.log(data)
-
-    let count = 0;
-
-    for (let i = 0; i < data.length; i++) {
-        if (data[i] != null) {
-            const div = document.createElement("div")
-            div.setAttribute("class", "news-pre-view")
-            document.getElementById("show-news-preview").append(div)
-
-            const header = document.createElement("h4")
-            header.textContent = data[i].content.header
-            div.append(header)
-
-            const image = document.createElement("img");
-            if (image.getAttribute('src') != "undefined") {
-                image.src = data[i].content.image;
-                if (image.getAttribute('src') != "data:,") {
-                    div.append(image);
-                }
-            }
-        }
-        else {
-            count++;
-        }
-    }
-
-    console.log(count)
-
-    if (count == 3) {
-        console.log("hi")
-        const div = document.createElement("div")
-        div.setAttribute("class", "news-pre-view")
-        document.getElementById("show-news-preview").append(div)
-
-        const header = document.createElement("h4")
-        header.textContent = "Es scheint einige Schwirigkeiten zu geben, wir arbeiten dran"
-        div.append(header)
-    }
-
-}
-
 async function addContentWindow() {
     document.getElementById("headertext").textContent = "";
     document.getElementById("contenttext").textContent = "";
@@ -406,11 +366,4 @@ document.getElementById("close-login-btn").addEventListener("click", function ()
 });
 document.getElementById("preview-news").addEventListener("click", function () {
     loadview(document.getElementById("news"));
-});
-
-
-var marker = new khtml.maplib.overlay.Marker({
-    position: new khtml.maplib.LatLng(-25.363882,131.044922), 
-    map: map,
-    title:"static marker"
 });

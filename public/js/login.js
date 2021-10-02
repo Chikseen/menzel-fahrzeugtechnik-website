@@ -21,7 +21,7 @@ document.getElementById("open-login").addEventListener("click", async function (
             const response = await fetch("/login", options);
             const login = await response.json();
             checkSession(null, login);
-            loadview(document.getElementById("home"));
+            loadview(document.getElementById(currentview));
             document.getElementById("open-login").textContent = "Logout";
             isLogedin = true;
             console.log("logstate: " + isLogedin)
@@ -55,7 +55,7 @@ document.getElementById("open-login").addEventListener("click", async function (
                     label.textContent = "Die Anmeldedaten sind korrekt";
                     label.classList.toggle("messagetrue", true);
                     label.classList.toggle("messagefalse", false);
-                    loadview("home");
+                    loadview(document.getElementById(currentview));
                     document.getElementById("open-login").textContent = "Logout";
                     isLogedin = true;
                     console.log("logstate: " + isLogedin)
@@ -84,7 +84,7 @@ document.getElementById("open-login").addEventListener("click", async function (
         sessionStorage.removeItem("session")
         isLogedin = false;
         document.getElementById("open-login").textContent = "Login";
-        loadview(document.getElementById("home"));
+        loadview(document.getElementById(currentview));
         document.getElementById("login").classList.toggle("show", false)
     }
 });
