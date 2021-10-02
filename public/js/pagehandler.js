@@ -331,6 +331,7 @@ function loadview(toload) {
             currentview = "kontakt";
             cleanSite()
             document.getElementById("static-contact").classList.toggle("show", true);
+            lmap.invalidateSize()
             break;
         case "Handel":
             currentview = "trade";

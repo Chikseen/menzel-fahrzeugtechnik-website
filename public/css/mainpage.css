@@ -204,10 +204,11 @@ input[type=file]::file-selector-button {
 height: 50px;
 }
 
-#map { 
-    height: 300px; 
-}
-
+#map {
+    position: relative;
+    height: 400px;
+    min-height: 400px;
+  }
  @keyframes contentLoadAnimation {
     0% {
         transform: rotateX(90deg);
