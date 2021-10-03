@@ -1,5 +1,5 @@
 
-const lmap = L.map('map').setView([51.271428, 12.369805], 15);
+const lmap = L.map('map').setView([51.271428, 12.369805], 16);
 
 const tileURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 const tiles = L.tileLayer(tileURL, { 

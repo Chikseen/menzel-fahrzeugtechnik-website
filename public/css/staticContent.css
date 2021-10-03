@@ -1,9 +1,6 @@
 
 #static-home {
     display: none;
-    background-color: rgb(141, 146, 135);
-    border-radius: var(--borderradius);
-    box-shadow: var(--shadow);
 }
 
 .static-content {
@@ -17,24 +14,32 @@
 
 #static-contact {
     display: none;
-    background-color: rgb(161, 135, 185);
 }
+
+#map {
+    position: relative;
+    width: 80%;
+    max-height: 1000px;
+    min-height: 600px;
+    z-index: 0;
+  }
 
 #show-news-preview, #show-trade-preview{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 
-    background: linear-gradient(90deg, rgba(241, 241, 241, 0.4)60%, rgba(66, 66, 66, 0.8)100%);
-    width: 100%;
-    height: auto;
+    overflow: hidden;
+
+    width: auto;
 }
 
 .static-field {
     position: relative;
-    margin: 20px;
-    border-radius: var(--borderradius);
-    box-shadow: var(--shadow);
+    margin: 50px 15px 20px 15px;
+    height: calc(20rem + 15px);
+    padding: 20px;
+
 }
 
 
@@ -58,6 +63,20 @@
     font-size: 3rem;
 }
 
+.static-field::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    border-radius: var(--borderradius);
+
+    background: linear-gradient(90deg, rgba(241, 241, 241, 0)60%, rgba(66, 66, 66, 0.9)100%);
+}
+
 .static-field:hover::before {
     content: 'Watch newest News new';
     background-color: rgba(224, 224, 224, 0.5);
@@ -65,15 +84,19 @@
 }
 
 
-.news-pre-view {
+.news-pre-view, .trade-pre-view {
     text-align: center;
     padding: 10px;
     margin: 15px;
+
+    min-width: 20rem;
+    width: 30%;
+    max-width: 40rem;
+
     border-radius: var(--borderradius);
-    box-shadow: var(--shadow);
-    max-width: 33%;
-    min-width: 250px;
+    box-shadow: 0px 0px 2px 1px rgb(40, 50, 55);;
 }
-.news-pre-view img{
-   width: 80%;
+.news-pre-view img, .trade-pre-view img{
+    height: 10rem;
+    max-width: 20rem;
 }

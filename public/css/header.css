@@ -9,7 +9,8 @@
     padding-top:10px;
     padding-bottom: 10px;
 
-    background: linear-gradient(80deg, rgb(124, 134, 155) 0%, rgb(158, 171, 197) 15%,  rgb(168, 184, 216) 85%, rgb(135, 148, 175) 100%);
+    color: rgb(230, 230, 230);
+    background-color: var(--akzentcolor);
 }
 
 .header-area {
@@ -28,8 +29,7 @@
     z-index: 10;
 
     top: 0;
-    left: calc(50% - 375px);
-    width: 750px;
+    width: auto;
 
     flex-direction: row;
     display: flex;
@@ -52,6 +52,7 @@
     flex-direction: column;
     margin: 20px;
 
+    font-size: 1.5rem;
 }
 #nav-header button:hover{
     box-shadow: var(--shadow);

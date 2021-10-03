@@ -1,9 +1,10 @@
 
 html, body {
     height: auto;
-    background-repeat: no-repeat;
-    background:  linear-gradient(135deg, #eaeffd 0%, #8394c7 80%, #353e58 100%);
+    background-color: rgb(240, 240, 240);
     font-size: 1rem;
+
+    font-family: sans-serif;
 }
 body {
     position: relative;
@@ -201,14 +202,10 @@ input[type=file]::file-selector-button {
 }
 
 #intrest-btn {
-height: 50px;
+    height: 50px;
 }
 
-#map {
-    position: relative;
-    height: 400px;
-    min-height: 400px;
-  }
+
  @keyframes contentLoadAnimation {
     0% {
         transform: rotateX(90deg);

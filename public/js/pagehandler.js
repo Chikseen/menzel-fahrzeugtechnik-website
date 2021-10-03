@@ -294,6 +294,12 @@ function cleanSite() {
             removecurrent.remove();
         }
     }
+    while (document.querySelector(".trade-pre-view") != null) {
+        const removecurrent = document.querySelector(".trade-pre-view");
+        if (removecurrent != null) {
+            removecurrent.remove();
+        }
+    }
     document.getElementById("static-home").classList.toggle("show", false)
     document.getElementById("static-contact").classList.toggle("show", false);
     document.getElementById("hide-adder").classList.toggle("show", false);
