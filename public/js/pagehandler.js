@@ -10,24 +10,26 @@ async function saveData() {
         if (currentview == "news") {
             content = {
                 header: document.getElementById("headertext").value,
-                text: document.getElementById("contenttext").value, 
+                text: document.getElementById("contenttext").value,
                 image: previewIMG()
             }
         }
         if (currentview == "trade") {
-            content = { 
-                header: document.getElementById("headertext").value, 
+            content = {
+                header: document.getElementById("headertext").value,
                 text: document.getElementById("contenttext").value,
-                spec: document.getElementById("specialtext").value, 
-                price: document.getElementById("pricetext").value,  
-                image: previewIMG() }
+                spec: document.getElementById("specialtext").value,
+                price: document.getElementById("pricetext").value,
+                image: previewIMG()
+            }
         }
         const window = currentview;
 
         let timestemp = (new Date().getTime());
         if (document.getElementById("savedata").textContent == "Update Data") {
             timestemp = getTimeStemp();
-            removedata(getid());
+            await removedata(getid());
+
         }
 
         const data = { window, content, timestemp };
@@ -44,7 +46,7 @@ async function saveData() {
         };
         const response = await fetch("/savedata", options)
         const json = await response.json();
-        loadcontent();
+        loadview(document.getElementById(currentview));
         addContentWindow();
     }
 };
@@ -267,13 +269,14 @@ let moveid;
 
 function editdata(id, data) {
     addContentWindow()
-    document.getElementById("headertext").textContent = data.header
-    document.getElementById("contenttext").textContent = data.content
+    document.getElementById("headertext").textContent = data.content.header
+    document.getElementById("contenttext").textContent = data.content.text
+    document.getElementById("specialtext").textContent = data.content.spec;
+    document.getElementById("pricetext").textContent = data.content.price;
+
     document.getElementById("savedata").textContent = "Update Data"
 
-    const image = data.image;
-
-    document.getElementById("IMGpreviewSPV").src = data.image;
+    document.getElementById("IMGpreviewSPV").src = data.content.image;
 
     movets = data.timestemp;
     moveid = data._id;
@@ -327,6 +330,7 @@ function loadview(toload) {
             break;
         case "Aktuelles":
             currentview = "news";
+            cleanSite()
             loadcontent();
             break;
         case "Leistungen":
@@ -341,6 +345,7 @@ function loadview(toload) {
             break;
         case "Handel":
             currentview = "trade";
+            cleanSite()
             loadcontent();
             break;
         case "Termine":

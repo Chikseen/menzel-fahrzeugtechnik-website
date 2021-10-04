@@ -79,7 +79,7 @@
 
 .static-field:hover::before {
     content: 'Watch newest News new';
-    background-color: rgba(224, 224, 224, 0.5);
+    background-color: rgba(224, 224, 224, 0.75);
     backdrop-filter: blur(10px);
 }
 
