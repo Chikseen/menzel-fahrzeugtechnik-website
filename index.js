@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 
 let SID;
 
-app.listen(3000, () => console.log("Connecet with Port:3000"));
+app.listen(80, () => console.log("Connecet with Port:80"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "1mb" }));
 
