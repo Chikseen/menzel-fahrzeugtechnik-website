@@ -9,6 +9,11 @@
   "author": "Tim Menzel",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "fs": "^0.0.1-security",
+    "simple-json-db": "^2.0.0",
     "vue": "^3.2.31",
     "vue-router": "^4.0.13"
   }
