@@ -9,7 +9,7 @@
       <button @click="sendData">Senden</button>
     </div>
     <br />
-    <p v-for="text in allData.new" :key="text">{{ text }}</p>
+    <p class="text" v-for="text in allData.new" :key="text" @click="removeEntry(text)">{{ text }}</p>
   </div>
 </template>
 
@@ -24,12 +24,26 @@ export default {
     };
   },
   methods: {
+    async getData() {
+      console.log("hi", await api.fetchData("getAll", {}));
+      this.allData = await api.fetchData("getAll", {});
+    },
     async sendData() {
       this.allData = await api.fetchData("createEntry", { text: this.text });
     },
+    async removeEntry(text) {
+      console.log("remove", text);
+      this.allData = await api.fetchData("removeEntry", { text: text });
+    },
   },
-  created() {
-    api.fetchData("getall", {});
+  mounted() {
+    this.getData();
   },
 };
 </script>
+
+<style>
+.text:hover {
+  color: red;
+}
+</style>

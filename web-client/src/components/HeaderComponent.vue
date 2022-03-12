@@ -4,6 +4,7 @@
       <WheelIcon class="header_icon" />
       <nav class="header_nav">
         <router-link class="header_nav_route" to="/home">Home</router-link>
+        <router-link class="header_nav_route" to="/news">News</router-link>
         <router-link class="header_nav_route" to="/service">Leistungen</router-link>
         <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
         <router-link class="header_nav_route" to="/about">About</router-link>

@@ -9,8 +9,8 @@ module.exports = {
       sass: {
         additionalData: `
           @import "@/assets/styles/_global.scss";
-        `
-      }
-    }
-  }
+        `,
+      },
+    },
+  },
 };

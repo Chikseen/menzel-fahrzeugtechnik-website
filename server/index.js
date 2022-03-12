@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 
 app.post("/getall", (req, res) => {
   const data = new JSONdb(pathPreFix + "/database/data.json");
-  res.json(data.get("all"));
+  res.json({ new: data.get("all") });
 });
 
 app.post("/createEntry", (req, res) => {
@@ -39,6 +39,15 @@ app.post("/createEntry", (req, res) => {
   if (!data.has("all")) data.set("all", []);
   let temp = data.get("all");
   temp.push(req.body.text);
+  data.set("all", temp);
+  res.json({ new: data.get("all") });
+});
+
+app.post("/removeEntry", (req, res) => {
+  const data = new JSONdb(pathPreFix + "/database/data.json");
+  let temp = data.get("all");
+  const i = temp.indexOf(req.body.text);
+  temp.splice(i, 1);
   data.set("all", temp);
   res.json({ new: data.get("all") });
 });
