@@ -7,7 +7,7 @@ const apiService = {
       console.log("mode is development")
       call = "http://192.168.2.100:7080";
     } else {
-      call = "https://api.menzel-fahrzeugtechnik.de/";
+      call = "https://api.menzel-fahrzeugtechnik.de";
     }
 
     try {
