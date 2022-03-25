@@ -5,6 +5,8 @@ dist_electron
 archiv
 database
 # local env files
+.env
+.env.json
 .env.local
 .env.*.local
 
