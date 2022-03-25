@@ -90,7 +90,6 @@ app.post("/key/check", async (req, res) => {
 app.post("/key/sendNew", async (req, res) => {
   console.log("sendNewKey", req.body);
   const uuid = uuidGen();
-  console.log("uuid", uuid);
   // SEND MAIL HERE
   const sendNewAuthmail = {
     subject: "new authKey",
@@ -98,6 +97,8 @@ app.post("/key/sendNew", async (req, res) => {
   };
   if (process.env.NODE_ENV != "development") {
     sendMail(transporter, mailAuth.get("name"), mailAuth.get("name"), sendNewAuthmail);
+  } else {
+    console.log("uuid", uuid);
   }
   // HASH N STORE
   const salt = await bcrypt.genSalt();
@@ -105,4 +106,53 @@ app.post("/key/sendNew", async (req, res) => {
   const user = new JSONdb(pathPreFix + "/database/user.json");
   user.set(hashed, "");
   res.json({ status: "keyNotValid" });
+});
+
+app.post("/activeMessages/create", async (req, res) => {
+  console.log("Create new Active message", req.body);
+
+  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
+  const data = am.get("data");
+  req.body.uuid = uuidGen();
+  data.push(req.body);
+
+  am.set("data", data);
+  res.json(data);
+});
+app.post("/activeMessages/get", async (req, res) => {
+  console.log("get All message");
+
+  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
+  const data = am.get("data");
+  res.json(data);
+});
+app.post("/activeMessages/getFilterd", async (req, res) => {
+  console.log("get Active message");
+  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
+  const data = am.get("data");
+
+  const tosend = [];
+  data.forEach((elem) => {
+    if (elem.showStatus == "true") tosend.push(elem);
+  });
+  console.log("todind", tosend);
+
+  res.json(tosend);
+});
+
+app.post("/activeMessages/delete", async (req, res) => {
+  console.log("Delete message");
+  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
+  let data = am.get("data");
+
+  const i = data.findIndex((element) => element.uuid == req.body.uuid);
+
+  delete data[i];
+  const tosend = [];
+  data.forEach((elem) => {
+    if (elem != null) tosend.push(elem);
+  });
+
+  am.set("data", tosend);
+  res.json(tosend);
 });
