@@ -9,5 +9,9 @@ module.exports = {
       console.log("creating data.json");
       fs.writeFile(pathPreFix + "/database/data.json", "", "utf8", function (err) {});
     }
+    if (!fs.existsSync(pathPreFix + "/database/user.json")) {
+      console.log("creating user.json");
+      fs.writeFile(pathPreFix + "/database/user.json", "", "utf8", function (err) {});
+    }
   },
 };
