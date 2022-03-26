@@ -2,7 +2,6 @@
   <div class="home">
     <ActiveMessage />
     <h1>Menzel-Fahrzeugpflege</h1>
-    <p>Diese seite befindet sich in der Entwicklung Besuchen sie uns bald wieder ;)</p>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">

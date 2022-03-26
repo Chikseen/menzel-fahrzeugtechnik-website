@@ -27,14 +27,18 @@ export default {
 <style lang="scss">
 .header {
   position: sticky;
+  top: 0;
+  right: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-color: $company_blue;
+  box-shadow: 10px -1px 10px 2px $company_blue;
   border-radius: 3rem 0 0 3rem;
   margin-left: 10%;
   padding-right: 10%;
   height: 6rem;
+  z-index: 11;
 
   &_icon {
     position: absolute;

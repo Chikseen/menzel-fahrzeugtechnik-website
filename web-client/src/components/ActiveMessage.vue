@@ -12,9 +12,9 @@
         <h2>{{ message.titel }}</h2>
         <p>{{ message.text }}</p>
       </div>
-      <div>
-        <p>Von: {{ message.startDate }}</p>
-        <p>Bis: {{ message.endDate }}</p>
+      <div class="active_textwrapper_date">
+        <p>Vom: {{ dateFormatter(message.startDate) }}</p>
+        <p>Bis: {{ dateFormatter(message.endDate) }}</p>
       </div>
     </div>
   </div>
@@ -34,6 +34,10 @@ export default {
     async getData() {
       const data = await api.fetchData("activeMessages/getFilterd", {});
       this.allActviveMessages = data;
+    },
+    dateFormatter(data) {
+      const date = new Date(data);
+      return `${date.getDay()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     },
   },
   mounted() {
@@ -74,6 +78,12 @@ export default {
     p {
       text-align: left;
       margin: 5px 0;
+    }
+
+    &_date {
+      p {
+        text-align: right;
+      }
     }
   }
 }
