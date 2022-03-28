@@ -33,6 +33,7 @@ export default {
   methods: {
     async getData() {
       const data = await api.fetchData("activeMessages/getFilterd", {});
+      this.$store.commit("setMessage", data);
       this.allActviveMessages = data;
     },
     dateFormatter(data) {

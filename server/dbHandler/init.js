@@ -20,5 +20,20 @@ module.exports = {
       const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
       am.set("data", []);
     }
+    if (!fs.existsSync(pathPreFix + "/database/openTimes.json")) {
+      console.log("creating openTimes.json");
+      fs.writeFile(pathPreFix + "/database/openTimes.json", "", "utf8", function (err) {});
+      const am = new JSONdb(pathPreFix + "/database/openTimes.json");
+      am.set("weekdays", [
+        { day: "Sunday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
+        { day: "Monday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Tuesday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Wensday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Thursday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Friday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Saturday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
+      ]);
+      am.set("exeption", []);
+    }
   },
 };

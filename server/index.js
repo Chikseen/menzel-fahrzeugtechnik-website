@@ -8,6 +8,8 @@ const { v4: uuidGen } = require("uuid");
 const nodemailer = require("nodemailer");
 const initMailTemplate = require("./mailHandling/initMailTemplate.js");
 const databaseIntegrity = require("./dbHandler/init.js");
+const ot = require("./dbHandler/openTimes.js");
+const am = require("./dbHandler/aktiveMessages.js");
 
 let pathPreFix;
 if (process.env.NODE_ENV === "development") {
@@ -65,26 +67,30 @@ app.use(express.urlencoded({ extended: true }));
 const port = 7080;
 app.listen(port, () => console.log("Connecet with Port: " + port));
 
-app.get("/", (req, res) => {
-  res.json({ status: "success" });
-});
-
-app.post("/key/check", async (req, res) => {
-  console.log("check Key", req.body);
+async function checkKey(key) {
+  console.log("check Key", key);
   const user = new JSONdb(pathPreFix + "/database/user.json");
   let foundSth = false;
   const uuid = Object.keys(user.JSON());
   try {
     for (let i = 0; i < uuid.length; i++) {
-      if (await bcrypt.compare(req.body.key, uuid[i])) {
+      if (await bcrypt.compare(key, uuid[i])) {
         foundSth = true;
       }
     }
-    if (foundSth) res.json({ status: "keyValid" });
-    else res.json({ status: "keyNotValid" });
+    if (foundSth) return true;
+    else return false;
   } catch (error) {
-    res.json({ status: "keyNotValid" });
+    return false;
   }
+}
+
+app.get("/", (req, res) => {
+  res.json({ status: "success" });
+});
+
+app.post("/key/check", async (req, res) => {
+  res.json({ status: await checkKey(req.body.key) });
 });
 
 app.post("/key/sendNew", async (req, res) => {
@@ -105,54 +111,35 @@ app.post("/key/sendNew", async (req, res) => {
   const hashed = await bcrypt.hash(uuid, salt);
   const user = new JSONdb(pathPreFix + "/database/user.json");
   user.set(hashed, "");
-  res.json({ status: "keyNotValid" });
+  res.json({ status: false });
 });
 
 app.post("/activeMessages/create", async (req, res) => {
-  console.log("Create new Active message", req.body);
-
-  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
-  const data = am.get("data");
-  req.body.uuid = uuidGen();
-  data.push(req.body);
-
-  am.set("data", data);
-  res.json(data);
+  if (await checkKey(req.body.key)) res.json(am.create(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
 });
 app.post("/activeMessages/get", async (req, res) => {
-  console.log("get All message");
-
-  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
-  const data = am.get("data");
-  res.json(data);
+  if (await checkKey(req.body.key)) res.json(am.getAll(pathPreFix));
+  else res.json({ status: "invalidKey" });
 });
 app.post("/activeMessages/getFilterd", async (req, res) => {
-  console.log("get Active message");
-  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
-  const data = am.get("data");
-
-  const tosend = [];
-  data.forEach((elem) => {
-    if (elem.showStatus == "true") tosend.push(elem);
-  });
-  console.log("todind", tosend);
-
-  res.json(tosend);
+  res.json(am.getFilterd(pathPreFix));
 });
 
 app.post("/activeMessages/delete", async (req, res) => {
-  console.log("Delete message");
-  const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
-  let data = am.get("data");
+  if (await checkKey(req.body.key)) res.json(am.delete(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
 
-  const i = data.findIndex((element) => element.uuid == req.body.uuid);
+app.post("/openTimes/get", async (req, res) => {
+  res.json(ot.getDay(pathPreFix));
+});
 
-  delete data[i];
-  const tosend = [];
-  data.forEach((elem) => {
-    if (elem != null) tosend.push(elem);
-  });
+app.post("/openTimes/getAll", async (req, res) => {
+  res.json(ot.getAll(pathPreFix));
+});
 
-  am.set("data", tosend);
-  res.json(tosend);
+app.post("/openTimes/set", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(ot.set(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
 });

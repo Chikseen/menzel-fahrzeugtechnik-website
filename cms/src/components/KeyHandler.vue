@@ -47,14 +47,16 @@ export default {
     async confirmKey() {
       console.log("new key requested");
       const data = await api.fetchData("key/check", { key: this.keyInput });
-      if (data.status === "keyNotValid") this.$emit("keyStatus", false);
-      if (data.status === "keyValid") {
+      if (data.status) this.$emit("keyStatus", false);
+      if (data.status) {
         localStorage.setItem("authKey", this.keyInput);
         this.$emit("keyStatus", true);
       }
     },
   },
-  mounted() {},
+  mounted() {
+    console.log("ssss", this.keyStatus);
+  },
 };
 </script>
 

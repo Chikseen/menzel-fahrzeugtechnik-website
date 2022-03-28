@@ -1,13 +1,25 @@
 <template>
   <div>
-    <ActiveMessage msg="Welcome to Your Vue.js App" v-if="keyValid" />
-    <KeyHandler :keyStatus="keyValid" @keyStatus="keyValid = $event" />
+    <div>
+      <button @click="toShow = 'msg'">Aktive Nachrichten</button>
+      <button @click="toShow = 'key'">ZugriffsKontrolle</button>
+      <button @click="toShow = 'open'">Öffnungszeiten</button>
+    </div>
+    <div v-if="keyValid">
+      <ActiveMessage v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
+      <KeyHandler v-if="toShow == 'key'" :keyStatus="keyValid" @keyStatus="keyValid = $event" />
+      <OpeningTimes v-if="toShow == 'open'" />
+    </div>
+    <div v-else>
+      <KeyHandler :keyStatus="keyValid" @keyStatus="keyValid = $event" />
+    </div>
   </div>
 </template>
 
 <script>
 import ActiveMessage from "@/components/ActiveMessage.vue";
 import KeyHandler from "@/components/KeyHandler.vue";
+import OpeningTimes from "@/components/OpeningTimes.vue";
 import api from "@/apiService";
 
 export default {
@@ -15,22 +27,23 @@ export default {
   components: {
     ActiveMessage,
     KeyHandler,
+    OpeningTimes,
   },
   data() {
     return {
       keyValid: false,
+      toShow: "open",
     };
   },
   methods: {
     async checkkey() {
       const data = await api.fetchData("key/check", { key: localStorage.getItem("authKey") });
-      console.log("data", data);
-      if (data.status === "keyNotValid") {
-        this.keyValid = false;
-      } else if (data.status === "keyValid") {
+      console.log("keystatus", data);
+      if (data.status) {
         this.keyValid = true;
       } else {
         this.keyValid = false;
+        this.toShow = "key";
       }
     },
   },

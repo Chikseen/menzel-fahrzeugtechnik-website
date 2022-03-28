@@ -2,7 +2,7 @@
   <div class="">
     <div class="header">
       <WheelIcon class="header_icon" />
-      <div class="header_quickConntact" @mouseup="$router.push('/contact')">
+      <div class="header_quickConntact header_quickConntact_timeing" @mouseup="$router.push('/contact')">
         <p>{{ isOpen }}</p>
         <p>{{ nextOpen }}</p>
       </div>
@@ -24,38 +24,28 @@
 <script>
 import WheelIcon from "@/assets/icons/WheelIcon.vue";
 
+import api from "../apiService";
+
 export default {
   components: {
     WheelIcon,
   },
   data() {
     return {
+      isOpen: "",
       nextOpen: "",
-      isOpen: "h",
     };
   },
+  methods: {
+    async getData() {
+      const data = await api.fetchData("openTimes/get", {});
+      this.$store.commit("setOpenTime", data);
+      this.isOpen = data.isOpen;
+      this.nextOpen = data.nextOpen;
+    },
+  },
   mounted() {
-    const date = new Date();
-    date.getDay();
-
-    if (date.getDay() == 0 || date.getDay() == 6) {
-     this.nextOpen = "Öffnet Montag 8:00";
-      this.isOpen = "Geschlossen";
-    } else {
-      //Opening
-      const dateStart = new Date(`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}T08:00:00`);
-
-      //Closing
-      const dateEnd = new Date(`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}T16:00:00`);
-
-      if (date > dateStart && date < dateEnd) {
-        this.nextOpen = "Schließt 16:00";
-        this.isOpen = "Geöffnet";
-      } else {
-        this.nextOpen = "Öffnet 8:00";
-        this.isOpen = "Geschlossen";
-      }
-    }
+    this.getData();
   },
 };
 </script>
@@ -101,6 +91,25 @@ export default {
 
   &_quickConntact {
     cursor: pointer;
+    max-width: 150px;
+    color: rgb(155, 155, 155);
+
+    p {
+      margin: 2px;
+    }
+
+    &_timeing {
+      padding-left: 100px;
+    }
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .header {
+    &_quickConntact {
+      display: none;
+    }
   }
 }
 </style>

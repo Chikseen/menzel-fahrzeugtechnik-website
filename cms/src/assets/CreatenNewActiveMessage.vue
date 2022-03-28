@@ -77,6 +77,7 @@ export default {
         titel: this.titel,
         colorselection: this.colorselection,
         showStatus: this.showStatus,
+        key: localStorage.getItem("authKey")
       });
       this.$emit("newData", data);
     },
