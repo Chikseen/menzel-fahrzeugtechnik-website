@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <ActiveMessage />
-    <h1>Menzel-Fahrzeugpflege</h1>
+    <h1>Menzel Fahrzeugtechnik</h1>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="home_content_text">
-          <h2>TÜV</h2>
+          <h2>TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
           <p>Wir machen TÜV</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="home_content_text">
-          <h2>Reifen Service</h2>
+          <h2>Freie KFZ-Werkstatt</h2>
           <p>Wir wechseln Reifen</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="home_content_text">
-          <h2>Glas Service</h2>
+          <h2>Klimaservice</h2>
           <p>Wir wechseln Gläßer</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
@@ -49,7 +49,19 @@
           </div>
         </div>
         <div class="home_content_text">
-          <h2>Unfall Service</h2>
+          <h2>Glassschaden</h2>
+          <p>Wir wechseln Gläßer</p>
+          <button @mouseup="$router.push('service')">Erfahre mehr</button>
+        </div>
+      </div>
+      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
+        <div class="home_content_picture_wrapper">
+          <div class="home_content_picture" id="divThreeGlas">
+            <p>DAS IST EIN BILD</p>
+          </div>
+        </div>
+        <div class="home_content_text">
+          <h2>Unfallreperaturen</h2>
           <p>Wir wechseln Gläßer</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>

@@ -14,7 +14,20 @@
         <router-link class="header_nav_route" to="/about">About</router-link>
       </nav>
       <div class="header_quickConntact" @mouseup="$router.push('/contact')">
-        <p>Adress?</p>
+        <p>Städtelner Straße 62</p>
+        <p>04416 Markkleeberg</p>
+      </div>
+      <div class="header_nav_menu" @mouseup="menuOpen = !menuOpen">
+        <p>MENU</p>
+        <Transition name="profile-setting">
+          <nav v-if="menuOpen" class="header_nav_smallWindow">
+            <router-link class="header_nav_route" to="/home">Home</router-link>
+            <router-link class="header_nav_route" to="/news">News</router-link>
+            <router-link class="header_nav_route" to="/service">Leistungen</router-link>
+            <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
+            <router-link class="header_nav_route" to="/about">About</router-link>
+          </nav>
+        </Transition>
       </div>
     </div>
     <router-view />
@@ -34,6 +47,7 @@ export default {
     return {
       isOpen: "",
       nextOpen: "",
+      menuOpen: false,
     };
   },
   methods: {
@@ -51,6 +65,16 @@ export default {
 </script>
 
 <style lang="scss">
+.profile-setting-enter-active,
+.profile-setting-leave-active {
+  transform: translateX(0);
+}
+.profile-setting-enter-from,
+.profile-setting-leave-to {
+  transform: translateX(100%);
+}
+/* _______ */
+
 .header {
   position: sticky;
   top: 0;
@@ -87,12 +111,20 @@ export default {
       font-size: 1.5rem;
       color: $ligth_font_color;
     }
+
+    &_menu {
+      display: none;
+    }
+    &_smallWindow {
+      display: none;
+    }
   }
 
   &_quickConntact {
     cursor: pointer;
-    max-width: 150px;
-    color: rgb(155, 155, 155);
+    max-width: 200px;
+    color: rgb(185, 185, 185);
+    transition: all 0.25s;
 
     p {
       margin: 2px;
@@ -103,12 +135,60 @@ export default {
     }
     margin: auto;
   }
+  &_quickConntact:hover {
+    color: rgb(230, 230, 230);
+  }
 }
 
 @media only screen and (max-width: 1100px) {
   .header {
     &_quickConntact {
       display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .header {
+    margin-left: 0;
+  }
+}
+@media only screen and (max-width: 810px) {
+  .header {
+    border-radius: 0 0 3rem 3rem;
+    height: 3rem;
+    transition: all 0.3s;
+    
+    &_icon {
+      display: none;
+    }
+
+    &_nav {
+      display: none;
+
+      &_smallWindow {
+        position: absolute;
+        top: 0;
+        right: 0;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        background-color: $company_blue;
+        box-shadow: 1px 1px 5px 1px rgba(204, 203, 203, 0.151);
+        border-radius: 10px;
+        height: 300px;
+      }
+
+      &_menu {
+        display: flex;
+        color: aliceblue;
+        width: 100%;
+        justify-content: flex-end;
+        text-align: center;
+        margin: auto 0;
+      }
     }
   }
 }
