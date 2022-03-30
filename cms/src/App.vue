@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <button @click="toShow = 'msg'">Aktive Nachrichten</button>
-      <button @click="toShow = 'key'">ZugriffsKontrolle</button>
-      <button @click="toShow = 'open'">Öffnungszeiten</button>
+      <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">Aktive Nachrichten</button>
+      <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">ZugriffsKontrolle</button>
+      <button @click="toShow = 'open'" :class="toShow == 'open' ? 'active' : ''">Öffnungszeiten</button>
     </div>
     <div v-if="keyValid">
       <ActiveMessage v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
