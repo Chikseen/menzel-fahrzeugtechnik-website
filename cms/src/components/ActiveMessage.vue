@@ -1,12 +1,12 @@
 <template>
   <div>
     <h1>Aktive Nachrichten</h1>
-    <CreateNewActiveMessage @newData="allMessages = $event" />
+    <CreateNewActiveMessage @newData="allMessages = $event" :setdata="setdata" />
     <br />
     <div>
       <h3>Aktive Nachrichten</h3>
       <div v-for="message in allMessages" :key="message.uuid">
-        <div v-if="message.showStatus == 'true'">
+        <div v-if="message.showStatus == 'true'" @mouseup="setsetData(message)">
           <p>{{ message.titel }}</p>
           <p>{{ message.text }}</p>
           <button @mouseup="deleteMessage(message.uuid)">Entfernen</button>
@@ -15,7 +15,7 @@
       </div>
       <h3>Inaktive Nachrichten</h3>
       <div v-for="message in allMessages" :key="message.uuid">
-        <div v-if="message.showStatus == 'false'">
+        <div v-if="message.showStatus == 'false'" @mouseup="setsetData(message)">
           <p>{{ message.titel }}</p>
           <p>{{ message.text }}</p>
           <button @mouseup="deleteMessage(message.uuid)">Entfernen</button>
@@ -38,6 +38,7 @@ export default {
     return {
       text: "",
       allMessages: [],
+      setdata: {},
     };
   },
   methods: {
@@ -53,6 +54,9 @@ export default {
         key: localStorage.getItem("authKey"),
       });
       this.allMessages = data;
+    },
+    setsetData(msg) {
+      this.setdata = msg;
     },
   },
   watch: {

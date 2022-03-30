@@ -48,9 +48,14 @@
     <div class="createnewMessage_status">
       <label>Aktiv anzeigen</label>
       <h6>nachrichten werden nur angezeigt wenn ihr status "Aktiv" ist</h6>
-      <input type="checkBox" checked v-model="showStatus" @mouseup="showStatus == 'true' ? (showStatus = 'false') : (showStatus = 'true')" />
+      <button @mouseup="showStatus = 'true'" :class="showStatus == 'true' ? 'active' : ''">Anzeigen</button>
+      <button @mouseup="showStatus = 'false'" :class="showStatus == 'false' ? 'active' : ''">Nicht Anzeigen</button>
     </div>
-    <button @click="createnewMessage">Nachricht Hinzufügen</button>
+    <button @click="createnewMessage" v-if="uuid == ''">Nachricht Hinzufügen</button>
+    <div v-else>
+      <button @click="createnewMessage">Nachricht Änderen</button>
+      <button @click="uuid = ''">Eine Neue Nachricht erstellen</button>
+    </div>
   </div>
 </template>
 
@@ -58,6 +63,9 @@
 import api from "../apiService";
 
 export default {
+  props: {
+    setdata: { type: Object, default: () => {} },
+  },
   data() {
     return {
       startDate: "",
@@ -66,6 +74,7 @@ export default {
       titel: "",
       colorselection: "1",
       showStatus: "true",
+      uuid: "",
     };
   },
   methods: {
@@ -77,9 +86,19 @@ export default {
         titel: this.titel,
         colorselection: this.colorselection,
         showStatus: this.showStatus,
-        key: localStorage.getItem("authKey")
+        key: localStorage.getItem("authKey"),
+        uuid: this.uuid,
       });
+      const date = new Date();
       this.$emit("newData", data);
+
+      this.startDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      this.endDate = `${date.getFullYear()}-${String(date.getMonth() + 2).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      this.text = "";
+      this.titel = "";
+      this.colorselection = "1";
+      this.showStatus = "true";
+      this.uuid = "";
     },
   },
   mounted() {
@@ -87,6 +106,17 @@ export default {
 
     this.startDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
     this.endDate = `${date.getFullYear()}-${String(date.getMonth() + 2).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  },
+  watch: {
+    setdata() {
+      this.startDate = this.setdata.startDate;
+      this.endDate = this.setdata.endDate;
+      this.text = this.setdata.text;
+      this.titel = this.setdata.titel;
+      this.colorselection = this.setdata.colorselection;
+      this.showStatus = this.setdata.showStatus;
+      this.uuid = this.setdata.uuid;
+    },
   },
 };
 </script>
@@ -165,5 +195,9 @@ textarea {
 .createnewMessage_status label,
 h6 {
   margin: 0;
+}
+
+.active {
+  background-color: green;
 }
 </style>

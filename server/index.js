@@ -110,8 +110,20 @@ app.post("/key/sendNew", async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashed = await bcrypt.hash(uuid, salt);
   const user = new JSONdb(pathPreFix + "/database/user.json");
-  user.set(hashed, "");
+  user.set(hashed, req.body.user);
   res.json({ status: false });
+});
+
+app.post("/key/getuser", async (req, res) => {
+  if (await checkKey(req.body.key)) {
+    const user = new JSONdb(pathPreFix + "/database/user.json");
+    const allNames = user.JSON();
+    let toSend = [];
+    Object.keys(allNames).forEach((name) => {
+      toSend.push(user.get(name));
+    });
+    res.json({ data: toSend });
+  } else res.json({ status: "invalidKey" });
 });
 
 app.post("/activeMessages/create", async (req, res) => {

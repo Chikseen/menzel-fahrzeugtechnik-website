@@ -1,7 +1,12 @@
 <template>
   <div class="keyHandler_wrapper">
     <div v-if="keyStatus">
-      <p>OPTIONS FOR VALID KEY</p>
+      <p>Alle Regrestierten Benutzter</p>
+      <h6>Sollten irgendwelche unregelmäsigkeiten auffallen bitte an an denn Betreiber wenden ;)</h6>
+      <div v-for="(item, index) in allUser" :key="index">
+        <p v-if="item == ''">NoName</p>
+        <p v-else>{{ item }}</p>
+      </div>
     </div>
     <div v-else>
       <h2>Der authKey ist ungültig oder sie sind nicht authentifiziert!</h2>
@@ -12,8 +17,11 @@
         </p>
       </div>
       <div class="keyHandler_newKey">
+        <label>Wer benutzt diesen authKey</label>
+        <input type="text" v-model="user" />
         <label>Neuen authKey anfordern</label>
-        <button @mouseup="requestNewKey">Anfordern</button>
+        <button @mouseup="requestNewKey" @click="showclickMessage = true">Anfordern</button>
+        <p v-if="showclickMessage">Der authKey für {{ user }} wurde an !-! geschickt</p>
       </div>
       <div class="keyHandler_newKey">
         <label>authKey hier eingeben </label>
@@ -35,17 +43,21 @@ export default {
   },
   data() {
     return {
+      showclickMessage: false,
       keyInput: "",
+      user: "",
+      allUser: [],
     };
   },
   methods: {
     async requestNewKey() {
-      console.log("new key requested");
-      const data = await api.fetchData("key/sendNew", { key: localStorage.getItem("authKey") });
+      const data = await api.fetchData("key/sendNew", {
+        key: localStorage.getItem("authKey"),
+        user: this.user,
+      });
       console.log("data", data);
     },
     async confirmKey() {
-      console.log("new key requested");
       const data = await api.fetchData("key/check", { key: this.keyInput });
       if (data.status) this.$emit("keyStatus", false);
       if (data.status) {
@@ -53,9 +65,14 @@ export default {
         this.$emit("keyStatus", true);
       }
     },
+    async getAlluser() {
+      console.log("hi");
+      const data = await api.fetchData("key/getuser", { key: localStorage.getItem("authKey") });
+      this.allUser = data.data;
+    },
   },
   mounted() {
-    console.log("ssss", this.keyStatus);
+    this.getAlluser();
   },
 };
 </script>

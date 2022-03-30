@@ -41,8 +41,20 @@ module.exports = {
 
     const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
     const data = am.get("data");
-    req.body.uuid = uuidGen();
-    data.push(req.body);
+    const toedit = data.find((item) => item.uuid == req.body.uuid);
+
+    console.log("toedit", toedit);
+
+    if (toedit != undefined) {
+      const i = data.findIndex((item) => item.uuid == req.body.uuid);
+      console.log("index", i);
+
+      data.splice(i, 1);
+      data.push(req.body);
+    } else {
+      req.body.uuid = uuidGen();
+      data.push(req.body);
+    }
 
     am.set("data", data);
     return data;
