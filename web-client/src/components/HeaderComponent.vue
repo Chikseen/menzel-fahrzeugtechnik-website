@@ -18,6 +18,10 @@
         <p>04416 Markkleeberg</p>
       </div>
       <div class="header_nav_menu" @mouseup="menuOpen = !menuOpen">
+        <div class="header_nav_menu_quickinfo">
+          <h4>Menzel-Fharzeugtechnik</h4>
+          <h5>{{ isOpen }}</h5>
+        </div>
         <p>MENU</p>
         <Transition name="profile-setting">
           <nav v-if="menuOpen" class="header_nav_smallWindow">
@@ -158,7 +162,8 @@ export default {
     border-radius: 0 0 3rem 3rem;
     height: 3rem;
     transition: all 0.3s;
-    
+    padding: 0;
+
     &_icon {
       display: none;
     }
@@ -170,6 +175,7 @@ export default {
         position: absolute;
         top: 0;
         right: 0;
+        width: 100%;
         overflow-x: hidden;
         overflow-y: scroll;
         display: flex;
@@ -185,9 +191,20 @@ export default {
         display: flex;
         color: aliceblue;
         width: 100%;
-        justify-content: flex-end;
+        justify-content: space-between;
         text-align: center;
-        margin: auto 0;
+        margin: auto;
+        padding: 0 25px;
+
+        &_quickinfo {
+          display: flex;
+          flex-direction: column;
+
+          h4,
+          h5 {
+            margin: 0;
+          }
+        }
       }
     }
   }

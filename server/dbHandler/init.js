@@ -25,13 +25,13 @@ module.exports = {
       fs.writeFile(pathPreFix + "/database/openTimes.json", "", "utf8", function (err) {});
       const am = new JSONdb(pathPreFix + "/database/openTimes.json");
       am.set("weekdays", [
-        { day: "Sunday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
-        { day: "Monday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
-        { day: "Tuesday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
-        { day: "Wensday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
-        { day: "Thursday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
-        { day: "Friday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
-        { day: "Saturday", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
+        { day: "Sonntag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
+        { day: "Montag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Dienstag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Mittwoch", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Donnerstag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Freitag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: true },
+        { day: "Samstag", timeStart: "T08:00:00", timeEnd: "T16:00:00", isOpen: false },
       ]);
       am.set("exeption", []);
     }
