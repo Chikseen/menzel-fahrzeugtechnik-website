@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>CMS für Menzel-Fharzeugtechnik</h1>
     <div>
       <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">Aktive Nachrichten</button>
       <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">ZugriffsKontrolle</button>
