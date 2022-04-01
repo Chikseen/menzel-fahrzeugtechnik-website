@@ -4,6 +4,7 @@ import ServiceView from "../views/ServiceView.vue";
 import ContactView from "../views/ContactView.vue";
 import AboutView from "../views/AboutView.vue";
 import NewsView from "../views/NewsView.vue";
+import ImpressumView from "../views/ImpressumView";
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
     path: "/news",
     name: "news",
     component: NewsView,
+  },
+  {
+    path: "/impressum",
+    name: "impressum",
+    component: ImpressumView,
   },
 ];
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Du musst die seite neuladen damit du deine änderungen siehst</p>
     <br />
     <p v-for="text in allData.new" :key="text">{{ text }}</p>
   </div>

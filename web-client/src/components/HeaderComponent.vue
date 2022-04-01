@@ -9,9 +9,10 @@
       <nav class="header_nav">
         <router-link class="header_nav_route" to="/home">Home</router-link>
         <router-link class="header_nav_route" to="/news">News</router-link>
-        <router-link class="header_nav_route" to="/service">Leistungen</router-link>
+        <router-link class="header_nav_route" to="/service">Service</router-link>
         <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
-        <router-link class="header_nav_route" to="/about">About</router-link>
+        <router-link class="header_nav_route" to="/about">Über mich</router-link>
+        <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
       </nav>
       <div class="header_quickConntact" @mouseup="$router.push('/contact')">
         <p>Städtelner Straße 62</p>
@@ -27,9 +28,10 @@
           <nav v-if="menuOpen" class="header_nav_smallWindow">
             <router-link class="header_nav_route" to="/home">Home</router-link>
             <router-link class="header_nav_route" to="/news">News</router-link>
-            <router-link class="header_nav_route" to="/service">Leistungen</router-link>
+            <router-link class="header_nav_route" to="/service">Service</router-link>
             <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
-            <router-link class="header_nav_route" to="/about">About</router-link>
+            <router-link class="header_nav_route" to="/about">Über mich</router-link>
+            <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
           </nav>
         </Transition>
       </div>

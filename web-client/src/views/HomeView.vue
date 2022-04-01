@@ -1,20 +1,19 @@
 <template>
   <div class="home">
-    <ActiveMessage />
+    <!-- <ActiveMessage /> -->
     <h1>Menzel Fahrzeugtechnik</h1>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
-          <div class="home_content_picture">
+         <!--  <div class="home_content_picture">
             <img src="@/assets/parrallax/L0.png" id="TuevImgLayer0" />
             <img src="@/assets/parrallax/L1.png" id="TuevImgLayer1" />
             <img src="@/assets/parrallax/L2.png" id="TuevImgLayer2" />
-          </div>
+          </div> -->
         </div>
         <div class="home_content_text">
           <h2>TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
-          <p>Wir machen TÜV</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div>
@@ -26,7 +25,6 @@
         </div>
         <div class="home_content_text">
           <h2>Freie KFZ-Werkstatt</h2>
-          <p>Wir wechseln Reifen</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div>
@@ -38,11 +36,10 @@
         </div>
         <div class="home_content_text">
           <h2>Klimaservice</h2>
-          <p>Wir wechseln Gläßer</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div>
-      <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
+     <!--  <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
         <div class="home_content_picture_wrapper">
           <div class="home_content_picture" id="divFouracc">
             <p>DAS IST EIN BILD</p>
@@ -53,7 +50,7 @@
           <p>Wir wechseln Gläßer</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
-      </div>
+      </div> -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
         <div class="home_content_picture_wrapper">
           <div class="home_content_picture" id="divThreeGlas">
@@ -61,8 +58,7 @@
           </div>
         </div>
         <div class="home_content_text">
-          <h2>Unfallreperaturen</h2>
-          <p>Wir wechseln Gläßer</p>
+          <h2>Unfallreparaturen</h2>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div>

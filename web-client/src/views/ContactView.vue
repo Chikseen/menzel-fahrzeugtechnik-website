@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Kontakt</h1>
-    <div class="contactView_openTimes">
-      <h2>Öffnungs Zeiten</h2>
+<!--     <div class="contactView_openTimes">
+      <h2>Öffnungszeiten</h2>
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
           <h3>Geöffnet am:</h3>
@@ -17,8 +17,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="contactView_openTimes_content_data">
+        </div> 
+         <div class="contactView_openTimes_content_data">
           <h3>Geschlossen am:</h3>
           <div class="contactView_openTimes_content_data_opening_wrapper">
             <div v-for="(day, index) in openTimes" :key="index" class="contactView_openTimes_days">
@@ -27,9 +27,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
-    </div>
+    </div> -->
     <div class="contactView_openTimes">
       <h2>Anschrift</h2>
       <div class="contactView_openTimes_content contactView_openTimes_content_adress">
@@ -37,7 +37,7 @@
         <p>Städtelner Straße 62</p>
         <p>04416 Markkleeberg</p>
         <p>E-Mail: <a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a></p>
-        <p>Telefon: <a href="tel:+031435424333">0314 35424333</a></p>
+        <p>Telefon: <a href="tel:+034135424333">0341 35424333</a></p>
         <p>Mobil: <a href="tel:+497725199">0160 7725199</a></p>
       </div>
     </div>
