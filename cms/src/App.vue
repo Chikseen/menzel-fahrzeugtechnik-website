@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       keyValid: false,
-      toShow: "open",
+      toShow: "key",
     };
   },
   methods: {
@@ -55,12 +55,43 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=BIZ+UDPMincho&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-family: "BIZ UDPMincho", serif;
+  font-size: 16px;
+}
+
+button {
+  background-color: #e9e9e9;
+  border: none;
+  border-radius: 5px;
+  margin: 5px 10px;
+  height: 30px;
+  padding: 6px;
+  box-shadow: 2px 2px 10px 2px #8f8f8f27;
+  font-family: "BIZ UDPMincho", serif;
+  font-size: 0.8rem;
+}
+input {
+  border-radius: 5px;
+  border: 0.5px solid rgba(151, 151, 151, 0.479);
+  height: 25px;
+  box-shadow: 2px 2px 10px 2px #8f8f8f27;
+  font-family: "BIZ UDPMincho", serif;
+  font-size: 0.8rem;
+}
+textarea {
+  border-radius: 5px;
+  border: 0.5px solid rgba(151, 151, 151, 0.479);
+  height: 100px;
+  box-shadow: 2px 2px 10px 2px #8f8f8f27;
+  font-family: "BIZ UDPMincho", serif;
+  font-size: 0.8rem;
 }
 </style>
