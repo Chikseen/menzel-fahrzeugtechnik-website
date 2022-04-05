@@ -8,9 +8,9 @@
       </div>
       <nav class="header_nav">
         <router-link class="header_nav_route" to="/home">Home</router-link>
-        <router-link class="header_nav_route" to="/news">News</router-link>
         <router-link class="header_nav_route" to="/service">Service</router-link>
         <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
+        <router-link class="header_nav_route" to="/galerie">Galerie</router-link>
         <router-link class="header_nav_route" to="/about">Über mich</router-link>
         <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
       </nav>
@@ -27,9 +27,9 @@
         <Transition name="profile-setting">
           <nav v-if="menuOpen" class="header_nav_smallWindow">
             <router-link class="header_nav_route" to="/home">Home</router-link>
-            <router-link class="header_nav_route" to="/news">News</router-link>
             <router-link class="header_nav_route" to="/service">Service</router-link>
             <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
+            <router-link class="header_nav_route" to="/galerie">Galerie</router-link>
             <router-link class="header_nav_route" to="/about">Über mich</router-link>
             <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
           </nav>

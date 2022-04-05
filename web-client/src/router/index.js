@@ -3,7 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import ServiceView from "../views/ServiceView.vue";
 import ContactView from "../views/ContactView.vue";
 import AboutView from "../views/AboutView.vue";
-import NewsView from "../views/NewsView.vue";
+import GalerieView from "../views/GalerieView.vue";
 import ImpressumView from "../views/ImpressumView";
 
 const routes = [
@@ -32,9 +32,9 @@ const routes = [
     component: AboutView,
   },
   {
-    path: "/news",
-    name: "news",
-    component: NewsView,
+    path: "/galerie",
+    name: "galerie",
+    component: GalerieView,
   },
   {
     path: "/impressum",
