@@ -20,6 +20,12 @@ module.exports = {
       const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
       am.set("data", []);
     }
+    if (!fs.existsSync(pathPreFix + "/database/news.json")) {
+      console.log("creating news.json");
+      fs.writeFile(pathPreFix + "/database/news.json", "", "utf8", function (err) {});
+      const news = new JSONdb(pathPreFix + "/database/news.json");
+      news.set("data", []);
+    }
     if (!fs.existsSync(pathPreFix + "/database/openTimes.json")) {
       console.log("creating openTimes.json");
       fs.writeFile(pathPreFix + "/database/openTimes.json", "", "utf8", function (err) {});

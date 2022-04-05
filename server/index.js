@@ -10,6 +10,7 @@ const initMailTemplate = require("./mailHandling/initMailTemplate.js");
 const databaseIntegrity = require("./dbHandler/init.js");
 const ot = require("./dbHandler/openTimes.js");
 const am = require("./dbHandler/aktiveMessages.js");
+const news = require("./dbHandler/news.js");
 
 let pathPreFix;
 if (process.env.NODE_ENV === "development") {
@@ -153,5 +154,20 @@ app.post("/openTimes/getAll", async (req, res) => {
 
 app.post("/openTimes/set", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(ot.set(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/loadAll", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(news.getAll(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/create", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(news.create(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/delete", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(news.delete(pathPreFix, req));
   else res.json({ status: "invalidKey" });
 });
