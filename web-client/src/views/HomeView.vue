@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <!-- <ActiveMessage /> -->
+    <ActiveMessage />
     <h1>Menzel Fahrzeugtechnik</h1>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
-         <!--  <div class="home_content_picture">
+          <!--  <div class="home_content_picture">
             <img src="@/assets/parrallax/L0.png" id="TuevImgLayer0" />
             <img src="@/assets/parrallax/L1.png" id="TuevImgLayer1" />
             <img src="@/assets/parrallax/L2.png" id="TuevImgLayer2" />
@@ -39,7 +39,7 @@
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div>
-     <!--  <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
+      <!--  <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
         <div class="home_content_picture_wrapper">
           <div class="home_content_picture" id="divFouracc">
             <p>DAS IST EIN BILD</p>
@@ -76,9 +76,9 @@ export default {
   },
   methods: {
     mouseMove(event, elem) {
-      for (let i = 0; i < 3; i++) {
+      /* for (let i = 0; i < 3; i++) {
         document.getElementById(elem + "Layer" + i).style.transform = `translateX(${(event.screenX - event.screenX / 2 - 400) / (10 * (i + 1))}px)`;
-      }
+      } */
     },
   },
 };
