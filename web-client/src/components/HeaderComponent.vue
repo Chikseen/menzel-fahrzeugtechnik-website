@@ -101,10 +101,6 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
-    transition: 1s all ease-in-out;
-  }
-  &_icon:hover {
-    transform: rotate(360deg);
   }
 
   &_nav {
