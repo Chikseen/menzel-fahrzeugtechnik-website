@@ -157,6 +157,10 @@ app.post("/openTimes/set", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
+app.post("/news/get", async (req, res) => {
+  res.json(news.get(pathPreFix, req));
+});
+
 app.post("/news/loadAll", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(news.getAll(pathPreFix, req));
   else res.json({ status: "invalidKey" });

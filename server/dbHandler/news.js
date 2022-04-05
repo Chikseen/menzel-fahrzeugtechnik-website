@@ -2,6 +2,10 @@ const JSONdb = require("simple-json-db");
 const { v4: uuidGen } = require("uuid");
 
 module.exports = {
+  get(pathPreFix, req) {
+    const news = new JSONdb(pathPreFix + "/database/news.json");
+    return news.get("data");
+  },
   getAll(pathPreFix, req) {
     const news = new JSONdb(pathPreFix + "/database/news.json");
     return news.get("data");

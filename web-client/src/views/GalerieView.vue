@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <br />
-    <p v-for="text in allData.new" :key="text">{{ text }}</p>
+  <div v-if="allMessages">
+    <div v-for="(message, index) in allMessages" :key="index">
+      <h3>{{ message.titel }}</h3>
+      <p>{{ message.text }}</p>
+      <h6>{{ message.date }}</h6>
+      <hr />
+    </div>
   </div>
 </template>
 <script>
@@ -10,17 +14,17 @@ import api from "@/apiService.js";
 export default {
   data() {
     return {
-      allData: [],
+      allMessages: [],
     };
   },
   methods: {
-    async getData() {
-      console.log("hi",await api.fetchData("getAll", {}))
-      this.allData = await api.fetchData("getAll", {});
+    async get() {
+      this.allMessages = await api.fetchData("news/get", {});
+      console.log("data", this.allMessages);
     },
   },
   mounted() {
-    this.getData();
+    this.get();
   },
 };
 </script>
