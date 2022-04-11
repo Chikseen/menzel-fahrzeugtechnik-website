@@ -6,11 +6,7 @@
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
-          <!--  <div class="home_content_picture">
-            <img src="@/assets/parrallax/L0.png" id="TuevImgLayer0" />
-            <img src="@/assets/parrallax/L1.png" id="TuevImgLayer1" />
-            <img src="@/assets/parrallax/L2.png" id="TuevImgLayer2" />
-          </div> -->
+           <TuevIcon />
         </div>
         <div class="home_content_text">
           <h2>TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
@@ -68,11 +64,13 @@
 
 <script>
 import ActiveMessage from "@/components/ActiveMessage";
+import TuevIcon from "@/assets/icons/TuevIcon.vue";
 
 export default {
   name: "HomeView",
   components: {
     ActiveMessage,
+    TuevIcon
   },
   methods: {
     mouseMove(event, elem) {
@@ -97,7 +95,7 @@ export default {
       justify-content: center;
       margin: 10px auto;
 
-      height: 30rem;
+      height: 20rem;
       width: 100%;
       max-width: 1250px;
 
