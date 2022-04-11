@@ -20,7 +20,6 @@ export default {
   methods: {
     async get() {
       this.allMessages = await api.fetchData("news/get", {});
-      console.log("data", this.allMessages);
     },
   },
   mounted() {

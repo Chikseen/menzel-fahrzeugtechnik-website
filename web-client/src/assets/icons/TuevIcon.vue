@@ -1,14 +1,30 @@
 <template>
   <div class="tuevIcon_wrapper">
-    <p class="tuevIcon_currentYearText">{{ currentYear }}, {{ currentMonth }}</p>
-    <svg style="transform: rotateZ((currentMonth * 32deg)" class="tuevIcon" viewBox="-1 -1 22 22" xmlns="http://www.w3.org/2000/svg" fill="#00000000">
+    <p class="tuevIcon_currentYearText">{{ currentYear }}</p>
+    <svg
+      class="tuevIcon tuevIcon_outter"
+      :style="'transform: rotateZ(' + currentMonth * 30 + 'deg)'"
+      viewBox="-1 -1 22 22"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="#00000000"
+    >
       <path stroke="#d3d7df" stroke-width="0.5px" d="M10 0A1 1 0 0010 20 1 1 0 0010 0M10 5A1 1 0 0110 15 1 1 0 0110 5" />
-
       <path
         stroke="#d3d7df"
-        stroke-width="0.5px"
-        d="M10 0A1 1 0 0010 0M10 5A1 1 0 0110 5M8.001 5.418 7.227 4.384C8.16 3.627 8.558 3.573 9.805 3.573L9.832 5.003M10.176 4.992 10.141 3.596C11.502 3.619 11.9 3.696 12.626 4.636L12.009 5.426M14.831 1.259 13.965 2.526C13.001 1.608 11.854 1.271 10.172 1.21L10.187.015M9.821.004 9.85 1.203C8.076 1.164 7.006 1.585 5.95 2.518L5.11 1.282"
+        stroke-width="0.25px"
+        d="M10 0A1 1 0 0010 0M10 5A1 1 0 0110 5M7.655 5.703 6.9 4.552Q8.157 3.663 9.769 3.669V5M10.197 4.994V3.709Q11.99 3.736 13.087 4.713L12.472 5.676M15.014 1.475 14.311 2.592Q12.579 1.415 10.251 1.234V-.003M9.789-.01V1.228Q7.548 1.301 5.756 2.438L5.006 1.328"
       />
+    </svg>
+    <svg
+      v-for="i in 12"
+      :key="i"
+      class="tuevIcon"
+      :style="'transform: rotateZ(' + i * 30 + 'deg)'"
+      viewBox="-1 -1 22 22"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="#00000000"
+    >
+      <path stroke="#d3d7df" stroke-width="0.25px" d="M10 0 10 1M10 4 10 5" />
     </svg>
   </div>
 </template>
@@ -20,7 +36,8 @@ export default {
   computed: {
     currentYear() {
       const date = new Date();
-      return String(date.getYear() + 1);
+      const string = String(date.getFullYear());
+      return string[2] + string[3];
     },
     currentMonth() {
       const date = new Date();
@@ -32,13 +49,18 @@ export default {
 
 <style lang="scss">
 .tuevIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  transition: 1s all;
 
   &_wrapper {
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
   }
 
   &_currentYearText {
@@ -53,6 +75,13 @@ export default {
     margin: auto;
     font-weight: 900;
     font-size: 3.5rem;
+  }
+
+  &_outter {
+    z-index: 5;
+    &:hover {
+      transform: rotateZ(360deg) !important;
+    }
   }
 }
 </style>

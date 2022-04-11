@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <MapComponent />
     <div class="contactView_openTimes">
       <h2>Anschrift</h2>
       <div class="contactView_openTimes_content contactView_openTimes_content_adress">
@@ -42,8 +43,12 @@
 
 <script>
 import api from "../apiService";
+import MapComponent from "@/components/MapComponent";
 
 export default {
+  components: {
+    MapComponent,
+  },
   data() {
     return {
       openTimes: [],
@@ -62,11 +67,8 @@ export default {
       let diffrent = [];
       this.openTimes = [];
 
-      console.log("allOpenDays", allOpenDays);
       if (allOpenDays.length > 1) {
         for (let i = 1; i < allOpenDays.length; i++) {
-          console.log("check for", allOpenDays[i]);
-          console.log("with", allOpenDays[i - 1]);
           if (allOpenDays[i].timeStart == allOpenDays[i - 1].timeStart && allOpenDays[i].timeEnd == allOpenDays[i - 1].timeEnd) {
             if (i == 1) {
               squshed.push(allOpenDays[i - 1]);
@@ -77,10 +79,6 @@ export default {
           }
         }
       }
-
-      console.log("squshed", squshed);
-      console.log("diffrent", diffrent);
-
       this.openTimes.push(squshed);
       this.openTimes.push(diffrent);
     },

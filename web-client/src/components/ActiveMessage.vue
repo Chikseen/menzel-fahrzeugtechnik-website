@@ -1,20 +1,22 @@
 <template>
-  <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
-    <div
-      class="active_textwrapper"
-      :class="[
-        message.colorselection == '0' ? 'active_textwrapper_red' : '',
-        message.colorselection == '1' ? 'active_textwrapper_green' : '',
-        message.colorselection == '2' ? 'active_textwrapper_white' : '',
-      ]"
-    >
-      <div>
-        <h2>{{ message.titel }}</h2>
-        <p>{{ message.text }}</p>
-      </div>
-      <div class="active_textwrapper_date">
-        <p>Vom: {{ dateFormatter(message.startDate) }}</p>
-        <p>Bis: {{ dateFormatter(message.endDate) }}</p>
+  <div v-if="allActviveMessages.length">
+    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
+      <div
+        class="active_textwrapper"
+        :class="[
+          message.colorselection == '0' ? 'active_textwrapper_red' : '',
+          message.colorselection == '1' ? 'active_textwrapper_green' : '',
+          message.colorselection == '2' ? 'active_textwrapper_white' : '',
+        ]"
+      >
+        <div>
+          <h2>{{ message.titel }}</h2>
+          <p>{{ message.text }}</p>
+        </div>
+        <div class="active_textwrapper_date">
+          <p>Vom: {{ dateFormatter(message.startDate) }}</p>
+          <p>Bis: {{ dateFormatter(message.endDate) }}</p>
+        </div>
       </div>
     </div>
   </div>
