@@ -6,22 +6,21 @@
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
-           <TuevIcon />
+          <TuevIcon />
         </div>
         <div class="home_content_text">
           <h2>TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
-          <button @mouseup="$router.push('service')">Erfahre mehr</button>
+          <p></p>
+          <button @mouseup="$router.push('service#tuev')">Erfahre mehr</button>
         </div>
       </div>
       <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divTwoWheel')">
         <div class="home_content_picture_wrapper">
-          <div class="home_content_picture" id="divTwoWheel">
-            <p>DAS IST EIN BILD</p>
-          </div>
+          <BrandCluster />
         </div>
         <div class="home_content_text">
           <h2>Freie KFZ-Werkstatt</h2>
-          <button @mouseup="$router.push('service')">Erfahre mehr</button>
+          <button @mouseup="$router.push('service#klimaservice')">Erfahre mehr</button>
         </div>
       </div>
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
@@ -65,12 +64,14 @@
 <script>
 import ActiveMessage from "@/components/ActiveMessage";
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
+import BrandCluster from "@/assets/icons/logos/LogoClusterIcon.vue";
 
 export default {
   name: "HomeView",
   components: {
     ActiveMessage,
-    TuevIcon
+    TuevIcon,
+    BrandCluster,
   },
   methods: {
     mouseMove(event, elem) {
