@@ -1,18 +1,48 @@
 <template>
   <div class="">
-    <div class="header">
+    <div class="header" @click="testclick">
       <WheelIcon class="header_icon" />
       <div class="header_quickConntact header_quickConntact_timeing" @mouseup="$router.push('/contact')">
         <p>{{ isOpen }}</p>
         <p>{{ nextOpen }}</p>
       </div>
       <nav class="header_nav">
-        <router-link class="header_nav_route" to="/home">Home</router-link>
-        <router-link class="header_nav_route" to="/service">Service</router-link>
-        <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
-        <router-link class="header_nav_route" to="/galerie">Galerie</router-link>
-        <router-link class="header_nav_route" to="/about">Über mich</router-link>
-        <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
+        <router-link class="header_nav_route" to="/home">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'home'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Home</a>
+        </router-link>
+        <router-link class="header_nav_route" to="/service">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'service'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Service</a>
+        </router-link>
+        <router-link class="header_nav_route" to="/contact">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'contact'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Kontakt</a>
+        </router-link>
+        <router-link class="header_nav_route" to="/galerie">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'galerie'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Galerie</a>
+        </router-link>
+        <router-link class="header_nav_route" to="/about">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'about'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Über mich</a>
+        </router-link>
+        <router-link class="header_nav_route" to="/impressum">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'impressum'" class="header_nav_route_active"></div>
+          </transition>
+          <a>Impressum</a>
+        </router-link>
       </nav>
       <div class="header_quickConntact" @mouseup="$router.push('/contact')">
         <p>Städtelner Straße 62</p>
@@ -63,6 +93,7 @@ export default {
       this.isOpen = data.isOpen;
       this.nextOpen = data.nextOpen;
     },
+    async testclick(e) {},
   },
   mounted() {
     this.getData();
@@ -79,6 +110,17 @@ export default {
 .profile-setting-leave-to {
   transform: translateX(100%);
 }
+
+.header-active-enter-active,
+.header-active-leave-active {
+  transform: translateY(0) rotateZ(0deg);
+}
+.header-active-enter-from {
+  transform: translateY(-110%) rotateZ(-10deg);
+}
+.header-active-leave-to {
+  transform: translateY(110%) rotateZ(10deg);
+}
 /* _______ */
 
 .header {
@@ -89,7 +131,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   background-color: $company_blue;
-  box-shadow: 10px -1px 10px 2px $company_blue;
+  box-shadow: 5px -16px 15px 2px lighten($company_blue, $amount: 10);
   border-radius: 3rem 0 0 3rem;
   margin-left: 10%;
   padding-right: 10%;
@@ -107,11 +149,40 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    overflow: hidden;
 
     &_route {
-      margin: 0 1rem;
+      position: relative;
+      padding: 30px 10px;
       font-size: 1.5rem;
       color: $ligth_font_color;
+      text-decoration: none;
+
+      &_active {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border-radius: 10px;
+        transition: all 1s;
+        z-index: -1;
+
+        ::after {
+          content: "";
+          position: absolute;
+
+          background-color: aqua;
+          top: 0;
+          left: 0;
+          height: 10px;
+          width: 10px;
+          z-index: 999;
+          /*           border-top-left-radius: 25px;
+          box-shadow: 0 -25px 0 0 #f66969; */
+        }
+      }
     }
 
     &_menu {
@@ -139,6 +210,25 @@ export default {
   }
   &_quickConntact:hover {
     color: rgb(230, 230, 230);
+  }
+}
+
+nav {
+  padding: 0 30px;
+  white-space: nowrap;
+
+  a {
+    a {
+      font-weight: bold;
+      color: #d3d7df;
+      transition: all 1s;
+    }
+
+    &.router-link-exact-active {
+      a {
+        color: $company_blue;
+      }
+    }
   }
 }
 
