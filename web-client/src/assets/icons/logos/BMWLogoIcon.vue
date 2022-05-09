@@ -18,7 +18,7 @@ export default {
   stroke: #d1d1d1;
   stroke-width: 0.5px;
   stroke-dasharray: 32px;
-  stroke-dashoffset: 64;
+  stroke-dashoffset: 64px;
   transition: 0.5s all linear;
 
   &_inner {

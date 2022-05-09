@@ -131,12 +131,12 @@ export default {
   flex-direction: row;
   justify-content: center;
   background-color: $company_blue;
-  box-shadow: 5px -16px 15px 2px lighten($company_blue, $amount: 10);
   border-radius: 3rem 0 0 3rem;
   margin-left: 10%;
   padding-right: 10%;
   height: 6rem;
   z-index: 11;
+  transition: all 1s;
 
   &_icon {
     position: absolute;
@@ -232,7 +232,14 @@ nav {
   }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1400px) {
+  .header {
+    margin-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
   .header {
     &_quickConntact {
       display: none;
@@ -240,12 +247,12 @@ nav {
   }
 }
 
-@media only screen and (max-width: 920px) {
+@media only screen and (max-width: 990px) {
   .header {
     margin-left: 0;
   }
 }
-@media only screen and (max-width: 810px) {
+@media only screen and (max-width: 870px) {
   .header {
     border-radius: 0 0 3rem 3rem;
     height: 3rem;

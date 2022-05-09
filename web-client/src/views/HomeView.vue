@@ -46,11 +46,9 @@
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
       </div> -->
-      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
+      <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
         <div class="home_content_picture_wrapper">
-          <div class="home_content_picture" id="divThreeGlas">
-            <p>DAS IST EIN BILD</p>
-          </div>
+          <RepairService />
         </div>
         <div class="home_content_text">
           <h2>Unfallreparaturen</h2>
@@ -65,6 +63,7 @@
 import ActiveMessage from "@/components/ActiveMessage";
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
 import BrandCluster from "@/assets/icons/logos/LogoClusterIcon.vue";
+import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
 
 export default {
   name: "HomeView",
@@ -72,6 +71,7 @@ export default {
     ActiveMessage,
     TuevIcon,
     BrandCluster,
+    RepairService,
   },
   methods: {
     mouseMove(event, elem) {
@@ -100,12 +100,12 @@ export default {
       width: 100%;
       max-width: 1250px;
 
-      box-shadow: 1px 1px 5px 1px rgba(204, 203, 203, 0.151);
+      /*  box-shadow: 1px 1px 5px 1px rgba(204, 203, 203, 0.151); */
     }
 
     &_left {
       flex-direction: row-reverse;
-      margin-right: 300px;
+     /*  margin-right: 300px; */
     }
 
     &_text,

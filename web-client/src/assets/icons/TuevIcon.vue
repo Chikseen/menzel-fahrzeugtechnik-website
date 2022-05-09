@@ -3,16 +3,22 @@
     <p class="tuevIcon_currentYearText">{{ currentYear }}</p>
     <svg
       class="tuevIcon tuevIcon_outter"
-      :style="'transform: rotateZ(' + currentMonth * 30 + 'deg)'"
+      :style="`transform: rotateZ(${currentMonth * 30}deg)`"
       viewBox="-1 -1 22 22"
       xmlns="http://www.w3.org/2000/svg"
       fill="#00000000"
     >
-      <path stroke="#d3d7df" stroke-width="0.5px" d="M10 0A1 1 0 0010 20 1 1 0 0010 0M10 5A1 1 0 0110 15 1 1 0 0110 5" />
       <path
-        stroke="#d3d7df"
-        stroke-width="0.25px"
-        d="M10 0A1 1 0 0010 0M10 5A1 1 0 0110 5M7.655 5.703 6.9 4.552Q8.157 3.663 9.769 3.669V5M10.197 4.994V3.709Q11.99 3.736 13.087 4.713L12.472 5.676M15.014 1.475 14.311 2.592Q12.579 1.415 10.251 1.234V-.003M9.789-.01V1.228Q7.548 1.301 5.756 2.438L5.006 1.328"
+        class="tuevIcon_outter_filler"
+        stroke="#d1d1d1"
+        :fill="tuevColor"
+        stroke-width="0.4px"
+        d="M10 0A1 1 0 0010 20 1 1 0 0010 0M10 5A1 1 0 0110 15 1 1 0 0110 5"
+      />
+      <path
+        stroke="#d1d1d1"
+        stroke-width="0.2px"
+        d="M10 0A1 1 0 0010 0M10 5A1 1 0 0110 5M7.563 5.726 6.859 4.564Q8.1 3.683 9.729 3.683V4.995M10.284 4.986V3.709Q12.01 3.78 13.11 4.669L12.472 5.676M14.933 1.464 14.264 2.521Q12.529 1.323 10.275 1.218V.011M9.729.011V1.226Q7.405 1.297 5.697 2.45L5.001 1.394"
       />
     </svg>
     <svg
@@ -24,7 +30,7 @@
       xmlns="http://www.w3.org/2000/svg"
       fill="#00000000"
     >
-      <path stroke="#d3d7df" stroke-width="0.25px" d="M10 0 10 1M10 4 10 5" />
+      <path stroke="#d1d1d1" stroke-width="0.25px" d="M10 0 10 1M10 4 10 5" />
     </svg>
   </div>
 </template>
@@ -42,6 +48,11 @@ export default {
     currentMonth() {
       const date = new Date();
       return String(date.getMonth() + 1);
+    },
+    tuevColor() {
+      const opacity = ""; // yyyyyyxx hex value
+      const colors = ["#1bb1f1", "#f4f017", "#d65c4b", "#f79cb8", "#1baf82", "#e59101"];
+      return colors.map((item) => item + opacity)[Math.floor(Math.random() * colors.length)];
     },
   },
 };
@@ -78,10 +89,17 @@ export default {
   }
 
   &_outter {
-    z-index: 5;
-    &:hover {
-      transform: rotateZ(360deg) !important;
+    &_filler {
+      transition: all 1.2s;
+      fill-opacity: 0;
     }
   }
+}
+
+.tuevIcon_wrapper:hover .tuevIcon_outter_filler {
+   fill-opacity: 1;
+}
+.tuevIcon_wrapper:hover .tuevIcon_outter {
+  transform: rotate(420deg) !important;
 }
 </style>

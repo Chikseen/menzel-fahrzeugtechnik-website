@@ -41,7 +41,7 @@ export default {
 
   &_bmw {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 25%;
     width: 20%;
     transition: 1s all;
@@ -61,7 +61,7 @@ export default {
 
   &_benz {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     width: 20%;
     transition: 1s all;
