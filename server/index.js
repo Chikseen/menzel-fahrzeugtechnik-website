@@ -20,6 +20,17 @@ if (process.env.NODE_ENV === "development") {
   pathPreFix = "";
 }
 
+var whitelist = ["https://dev.menzel-fahrzeugtechnik.de", "https://menzel-fahrzeugtechnik.de", "http://192.168.2.100:8080", "app://."];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
 const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
 var transporter = nodemailer.createTransport({
   auth: {
@@ -62,7 +73,7 @@ databaseIntegrity.init(fs, pathPreFix);
 
 // EXPRESS SETUP
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const port = 7080;
