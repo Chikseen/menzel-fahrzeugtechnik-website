@@ -27,9 +27,7 @@ export default {
     setoverlay(evt) {
       const parent = document.getElementById("repairClusterID");
       const child = document.getElementById("repairClusterGoodID");
-
-      const posInPercent = (evt.x / parent.offsetWidth) * 100;
-      // console.log("pos", posInPercent);
+      const posInPercent = ((evt.x - parent.getBoundingClientRect().left) / parent.clientWidth) * 100;
       child.setAttribute("style", `width:${posInPercent}%`);
     },
     resetPos() {
@@ -52,6 +50,7 @@ export default {
   &_wrapper {
     height: 100%;
     width: 100%;
+    max-width: 450px;
     overflow: hidden !important;
     position: relative;
     display: flex;
@@ -62,7 +61,8 @@ export default {
     top: 0;
     left: 0;
     width: 50%;
-    min-height: 100%;
+    height: 100%;
+    height: 100%;
     transition: all 0.1s;
     background-color: rgb(255, 255, 255);
     z-index: 5;
@@ -73,7 +73,8 @@ export default {
     top: 0;
     right: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    height: 100%;
   }
 
   &_repairdevice {

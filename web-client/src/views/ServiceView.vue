@@ -1,37 +1,63 @@
 <template>
   <div class="serviceView_wrapper">
-    <div id="tuev">
-      <h1>TÜV und Abgasuntersuchung</h1>
-      <p>
-        Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den Zweijahresrhythmus. Die Hauptuntersuchung
-        stellt die "Verkehrssicherheit, Vorschriftsmäßigkeit und Umweltverträglichkeit" der Fahrzeuge sicher.
-      </p>
-      <a target="_blank" href="https://www.adac.de/rund-ums-fahrzeug/reparatur-pflege-wartung/hu-und-au/hu-und-au/">Mehr zum Thema TÜV und Abgasuntersuchung</a>
+    <h1>Unsere Leistungen</h1>
+    <div class="serviceView_overview">
+      <div class="serviceView_overview_container" @click="$router.push({ name: `tuev` })">
+        <p>TÜV Prüfstützpunkt und Abgasuntersuchung</p>
+        <TuevIcon :fontSize="'1.5'" />
+      </div>
+      <div class="serviceView_overview_container" @click="$router.push({ name: `ac` })">
+        <p>Klimaservice</p>
+      </div>
+      <div class="serviceView_overview_container" @click="$router.push({ name: `tiers` })">
+        <p>Reifen und Räder</p>
+      </div>
     </div>
-    <div id="klimaservice">
-      <h1>Klimaservice</h1>
-      <p>
-        Die regelmäßige Wartung der Klimaanlage erhöht die Sicherheit und verhindert teure Reparaturen. Jede Klimaanlage verliert pro Jahr Kältemittel, dadurch
-        verringert sich die Kühlleistung der Klimaanlage deutlich. Deshalb sollte das Kältemittel alle 2 Jahre aufgefüllt werden. Eine Klimaanlage kühlt nicht
-        nur, sie hält bei optimaler Leistung auch die Innenraumluft trocken. Deshalb ist es auch wichtig im Herbst und Winter die Klimaanlage einzuschalten,
-        denn es gilt: je trockener die Innenraumluft, desto weniger beschlagen die Scheiben.
-      </p>
+    <div v-if="this.$route.name == 'service'">
+      <p>Wir sind für sie da</p>
     </div>
-    <div>
-      <h1>Reifen und Räder</h1>
-      <p>
-        Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes Reifenprofil gewährleistet eine optimale
-        Straßenhaftung. Auf Wunsch können die Reifen auch eingelagert werden.
-      </p>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
+
+<script>
+import TuevIcon from "@/assets/icons/TuevIcon.vue";
+
+export default {
+  components: {
+    TuevIcon,
+  },
+  mounted() {},
+};
+</script>
 
 <style lang="scss">
 .serviceView {
   &_wrapper {
-    max-width: 750px;
+    max-width: 1500px;
     margin: 0 auto;
+  }
+
+  &_overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    margin: 30px;
+
+    &_container {
+      height: 200px;
+      width: 100%;
+      border-radius: 5px;
+      box-shadow: 1px 1px 5px 1px lighten($company_blue, 81);
+
+      & div {
+        height: 150px;
+      }
+
+      & p {
+        font-weight: 750;
+      }
+    }
   }
 }
 </style>

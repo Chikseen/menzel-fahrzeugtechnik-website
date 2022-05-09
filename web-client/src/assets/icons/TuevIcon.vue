@@ -1,6 +1,6 @@
 <template>
   <div class="tuevIcon_wrapper">
-    <p class="tuevIcon_currentYearText">{{ currentYear }}</p>
+    <p class="tuevIcon_currentYearText" :style="`font-size: ${fontSize}rem;`">{{ currentYear }}</p>
     <svg
       class="tuevIcon tuevIcon_outter"
       :style="`transform: rotateZ(${currentMonth * 30}deg)`"
@@ -37,6 +37,9 @@
 
 <script>
 export default {
+  props: {
+    fontSize: {type: String, default: "3.5"}
+  },
   components: {},
   methods: {},
   computed: {
@@ -85,7 +88,6 @@ export default {
     justify-content: center;
     margin: auto;
     font-weight: 900;
-    font-size: 3.5rem;
   }
 
   &_outter {
@@ -97,7 +99,7 @@ export default {
 }
 
 .tuevIcon_wrapper:hover .tuevIcon_outter_filler {
-   fill-opacity: 1;
+  fill-opacity: 1;
 }
 .tuevIcon_wrapper:hover .tuevIcon_outter {
   transform: rotate(420deg) !important;

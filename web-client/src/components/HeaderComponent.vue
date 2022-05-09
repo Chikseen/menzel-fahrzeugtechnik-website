@@ -15,7 +15,7 @@
         </router-link>
         <router-link class="header_nav_route" to="/service">
           <transition name="header-active">
-            <div v-if="this.$route.name == 'service'" class="header_nav_route_active"></div>
+            <div v-if="isService" class="header_nav_route_active"></div>
           </transition>
           <a>Service</a>
         </router-link>
@@ -57,7 +57,7 @@
         <Transition name="profile-setting">
           <nav v-if="menuOpen" class="header_nav_smallWindow">
             <router-link class="header_nav_route" to="/home">Home</router-link>
-            <router-link class="header_nav_route" to="/service">Service</router-link>
+            <router-link class="header_nav_route" to="/service/">Service</router-link>
             <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
             <router-link class="header_nav_route" to="/galerie">Galerie</router-link>
             <router-link class="header_nav_route" to="/about">Über mich</router-link>
@@ -86,6 +86,11 @@ export default {
       menuOpen: false,
     };
   },
+  computed: {
+    isService() {
+      return this.$router.currentRoute.value.matched.some((item) => item.path == "/service/");
+    },
+  },
   methods: {
     async getData() {
       const data = await api.fetchData("openTimes/get", {});
@@ -97,6 +102,7 @@ export default {
   },
   mounted() {
     this.getData();
+    console.log("t", this.$route.name);
   },
 };
 </script>
@@ -224,7 +230,7 @@ nav {
       transition: all 1s;
     }
 
-    &.router-link-exact-active {
+    &.router-link-active {
       a {
         color: $company_blue;
       }

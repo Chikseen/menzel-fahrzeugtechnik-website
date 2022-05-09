@@ -6,6 +6,11 @@ import AboutView from "../views/AboutView.vue";
 import GalerieView from "../views/GalerieView.vue";
 import ImpressumView from "../views/ImpressumView";
 
+// Service Views
+import Tuev from "../views/ServiceViews/Tuev";
+import Tiers from "../views/ServiceViews/Tiers";
+import AC from "../views/ServiceViews/AC";
+
 const routes = [
   {
     path: "/",
@@ -17,9 +22,26 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/service",
     name: "service",
+    path: "/service/",
     component: ServiceView,
+    children: [
+      {
+        path: "tuev",
+        name: "tuev",
+        component: Tuev,
+      },
+      {
+        path: "tiers",
+        name: "tiers",
+        component: Tiers,
+      },
+      {
+        path: "ac",
+        name: "ac",
+        component: AC,
+      },
+    ],
   },
   {
     path: "/contact",
