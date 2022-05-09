@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import api from "../apiService";
+import api from "@/apiService";
 import MapComponent from "@/components/MapComponent";
 
 export default {
