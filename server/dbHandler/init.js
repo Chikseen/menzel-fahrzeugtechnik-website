@@ -16,7 +16,7 @@ module.exports = {
     }
     if (!fs.existsSync(pathPreFix + "/database/activeMessages.json")) {
       console.log("creating activeMessages.json");
-      fs.writeFile(pathPreFix + "/database/activeMessages.json", "", "utf8", function (err) {});
+      fs.writeFile(pathPreFix + "/database/activeMessages.json", { data: [] }, "utf8", function (err) {});
       const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
       am.set("data", []);
     }
