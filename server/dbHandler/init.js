@@ -26,6 +26,10 @@ module.exports = {
       const news = new JSONdb(pathPreFix + "/database/news.json");
       news.set("data", []);
     }
+    if (!fs.existsSync(pathPreFix + "/database/images")) {
+      console.log("creating images Folder");
+      fs.mkdirSync(pathPreFix + "/database/images");
+    }
     if (!fs.existsSync(pathPreFix + "/database/openTimes.json")) {
       console.log("creating openTimes.json");
       fs.writeFile(pathPreFix + "/database/openTimes.json", "", "utf8", function (err) {});

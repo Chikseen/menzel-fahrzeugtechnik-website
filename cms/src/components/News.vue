@@ -19,11 +19,10 @@
             <textarea name="" id="" cols="50" rows="5" v-model="text"></textarea>
           </div>
         </div>
-        <p>?pictures?</p>
-        <p>?videos?</p>
-        <button @click="createnewMessage">Post erstellen</button>
       </div>
     </div>
+    <FileUpload @onImagesChange="upadteImages($event)" />
+    <button @click="createnewMessage">EINTRAG ERSTELLEN</button>
     <div>
       <h3>Alle Nachrichten</h3>
       <div v-for="(item, index) in allMessages" :key="index">
@@ -35,13 +34,19 @@
 
 <script>
 import api from "@/apiService";
+import FileUpload from "./FileUpload.vue";
+
 export default {
+  components: {
+    FileUpload,
+  },
   data() {
     return {
       allMessages: [],
       date: "",
       titel: "",
       text: "",
+      images: [],
     };
   },
   methods: {
@@ -57,6 +62,7 @@ export default {
         titel: this.titel,
         text: this.text,
         key: localStorage.getItem("authKey"),
+        images: this.images,
       });
       console.log("data", this.allMessages);
     },
@@ -66,6 +72,10 @@ export default {
         key: localStorage.getItem("authKey"),
       });
       console.log("data", this.allMessages);
+    },
+    upadteImages(evt) {
+      console.log("update", evt);
+      this.images = evt;
     },
   },
   mounted() {

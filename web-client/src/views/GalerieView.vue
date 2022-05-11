@@ -4,6 +4,9 @@
       <h3>{{ message.titel }}</h3>
       <p>{{ message.text }}</p>
       <h6>{{ message.date }}</h6>
+      <div v-for="(img, index) in message.images" :key="index + 'sec'">
+        <img class="tmp" :src="'data:image/png;base64, ' + img" alt="" />
+      </div>
       <hr />
     </div>
   </div>
@@ -27,3 +30,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.tmp {
+  max-width: 500px;
+}
+</style>

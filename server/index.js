@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const cors = require("cors");
 const { v4: uuidGen } = require("uuid");
 const nodemailer = require("nodemailer");
+
 const initMailTemplate = require("./mailHandling/initMailTemplate.js");
 const databaseIntegrity = require("./dbHandler/init.js");
 const ot = require("./dbHandler/openTimes.js");
@@ -20,7 +21,14 @@ if (process.env.NODE_ENV === "development") {
   pathPreFix = "";
 }
 
-var whitelist = ["https://dev.menzel-fahrzeugtechnik.de", "https://menzel-fahrzeugtechnik.de", "http://192.168.2.100:8080", "app://."];
+var whitelist = [
+  "https://dev.menzel-fahrzeugtechnik.de",
+  "https://menzel-fahrzeugtechnik.de",
+  "http://192.168.2.100:7080",
+  "http://192.168.2.100:8080",
+  "http://192.168.2.100:8081",
+  "app://.",
+];
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -74,8 +82,8 @@ databaseIntegrity.init(fs, pathPreFix);
 // EXPRESS SETUP
 const app = express();
 app.use(cors(corsOptions));
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "100mb" }));
 const port = 7080;
 app.listen(port, () => console.log("Connecet with Port: " + port));
 
