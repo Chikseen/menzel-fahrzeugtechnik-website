@@ -20,7 +20,7 @@ module.exports = {
         console.log("ids", data[i].imageIds);
         data[i].imageIds.forEach((uuid) => {
           var bitmap = fs.readFileSync(`${pathPreFix}/database/images/${uuid}.png`);
-          const base = new Buffer(bitmap).toString("base64");
+          const base = new Buffer(bitmap).toString("base64").replace(/^data:image\/png;base64,/, "");
           data[i].images.push(base);
         });
         toSend.push(data[i]);
@@ -37,19 +37,30 @@ module.exports = {
     const news = new JSONdb(pathPreFix + "/database/news.json");
     let data = news.get("data");
     req.body.uuid = uuidGen();
-    req.body.imageIds = [];
+    const imageIds = [];
     req.body.images.forEach((imgRaw) => {
+      const tww = imgRaw.replace(/^data:image\/png;base64,/, "");
       const uuid = uuidGen();
-      var body = imgRaw,
-        base64Data = body.replace(/^data:image\/png;base64,/, ""),
+      var body = tww,
+        base64Data = body,
         binaryData = new Buffer(base64Data, "base64").toString("binary");
-
-      fs.writeFile(`${pathPreFix}/database/images/${uuid}.png`, binaryData, "binary", function (err) {});
-      req.body.imageIds.push(uuid);
+      console.log("ui", uuid);
+      fs.writeFile(`${pathPreFix}/database/images/${uuid}.png`, binaryData, "binary", function (err) {
+        console.log("err", err);
+      });
+      imageIds.push(uuid);
     });
-    delete req.body.images;
 
-    data.push(req.body);
+    const newO = {
+      date: req.body.date,
+      titel: req.body.titel,
+      text: req.body.text,
+      key: req.body.key,
+      uuid: req.body.uuid,
+      imageIds: imageIds,
+    };
+
+    data.push(newO);
     news.set("data", data);
     return data;
   },
