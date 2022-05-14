@@ -7,4 +7,4 @@ RUN npm install
 COPY . /app
 EXPOSE 7080
 EXPOSE 7081
-CMD [ "node", "index.js" , "&&" ,"node", "imageservice.js"]
+CMD [ "npm run start"]
