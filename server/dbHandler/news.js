@@ -7,27 +7,31 @@ module.exports = {
     const news = new JSONdb(pathPreFix + "/database/news.json");
 
     const data = news.get("data");
-
+   /*  
     const min = 0;
     const max = 10;
-
+   
     let toSend = [];
 
-    for (let i = min; i < max; i++) {
-      if (data[i]) {
-        console.log("data", data[i]);
-        data[i].images = [];
-        console.log("ids", data[i].imageIds);
-        data[i].imageIds.forEach((uuid) => {
-          var bitmap = fs.readFileSync(`${pathPreFix}/database/images/${uuid}.png`);
-          const base = new Buffer(bitmap).toString("base64").replace(/^data:image\/png;base64,/, "");
-          data[i].images.push(base);
-        });
-        toSend.push(data[i]);
+     try {
+      for (let i = min; i < max; i++) {
+        if (data[i]) {
+          console.log("data", data[i]);
+          data[i].images = [];
+          console.log("ids", data[i].imageIds);
+          data[i].imageIds.forEach((uuid) => {
+            var bitmap = fs.readFileSync(`${pathPreFix}/database/images/${uuid}.png`);
+            const base = new Buffer(bitmap).toString("base64").replace(/^data:image\/png;base64,/, "");
+            data[i].images.push(base);
+          });
+          toSend.push(data[i]);
+        }
       }
-    }
+    } catch (error) {
+      return "an error ocured";
+    } */
 
-    return toSend;
+    return data;
   },
   getAll(pathPreFix, req) {
     const news = new JSONdb(pathPreFix + "/database/news.json");

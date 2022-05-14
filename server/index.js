@@ -4,8 +4,10 @@ const fs = require("fs");
 const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const corsImage = require("cors");
 const { v4: uuidGen } = require("uuid");
 const nodemailer = require("nodemailer");
+const path = require("path");
 
 const initMailTemplate = require("./mailHandling/initMailTemplate.js");
 const databaseIntegrity = require("./dbHandler/init.js");
@@ -197,12 +199,28 @@ app.post("/news/delete", async (req, res) => {
 
 // EXPRESS SETUP
 const imageapp = express();
-imageapp.use(cors());
+imageapp.use(corsImage());
 imageapp.use(express.urlencoded({ extended: true }));
 imageapp.use(express.json({ limit: "100mb" }));
 const portimage = 7081;
 imageapp.listen(portimage, () => console.log("Connecet with Port: " + portimage));
 
 imageapp.get("/", (req, res) => {
-  res.json({ status: "success" });
+  const header = JSON.stringify(req.query.id);
+  console.log(header);
+  var options = {
+    root: path.join(__dirname, `database/images`),
+    dotfiles: "deny",
+    headers: {
+      "x-timestamp": Date.now(),
+      "x-sent": true,
+    },
+  };
+  res.sendFile(`${req.query.id}.png`, options, function (err) {
+    if (err) {
+      res.send(err);
+    } else {
+      console.log("Sent:", `${req.query.id}.png`);
+    }
+  });
 });
