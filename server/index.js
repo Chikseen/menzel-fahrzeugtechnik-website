@@ -209,7 +209,7 @@ imageapp.get("/", (req, res) => {
   const header = JSON.stringify(req.query.id);
   let root = "";
   if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
-  else root = "database/images";
+  else root = "/database/images";
   console.log(header);
   console.log(root);
   var options = {
