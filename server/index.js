@@ -207,9 +207,12 @@ imageapp.listen(portimage, () => console.log("Connecet with Port: " + portimage)
 
 imageapp.get("/", (req, res) => {
   const header = JSON.stringify(req.query.id);
+  let root = "";
+  if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
+  else root = "database/images";
   console.log(header);
   var options = {
-    root: path.join(__dirname, `database/images`),
+    root: root,
     dotfiles: "deny",
     headers: {
       "x-timestamp": Date.now(),
