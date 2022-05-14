@@ -1,5 +1,5 @@
 require("dotenv").config();
-const JSONdb = require("simple-json-db");
+const JSONdb = require("simple-json-db");urlencodedap
 const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
@@ -13,13 +13,13 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // EXPRESS SETUP
-const app = express();
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ limit: "100mb" }));
+const imageapp = express();
+imageapp.use(cors());
+imageapp.use(express.urlencoded({ extended: true }));
+imageapp.use(express.json({ limit: "100mb" }));
 const port = 7081;
-app.listen(port, () => console.log("Connecet with Port: " + port));
+imageapp.listen(port, () => console.log("Connecet with Port: " + port));
 
-app.get("/", (req, res) => {
+imageapp.get("/", (req, res) => {
   res.json({ status: "success" });
 });
