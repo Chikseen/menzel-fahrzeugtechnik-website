@@ -211,6 +211,7 @@ imageapp.get("/", (req, res) => {
   if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
   else root = "database/images";
   console.log(header);
+  console.log(root);
   var options = {
     root: root,
     dotfiles: "deny",
