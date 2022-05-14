@@ -39,42 +39,43 @@ var corsOptions = {
   },
 };
 
-const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
-var transporter = nodemailer.createTransport({
-  auth: {
-    user: mailAuth.get("name"),
-    pass: mailAuth.get("apKey"),
-  },
-  port: 587,
-  host: "smtp.gmail.com",
-  secure: false,
-});
+ /*  const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
+  var transporter = nodemailer.createTransport({
+    auth: {
+      user: mailAuth.get("name"),
+      pass: mailAuth.get("apKey"),
+    },
+    port: 587,
+    host: "smtp.gmail.com",
+    secure: false,
+  });
 
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to handle e-mails");
-  }
-});
-function sendMail(transporter, from, to, data) {
-  var mailOptions = {
-    from: from,
-    to: to,
-    subject: data.subject,
-    html: data.html,
-  };
-
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.verify(function (error, success) {
     if (error) {
       console.log(error);
-      return { status: "Failed" };
     } else {
-      console.log("Email sent: " + info.response);
-      return { status: "success" };
+      console.log("Server is ready to handle e-mails");
     }
   });
-}
+  function sendMail(transporter, from, to, data) {
+    var mailOptions = {
+      from: from,
+      to: to,
+      subject: data.subject,
+      html: data.html,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        return { status: "Failed" };
+      } else {
+        console.log("Email sent: " + info.response);
+        return { status: "success" };
+      }
+    });
+  }
+ */
 
 // DATAINIT
 databaseIntegrity.init(fs, pathPreFix);
