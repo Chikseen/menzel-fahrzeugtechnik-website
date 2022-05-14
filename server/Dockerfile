@@ -7,4 +7,4 @@ RUN npm install
 COPY . /app
 EXPOSE 7080
 EXPOSE 7081
-CMD [ "npm run start"]
+RUN npm run start
