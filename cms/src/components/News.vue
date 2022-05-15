@@ -25,8 +25,12 @@
     <button @click="createnewMessage">EINTRAG ERSTELLEN</button>
     <div>
       <h3>Alle Nachrichten</h3>
-      <div v-for="(item, index) in allMessages" :key="index">
-        <p class="test" @mouseup="deleteNews(item.uuid)">{{ item }}</p>
+      <div v-for="(item, index) in allMessages" :key="index" class="newsPreviewWrapper" @mouseup="deleteNews(item.uuid)">
+        <p>Erstellt {{ item.date }}</p>
+        <p>{{ item.titel }}</p>
+        <p>Erstellt {{ item.text }}</p>
+        <img v-for="(img, index) in item.imageIds" :key="index + 'imgs'" :src="url + img.imageId" alt="" class="newsImagePreview" />
+        <h6 class="test">{{ item }}</h6>
       </div>
     </div>
   </div>
@@ -48,6 +52,12 @@ export default {
       text: "",
       images: [],
     };
+  },
+  computed: {
+    url() {
+      if (process.env.NODE_ENV == "development") return "http://192.168.2.100:7081?id=";
+      else return "https://image.menzel-fahrzeugtechnik.de?id=";
+    },
   },
   methods: {
     async getAll() {
@@ -87,7 +97,17 @@ export default {
 </script>
 
 <style>
-.test:hover {
-  background-color: rgb(235, 72, 72);
+.newsPreviewWrapper {
+  background-color: #f3f3f34d;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px 0 #4d4d4d36;
+  padding: 10px;
+  margin: 15px;
+}
+.newsPreviewWrapper:hover {
+  background-color: rgba(235, 72, 72, 0.719);
+}
+.newsImagePreview {
+  max-width: 200px;
 }
 </style>

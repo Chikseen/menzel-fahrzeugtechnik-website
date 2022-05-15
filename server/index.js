@@ -22,6 +22,9 @@ if (process.env.NODE_ENV === "development") {
 } else {
   pathPreFix = "";
 }
+let root = "";
+if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
+else root = "/database/images";
 
 var whitelist = [
   "https://dev.menzel-fahrzeugtechnik.de",
@@ -197,6 +200,16 @@ app.post("/news/delete", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
+app.post("/news/uploadImage", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(news.uploadImage(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/getAllImage", (req, res) => {
+  console.log("news.getAllImage(root)", news.getAllImage(root));
+  res.json(news.getAllImage(root));
+});
+
 // EXPRESS SETUP
 const imageapp = express();
 imageapp.use(corsImage());
@@ -207,9 +220,6 @@ imageapp.listen(portimage, () => console.log("Connecet with Port: " + portimage)
 
 imageapp.get("/", (req, res) => {
   const header = JSON.stringify(req.query.id);
-  let root = "";
-  if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
-  else root = "/database/images";
   console.log(header);
   console.log(root);
   var options = {
@@ -222,7 +232,7 @@ imageapp.get("/", (req, res) => {
   };
   res.sendFile(`${req.query.id}.png`, options, function (err) {
     if (err) {
-      res.send(err);
+      console.log(err);
     } else {
       console.log("Sent:", `${req.query.id}.png`);
     }

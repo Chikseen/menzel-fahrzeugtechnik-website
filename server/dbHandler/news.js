@@ -7,7 +7,7 @@ module.exports = {
     const news = new JSONdb(pathPreFix + "/database/news.json");
 
     const data = news.get("data");
-   /*  
+    /*  
     const min = 0;
     const max = 10;
    
@@ -41,19 +41,6 @@ module.exports = {
     const news = new JSONdb(pathPreFix + "/database/news.json");
     let data = news.get("data");
     req.body.uuid = uuidGen();
-    const imageIds = [];
-    req.body.images.forEach((imgRaw) => {
-      const tww = imgRaw.replace(/^data:image\/png;base64,/, "");
-      const uuid = uuidGen();
-      var body = tww,
-        base64Data = body,
-        binaryData = new Buffer(base64Data, "base64").toString("binary");
-      console.log("ui", uuid);
-      fs.writeFile(`${pathPreFix}/database/images/${uuid}.png`, binaryData, "binary", function (err) {
-        console.log("err", err);
-      });
-      imageIds.push(uuid);
-    });
 
     const newO = {
       date: req.body.date,
@@ -61,7 +48,7 @@ module.exports = {
       text: req.body.text,
       key: req.body.key,
       uuid: req.body.uuid,
-      imageIds: imageIds,
+      imageIds: req.body.images,
     };
 
     data.push(newO);
@@ -83,5 +70,21 @@ module.exports = {
 
     news.set("data", tosend);
     return tosend;
+  },
+  uploadImage(pathPreFix, req) {
+    console.log("create new Image");
+    const tww = req.body.image.replace(/^data:image\/png;base64,/, "");
+    const uuid = uuidGen();
+    var body = tww,
+      base64Data = body,
+      binaryData = new Buffer(base64Data, "base64").toString("binary");
+    console.log("ui", uuid);
+    fs.writeFile(`${pathPreFix}/database/images/${uuid}.png`, binaryData, "binary", function (err) {
+      console.log("err", err);
+    });
+    return { imageId: uuid };
+  },
+  getAllImage(path) {
+    return fs.readdirSync(path);
   },
 };
