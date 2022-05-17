@@ -74,15 +74,14 @@ module.exports = {
   uploadImage(pathPreFix, req) {
     console.log("create new Image");
     const tww = req.body.image.replace(/^data:image\/png;base64,/, "");
-    const uuid = uuidGen();
     var body = tww,
       base64Data = body,
       binaryData = new Buffer(base64Data, "base64").toString("binary");
-    console.log("ui", uuid);
-    fs.writeFile(`${pathPreFix}/database/images/${uuid}.png`, binaryData, "binary", function (err) {
+    console.log("name", req.body.name);
+    fs.writeFile(`${pathPreFix}/database/images/${req.body.name}.png`, binaryData, "binary", function (err) {
       console.log("err", err);
     });
-    return { imageId: uuid };
+    return { imageId: req.body.name };
   },
   getAllImage(path) {
     return fs.readdirSync(path);

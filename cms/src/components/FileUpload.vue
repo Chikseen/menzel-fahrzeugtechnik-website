@@ -4,16 +4,32 @@
     <div>
       <div class="imageSelectionPreview">
         <div v-for="(image, index) in images" :key="index">
-          <div v-if="image.imageId.length > 0">
-            <img class="previewInSelcetion" @click="removeImage(index)" :src="url + image.imageId" />
+          <div v-if="image.length > 0">
+            <img class="previewInSelcetion" @click="removeImage(index)" :src="url + image" />
           </div>
         </div>
       </div>
 
-      <div class="imageUpload">
-        <p>Weiteres Bild Hinzufügen (Bild anglicken um zu entfernen)</p>
-        <input v-if="reloadImagebox" type="file" @change="previewImage" accept="image/png" />
-        <button @click="addPicture" v-if="this.currentPreview != ''">Hinzufügen</button>
+      <div class="imageHandler">
+        <div class="imageUpload">
+          <p>Bild Hochladen</p>
+          <div>
+            <p>Bildtitel</p>
+            <input type="text" v-model="imageSearch" />
+          </div>
+          <input v-if="reloadImagebox" type="file" @change="previewImage" accept="image/png" />
+          <button @click="addPicture" v-if="this.currentPreview != '' && imageSearch.length > 2 && imageSearchResults.length === 0">Hochladen</button>
+        </div>
+        <div>
+          <p>Oder ein exestierendes Bild auswählen</p>
+          <input type="text" v-model="imageSearch" />
+        </div>
+        <div class="imageSearchPreviewWrapper">
+          <div v-for="(img, index) in imageSearchResults" :key="index + 'sec'">
+            <img @click="addImage(img)" class="imageSearchPreview" :src="url + img" alt="" />
+          </div>
+          <p v-if="imageSearch.length > 0 && imageSearchResults.length === 0">keine Bilder die dieser Suche entsprechen</p>
+        </div>
       </div>
       <div class="image-preview" v-if="currentPreview.length > 0">
         <img class="preview" :src="currentPreview" />
@@ -26,11 +42,18 @@
 import api from "@/apiService";
 
 export default {
+  components: {},
+  props: {
+    imagesFromAbove: { type: Array },
+  },
   data() {
     return {
       images: [],
       currentPreview: "",
       reloadImagebox: true,
+      allImages: [],
+      imageSearch: "",
+      imageSearchResults: [],
     };
   },
   computed: {
@@ -55,9 +78,10 @@ export default {
         const imageId = await api.fetchData("news/uploadImage", {
           key: localStorage.getItem("authKey"),
           image: this.currentPreview,
+          name: this.imageSearch,
         });
-        console.log("imageid", imageId);
-        this.images.push(imageId);
+        console.log("imageid", imageId.imageId);
+        this.images.push(imageId.imageId);
         this.reloadImagebox = false;
         this.reloadImagebox = true;
         this.currentPreview = "";
@@ -72,8 +96,35 @@ export default {
       console.log("trigger update");
       this.$emit("onImagesChange", this.images);
     },
+    addImage(imageId) {
+      console.log("push image", imageId);
+      this.images.push(imageId);
+      this.updateImages();
+    },
+    async loadPictures() {
+      const images = await api.fetchData("news/getAllImage", {
+        key: localStorage.getItem("authKey"),
+      });
+      this.allImages = images.map((img) => img.replace(/.png/, ""));
+    },
   },
-  mounted() {},
+  watch: {
+    imageSearch() {
+      if (this.ImageSearch != "") {
+        console.log("this.imageSearch", this.imageSearch);
+        const regEx = new RegExp(this.imageSearch);
+        this.imageSearchResults = this.allImages.filter((img) => img.match(regEx));
+      } else {
+        this.imageSearchResults = null;
+      }
+    },
+    imagesFromAbove() {
+      this.images = this.imagesFromAbove;
+    },
+  },
+  mounted() {
+    this.loadPictures();
+  },
 };
 </script>
 
@@ -105,6 +156,27 @@ export default {
 }
 
 .imageSelectionPreview div {
+  max-width: 200px;
+}
+
+.imageHandler {
+  display: flex;
+  justify-content: center;
+}
+
+.imageHandler input {
+  width: 300px;
+  height: 21px;
+}
+
+.imageSearchPreviewWrapper {
+  max-width: 750px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+  gap: 5px;
+}
+
+.imageSearchPreview {
   max-width: 200px;
 }
 </style>

@@ -21,16 +21,17 @@
         </div>
       </div>
     </div>
-    <FileUpload @onImagesChange="upadteImages($event)" />
+    <FileUpload @onImagesChange="upadteImages($event)" :imagesFromAbove="images" />
     <button @click="createnewMessage">EINTRAG ERSTELLEN</button>
     <div>
       <h3>Alle Nachrichten</h3>
-      <div v-for="(item, index) in allMessages" :key="index" class="newsPreviewWrapper" @mouseup="deleteNews(item.uuid)">
+      <div v-for="(item, index) in allMessages" :key="index" class="newsPreviewWrapper" @click="editNews(item)">
         <p>Erstellt {{ item.date }}</p>
         <p>{{ item.titel }}</p>
         <p>Erstellt {{ item.text }}</p>
-        <img v-for="(img, index) in item.imageIds" :key="index + 'imgs'" :src="url + img.imageId" alt="" class="newsImagePreview" />
+        <img v-for="(img, index) in item.imageIds" :key="index + 'imgs'" :src="url + img" alt="" class="newsImagePreview" />
         <h6 class="test">{{ item }}</h6>
+        <button style="background-color: red; z-index: 10" @click="deleteNews(item.uuid)">Eintrag Löschen</button>
       </div>
     </div>
   </div>
@@ -82,10 +83,19 @@ export default {
         key: localStorage.getItem("authKey"),
       });
       console.log("data", this.allMessages);
+      this.getAll();
+    },
+    editNews(data) {
+      console.log("images", data);
+      this.date = data.data;
+      this.titel = data.titel;
+      this.text = data.text;
+      this.images = data.imageIds;
     },
     upadteImages(evt) {
       console.log("update", evt);
       this.images = evt;
+      this.getAll();
     },
   },
   mounted() {
@@ -103,9 +113,10 @@ export default {
   box-shadow: 2px 2px 10px 0 #4d4d4d36;
   padding: 10px;
   margin: 15px;
+  transition: all 0.5s;
 }
 .newsPreviewWrapper:hover {
-  background-color: rgba(235, 72, 72, 0.719);
+  background-color: rgba(223, 223, 223, 0.719);
 }
 .newsImagePreview {
   max-width: 200px;
