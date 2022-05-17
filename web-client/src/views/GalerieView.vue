@@ -1,34 +1,37 @@
 <template>
   <div v-if="allMessages">
     <div v-for="(message, index) in allMessages" :key="index">
-      <h3>{{ message.titel }}</h3>
-      <p>{{ message.text }}</p>
-      <h6>{{ message.date }}</h6>
-      <div v-for="(img, index) in message.imageIds" :key="index + 'sec'">
-        <img class="tmp" :src="url + img.imageId" alt="" />
-      </div>
-      <hr />
+      <NewsMessage :message="message" />
     </div>
+    <button @click="get">Mehr</button>
   </div>
 </template>
 <script>
 import api from "@/apiService.js";
 
+import NewsMessage from "@/components/NewsMessage";
+
 export default {
+  components: {
+    NewsMessage,
+  },
   data() {
     return {
       allMessages: [],
+      top: 0,
+      count: 5,
     };
-  },
-  computed: {
-    url() {
-      if (process.env.NODE_ENV == "development") return "http://192.168.2.100:7081?id=";
-      else return "https://image.menzel-fahrzeugtechnik.de?id=";
-    },
   },
   methods: {
     async get() {
-      this.allMessages = await api.fetchData("news/get", {});
+      const resp = await api.fetchData("news/get", {
+        top: this.top,
+        count: this.count,
+      });
+      this.top = this.top + 5;
+      this.count = this.count + 5;
+      console.log("resp", resp);
+      this.allMessages = this.allMessages.concat(resp);
     },
   },
   mounted() {

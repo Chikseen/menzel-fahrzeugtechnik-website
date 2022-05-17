@@ -5,37 +5,16 @@ const fs = require("fs");
 module.exports = {
   get(pathPreFix, req) {
     const news = new JSONdb(pathPreFix + "/database/news.json");
-
-    const data = news.get("data");
-    /*  
-    const min = 0;
-    const max = 10;
-   
-    let toSend = [];
-
-     try {
-      for (let i = min; i < max; i++) {
-        if (data[i]) {
-          console.log("data", data[i]);
-          data[i].images = [];
-          console.log("ids", data[i].imageIds);
-          data[i].imageIds.forEach((uuid) => {
-            var bitmap = fs.readFileSync(`${pathPreFix}/database/images/${uuid}.png`);
-            const base = new Buffer(bitmap).toString("base64").replace(/^data:image\/png;base64,/, "");
-            data[i].images.push(base);
-          });
-          toSend.push(data[i]);
-        }
-      }
-    } catch (error) {
-      return "an error ocured";
-    } */
-
-    return data;
+    const data = news.get("data").reverse();
+    console.log("fetch news data", req.body);
+    if (req.body.top === undefined || req.body.count === undefined) return data;
+    else {
+      return data.slice(req.body.top, req.body.count);
+    }
   },
   getAll(pathPreFix, req) {
     const news = new JSONdb(pathPreFix + "/database/news.json");
-    return news.get("data");
+    return news.get("data").reverse();
   },
   create(pathPreFix, req) {
     const news = new JSONdb(pathPreFix + "/database/news.json");
@@ -77,7 +56,6 @@ module.exports = {
     var body = tww,
       base64Data = body,
       binaryData = new Buffer(base64Data, "base64").toString("binary");
-    console.log("name", req.body.name);
     fs.writeFile(`${pathPreFix}/database/images/${req.body.name}.png`, binaryData, "binary", function (err) {
       console.log("err", err);
     });

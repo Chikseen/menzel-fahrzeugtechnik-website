@@ -62,7 +62,6 @@ export default {
     left: 0;
     width: 50%;
     height: 100%;
-    height: 100%;
     transition: all 0.1s;
     background-color: rgb(255, 255, 255);
     z-index: 5;
@@ -82,6 +81,14 @@ export default {
     top: 0;
     left: 0;
     height: 100%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .repairCluster {
+    &_good {
+      width: 65%;
+    }
   }
 }
 </style>

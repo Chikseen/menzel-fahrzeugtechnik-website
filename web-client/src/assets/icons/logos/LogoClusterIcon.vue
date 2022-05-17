@@ -94,4 +94,75 @@ export default {
   left: 75%;
   width: 30%;
 }
+
+@media only screen and (max-width: 550px) {
+  .logoCluster {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &_audi {
+      position: absolute;
+      top: 5%;
+      left: 20%;
+      width: 50%;
+      transition: 1s all;
+    }
+
+    &_bmw {
+      position: absolute;
+      top: 30%;
+      left: 15%;
+      width: 40%;
+      transition: 1s all;
+
+      &:hover {
+        transform: rotateZ(90deg);
+      }
+    }
+
+    &_vw {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      width: 40%;
+      transition: 1s all;
+    }
+
+    &_benz {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      width: 40%;
+      transition: 1s all;
+    }
+
+    &_wrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .logoCluster_wrapper:hover .logoCluster_audi {
+    top: 5%;
+    left: 10%;
+    width: 60%;
+  }
+
+  .logoCluster_wrapper:hover .logoCluster_bmw {
+    top: 40%;
+    left: 10%;
+    width: 50%;
+  }
+  .logoCluster_wrapper:hover .logoCluster_vw {
+    top: 20%;
+    left: 50%;
+    width: 50%;
+  }
+  .logoCluster_wrapper:hover .logoCluster_benz {
+    top: 55%;
+    left: 50%;
+    width: 50%;
+  }
+}
 </style>

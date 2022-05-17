@@ -105,7 +105,7 @@ export default {
 
     &_left {
       flex-direction: row-reverse;
-     /*  margin-right: 300px; */
+      /*  margin-right: 300px; */
     }
 
     &_text,
@@ -132,6 +132,45 @@ export default {
         top: 0;
         left: 0;
         width: 100%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .home {
+    &_content {
+      &_left {
+        flex-direction: row-reverse;
+        /*  margin-right: 300px; */
+      }
+
+      &_text,
+      &_picture_wrapper {
+        width: 50%;
+        font-size: 0.8rem;
+      }
+
+      &_text {
+        margin: auto;
+      }
+
+      &_picture {
+        &_wrapper {
+          position: relative;
+        }
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+        }
       }
     }
   }

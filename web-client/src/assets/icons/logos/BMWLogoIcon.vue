@@ -37,4 +37,5 @@ export default {
 .logoCluster_logoClusterBrand_bmw:hover .logoCluster_logoClusterBrand_bmw_inner {
   fill: #009ada;
 } 
+
 </style>

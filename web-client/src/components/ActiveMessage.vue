@@ -90,4 +90,25 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 870px) {
+  .active {
+    &_textwrapper {
+      h2,
+      p {
+        text-align: left;
+        margin: 5px 0;
+        font-size: 0.91rem;
+      }
+
+      &_date {
+        min-width: 120px;
+
+        p {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
 </style>

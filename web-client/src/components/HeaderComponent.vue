@@ -53,15 +53,45 @@
           <h4>Menzel-Fharzeugtechnik</h4>
           <h5>{{ isOpen }}</h5>
         </div>
-        <p>MENU</p>
-        <Transition name="profile-setting">
+        <ArrowIcon :class="['header_nav_menu_icon', menuOpen ? 'header_nav_menu_icon_open' : '']" />
+        <Transition name="header-menu">
           <nav v-if="menuOpen" class="header_nav_smallWindow">
-            <router-link class="header_nav_route" to="/home">Home</router-link>
-            <router-link class="header_nav_route" to="/service/">Service</router-link>
-            <router-link class="header_nav_route" to="/contact">Kontakt</router-link>
-            <router-link class="header_nav_route" to="/galerie">Galerie</router-link>
-            <router-link class="header_nav_route" to="/about">Über mich</router-link>
-            <router-link class="header_nav_route" to="/impressum">Impressum</router-link>
+            <router-link class="header_nav_route" to="/home">
+              <transition name="header-active">
+                <div v-if="this.$route.name == 'home'" class="header_nav_route_active"></div>
+              </transition>
+              <a>Home</a>
+            </router-link>
+            <router-link class="header_nav_route" to="/service">
+              <transition name="header-active">
+                <div v-if="isService" class="header_nav_route_active"></div>
+              </transition>
+              <a>Service</a>
+            </router-link>
+            <router-link class="header_nav_route" to="/contact">
+              <transition name="header-active">
+                <div v-if="this.$route.name == 'contact'" class="header_nav_route_active"></div>
+              </transition>
+              <a>Kontakt</a>
+            </router-link>
+            <router-link class="header_nav_route" to="/galerie">
+              <transition name="header-active">
+                <div v-if="this.$route.name == 'galerie'" class="header_nav_route_active"></div>
+              </transition>
+              <a>Galerie</a>
+            </router-link>
+            <router-link class="header_nav_route" to="/about">
+              <transition name="header-active">
+                <div v-if="this.$route.name == 'about'" class="header_nav_route_active"></div>
+              </transition>
+              <a>Über mich</a>
+            </router-link>
+            <router-link class="header_nav_route" to="/impressum">
+              <transition name="header-active">
+                <div v-if="this.$route.name == 'impressum'" class="header_nav_route_active"></div>
+              </transition>
+              <a>Impressum</a>
+            </router-link>
           </nav>
         </Transition>
       </div>
@@ -72,12 +102,14 @@
 
 <script>
 import WheelIcon from "@/assets/icons/WheelIcon.vue";
+import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
 
 import api from "../apiService";
 
 export default {
   components: {
     WheelIcon,
+    ArrowIcon,
   },
   data() {
     return {
@@ -108,15 +140,6 @@ export default {
 </script>
 
 <style lang="scss">
-.profile-setting-enter-active,
-.profile-setting-leave-active {
-  transform: translateX(0);
-}
-.profile-setting-enter-from,
-.profile-setting-leave-to {
-  transform: translateX(100%);
-}
-
 .header-active-enter-active,
 .header-active-leave-active {
   transform: translateY(0) rotateZ(0deg);
@@ -259,6 +282,15 @@ nav {
   }
 }
 @media only screen and (max-width: 870px) {
+  .header-menu-enter-active,
+  .header-menu-leave-active {
+    transform: translateX(100%);
+  }
+  .header-menu-enter-from,
+  .header-menu-leave-to {
+    transform: translateX(0);
+  }
+
   .header {
     border-radius: 0 0 3rem 3rem;
     height: 3rem;
@@ -276,16 +308,19 @@ nav {
         position: absolute;
         top: 0;
         right: 0;
-        width: 100%;
+        width: 200px;
+        padding: auto;
+        margin: 0;
         overflow-x: hidden;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         background-color: $company_blue;
-        box-shadow: 1px 1px 5px 1px rgba(204, 203, 203, 0.151);
+        box-shadow: 1px 1px 10px 1px $company_blue;
         border-radius: 10px;
-        height: 300px;
+        height: auto;
+        
       }
 
       &_menu {
@@ -297,14 +332,59 @@ nav {
         margin: auto;
         padding: 0 25px;
 
+        &_icon {
+          max-height: 30px;
+          width: 35px;
+          margin: 7px 10px 0 0;
+          transition: all 0.3s;
+          z-index: 9;
+
+          &_open {
+            transform: rotateZ(180deg);
+          }
+        }
+
         &_quickinfo {
           display: flex;
           flex-direction: column;
+          
 
           h4,
           h5 {
-            margin: 0;
+            margin: 1px;
+            font-weight: 600;
           }
+          h4 {
+            margin-top: 6px;
+          }
+        }
+      }
+
+      &_route {
+        position: relative;
+        padding: 5px 5px;
+        font-size: 1.2rem;
+        color: $ligth_font_color;
+        text-decoration: none;
+        width: 120px;
+      }
+    }
+  }
+  nav {
+    padding: 0 10px;
+    white-space: nowrap;
+
+    a {
+      margin: 5px 0;
+      a {
+        font-weight: bold;
+        color: #d3d7df;
+        transition: all 1s;
+      }
+
+      &.router-link-active {
+        a {
+          color: #8f8f8f;
         }
       }
     }

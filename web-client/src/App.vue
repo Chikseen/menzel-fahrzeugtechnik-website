@@ -27,6 +27,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {
@@ -34,6 +36,7 @@ html {
   top: 50%;
   left: 50%;
   width: 5px;
+  height: 5px;
   transition: all 0.5s;
 }
 

@@ -113,6 +113,7 @@ export default {
 
           &_wrapper {
             display: flex;
+            width: calc(100% - 20px);
           }
 
           &_dates {
@@ -135,13 +136,15 @@ export default {
     transition: all 0.3s;
 
     &_openTimes {
+      overflow: hidden;
+      
       &_content {
         flex-direction: column;
         width: 100%;
 
         &_data {
           width: 100%;
-
+          margin: 0;
           &_opening > div {
             margin: 5px;
             display: flex;
