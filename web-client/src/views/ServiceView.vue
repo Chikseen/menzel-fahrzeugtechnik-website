@@ -8,9 +8,11 @@
       </div>
       <div class="serviceView_overview_container" @click="$router.push({ name: `ac` })">
         <p>Klimaservice</p>
+        <ACIcon />
       </div>
       <div class="serviceView_overview_container" @click="$router.push({ name: `tiers` })">
         <p>Reifen und Räder</p>
+        <WheelIcon />
       </div>
     </div>
     <div v-if="this.$route.name == 'service'">
@@ -22,10 +24,14 @@
 
 <script>
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
+import WheelIcon from "@/assets/icons/WheelIcon2.vue";
+import ACIcon from "@/assets/icons/ACIcon.vue";
 
 export default {
   components: {
     TuevIcon,
+    WheelIcon,
+    ACIcon,
   },
   mounted() {},
 };
@@ -48,7 +54,8 @@ export default {
       height: 200px;
       width: 100%;
       border-radius: 5px;
-      box-shadow: 1px 1px 5px 1px lighten($company_blue, 81);
+      box-shadow: 1px 1px 7px 1px lighten($company_blue, 78);
+      cursor: pointer;
 
       & div {
         height: 120px;

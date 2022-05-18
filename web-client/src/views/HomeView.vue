@@ -26,7 +26,7 @@
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
         <div class="home_content_picture_wrapper">
           <div class="home_content_picture" id="divThreeGlas">
-            <p>DAS IST EIN BILD</p>
+            <ACIcon />
           </div>
         </div>
         <div class="home_content_text">
@@ -64,6 +64,7 @@ import ActiveMessage from "@/components/ActiveMessage";
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
 import BrandCluster from "@/assets/icons/logos/LogoClusterIcon.vue";
 import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
+import ACIcon from "@/assets/icons/ACIcon.vue";
 
 export default {
   name: "HomeView",
@@ -72,6 +73,7 @@ export default {
     TuevIcon,
     BrandCluster,
     RepairService,
+    ACIcon,
   },
   methods: {
     mouseMove(event, elem) {

@@ -54,6 +54,10 @@ export default {
     overflow: hidden !important;
     position: relative;
     display: flex;
+
+    &:hover {
+      stroke: $icon_active_grey !important;
+    }
   }
 
   &_good {
