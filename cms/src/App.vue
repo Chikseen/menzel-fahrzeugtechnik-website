@@ -2,11 +2,11 @@
   <div>
     <h1>CMS für Menzel-Fharzeugtechnik</h1>
     <div>
-      <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">Aktive Nachrichten</button>
+      <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">aktive Nachrichten</button>
       <button @click="toShow = 'news'" :class="toShow == 'news' ? 'active' : ''">News</button>
       <button @click="toShow = 'galerie'" :class="toShow == 'galerie' ? 'active' : ''">Galerie</button>
       <button @click="toShow = 'open'" :class="toShow == 'open' ? 'active' : ''">Öffnungszeiten</button>
-      <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">ZugriffsKontrolle</button>
+      <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">
       <ActiveMessage v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />

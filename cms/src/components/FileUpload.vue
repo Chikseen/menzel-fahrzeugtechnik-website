@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>Hinzugefügte Bilder</h4>
+    <h4>hinzugefügte Bilder</h4>
     <div>
       <div class="imageSelectionPreview">
         <div v-for="(image, index) in images" :key="index">
@@ -12,7 +12,7 @@
 
       <div class="imageHandler">
         <div class="imageUpload">
-          <p>Bild Hochladen</p>
+          <p>Bild hochladen</p>
           <div>
             <p>Bildtitel</p>
             <input type="text" v-model="imageSearch" />
@@ -21,7 +21,7 @@
           <button @click="addPicture" v-if="this.currentPreview != '' && imageSearch.length > 2 && imageSearchResults.length === 0">Hochladen</button>
         </div>
         <div>
-          <p>Oder ein exestierendes Bild auswählen</p>
+          <p>Oder ein vorhandenes Bild auswählen</p>
           <input type="text" v-model="imageSearch" />
         </div>
         <div class="imageSearchPreviewWrapper">

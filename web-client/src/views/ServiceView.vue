@@ -16,7 +16,7 @@
       </div>
     </div>
     <div v-if="this.$route.name == 'service'">
-      <p>Wir sind für sie da</p>
+      <p>Wir sind für Sie da</p>
     </div>
     <router-view></router-view>
   </div>
