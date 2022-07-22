@@ -75,7 +75,7 @@ export default {
     },
     async addPicture() {
       if (this.currentPreview != "") {
-        const imageId = await api.fetchData("news/uploadImage", {
+        const imageId = await api.get("news/uploadImage", {
           key: localStorage.getItem("authKey"),
           image: this.currentPreview,
           name: this.imageSearch,
@@ -102,7 +102,7 @@ export default {
       this.updateImages();
     },
     async loadPictures() {
-      const images = await api.fetchData("news/getAllImage", {
+      const images = await api.get("news/getAllImage", {
         key: localStorage.getItem("authKey"),
       });
       this.allImages = images.map((img) => img.replace(/.png/, ""));

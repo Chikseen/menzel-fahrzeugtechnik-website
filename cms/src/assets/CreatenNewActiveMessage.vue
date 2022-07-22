@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     async createnewMessage() {
-      const data = await api.fetchData("activeMessages/create", {
+      const data = await api.get("activeMessages/create", {
         startDate: this.startDate,
         endDate: this.endDate,
         text: this.text,

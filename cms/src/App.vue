@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     async checkkey() {
-      const data = await api.fetchData("key/check", { key: localStorage.getItem("authKey") });
+      const data = await api.get("key/check", { key: localStorage.getItem("authKey") });
       console.log("keystatus", data);
       if (data.status) {
         this.keyValid = true;

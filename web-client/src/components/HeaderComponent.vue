@@ -125,7 +125,7 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("openTimes/get", {});
+      const data = await api.get("openTimes/get", {});
       this.$store.commit("setOpenTime", data);
       this.isOpen = data.isOpen;
       this.nextOpen = data.nextOpen;

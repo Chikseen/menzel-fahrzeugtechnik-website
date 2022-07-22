@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("activeMessages/getFilterd", {});
+      const data = await api.get("activeMessages/getFilterd", {});
       this.$store.commit("setMessage", data);
       this.allActviveMessages = data;
     },

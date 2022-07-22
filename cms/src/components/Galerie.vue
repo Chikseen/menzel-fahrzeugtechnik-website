@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     async loadPictures() {
-      const images = await api.fetchData("news/getAllImage", {
+      const images = await api.get("news/getAllImage", {
         key: localStorage.getItem("authKey"),
       });
       this.images = images;

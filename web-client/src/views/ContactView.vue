@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     async getTimes() {
-      const data = await api.fetchData("openTimes/getAll", {});
+      const data = await api.get("openTimes/getAll", {});
 
       let allOpenDays = [];
       data.weekdays.forEach((day) => {

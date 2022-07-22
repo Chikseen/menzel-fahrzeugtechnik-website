@@ -45,13 +45,13 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("activeMessages/get", {
+      const data = await api.get("activeMessages/get", {
         key: localStorage.getItem("authKey"),
       });
       this.allMessages = data;
     },
     async deleteMessage(uuid) {
-      const data = await api.fetchData("activeMessages/delete", {
+      const data = await api.get("activeMessages/delete", {
         uuid: uuid,
         key: localStorage.getItem("authKey"),
       });

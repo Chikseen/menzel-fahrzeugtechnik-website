@@ -51,14 +51,14 @@ export default {
   },
   methods: {
     async requestNewKey() {
-      const data = await api.fetchData("key/sendNew", {
+      const data = await api.get("key/sendNew", {
         key: localStorage.getItem("authKey"),
         user: this.user,
       });
       console.log("data", data);
     },
     async confirmKey() {
-      const data = await api.fetchData("key/check", { key: this.keyInput });
+      const data = await api.get("key/check", { key: this.keyInput });
       if (data.status) this.$emit("keyStatus", false);
       if (data.status) {
         localStorage.setItem("authKey", this.keyInput);
@@ -67,7 +67,7 @@ export default {
     },
     async getAlluser() {
       console.log("hi");
-      const data = await api.fetchData("key/getuser", { key: localStorage.getItem("authKey") });
+      const data = await api.get("key/getuser", { key: localStorage.getItem("authKey") });
       this.allUser = data.data;
     },
   },

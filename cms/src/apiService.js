@@ -1,6 +1,6 @@
 const apiService = {
   //DATA FETCHER
-  async fetchData(adress, payload) {
+  async get(adress, payload) {
     let call;
     if (process.env.NODE_ENV == "development") {
       console.log("mode is development");

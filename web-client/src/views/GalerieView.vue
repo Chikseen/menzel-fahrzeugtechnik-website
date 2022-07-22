@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     async get() {
-      const resp = await api.fetchData("news/get", {
+      const resp = await api.get("news/get", {
         top: this.top,
         count: this.count,
       });
