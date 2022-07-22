@@ -7,7 +7,7 @@
     </div>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
-      <div class="home_content_left home_content_wrapper underlined" @mousemove="mouseMove($event, 'TuevImg')">
+      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
           <TuevIcon />
         </div>
@@ -191,9 +191,9 @@ export default {
 @media only screen and (max-width: 870px) {
   .home {
     &_content {
-      &_left {
-        flex-direction: row-reverse;
-        /*  margin-right: 300px; */
+      &_wrapper {
+        position: relative;
+        height: auto;
       }
 
       &_titel,
@@ -203,12 +203,21 @@ export default {
       }
 
       &_titel {
-        margin: auto;
+        width: 100%;
+        text-align: right;
+
+        h2 {
+          margin: 20px 25px 10px 100px;
+        }
       }
 
       &_picture {
         &_wrapper {
-          position: relative;
+          position: absolute;
+          top: 10px;
+          left: 0;
+          height: 75px;
+          width: 75px;
         }
 
         position: absolute;
@@ -223,10 +232,10 @@ export default {
           width: 100%;
         }
       }
-    }
 
-    &_titel {
-      display: none;
+      &_text {
+        margin-top:40px;
+      }
     }
   }
 }

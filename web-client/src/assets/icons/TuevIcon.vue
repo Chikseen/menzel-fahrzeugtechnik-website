@@ -38,7 +38,7 @@
 <script>
 export default {
   props: {
-    fontSize: {type: String, default: "3.5"}
+    fontSize: { type: String, default: "3.5" },
   },
   components: {},
   methods: {},
@@ -103,5 +103,13 @@ export default {
 }
 .tuevIcon_wrapper:hover .tuevIcon_outter {
   transform: rotate(420deg) !important;
+}
+
+@media only screen and (max-width: 870px) {
+  .tuevIcon {
+    &_currentYearText {
+      font-size: 100% !important;
+    }
+  }
 }
 </style>

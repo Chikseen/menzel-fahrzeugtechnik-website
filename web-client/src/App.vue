@@ -149,4 +149,10 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background-color: $company_blue;
 }
+
+@media only screen and (max-width: 870px) {
+  .pageTitel {
+    display: none;
+  }
+}
 </style>

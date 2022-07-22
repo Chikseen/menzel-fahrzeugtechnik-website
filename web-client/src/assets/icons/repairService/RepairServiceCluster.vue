@@ -1,6 +1,6 @@
 <template>
-  <div id="repairClusterID" class="repairCluster_wrapper" @mouseover="setoverlay" @mouseleave="resetPos">
-    <CarGoodCondtionIcon id="repairClusterGoodID" class="repairCluster_good" />
+  <div id="repairClusterID" class="repairCluster_wrapper" @mouseover="setOverlayPos">
+    <CarGoodCondtionIcon :style="`width:${posInPercent}%`" id="repairClusterGoodID" class="repairCluster_good" />
     <!--   <RepairDevice class="repairCluster_repairdevice" /> -->
     <CarBadCondtionIcon class="repairCluster_bad" />
   </div>
@@ -21,39 +21,45 @@ export default {
     return {
       hover: false,
       hoverDelay: false,
+      posInPercent: 50,
+      posParentWidth: 0,
+      posParentLeft: 0,
     };
   },
   methods: {
-    setoverlay(evt) {
+    setOverlayPos(evt) {
       const parent = document.getElementById("repairClusterID");
-      const child = document.getElementById("repairClusterGoodID");
       const posInPercent = ((evt.x - parent.getBoundingClientRect().left) / parent.clientWidth) * 100;
-      child.setAttribute("style", `width:${posInPercent}%`);
+      this.posInPercent = posInPercent;
+
+      /*  
+      
+      @mouseover="setParent" 
+
+      
+      setOverlayPos(evt) {
+      const posInPercent = ((evt.x - this.posParentLeft) / this.posParentWidth) * 100;
+      this.posInPercent = posInPercent;
     },
-    resetPos() {
-      const child = document.getElementById("repairClusterGoodID");
-      child.setAttribute("style", "width:50%");
+
+    setParent(evt) {
+      this.posParentLeft = evt.fromElement.getBoundingClientRect().left;
+      this.posParentWidth = evt.fromElement.clientWidth;
+    }, */
     },
   },
 };
 </script>
 
 <style lang="scss">
-/* .repairCluster_wrapper:hover .repairCluster_bad {
-  width: 100%;
-}
-.repairCluster_wrapper:hover .repairCluster_good {
-  width: 100%;
-} */
-
 .repairCluster {
   &_wrapper {
-    height: 100%;
-    width: 100%;
-    max-width: 450px;
-    overflow: hidden !important;
     position: relative;
     display: flex;
+    height: 100%;
+    overflow: hidden !important;
+    margin: 0 auto;
+    aspect-ratio: 16 / 11;
 
     &:hover {
       stroke: $icon_active_grey !important;
