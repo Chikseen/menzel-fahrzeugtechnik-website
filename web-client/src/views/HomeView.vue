@@ -1,26 +1,37 @@
 <template>
   <div class="home">
     <ActiveMessage />
-    <h1>Menzel Fahrzeugtechnik</h1>
+    <div class="home_titel">
+      <h1>Menzel</h1>
+      <h1>Fahrzeugtechnik</h1>
+    </div>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
-      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
+      <div class="home_content_left home_content_wrapper underined" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
           <TuevIcon />
         </div>
-        <div class="home_content_text">
-          <h2>TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
-          <p></p>
-          <button @mouseup="$router.push('service#tuev')">Erfahre mehr</button>
+        <div class="home_content_titel" @mouseup="$router.push('service#tuev')">
+          <h2 class="underlined">TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
+          <div class="home_content_text">
+            <ul>
+              <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den Zweijahresrhythmus.</li>
+              <li>Die Hauptuntersuchung stellt die "Verkehrssicherheit, Vorschriftsmäßigkeit und Umweltverträglichkeit" der Fahrzeuge sicher.</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divTwoWheel')">
         <div class="home_content_picture_wrapper">
           <BrandCluster />
         </div>
-        <div class="home_content_text">
-          <h2>Freie KFZ-Werkstatt</h2>
-          <button @mouseup="$router.push('service#klimaservice')">Erfahre mehr</button>
+        <div class="home_content_titel" @mouseup="$router.push('service')">
+          <h2 class="underlined">Freie KFZ-Werkstatt</h2>
+          <div class="home_content_text">
+            <ul>
+              <li></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
@@ -29,9 +40,20 @@
             <ACIcon />
           </div>
         </div>
-        <div class="home_content_text">
-          <h2>Klimaservice</h2>
-          <button @mouseup="$router.push('service')">Erfahre mehr</button>
+        <div class="home_content_titel" @mouseup="$router.push('service#klimaservice')">
+          <h2 class="underlined">Klimaservice</h2>
+          <div class="home_content_text">
+            <ul>
+              <li>
+                Die regelmäßige Wartung der Klimaanlage erhöht die Sicherheit und verhindert teure Reparaturen. Jede Klimaanlage verliert pro Jahr Kältemittel,
+                dadurch verringert sich die Kühlleistung der Klimaanlage deutlich. Deshalb sollte das Kältemittel alle 2 Jahre aufgefüllt werden.
+              </li>
+              <li>
+                Eine Klimaanlage kühlt nicht nur, sie hält bei optimaler Leistung auch die Innenraumluft trocken. Deshalb ist es auch wichtig im Herbst und
+                Winter die Klimaanlage einzuschalten, denn es gilt: je trockener die Innenraumluft, desto weniger beschlagen die Scheiben.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <!--  <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
@@ -45,14 +67,28 @@
           <p>Wir wechseln Gläßer</p>
           <button @mouseup="$router.push('service')">Erfahre mehr</button>
         </div>
+
+        Versicherungsschadenabwicklung 
+
+Hol- und Bringeservice 
+
+Werkstattersatzwagen 
+
+
       </div> -->
       <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
         <div class="home_content_picture_wrapper">
           <RepairService />
         </div>
-        <div class="home_content_text">
-          <h2>Unfallreparaturen</h2>
-          <button @mouseup="$router.push('service')">Erfahre mehr</button>
+        <div class="home_content_titel">
+          <h2 class="underlined">Unfallreparaturen</h2>
+          <div class="home_content_text" @mouseup="$router.push('service')">
+            <ul>
+              <li>Versicherungsschadenabwicklung</li>
+              <li>Hol- und Bringeservice</li>
+              <li>Werkstattersatzwagen</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +127,7 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
+    row-gap: 20px;
 
     &_wrapper {
       display: flex;
@@ -98,36 +135,48 @@ export default {
       justify-content: center;
       margin: 10px auto;
 
-      height: 20rem;
+      height: 15rem;
       width: 100%;
       max-width: 1250px;
-
-      /*  box-shadow: 1px 1px 5px 1px rgba(204, 203, 203, 0.151); */
     }
 
     &_left {
       flex-direction: row-reverse;
-      /*  margin-right: 300px; */
     }
 
-    &_text,
+    &_titel,
     &_picture_wrapper {
       width: 50%;
     }
 
+    &_titel {
+      margin: 0 auto;
+      cursor: pointer;
+
+      h2 {
+        position: relative;
+      }
+    }
+
     &_text {
-      margin: auto;
+      text-align: left;
     }
 
     &_picture {
-      &_wrapper {
-        position: relative;
-      }
-
+      max-height: 100%;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &_wrapper {
+        max-height: 100%;
+        position: relative;
+      }
 
       img {
         position: absolute;
@@ -136,6 +185,66 @@ export default {
         width: 100%;
       }
     }
+  }
+
+  &_titel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    &:hover {
+      h1 {
+        &:nth-child(1) {
+          color: $error-red;
+        }
+      }
+    }
+
+    h1 {
+      position: relative;
+      font-size: 3rem;
+      color: $company_blue;
+      padding: 0 10px;
+      background-color: #fff;
+      letter-spacing: 2px;
+      z-index: 2;
+      transition: all 0.5s;
+
+      &:nth-child(1) {
+        &::after {
+          content: "";
+          position: absolute;
+          top: calc(50% + 2rem);
+          right: 0;
+          margin: 0 10px;
+          height: 2px;
+          width: 100%;
+          background-color: $company_blue;
+        }
+      }
+
+      &:nth-child(2) {
+        &::after {
+          content: "";
+          position: absolute;
+          top: calc(50% - 2rem);
+          left: 0;
+          margin: 0 10px;
+          height: 2px;
+          width: 100%;
+          background-color: $company_blue;
+        }
+      }
+    }
+    /*     &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      margin: 0 10%;
+      height: 2px;
+      width: 80%;
+      background-color: $company_blue;
+    }  */
   }
 }
 
@@ -147,13 +256,13 @@ export default {
         /*  margin-right: 300px; */
       }
 
-      &_text,
+      &_titel,
       &_picture_wrapper {
         width: 50%;
         font-size: 0.8rem;
       }
 
-      &_text {
+      &_titel {
         margin: auto;
       }
 
@@ -174,6 +283,10 @@ export default {
           width: 100%;
         }
       }
+    }
+
+    &_titel {
+      display: none;
     }
   }
 }

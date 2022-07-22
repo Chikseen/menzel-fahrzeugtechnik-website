@@ -50,7 +50,10 @@
       </div>
       <div class="header_nav_menu" @mouseup="menuOpen = !menuOpen">
         <div class="header_nav_menu_quickinfo">
-          <h4>Menzel-Fharzeugtechnik</h4>
+          <div class="header_nav_menu_quickinfo_titel">
+            <h1>Menzel</h1>
+            <h1>Fahrzeugtechnik</h1>
+          </div>
           <h5>{{ isOpen }}</h5>
         </div>
         <ArrowIcon :class="['header_nav_menu_icon', menuOpen ? 'header_nav_menu_icon_open' : '']" />
@@ -320,7 +323,6 @@ nav {
         box-shadow: 1px 1px 10px 1px $company_blue;
         border-radius: 10px;
         height: auto;
-        
       }
 
       &_menu {
@@ -347,7 +349,6 @@ nav {
         &_quickinfo {
           display: flex;
           flex-direction: column;
-          
 
           h4,
           h5 {
@@ -356,6 +357,42 @@ nav {
           }
           h4 {
             margin-top: 6px;
+          }
+
+          &_titel {
+            display: flex;
+
+            h1 {
+              position: relative;
+              padding: 0 5px;
+              font-size: 1.1rem;
+
+              &:nth-child(1) {
+                &::after {
+                  content: "";
+                  position: absolute;
+                  top: calc(50% + 0.6rem);
+                  right: 0;
+                  margin-right: 5px;
+                  height: 2px;
+                  width: 100%;
+                  background-color: white;
+                }
+              }
+
+              &:nth-child(2) {
+                &::after {
+                  content: "";
+                  position: absolute;
+                  top: calc(50% - 0.7rem);
+                  left: 0;
+                  margin-left: 5px;
+                  height: 2px;
+                  width: 100%;
+                  background-color: white;
+                }
+              }
+            }
           }
         }
       }

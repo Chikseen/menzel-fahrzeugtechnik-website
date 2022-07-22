@@ -22,13 +22,26 @@ html {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  //font-family: Helvetica, Arial, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin: 0;
   padding: 0;
+}
+
+.underlined {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: $company_blue;
+  }
 }
 
 ::-webkit-scrollbar {

@@ -62,7 +62,7 @@ export default {
   &_benz {
     position: absolute;
     top: 45%;
-    left: 50%;
+    left: 65%;
     width: 20%;
     transition: 1s all;
   }
