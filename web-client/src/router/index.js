@@ -10,6 +10,7 @@ import ImpressumView from "../views/ImpressumView";
 import Tuev from "../views/ServiceViews/Tuev";
 import Tiers from "../views/ServiceViews/Tiers";
 import AC from "../views/ServiceViews/AC";
+import Repair from "../views/ServiceViews/Repair";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
         path: "ac",
         name: "ac",
         component: AC,
+      },
+      {
+        path: "repair",
+        name: "repair",
+        component: Repair,
       },
     ],
   },

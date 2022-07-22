@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <ActiveMessage />
-    <div class="home_titel">
+    <div class="pageTitel">
       <h1>Menzel</h1>
       <h1>Fahrzeugtechnik</h1>
     </div>
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
-      <div class="home_content_left home_content_wrapper underined" @mousemove="mouseMove($event, 'TuevImg')">
+      <div class="home_content_left home_content_wrapper underlined" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
           <TuevIcon />
         </div>
-        <div class="home_content_titel" @mouseup="$router.push('service#tuev')">
-          <h2 class="underlined">TÜV Prüfstützpunkt und Abgasuntersuchung</h2>
+        <div class="home_content_titel" @mouseup="$router.push({ name: 'tuev' })">
+          <h2 class="underlined">Hauptuntersuchung und Abgasuntersuchung</h2>
           <div class="home_content_text">
             <ul>
               <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den Zweijahresrhythmus.</li>
@@ -25,7 +25,7 @@
         <div class="home_content_picture_wrapper">
           <BrandCluster />
         </div>
-        <div class="home_content_titel" @mouseup="$router.push('service')">
+        <div class="home_content_titel" @mouseup="$router.push({ name: 'service' })">
           <h2 class="underlined">Freie KFZ-Werkstatt</h2>
           <div class="home_content_text">
             <ul>
@@ -40,7 +40,7 @@
             <ACIcon />
           </div>
         </div>
-        <div class="home_content_titel" @mouseup="$router.push('service#klimaservice')">
+        <div class="home_content_titel" @mouseup="$router.push({ name: 'ac' })">
           <h2 class="underlined">Klimaservice</h2>
           <div class="home_content_text">
             <ul>
@@ -82,7 +82,7 @@ Werkstattersatzwagen
         </div>
         <div class="home_content_titel">
           <h2 class="underlined">Unfallreparaturen</h2>
-          <div class="home_content_text" @mouseup="$router.push('service')">
+          <div class="home_content_text" @mouseup="$router.push({ name: 'repair' })">
             <ul>
               <li>Versicherungsschadenabwicklung</li>
               <li>Hol- und Bringeservice</li>
@@ -185,66 +185,6 @@ export default {
         width: 100%;
       }
     }
-  }
-
-  &_titel {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    &:hover {
-      h1 {
-        &:nth-child(1) {
-          color: $error-red;
-        }
-      }
-    }
-
-    h1 {
-      position: relative;
-      font-size: 3rem;
-      color: $company_blue;
-      padding: 0 10px;
-      background-color: #fff;
-      letter-spacing: 2px;
-      z-index: 2;
-      transition: all 0.5s;
-
-      &:nth-child(1) {
-        &::after {
-          content: "";
-          position: absolute;
-          top: calc(50% + 2rem);
-          right: 0;
-          margin: 0 10px;
-          height: 2px;
-          width: 100%;
-          background-color: $company_blue;
-        }
-      }
-
-      &:nth-child(2) {
-        &::after {
-          content: "";
-          position: absolute;
-          top: calc(50% - 2rem);
-          left: 0;
-          margin: 0 10px;
-          height: 2px;
-          width: 100%;
-          background-color: $company_blue;
-        }
-      }
-    }
-    /*     &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      margin: 0 10%;
-      height: 2px;
-      width: 80%;
-      background-color: $company_blue;
-    }  */
   }
 }
 

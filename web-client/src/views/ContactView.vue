@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Kontakt</h1>
+    <div class="pageTitel pageTitel_noSpace">
+      <h1>Kon</h1>
+      <h1>takt</h1>
+    </div>
     <div class="contactView_openTimes">
       <h2>Öffnungszeiten</h2>
       <div class="contactView_openTimes_content">
@@ -137,7 +140,7 @@ export default {
 
     &_openTimes {
       overflow: hidden;
-      
+
       &_content {
         flex-direction: column;
         width: 100%;

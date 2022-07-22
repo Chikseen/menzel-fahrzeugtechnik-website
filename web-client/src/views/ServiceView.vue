@@ -1,9 +1,12 @@
 <template>
   <div class="serviceView_wrapper">
-    <h1>Unsere Leistungen</h1>
+    <div class="pageTitel">
+      <h1>Unsere</h1>
+      <h1>Leistungen</h1>
+    </div>
     <div class="serviceView_overview">
       <div class="serviceView_overview_container" @click="$router.push({ name: `tuev` })">
-        <p>TÜV Prüfstützpunkt und Abgasuntersuchung</p>
+        <p>Hauptuntersuchung und Abgasuntersuchung</p>
         <TuevIcon :fontSize="'1.5'" />
       </div>
       <div class="serviceView_overview_container" @click="$router.push({ name: `ac` })">
@@ -14,9 +17,14 @@
         <p>Reifen und Räder</p>
         <WheelIcon />
       </div>
+      <div class="serviceView_overview_container" @click="$router.push({ name: `repair` })">
+        <p>Unfallreparaturen</p>
+        <RepairService />
+      </div>
     </div>
     <div v-if="this.$route.name == 'service'">
-      <p>Wir sind für Sie da</p>
+      <h3>Wir sind für Sie da</h3>
+      <p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
     </div>
     <router-view></router-view>
   </div>
@@ -26,12 +34,14 @@
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
 import WheelIcon from "@/assets/icons/WheelIcon2.vue";
 import ACIcon from "@/assets/icons/ACIcon.vue";
+import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
 
 export default {
   components: {
     TuevIcon,
     WheelIcon,
     ACIcon,
+    RepairService,
   },
   mounted() {},
 };
@@ -51,18 +61,30 @@ export default {
     margin: 30px;
 
     &_container {
+      cursor: pointer;
       height: 200px;
       width: 100%;
       border-radius: 5px;
       box-shadow: 1px 1px 7px 1px lighten($company_blue, 78);
-      cursor: pointer;
 
       & div {
         height: 120px;
       }
 
       & p {
+        position: relative;
         font-weight: 750;
+      }
+    }
+  }
+  &_detailed {
+    &_text {
+      text-align: left;
+      max-width: 1000px;
+      margin: auto;
+
+      li {
+        margin-top: 10px;
       }
     }
   }
