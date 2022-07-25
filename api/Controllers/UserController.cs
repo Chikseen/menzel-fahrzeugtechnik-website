@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 [ApiController]
-[Route("[controller]")]
+[Route("User")]
 public class UserController : ControllerBase
 {
 

@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:8080", "http://www.contoso.com")
+                          policy.WithOrigins("https://localhost:8080")
                             .AllowAnyMethod()
                             .AllowAnyMethod()
                             .WithExposedHeaders("content-disposition")
@@ -43,5 +43,8 @@ app.UseCors(builder =>
            .AllowAnyHeader()
     );
 app.MapControllers();
+
+DatabaseService databaseService = new DatabaseService();
+databaseService.dbInit();
 
 app.Run();
