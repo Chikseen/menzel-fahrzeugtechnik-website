@@ -2,6 +2,7 @@ const apiService = {
   //DATA FETCHER
   async get(adress) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -13,6 +14,7 @@ const apiService = {
     return await request.json();
   },
   async post(adress, payload) {
+    console.log("process.env.VUE_APP_API", process.env.VUE_APP_API);
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
       body: JSON.stringify(payload),
       credentials: "include",

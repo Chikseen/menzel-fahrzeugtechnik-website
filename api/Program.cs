@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("https://localhost:8080")
+                          policy.WithOrigins("https://localhost:8080", "http://localhost:8080", "https://dev.menzel-fahrzeugtechnik.de/", "https://menzel-fahrzeugtechnik.de/")
                             .AllowAnyMethod()
                             .AllowAnyMethod()
                             .WithExposedHeaders("content-disposition")
@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
@@ -44,7 +44,6 @@ app.UseCors(builder =>
     );
 app.MapControllers();
 
-DatabaseService databaseService = new DatabaseService();
-databaseService.dbInit();
+DatabaseService.dbInit();
 
 app.Run();

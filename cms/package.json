@@ -5,8 +5,8 @@
     "author": "Tim Menzel",
     "description": "",
     "scripts": {
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
+        "serve": "vue-cli-service serve --mode develop",
+        "build": "vue-cli-service build --mode production",
         "lint": "vue-cli-service lint",
         "electron:build": "vue-cli-service electron:build",
         "electron:serve": "vue-cli-service electron:serve",

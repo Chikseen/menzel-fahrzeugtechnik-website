@@ -10,3 +10,8 @@ public class NewUser
 {
     public string name { get; set; }
 }
+
+public class ValidateUser
+{
+    public string value { get; set; }
+}

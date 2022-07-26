@@ -3,6 +3,7 @@
     <div v-if="keyStatus">
       <p>Alle Regrestierten Benutzter</p>
       <h6>Sollten irgendwelche unregelmäsigkeiten auffallen bitte an an denn Betreiber wenden ;)</h6>
+      <button @click="getAlluser">LoadUser</button>
       <div v-for="(item, index) in allUser" :key="index">
         <p v-if="item == ''">NoName</p>
         <p v-else>{{ item }}</p>
@@ -51,28 +52,24 @@ export default {
   },
   methods: {
     async requestNewKey() {
-      const data = await api.post("key/sendNew", {
-        key: localStorage.getItem("authKey"),
-        user: this.user,
+      const data = await api.post("User", {
+        name: this.user,
       });
       console.log("data", data);
     },
     async confirmKey() {
-      const data = await api.get("key/check", { key: this.keyInput });
-      if (data.status) this.$emit("keyStatus", false);
-      if (data.status) {
-        localStorage.setItem("authKey", this.keyInput);
-        this.$emit("keyStatus", true);
-      }
+      const data = await api.post("User/Validate", { value: this.keyInput });
+      console.log("data", data);
     },
     async getAlluser() {
       console.log("hi");
-      const data = await api.get("key/getuser", { key: localStorage.getItem("authKey") });
+      const data = await api.get("User/All");
       this.allUser = data.data;
     },
-  },
-  mounted() {
-    this.getAlluser();
+    mounted() {
+      console.log("hi");
+      this.getAlluser();
+    },
   },
 };
 </script>

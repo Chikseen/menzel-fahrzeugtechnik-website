@@ -1,30 +1,48 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Net.Http;
 
 [ApiController]
 [Route("User")]
 public class UserController : ControllerBase
 {
-
-    private DatabaseService databaseService;
+    private UserService userService;
     public UserController()
     {
-        databaseService = new DatabaseService();
+        userService = new UserService();
     }
 
-
-    [HttpGet("{value}")]
-    public Boolean CheckKey(int value)
+    [HttpGet]
+    public Object CheckKey()
     {
-        return databaseService.getUserById(value);
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+            return new { status = true };
+        else
+            return new { status = false };
+    }
+
+    [HttpGet("All")]
+    public Object GetAllUserNames()
+    {
+        var users = new List<String>();
+        List<String> useres = userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]);
+        return new { useres };
     }
 
     [HttpPost]
-    public User CreateUser(NewUser newuser)
+    public Object CreateUser(NewUser newuser)
     {
-        User user = new User();
-        int value = databaseService.createNewUser(newuser.name);
+        Object data = userService.createNewUser(newuser.name);
+        return data;
+    }
 
-        return user;
+    [HttpPost("Validate")]
+    public Object ValidateUser(ValidateUser value)
+    {
+        if (userService.checkUserExits(value.value))
+        {
+            HttpContext.Response.Cookies.Append("sessionId", value.value);
+        }
+        return new { st = "st" };
     }
 }
