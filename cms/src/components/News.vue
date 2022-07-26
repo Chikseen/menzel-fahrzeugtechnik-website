@@ -62,13 +62,13 @@ export default {
   },
   methods: {
     async getAll() {
-      this.allMessages = await api.get("news/loadAll", {
+      this.allMessages = await api.post("news/loadAll", {
         key: localStorage.getItem("authKey"),
       });
       console.log("data", this.allMessages);
     },
     async createnewMessage() {
-      this.allMessages = await api.get("news/create", {
+      this.allMessages = await api.post("news/create", {
         date: this.date,
         titel: this.titel,
         text: this.text,
@@ -78,7 +78,7 @@ export default {
       console.log("data", this.allMessages);
     },
     async deleteNews(uuid) {
-      this.allMessages = await api.get("news/delete", {
+      this.allMessages = await api.post("news/delete", {
         uuid: uuid,
         key: localStorage.getItem("authKey"),
       });

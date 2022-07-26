@@ -156,7 +156,7 @@ app.post("/activeMessages/create", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(am.create(pathPreFix, req));
   else res.json({ status: "invalidKey" });
 });
-app.get("/activeMessages/get", async (req, res) => {
+app.post("/activeMessages/get", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(am.getAll(pathPreFix));
   else res.json({ status: "invalidKey" });
 });
