@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style lang="scss">
+.repairServiceStroke {
+  stroke: $icon_base_grey;
+  transition: all 0.5s;
+}
+
 .repairCluster {
   &_wrapper {
     position: relative;
@@ -62,7 +67,9 @@ export default {
     aspect-ratio: 16 / 11;
 
     &:hover {
-      stroke: $icon_active_grey !important;
+      .repairServiceStroke {
+        stroke: $icon_active_grey !important;
+      }
     }
   }
 
