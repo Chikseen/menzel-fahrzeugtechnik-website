@@ -4,6 +4,9 @@ node_modules
 dist_electron
 archiv
 database
+bin
+obj
+
 # local env files
 .env
 .env.json

@@ -12,18 +12,19 @@ public class UserController : ControllerBase
         databaseService = new DatabaseService();
     }
 
-    [HttpGet(Name = "GetAllUser")]
-    public String Get()
+
+    [HttpGet("{value}")]
+    public Boolean CheckKey(int value)
     {
-        return "success";
+        return databaseService.getUserById(value);
     }
 
-    /*     [HttpPost]
-        public IActionResult Create(User user)
-        {
-            Console.WriteLine("Create new UserName" + user.Name);
-            Console.WriteLine("Create new UserID" + user.Id);
-            databaseService.createNewUser(user.Name, user.Id);
-            return CreatedAtAction(nameof(Create), new { id = user.Name }, user);
-        } */
+    [HttpPost]
+    public User CreateUser(NewUser newuser)
+    {
+        User user = new User();
+        int value = databaseService.createNewUser(newuser.name);
+
+        return user;
+    }
 }

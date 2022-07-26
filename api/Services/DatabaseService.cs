@@ -1,16 +1,29 @@
 using Npgsql;
+using dotenv.net;
+
 public class DatabaseService
 {
     private string name = "";
     private string location = "";
     private NpgsqlConnection con;
-    private String postgresPassword = System.Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+    private String postgresHost = "";
+    private String postgresPort = "";
+    private String postgresUser = "";
+    private String postgresPassword = "";
+    private String postgresDatabase = "";
 
     public DatabaseService()
     {
-        Console.WriteLine("postgresPassword");
-        Console.WriteLine(postgresPassword);
-        var cs = "Host=localhost;Port=5432;Username=admin;Password=12345678;Database=test";
+        DotEnv.Load();
+        postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
+        postgresPort = Environment.GetEnvironmentVariable("POSTGRES_PORT");
+        postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
+        postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+        postgresDatabase = Environment.GetEnvironmentVariable("POSTGRES_DATABASE");
+
+        var cs = $"Host={postgresHost};Port={postgresPort};Username={postgresUser};Password={postgresPassword};Database={postgresDatabase}";
+        Console.WriteLine($"con: {cs}");
+
         con = new NpgsqlConnection(cs);
         con.Open();
     }
@@ -20,34 +33,41 @@ public class DatabaseService
         con.Close();
     }
 
-    public void createNewUser(String userName, int userId)
+    public int createNewUser(String name)
     {
-        var sql = "INSERT INTO Keys VALUES (" + userId + ", '" + userName + "');";
+        Random rd = new Random();
+        int value = rd.Next(100000000, 999999999);
+        String sql = $"INSERT INTO Keys(value, name, created)VALUES ({value}, '{name}', NOW());";
         Console.WriteLine(sql);
         NpgsqlCommand command = new NpgsqlCommand(sql, con);
         NpgsqlDataReader dr = command.ExecuteReader();
-
+        return value;
     }
 
 
-    public String getAllUser()
+    public Boolean getUserById(int value)
     {
-        var sql = "SELECT * FROM Keys";
+        var sql = $"SELECT * FROM Keys WHERE value = {value};";
         Console.WriteLine(sql);
         NpgsqlCommand command = new NpgsqlCommand(sql, con);
         NpgsqlDataReader dr = command.ExecuteReader();
 
-        String version = "";
+        var users = new List<String>();
 
         while (dr.Read())
         {
-            Console.Write("{0}\t{1} \n", dr[0], dr[1]);
-            version += dr[0] + "\t";
-            version += dr[1] + "\t";
-            version += "\n";
+            String tuser = "";
+            Console.Write("{0} {1} {2} {3} \n", dr[0], dr[1], dr[2], dr[3]);
+            tuser += dr[0] + " ";
+            tuser += dr[1] + " ";
+            tuser += dr[2] + " ";
+            tuser += dr[3] + " ";
+            tuser += "\n";
+            users.Add(tuser);
         }
-
-        return version;
+        Console.WriteLine(users.Count);
+        if (users.Count > 0) return true;
+        else return false;
     }
 
     public String dbInit()
@@ -56,14 +76,15 @@ public class DatabaseService
 
         try
         {
-            var sql = "CREATE TABLE IF NOT EXITS Keys (Id SERIAL PRIMARY KEY, value numeric NOT NULL, name VARCHAR(255), created DATE NOT NULL DEFAULT CURRENT_DATE);";
+            var sql = "CREATE TABLE IF NOT EXISTS Keys (id SERIAL PRIMARY KEY, value numeric NOT NULL, name VARCHAR(255), created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);";
             Console.WriteLine(sql);
             NpgsqlCommand command = new NpgsqlCommand(sql, con);
             NpgsqlDataReader dr = command.ExecuteReader();
         }
-        catch (System.Exception)
+        catch (System.Exception e)
         {
             Console.WriteLine("Error While creating Keys Table");
+            Console.WriteLine(e);
             return "error_creating_table_keys";
         }
 

@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "dotenv.net/3.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/dotenv.net.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Cors/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -274,6 +283,20 @@
     }
   },
   "libraries": {
+    "dotenv.net/3.1.1": {
+      "sha512": "SjU7/mnA1+cYLf0Bnf+8XNYmzfWn6I//mhu84sgfnrM+bvt6/1GMZK0wfrDVY8wRoZACkcLbmT9h28dJ0MtlTA==",
+      "type": "package",
+      "path": "dotenv.net/3.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotenv.net.3.1.1.nupkg.sha512",
+        "dotenv.net.nuspec",
+        "lib/netstandard1.6/dotenv.net.dll",
+        "lib/netstandard2.0/dotenv.net.dll",
+        "lib/netstandard2.1/dotenv.net.dll"
+      ]
+    },
     "Microsoft.AspNetCore.Cors/2.2.0": {
       "sha512": "LFlTM3ThS3ZCILuKnjy8HyK9/IlDh3opogdbCVx6tMGyDzTQBgMPXLjGDLtMk5QmLDCcP3l1TO3z/+1viA8GUg==",
       "type": "package",
@@ -961,28 +984,31 @@
     "net6.0": [
       "Microsoft.AspNetCore.Cors >= 2.2.0",
       "Npgsql >= 6.0.5",
-      "Swashbuckle.AspNetCore >= 6.3.2"
+      "Swashbuckle.AspNetCore >= 6.3.2",
+      "dotenv.net >= 3.1.1"
     ]
   },
   "packageFolders": {
-    "/Users/appsfactory/.nuget/packages/": {}
+    "C:\\Users\\gta_f\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/appsfactory/Documents/Programms/menzel-fahrzeugtechnik-website/api/api.csproj",
+      "projectUniqueName": "c:\\Users\\gta_f\\Desktop\\menzel-fahrzeugtechnik-website\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "/Users/appsfactory/Documents/Programms/menzel-fahrzeugtechnik-website/api/api.csproj",
-      "packagesPath": "/Users/appsfactory/.nuget/packages/",
-      "outputPath": "/Users/appsfactory/Documents/Programms/menzel-fahrzeugtechnik-website/api/obj/",
+      "projectPath": "c:\\Users\\gta_f\\Desktop\\menzel-fahrzeugtechnik-website\\api\\api.csproj",
+      "packagesPath": "C:\\Users\\gta_f\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\gta_f\\Desktop\\menzel-fahrzeugtechnik-website\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/appsfactory/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\gta_f\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1012,6 +1038,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.3.2, )"
+          },
+          "dotenv.net": {
+            "target": "Package",
+            "version": "[3.1.1, )"
           }
         },
         "imports": [
@@ -1032,7 +1062,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

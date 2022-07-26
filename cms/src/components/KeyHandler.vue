@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     async requestNewKey() {
-      const data = await api.get("key/sendNew", {
+      const data = await api.post("key/sendNew", {
         key: localStorage.getItem("authKey"),
         user: this.user,
       });
