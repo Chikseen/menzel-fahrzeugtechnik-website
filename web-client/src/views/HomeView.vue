@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <ActiveMessage />
     <div class="pageTitel">
       <h1>Menzel</h1>
       <h1>Fahrzeugtechnik</h1>
     </div>
+    <ActiveMessage />
     <div class="home_content">
       <!-- TEMPORARY PLACEHOLDER -->
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
@@ -234,7 +234,7 @@ export default {
       }
 
       &_text {
-        margin-top:40px;
+        margin-top: 40px;
       }
     }
   }
