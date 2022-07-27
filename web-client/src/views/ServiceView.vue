@@ -21,6 +21,9 @@
         <p>Unfallreparaturen</p>
         <RepairService />
       </div>
+      <div class="serviceView_overview_container" @click="$router.push({ name: `glasService` })">
+        <p>Glasschäden</p>
+      </div>
     </div>
     <div v-if="this.$route.name == 'service'">
       <h3>Wir sind für Sie da</h3>

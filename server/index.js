@@ -29,14 +29,15 @@ else root = "/database/images";
 var whitelist = [
   "https://dev.menzel-fahrzeugtechnik.de",
   "https://menzel-fahrzeugtechnik.de",
-  "http://192.168.2.100:7080",
-  "http://192.168.2.100:8080",
-  "http://192.168.2.100:8081",
+  "http://localhost:7080",
+  "http://localhost:8080",
+  "http://localhost:8081",
   "app://.",
 ];
+
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -2) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -44,7 +45,7 @@ var corsOptions = {
   },
 };
 
-const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
+/* const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
 var transporter = nodemailer.createTransport({
   auth: {
     user: mailAuth.get("name"),
@@ -79,7 +80,7 @@ function sendMail(transporter, from, to, data) {
       return { status: "success" };
     }
   });
-}
+} */
 
 // DATAINIT
 databaseIntegrity.init(fs, pathPreFix);
@@ -159,7 +160,7 @@ app.post("/activeMessages/get", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(am.getAll(pathPreFix));
   else res.json({ status: "invalidKey" });
 });
-app.post("/activeMessages/getFilterd", async (req, res) => {
+app.get("/activeMessages/getFilterd", async (req, res) => {
   res.json(am.getFilterd(pathPreFix));
 });
 
@@ -168,11 +169,11 @@ app.post("/activeMessages/delete", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
-app.post("/openTimes/get", async (req, res) => {
+app.get("/openTimes/get", async (req, res) => {
   res.json(ot.getDay(pathPreFix));
 });
 
-app.post("/openTimes/getAll", async (req, res) => {
+app.get("/openTimes/getAll", async (req, res) => {
   res.json(ot.getAll(pathPreFix));
 });
 
@@ -181,7 +182,7 @@ app.post("/openTimes/set", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
-app.post("/news/get", async (req, res) => {
+app.get("/news/get", async (req, res) => {
   res.json(news.get(pathPreFix, req));
 });
 

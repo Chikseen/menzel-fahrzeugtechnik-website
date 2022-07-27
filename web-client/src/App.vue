@@ -67,12 +67,22 @@ html {
         }
       }
     }
+    &:hover {
+      h1 {
+        &:nth-child(1) {
+          color: $akzent_blue !important;
+        }
+        &:nth-child(2) {
+          color: $akzent_blue !important;
+        }
+      }
+    }
   }
 
   &:hover {
     h1 {
       &:nth-child(1) {
-        color: $error-red;
+        color: $akzent_blue;
       }
     }
   }

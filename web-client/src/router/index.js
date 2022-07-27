@@ -1,16 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import ServiceView from "../views/ServiceView.vue";
-import ContactView from "../views/ContactView.vue";
-import AboutView from "../views/AboutView.vue";
-import GalerieView from "../views/GalerieView.vue";
-import ImpressumView from "../views/ImpressumView";
+import HomeView from "@/views/HomeView.vue";
+import ServiceView from "@/views/ServiceView.vue";
+import ContactView from "@/views/ContactView.vue";
+import AboutView from "@/views/AboutView.vue";
+import GalerieView from "@/views/GalerieView.vue";
+import ImpressumView from "@/views/ImpressumView";
 
 // Service Views
-import Tuev from "../views/ServiceViews/Tuev";
-import Tiers from "../views/ServiceViews/Tiers";
-import AC from "../views/ServiceViews/AC";
-import Repair from "../views/ServiceViews/Repair";
+import Tuev from "@/views/ServiceViews/Tuev";
+import Tiers from "@/views/ServiceViews/Tiers";
+import AC from "@/views/ServiceViews/AC";
+import Repair from "@/views/ServiceViews/Repair";
+import GlasService from "@/views/ServiceViews/GlasService";
 
 const routes = [
   {
@@ -46,6 +47,11 @@ const routes = [
         path: "repair",
         name: "repair",
         component: Repair,
+      },
+      {
+        path: "glasService",
+        name: "glasService",
+        component: GlasService,
       },
     ],
   },

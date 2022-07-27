@@ -6,6 +6,7 @@
         <li>Versicherungsschadenabwicklung</li>
         <li>Hol- und Bringeservice</li>
         <li>Werkstattersatzwagen</li>
+        <li>Smartrepair</li>
       </ul>
     </div>
     <h1></h1>
