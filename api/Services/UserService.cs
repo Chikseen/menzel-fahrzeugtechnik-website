@@ -24,25 +24,24 @@ public class UserService
 
     public List<String> getAllUserNames(String value)
     {
-        /*       Boolean userExits = checkUserExits(value);
-                if (userExits)
-                { */
-        String sql = $"SELECT name, id FROM Keys";
-        List<List<String>> data = DatabaseService.query(sql);
-
-        var users = new List<String>();
-
-        for (int i = 0; i < data.Count; i++)
+        Boolean userExits = checkUserExits(value);
+        if (userExits)
         {
-            String tuser = "";
-            Console.Write("{0} {1} \n", data[i][0], data[i][1]);
-            tuser += data[i][0] + " ";
-            tuser += data[i][1] + " ";
-            tuser += "\n";
-            users.Add(tuser);
-        }
+            String sql = $"SELECT name, id FROM Keys";
+            List<List<String>> data = DatabaseService.query(sql);
 
-        return users;
+            var users = new List<String>();
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                String tuser = "";
+                tuser += data[i][0];
+                users.Add(tuser);
+            }
+
+            return users;
+        }
+        return new List<String>();
     }
 
     public Boolean checkUserExits(String value)

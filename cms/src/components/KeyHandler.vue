@@ -62,12 +62,10 @@ export default {
       console.log("data", data);
     },
     async getAlluser() {
-      console.log("hi");
       const data = await api.get("User/All");
-      this.allUser = data.data;
+      this.allUser = data.useres;
     },
     mounted() {
-      console.log("hi");
       this.getAlluser();
     },
   },
