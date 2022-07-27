@@ -154,6 +154,7 @@ html {
   border-radius: 3px;
   background-color: lighten($company_blue, 75);
   transition: all 0.5s;
+  color: #f13232;
 }
 
 ::-webkit-scrollbar-thumb:hover {

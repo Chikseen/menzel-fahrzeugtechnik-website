@@ -1,5 +1,3 @@
-
-using Npgsql;
 public class UserService
 {
     public Object createNewUser(String name)

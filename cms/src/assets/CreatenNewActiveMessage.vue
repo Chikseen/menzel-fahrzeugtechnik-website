@@ -26,20 +26,20 @@
         <div class="createnewMessage_coloerpicker_boxes">
           <div class="createnewMessage_coloerpicker_boxes_single">
             <label>Rot</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = '0'">
-              <div v-if="colorselection == '0'" style="background-color: rgb(241, 50, 50); width: 100%; height: 100%"></div>
+            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'red'">
+              <div v-if="colorselection == 'red'" style="background-color: rgb(241, 50, 50); width: 100%; height: 100%"></div>
             </div>
           </div>
           <div class="createnewMessage_coloerpicker_boxes_single">
             <label>Grün</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = '1'">
-              <div v-if="colorselection == '1'" style="background-color: rgb(50, 235, 75); width: 100%; height: 100%"></div>
+            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'green'">
+              <div v-if="colorselection == 'green'" style="background-color: rgb(50, 235, 75); width: 100%; height: 100%"></div>
             </div>
           </div>
           <div class="createnewMessage_coloerpicker_boxes_single">
             <label>Weiß</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = '2'">
-              <div v-if="colorselection == '2'" style="background-color: rgb(235, 235, 235); width: 100%; height: 100%"></div>
+            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'white'">
+              <div v-if="colorselection == 'white'" style="background-color: rgb(235, 235, 235); width: 100%; height: 100%"></div>
             </div>
           </div>
         </div>
@@ -48,13 +48,13 @@
     <div class="createnewMessage_status">
       <label>Aktiv anzeigen</label>
       <h6>nachrichten werden nur angezeigt wenn ihr status "Aktiv" ist</h6>
-      <button @mouseup="showStatus = 'true'" :class="showStatus == 'true' ? 'active' : ''">Anzeigen</button>
-      <button @mouseup="showStatus = 'false'" :class="showStatus == 'false' ? 'active' : ''">Nicht Anzeigen</button>
+      <button @mouseup="showStatus = true" :class="showStatus ? 'active' : ''">Anzeigen</button>
+      <button @mouseup="showStatus = false" :class="!showStatus ? 'active' : ''">Nicht Anzeigen</button>
     </div>
-    <button @click="createnewMessage" v-if="uuid == ''">Nachricht Hinzufügen</button>
+    <button @click="createnewMessage" v-if="id == ''">Nachricht Hinzufügen</button>
     <div v-else>
       <button @click="createnewMessage">Nachricht Änderen</button>
-      <button @click="uuid = ''">Eine Neue Nachricht erstellen</button>
+      <button @click="id = ''">Eine Neue Nachricht erstellen</button>
     </div>
   </div>
 </template>
@@ -72,33 +72,37 @@ export default {
       endDate: "",
       text: "",
       titel: "",
-      colorselection: "1",
-      showStatus: "true",
-      uuid: "",
+      colorselection: "red",
+      showStatus: true,
+      created: "",
+      id: "",
     };
   },
   methods: {
     async createnewMessage() {
-      const data = await api.post("activeMessages/create", {
-        startDate: this.startDate,
-        endDate: this.endDate,
-        text: this.text,
-        titel: this.titel,
-        colorselection: this.colorselection,
-        showStatus: this.showStatus,
-        key: localStorage.getItem("authKey"),
-        uuid: this.uuid,
-      });
-      const date = new Date();
-      this.$emit("newData", data);
-
-      this.startDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-      this.endDate = `${date.getFullYear()}-${String(date.getMonth() + 2).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-      this.text = "";
-      this.titel = "";
-      this.colorselection = "1";
-      this.showStatus = "true";
-      this.uuid = "";
+      if (this.id === "") {
+        const data = await api.post("Notification", {
+          startDate: new Date(this.startDate),
+          endDate: new Date(this.endDate),
+          titel: this.titel,
+          text: this.text,
+          color: this.colorselection,
+          isActive: this.showStatus,
+        });
+        console.log(data);
+      } else {
+        const data = await api.put("Notification", {
+          id: this.id,
+          startDate: new Date(this.startDate),
+          endDate: new Date(this.endDate),
+          titel: this.titel,
+          text: this.text,
+          color: this.colorselection,
+          isActive: this.showStatus,
+        });
+        console.log(data);
+      }
+      this.$emit("newData");
     },
   },
   mounted() {
@@ -109,13 +113,18 @@ export default {
   },
   watch: {
     setdata() {
-      this.startDate = this.setdata.startDate;
-      this.endDate = this.setdata.endDate;
+      let startDate = new Date(this.setdata.startDate);
+      let endDate = new Date(this.setdata.startDate);
+
+      //yyyy-MM-dd
+      this.startDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, "0")}-${String(startDate.getDate()).padStart(2, "0")}`;
+      this.endDate = `${endDate.getFullYear()}-${String(endDate.getMonth() + 1).padStart(2, "0")}-${String(endDate.getDate()).padStart(2, "0")}`;
       this.text = this.setdata.text;
       this.titel = this.setdata.titel;
-      this.colorselection = this.setdata.colorselection;
-      this.showStatus = this.setdata.showStatus;
-      this.uuid = this.setdata.uuid;
+      this.colorselection = this.setdata.color;
+      this.showStatus = this.setdata.isActive;
+      this.id = this.setdata.id;
+      this.created = this.setdata.created;
     },
   },
 };

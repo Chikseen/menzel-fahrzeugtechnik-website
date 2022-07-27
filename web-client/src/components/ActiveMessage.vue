@@ -1,12 +1,12 @@
 <template>
   <div v-if="allActviveMessages.length">
-    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
+    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.id">
       <div
         class="active_textwrapper"
         :class="[
-          message.colorselection == '0' ? 'active_textwrapper_red' : '',
-          message.colorselection == '1' ? 'active_textwrapper_green' : '',
-          message.colorselection == '2' ? 'active_textwrapper_white' : '',
+          message.color == 'red' ? 'active_textwrapper_red' : '',
+          message.color == 'green' ? 'active_textwrapper_green' : '',
+          message.color == 'white' ? 'active_textwrapper_white' : '',
         ]"
       >
         <div>
@@ -34,13 +34,15 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.get("activeMessages/getFilterd", {});
+      const data = await api.get("Notification");
       this.$store.commit("setMessage", data);
       this.allActviveMessages = data;
     },
     dateFormatter(data) {
+      console.log(data);
       const date = new Date(data);
-      return `${date.getDay()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
+      return `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
     },
   },
   mounted() {

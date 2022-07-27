@@ -1,26 +1,26 @@
 <template>
   <div>
     <h1>Aktive Nachrichten</h1>
-    <CreateNewActiveMessage @newData="allMessages = $event" :setdata="setdata" />
+    <CreateNewActiveMessage @newData="getData" :setdata="setdata" />
     <br />
     <div class="activeMessages_wrapper">
       <div>
         <h3>Aktive Nachrichten</h3>
-        <div v-for="message in allMessages" :key="message.uuid">
-          <div v-if="message.showStatus == 'true'" @mouseup="setsetData(message)" class="activeMessages_slection">
+        <div v-for="message in allMessages" :key="message.id">
+          <div v-if="message.isActive" @mouseup="setsetData(message)" class="activeMessages_slection">
             <p>{{ message.titel }}</p>
             <p>{{ message.text }}</p>
-            <button @mouseup="deleteMessage(message.uuid)">Entfernen</button>
+            <button @mouseup="deleteMessage(message.id)">Entfernen</button>
           </div>
         </div>
       </div>
       <div>
         <h3>Inaktive Nachrichten</h3>
-        <div v-for="message in allMessages" :key="message.uuid">
-          <div v-if="message.showStatus == 'false'" @mouseup="setsetData(message)" class="activeMessages_slection">
+        <div v-for="message in allMessages" :key="message.id">
+          <div v-if="!message.isActive" @mouseup="setsetData(message)" class="activeMessages_slection">
             <p>{{ message.titel }}</p>
             <p>{{ message.text }}</p>
-            <button @mouseup="deleteMessage(message.uuid)">Entfernen</button>
+            <button @mouseup="deleteMessage(message.id)">Entfernen</button>
           </div>
         </div>
       </div>
@@ -45,17 +45,15 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.post("activeMessages/get", {
-        key: localStorage.getItem("authKey"),
-      });
+      const data = await api.get("Notification/All");
       this.allMessages = data;
     },
-    async deleteMessage(uuid) {
-      const data = await api.post("activeMessages/delete", {
-        uuid: uuid,
-        key: localStorage.getItem("authKey"),
+    async deleteMessage(id) {
+      const data = await api.delete("Notification", {
+        id: id,
       });
-      this.allMessages = data;
+      if (data.status) this.getData();
+      else console.log("error while deleting Notification");
     },
     setsetData(msg) {
       this.setdata = msg;
@@ -63,8 +61,7 @@ export default {
   },
   watch: {
     allMessages() {
-      console.log("222", this.allMessages);
-      this.allMessages.sort((a, b) => (new Date(a.startDate) > new Date(b.startDate) ? 1 : new Date(b.startDate) > new Date(a.startDate) ? -1 : 0));
+      this.allMessages.sort((a, b) => (new Date(a.created) > new Date(b.created) ? 1 : new Date(b.created) > new Date(a.created) ? -1 : 0)).reverse();
     },
   },
   mounted() {

@@ -49,10 +49,27 @@ public static class DatabaseService
 
     public static String dbInit()
     {
-        con.Open();
         Console.WriteLine("DB Init");
+
+        // __________ COLOR ENUMS __________
         try
         {
+            con.Open();
+            var sql = "CREATE TYPE color AS ENUM ('red', 'green', 'white');";
+            Console.WriteLine(sql);
+            NpgsqlCommand command = new NpgsqlCommand(sql, con);
+            NpgsqlDataReader dr = command.ExecuteReader();
+        }
+        catch (System.Exception)
+        {
+            Console.WriteLine("Error While creating Color Enum, It may alrady exists and this error can be ignored");
+        }
+        con.Close();
+
+        // __________ USERTABLE __________
+        try
+        {
+            con.Open();
             var sql = "CREATE TABLE IF NOT EXISTS Keys (id SERIAL PRIMARY KEY, value VARCHAR(255) NOT NULL, name VARCHAR(255), created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);";
             Console.WriteLine(sql);
             NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -64,6 +81,24 @@ public static class DatabaseService
             Console.WriteLine(e);
             con.Close();
             return "error_creating_table_keys";
+        }
+        con.Close();
+
+        // __________ Notifications __________
+        try
+        {
+            con.Open();
+            var sql = "CREATE TABLE IF NOT EXISTS Notifications (id SERIAL PRIMARY KEY, startDate TIMESTAMP WITH TIME ZONE, endDate TIMESTAMP WITH TIME ZONE, titel VARCHAR(255),  text TEXT NOT NULL, color color, isActive boolean, created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);";
+            Console.WriteLine(sql);
+            NpgsqlCommand command = new NpgsqlCommand(sql, con);
+            NpgsqlDataReader dr = command.ExecuteReader();
+        }
+        catch (System.Exception e)
+        {
+            Console.WriteLine("Error While creating Notifications Table");
+            Console.WriteLine(e);
+            con.Close();
+            return "error_creating_table_notifications";
         }
         con.Close();
         return "success";

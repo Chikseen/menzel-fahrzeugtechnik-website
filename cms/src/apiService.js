@@ -28,7 +28,21 @@ const apiService = {
     });
     return await request.json();
   },
-  async PATCH(adress, payload) {
+  async put(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: JSON.stringify(payload),
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await request.json();
+  },
+  async patch(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
       body: JSON.stringify(payload),
       credentials: "include",
