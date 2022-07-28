@@ -1,35 +1,35 @@
 <template>
   <div>
-    <h1>Kontakt</h1>
-<!--     <div class="contactView_openTimes">
+    <div class="pageTitel pageTitel_noSpace">
+      <h1>Kon</h1>
+      <h1>takt</h1>
+    </div>
+    <div class="contactView_openTimes">
       <h2>Öffnungszeiten</h2>
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
-          <h3>Geöffnet am:</h3>
-          <div class="contactView_openTimes_content_data_opening_wrapper">
-            <div v-for="(day, index) in openTimes" :key="index" class="contactView_openTimes_content_data_opening">
-              <div v-if="day.isOpen">
-                <p>{{ day.day }}</p>
-                <div class="contactView_openTimes_content_data_opening_dates">
-                  <p>{{ day.timeStart.slice(1, 6) }}</p>
-                  <p>{{ day.timeEnd.slice(1, 6) }}</p>
-                </div>
+          <div class="contactView_openTimes_content_data_opening_wrapper" v-if="openTimes[0]">
+            <div class="contactView_openTimes_content_data_opening">
+              <p>{{ openTimes[0][0].day }} - {{ openTimes[0][openTimes[0].length - 1].day }}</p>
+              <div class="contactView_openTimes_content_data_opening_dates">
+                <p>{{ openTimes[0][0].timeStart.slice(1, 6) }}</p>
+                <p>{{ openTimes[0][0].timeEnd.slice(1, 6) }}</p>
               </div>
             </div>
-          </div>
-        </div> 
-         <div class="contactView_openTimes_content_data">
-          <h3>Geschlossen am:</h3>
-          <div class="contactView_openTimes_content_data_opening_wrapper">
-            <div v-for="(day, index) in openTimes" :key="index" class="contactView_openTimes_days">
-              <div v-if="!day.isOpen">
-                <p>&nbsp {{ day.day }},</p>
+            <div v-for="(day, index) in openTimes[1]" :key="index" class="contactView_openTimes_content_data_opening">
+              <p>{{ day.day }}</p>
+              <div v-if="day.day != 'Samstag'" class="contactView_openTimes_content_data_opening_dates">
+                <p>{{ day.timeStart.slice(1, 6) }}</p>
+                <p>{{ day.timeEnd.slice(1, 6) }}</p>
               </div>
+              <!-- For now hardcoded, Change later -->
+              <p v-if="day.day == 'Samstag'">nach Vereinbarung</p>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-    </div> -->
+    </div>
+    <MapComponent />
     <div class="contactView_openTimes">
       <h2>Anschrift</h2>
       <div class="contactView_openTimes_content contactView_openTimes_content_adress">
@@ -45,9 +45,13 @@
 </template>
 
 <script>
-import api from "../apiService";
+import api from "@/apiService";
+import MapComponent from "@/components/MapComponent";
 
 export default {
+  components: {
+    MapComponent,
+  },
   data() {
     return {
       openTimes: [],
@@ -55,8 +59,31 @@ export default {
   },
   methods: {
     async getTimes() {
-      const data = await api.fetchData("openTimes/getAll", {});
-      this.openTimes = await data.weekdays;
+      const data = await api.get("openTimes/getAll", {});
+
+      let allOpenDays = [];
+      data.weekdays.forEach((day) => {
+        if (day.isOpen) allOpenDays.push(day);
+      });
+
+      let squshed = [];
+      let diffrent = [];
+      this.openTimes = [];
+
+      if (allOpenDays.length > 1) {
+        for (let i = 1; i < allOpenDays.length; i++) {
+          if (allOpenDays[i].timeStart == allOpenDays[i - 1].timeStart && allOpenDays[i].timeEnd == allOpenDays[i - 1].timeEnd) {
+            if (i == 1) {
+              squshed.push(allOpenDays[i - 1]);
+            }
+            squshed.push(allOpenDays[i]);
+          } else {
+            diffrent.push(allOpenDays[i]);
+          }
+        }
+      }
+      this.openTimes.push(squshed);
+      this.openTimes.push(diffrent);
     },
   },
   mounted() {
@@ -89,6 +116,7 @@ export default {
 
           &_wrapper {
             display: flex;
+            width: calc(100% - 20px);
           }
 
           &_dates {
@@ -109,15 +137,17 @@ export default {
 @media only screen and (max-width: 550px) {
   .contactView {
     transition: all 0.3s;
-    
+
     &_openTimes {
+      overflow: hidden;
+
       &_content {
         flex-direction: column;
         width: 100%;
 
         &_data {
           width: 100%;
-
+          margin: 0;
           &_opening > div {
             margin: 5px;
             display: flex;

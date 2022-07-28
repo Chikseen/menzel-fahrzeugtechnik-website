@@ -2,14 +2,18 @@
   <div>
     <h1>CMS für Menzel-Fharzeugtechnik</h1>
     <div>
-      <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">Aktive Nachrichten</button>
-      <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">ZugriffsKontrolle</button>
+      <button @click="toShow = 'msg'" :class="toShow == 'msg' ? 'active' : ''">aktive Nachrichten</button>
+      <button @click="toShow = 'news'" :class="toShow == 'news' ? 'active' : ''">News</button>
+      <button @click="toShow = 'galerie'" :class="toShow == 'galerie' ? 'active' : ''">Galerie</button>
       <button @click="toShow = 'open'" :class="toShow == 'open' ? 'active' : ''">Öffnungszeiten</button>
+      <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">
       <ActiveMessage v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
       <KeyHandler v-if="toShow == 'key'" :keyStatus="keyValid" @keyStatus="keyValid = $event" />
       <OpeningTimes v-if="toShow == 'open'" />
+      <News v-if="toShow == 'news'" />
+      <Galerie v-if="toShow == 'galerie'" />
     </div>
     <div v-else>
       <KeyHandler :keyStatus="keyValid" @keyStatus="keyValid = $event" />
@@ -21,6 +25,8 @@
 import ActiveMessage from "@/components/ActiveMessage.vue";
 import KeyHandler from "@/components/KeyHandler.vue";
 import OpeningTimes from "@/components/OpeningTimes.vue";
+import News from "@/components/News.vue";
+import Galerie from "@/components/Galerie.vue";
 import api from "@/apiService";
 
 export default {
@@ -29,16 +35,18 @@ export default {
     ActiveMessage,
     KeyHandler,
     OpeningTimes,
+    News,
+    Galerie,
   },
   data() {
     return {
       keyValid: false,
-      toShow: "key",
+      toShow: "news",
     };
   },
   methods: {
     async checkkey() {
-      const data = await api.fetchData("key/check", { key: localStorage.getItem("authKey") });
+      const data = await api.post("key/check", { key: localStorage.getItem("authKey") });
       console.log("keystatus", data);
       if (data.status) {
         this.keyValid = true;

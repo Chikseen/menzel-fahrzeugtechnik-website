@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h2>Impressum</h2>
+    <div class="pageTitel pageTitel_noSpace">
+      <h1>Impres</h1>
+      <h1>sum</h1>
+    </div>
     <div>
       <p>UmsatzsteuerID: DE297053411</p>
       <p>Steuernummer: 238/248/07256</p>

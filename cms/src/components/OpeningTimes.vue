@@ -71,14 +71,12 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("openTimes/getAll", {
-        key: localStorage.getItem("authKey"),
-      });
+      const data = await api.get("openTimes/getAll");
       this.data = data;
     },
     async sendNewData(i) {
       console.log("elem", i);
-      const data = await api.fetchData("openTimes/set", {
+      const data = await api.post("openTimes/set", {
         toChange: i,
         newStartHH: String(this.newStartHH).padStart(2, "0"),
         newStartMM: String(this.newStartMM).padStart(2, "0"),
