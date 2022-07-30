@@ -28,7 +28,7 @@
         "simple-json-db": "^1.2.3",
         "v-qrcode": "^1.0.3",
         "v-tooltip": "^3.0.0-beta.1",
-        "vue": "^3.2.31",
+        "vue": "^3.2.37",
         "vue-html2pdf": "^1.8.0",
         "vue-router": "^3.5.3",
         "vue-select": "^3.16.0",

@@ -1,46 +1,33 @@
-# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
-
 version: '3.4'
 
 services:
   api:
-    image: api
-#    build:
-#      dockerfile: ./api/Dockerfile
+    build: ./api
     ports:
       - 7080:7080
     environment:
-      POSTGRES_HOST: localhost
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: admin@admin.com
-      POSTGRES_PASSWORD: password
-      POSTGRES_DATABASE: postgres
-      PGADMIN_PORT: 6081
-      PGADMIN_PASSWORD: password
-      PGADMIN_EMAIL: admin@admin.com
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
     networks:
       - backend
       - frontend
 
   webclient:
-    image: webclient
-#    build:
-#      context: .
-#      dockerfile: ./web-client/Dockerfile
+    build: ./web-client
     ports:
       - 8080:80
     networks:
       - frontend
 
-#  cms:
-#    image: cms
-#    build:
-#      context: .
-#      dockerfile: ./cms/Dockerfile
-#    ports:
-#      - 8081:8081
-#    networks:
-#      - frontend
+  cms:
+    build: ./cms
+    ports:
+      - 8081:80
+    networks:
+      - frontend
 
   postgres:
     image: postgres:latest
@@ -77,3 +64,4 @@ networks:
   backend:
     internal: true
   frontend:
+    driver: bridge
