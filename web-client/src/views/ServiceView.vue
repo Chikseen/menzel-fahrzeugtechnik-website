@@ -92,4 +92,14 @@ export default {
     }
   }
 }
+
+@media only screen and (max-width: 870px) {
+  .serviceView {
+    &_overview {
+      display: flex;
+      overflow-x: scroll;
+      height: calc(100% + 15px);
+    }
+  }
+}
 </style>

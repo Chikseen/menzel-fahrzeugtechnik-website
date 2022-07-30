@@ -1,5 +1,6 @@
 ### .env Template
 '
+POSTGRES_HOST=localhost
 POSTGRES_PORT=6080
 POSTGRES_USER=admin
 POSTGRES_PASSWORD=password

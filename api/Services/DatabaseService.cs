@@ -73,6 +73,7 @@ public static class DatabaseService
         }
         catch (System.Exception)
         {
+        con.Close();
             Console.WriteLine("Error While creating Color Enum, It may alrady exists and this error can be ignored");
         }
         con.Close();
