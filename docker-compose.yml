@@ -11,9 +11,12 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      FILE_PATH: ${FILE_PATH}
     networks:
       - backend
       - frontend
+    volumes:
+      - postgres-data:/Files/images
 
   webclient:
     build: ./web-client
