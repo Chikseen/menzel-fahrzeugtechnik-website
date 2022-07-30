@@ -19,7 +19,7 @@ public class OpeninghoursService
 
     public List<Openinghours> getDays()
     {
-        String sql = $"SELECT * FROM Openinghours WHERE startDate <= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date AND endDate >= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date ORDER BY orderposition";
+        String sql = $"SELECT * FROM Openinghours WHERE (startDate <= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date AND endDate >= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date) OR NOT isTimeLimited ORDER BY orderposition";
 
         List<List<String>> data = DatabaseService.query(sql);
         List<Openinghours> openinghoursList = new List<Openinghours>();

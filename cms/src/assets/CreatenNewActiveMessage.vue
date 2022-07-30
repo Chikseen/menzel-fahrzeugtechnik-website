@@ -53,9 +53,10 @@
     </div>
     <button @click="createnewMessage" v-if="id == ''">Nachricht Hinzufügen</button>
     <div v-else>
-      <button @click="createnewMessage">Nachricht Änderen</button>
-      <button @click="id = ''">Eine Neue Nachricht erstellen</button>
+      <button @click="createnewMessage">Nachricht überarbeiten</button>
+      <button @click="id = ''">Nachricht neu erstellen</button>
     </div>
+    <button @click="resetSelection">Auswahl zurücksetzten</button>
   </div>
 </template>
 
@@ -103,6 +104,16 @@ export default {
         console.log(data);
       }
       this.$emit("newData");
+    },
+    resetSelection() {
+      this.startDate = "";
+      this.endDate = "";
+      this.text = "";
+      this.titel = "";
+      this.colorselection = "red";
+      this.showStatus = true;
+      this.created = "";
+      this.id = "";
     },
   },
   mounted() {
