@@ -28,23 +28,34 @@ public static class DatabaseService
 
     public static List<List<String>> query(String sql)
     {
-        con.Open();
-        Console.WriteLine(sql);
-        NpgsqlCommand command = new NpgsqlCommand(sql, con);
-        NpgsqlDataReader dr = command.ExecuteReader();
-
         var columns = new List<List<String>>();
-        while (dr.Read())
+        try
         {
-            var rows = new List<String>();
-            for (int i = 0; i < dr.FieldCount; i++)
-                rows.Add($"{dr[i]}");
+            if (con.State != System.Data.ConnectionState.Open)
+                con.Open();
 
-            columns.Add(rows);
+            Console.WriteLine(sql);
+            NpgsqlCommand command = new NpgsqlCommand(sql, con);
+            NpgsqlDataReader dr = command.ExecuteReader();
+
+            while (dr.Read())
+            {
+                var rows = new List<String>();
+                for (int i = 0; i < dr.FieldCount; i++)
+                    rows.Add($"{dr[i]}");
+
+                columns.Add(rows);
+            }
+
+            con.Close();
+            return columns;
         }
-
-        con.Close();
-        return columns;
+        catch (System.Exception e)
+        {
+            Console.WriteLine(e);
+            con.Close();
+            throw;
+        }
     }
 
     public static String dbInit()
@@ -99,6 +110,24 @@ public static class DatabaseService
             Console.WriteLine(e);
             con.Close();
             return "error_creating_table_notifications";
+        }
+        con.Close();
+
+        // __________ Openinghours __________
+        try
+        {
+            con.Open();
+            var sql = "CREATE TABLE IF NOT EXISTS Openinghours (id SERIAL PRIMARY KEY, days VARCHAR(255), isOpen boolean, open TIMESTAMP, close TIMESTAMP, showCutomText boolean, customText VARCHAR(255), isTimeLimited boolean, startDate TIMESTAMP, endDate TIMESTAMP, orderposition INT);";
+            Console.WriteLine(sql);
+            NpgsqlCommand command = new NpgsqlCommand(sql, con);
+            NpgsqlDataReader dr = command.ExecuteReader();
+        }
+        catch (System.Exception e)
+        {
+            Console.WriteLine("Error While creating Openinghours Table");
+            Console.WriteLine(e);
+            con.Close();
+            return "error_creating_table_openinghours";
         }
         con.Close();
         return "success";

@@ -9,21 +9,11 @@
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
           <div class="contactView_openTimes_content_data_opening_wrapper" v-if="openTimes[0]">
-            <div class="contactView_openTimes_content_data_opening">
-              <p>{{ openTimes[0][0].day }} - {{ openTimes[0][openTimes[0].length - 1].day }}</p>
-              <div class="contactView_openTimes_content_data_opening_dates">
-                <p>{{ openTimes[0][0].timeStart.slice(1, 6) }}</p>
-                <p>{{ openTimes[0][0].timeEnd.slice(1, 6) }}</p>
-              </div>
-            </div>
-            <div v-for="(day, index) in openTimes[1]" :key="index" class="contactView_openTimes_content_data_opening">
-              <p>{{ day.day }}</p>
-              <div v-if="day.day != 'Samstag'" class="contactView_openTimes_content_data_opening_dates">
-                <p>{{ day.timeStart.slice(1, 6) }}</p>
-                <p>{{ day.timeEnd.slice(1, 6) }}</p>
-              </div>
-              <!-- For now hardcoded, Change later -->
-              <p v-if="day.day == 'Samstag'">nach Vereinbarung</p>
+            <div v-for="item in openTimes" :key="item.id">
+              <!-- {{ item }} -->
+              <p v-if="!item.showCutomText">{{ item.days }}</p>
+              <p v-if="!item.showCutomText">{{ convertToTime(item.open) }} - {{ convertToTime(item.close) }}</p>
+              <p v-else="item.showCutomText">{{ item.customText }}</p>
             </div>
           </div>
         </div>
@@ -59,9 +49,10 @@ export default {
   },
   methods: {
     async getTimes() {
-      const data = await api.get("openTimes/getAll", {});
+      const data = await api.get("Openinghours");
+      this.openTimes = data;
 
-      let allOpenDays = [];
+      /*       let allOpenDays = [];
       data.weekdays.forEach((day) => {
         if (day.isOpen) allOpenDays.push(day);
       });
@@ -83,7 +74,11 @@ export default {
         }
       }
       this.openTimes.push(squshed);
-      this.openTimes.push(diffrent);
+      this.openTimes.push(diffrent); */
+    },
+    convertToTime(time) {
+      const date = new Date(time);
+      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
     },
   },
   mounted() {
@@ -110,6 +105,7 @@ export default {
         margin: 10px;
         flex-direction: column;
         display: flex;
+        width: 150px;
 
         &_opening {
           margin: 5px;

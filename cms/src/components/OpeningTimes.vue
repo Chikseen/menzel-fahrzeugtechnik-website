@@ -1,50 +1,76 @@
 <template>
   <div>
-    <h3>Öffnungszeiten</h3>
-    <div v-if="data.weekdays">
-      <div v-for="(day, i) in data.weekdays" :key="day.day" @mouseover="selected = i">
-        <p>{{ day.day }}</p>
-        <div v-if="day.isOpen">
-          <div class="opneingTimes_selction">
-            <p>Von: {{ day.timeStart.slice(1) }}</p>
-            <div v-if="selected == i" class="opneingTimes_selction_newTime">
-              <div>
-                <h6>Stunde</h6>
-                <input type="number" min="0" max="23" v-model="newStartHH" />
-              </div>
-              <p>:</p>
-              <div>
-                <h6>Minute</h6>
-                <input type="number" min="0" max="59" v-model="newStartMM" />
-              </div>
+    <h2>Öffnungszeiten</h2>
+    <div class="OHMain">
+      <div>
+        <h4>Eintragsmanager</h4>
+        <div class="newOHWrapper">
+          <div class="OHcontainer">
+            <div class="newOH">
+              <label>Tage/Text</label>
+              <input type="text" v-model="selectedEntry.days" />
             </div>
           </div>
-          <div class="opneingTimes_selction">
-            <p>Bis: {{ day.timeEnd.slice(1) }}</p>
-            <div v-if="selected == i" class="opneingTimes_selction_newTime">
-              <div>
-                <h6>Stunde</h6>
-                <input type="number" min="0" max="23" v-model="newEndHH" />
-              </div>
-              <p>:</p>
-              <div>
-                <h6>Minute</h6>
-                <input type="number" min="0" max="59" v-model="newEndMM" />
-              </div>
+          <div class="OHcontainer">
+            <div class="newOH">
+              <label>isOpen</label>
+              <div :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.isOpen = !selectedEntry.isOpen"></div>
+            </div>
+          </div>
+          <div class="OHcontainer">
+            <div class="newOH">
+              <label>{{ selectedEntry.showCutomText ? "Eigener Text" : "Von - Bis" }}</label>
+              <div :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"></div>
+            </div>
+            <div class="newOH" v-if="!selectedEntry.showCutomText">
+              <label>Von</label>
+              <input type="time" :value="open" @change="setTime($event, 'open')" />
+            </div>
+            <div class="newOH" v-if="!selectedEntry.showCutomText">
+              <label>Bis</label>
+              <input type="time" :value="close" @change="setTime($event, 'close')" />
+            </div>
+            <div class="newOH" v-if="selectedEntry.showCutomText">
+              <label>Text</label>
+              <input type="text" v-model="selectedEntry.customText" />
+            </div>
+          </div>
+          <div class="OHcontainer">
+            <div class="newOH">
+              <label>Zeitlich begränzt</label>
+              <div
+                :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"
+              ></div>
+            </div>
+            <div class="newOH" v-if="selectedEntry.isTimeLimited">
+              <label>Start Date</label>
+              <input type="date" :value="startDate" @change="setDate($event, 'startDate')" />
+            </div>
+            <div class="newOH" v-if="selectedEntry.isTimeLimited">
+              <label>End Date</label>
+              <input type="date" :value="endDate" @change="setDate($event, 'endDate')" />
+            </div>
+          </div>
+          <div class="OHcontainer">
+            <div class="newOH">
+              <label>Position</label>
+              <input type="text" v-model="selectedEntry.orderposition" />
             </div>
           </div>
         </div>
-        <div v-else>
-          <p>Geschlossen</p>
+        <button @click="selectedEntry = defaultEntry">Auswahl Zurücksetzten</button>
+        <div>
+          <button @click="saveEntry" v-if="selectedEntry.id">Eintrag Überarbeiten</button>
+          <button @click="deleteEntry" v-if="selectedEntry.id">Eintrag entfernen</button>
+          <button @click="saveEntry" v-if="!selectedEntry.id">Eintrag Erstellen</button>
         </div>
-        <div v-if="selected == i">
-          <div>
-            <button @click="(isOpen = true), sendNewData(i)" :class="day.isOpen ? 'isActive' : ''">Geöffnet</button>
-            <button @click="(isOpen = false), sendNewData(i)" :class="!day.isOpen ? 'isActive' : ''">Geschlossen</button>
-          </div>
-          <button @click="sendNewData(i)">Bestätigen</button>
+      </div>
+      <div class="existingOH">
+        <h2>Alle Einträge</h2>
+        <div class="opneingTimes_selction" v-for="item in oh" :key="item.id" @click="selectedEntry = item">
+          <p>{{ item }}</p>
         </div>
-        <hr />
       </div>
     </div>
   </div>
@@ -59,59 +85,84 @@ export default {
   props: {},
   data() {
     return {
-      data: {},
-      newStartHH: null,
-      newStartMM: null,
-      newEndHH: null,
-      newEndMM: null,
-      isOpen: null,
-      isStart: true,
-      selected: -1,
+      oh: [],
+      selectedEntry: {},
+      defaultEntry: {
+        days: "Von-Bis",
+        isOpen: true,
+        open: new Date(),
+        close: new Date(),
+        showCutomText: false,
+        customText: "Wird angezeigt wenn ausgewählt",
+        isTimeLimited: true,
+        startDate: new Date(),
+        endDate: new Date(),
+        orderposition: -1,
+      },
     };
   },
-  methods: {
-    async getData() {
-      const data = await api.get("openTimes/getAll");
-      this.data = data;
+  computed: {
+    open() {
+      const date = new Date(this.selectedEntry.open);
+      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
     },
-    async sendNewData(i) {
-      console.log("elem", i);
-      const data = await api.post("openTimes/set", {
-        toChange: i,
-        newStartHH: String(this.newStartHH).padStart(2, "0"),
-        newStartMM: String(this.newStartMM).padStart(2, "0"),
-        newEndHH: String(this.newEndHH).padStart(2, "0"),
-        newEndMM: String(this.newEndMM).padStart(2, "0"),
-        isOpen: this.isOpen,
-        isStart: this.isStart,
-        key: localStorage.getItem("authKey"),
-      });
-      this.data = data;
-      this.newHH = null;
-      this.newMM = null;
-      this.isOpen = null;
+    close() {
+      const date = new Date(this.selectedEntry.close);
+      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+    },
+    startDate() {
+      const date = new Date(this.selectedEntry.startDate);
+      return `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    },
+    endDate() {
+      const date = new Date(this.selectedEntry.endDate);
+      return `${date.getFullYear()}-${String(date.getMonth() + 2).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    },
+  },
+  methods: {
+    setTime(e, key) {
+      console.log(e.target.value);
+      console.log(e.target.value.match(/[0-9]*:/)[0].replace(/:/, ""), e.target.value.match(/:[0-9]*/)[0]);
+      const date = new Date(
+        null,
+        null,
+        null,
+        String(e.target.value.match(/[0-9]*:/)[0].replace(/:/, "")).padStart(2, "0"),
+        String(e.target.value.match(/:[0-9]*/)[0].replace(/:/, "")).padStart(2, "0")
+      );
+      console.log("time", date);
+      this.selectedEntry[key] = date;
+    },
+    setDate(e, key) {
+      console.log(e.target.value);
+      const date = new Date(e.target.value);
+      console.log("time", date);
+      this.selectedEntry[key] = date;
+    },
+    async getData() {
+      this.oh = [];
+      const oh = await api.get("Openinghours/All");
+      this.oh = oh;
+      //Multi User debuging
+      /* let counter = 1;
+       while (counter > 0) {
+        await this.getData();
+      } */
+    },
+    async saveEntry() {
+      if (this.selectedEntry.id) await api.put("Openinghours", this.selectedEntry);
+      else await api.post("Openinghours", this.selectedEntry);
+      this.getData();
+    },
+    async deleteEntry() {
+      await api.delete("Openinghours", { id: this.selectedEntry.id });
+      this.getData();
+      this.selectedEntry = this.defaultEntry;
     },
   },
   mounted() {
     this.getData();
-  },
-  watch: {
-    newStartHH() {
-      if (this.newStartHH <= 0) this.newStartHH = 0;
-      if (this.newStartHH >= 23) this.newStartHH = 23;
-    },
-    newStartMM() {
-      if (this.newStartMM <= 0) this.newStartMM = 0;
-      if (this.newStartMM >= 59) this.newStartMM = 59;
-    },
-    newEndHH() {
-      if (this.newEndHH <= 0) this.newEndHH = 0;
-      if (this.newEndHH >= 23) this.newEndHH = 23;
-    },
-    newEndMM() {
-      if (this.newEndMM <= 0) this.newEndMM = 0;
-      if (this.newEndMM >= 59) this.newEndMM = 59;
-    },
+    this.selectedEntry = this.defaultEntry;
   },
 };
 </script>
@@ -122,11 +173,56 @@ export default {
 }
 .opneingTimes_selction {
   display: flex;
-  margin: 5px auto;
+  margin: 15px auto;
+  max-width: 1000px;
   justify-content: center;
+  box-shadow: 0 0 10px 1px #1b1b1b36;
+  border-radius: 10px;
 }
 .opneingTimes_selction_newTime {
   display: flex;
   margin: 0 5px;
+}
+.OHMain {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  padding: 25px;
+  height: 750px;
+}
+.OHcontainer {
+  box-shadow: 0 0 10px 1px #1b1b1b18;
+  border-radius: 10px;
+  padding: 5px 15px;
+  margin: 10px 0;
+}
+.newOHWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: auto;
+}
+.newOH {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 15px auto;
+  align-items: center;
+  gap: 10px;
+}
+.existingOH {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 10px;
+}
+.activeSpan {
+  background-color: green;
+  width: 24px;
+  height: 24px;
+}
+.inActiveSpan {
+  background-color: red;
+  width: 24px;
+  height: 24px;
 }
 </style>
