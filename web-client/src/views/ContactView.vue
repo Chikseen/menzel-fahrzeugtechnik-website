@@ -51,6 +51,11 @@ export default {
     async getTimes() {
       const data = await api.get("Openinghours");
       this.openTimes = data;
+      //Multi User debuging
+      /* let counter = 1;
+      while (counter > 0) {
+        await this.getTimes();
+      } */
 
       /*       let allOpenDays = [];
       data.weekdays.forEach((day) => {

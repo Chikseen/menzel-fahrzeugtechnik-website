@@ -20,7 +20,10 @@
           <div class="OHcontainer">
             <div class="newOH">
               <label>{{ selectedEntry.showCutomText ? "Eigener Text" : "Von - Bis" }}</label>
-              <div :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"></div>
+              <div
+                :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"
+              ></div>
             </div>
             <div class="newOH" v-if="!selectedEntry.showCutomText">
               <label>Von</label>
@@ -144,8 +147,8 @@ export default {
       const oh = await api.get("Openinghours/All");
       this.oh = oh;
       //Multi User debuging
-      /* let counter = 1;
-       while (counter > 0) {
+/*       let counter = 1;
+      while (counter > 0) {
         await this.getData();
       } */
     },
