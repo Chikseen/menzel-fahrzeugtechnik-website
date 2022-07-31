@@ -21,7 +21,42 @@
         </div>
       </div>
     </div>
-    <FileUpload @onImagesChange="upadteImages($event)" :imagesFromAbove="images" />
+
+    <form name="form1" method="post" enctype="multipart/form-data" :action="api">
+      <label for="image1">Image File</label>
+      <input name="file" type="file" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <form name="form1" method="post" enctype="multipart/form-data" :action="api">
+      <div>
+        <label for="caption">Image Caption</label>
+        <input name="caption" type="text" />
+      </div>
+      <div>
+        <label for="image1">Image File</label>
+        <input name="file" type="file" />
+      </div>
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+
+    <!--     <form name="form1" method="post" enctype="multipart/form-data" :action="api">
+      <div>
+        <label for="caption">Image Caption</label>
+        <input name="caption" type="text" />
+      </div>
+      <div>
+        <label for="image1">Image File</label>
+        <input name="image1" type="file" />
+      </div>
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form> -->
+
+    <!--  <FileUpload @onImagesChange="upadteImages($event)" :imagesFromAbove="images" />
     <button @click="createnewMessage">EINTRAG ERSTELLEN</button>
     <div>
       <h3>Alle Nachrichten</h3>
@@ -33,17 +68,17 @@
         <h6 class="test">{{ item }}</h6>
         <button style="background-color: red; z-index: 10" @click="deleteNews(item.uuid)">Eintrag Löschen</button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import api from "@/apiService";
-import FileUpload from "./FileUpload.vue";
+//import FileUpload from "./FileUpload.vue";
 
 export default {
   components: {
-    FileUpload,
+    //   FileUpload,
   },
   data() {
     return {
@@ -59,8 +94,36 @@ export default {
       if (process.env.NODE_ENV == "development") return "http://192.168.2.100:7081?id=";
       else return "https://image.menzel-fahrzeugtechnik.de?id=";
     },
+    api() {
+      return `${process.env.VUE_APP_API}/Images`;
+    },
   },
   methods: {
+    async uploadImage(e) {
+      let formData = new FormData();
+      formData.append("image1", e.target.files[0]);
+      api.uploadFile("Images", formData);
+
+      /*       const file = e.target.files[0];
+      if (file !== undefined && config.imgTypes.includes(file.type)) {
+        this.logoImage.name = file.name;
+        if (this.logoImage.name.lastIndexOf(".") <= 0) {
+          return;
+        }
+        const fr = new FileReader();
+        fr.readAsDataURL(file);
+        fr.addEventListener("load", () => {
+          this.logoImage.url = fr.result;
+          this.logoImage.file = file;
+        });
+      }
+      this.defaultLogo = false;
+
+      if (this.importedLogo) {
+        this.importedLogo = null;
+      } */
+    },
+
     async getAll() {
       this.allMessages = await api.post("news/loadAll", {
         key: localStorage.getItem("authKey"),

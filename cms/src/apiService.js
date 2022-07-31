@@ -14,7 +14,6 @@ const apiService = {
     return await request.json();
   },
   async post(adress, payload) {
-    console.log("process.env.VUE_APP_API", process.env.VUE_APP_API);
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
       body: JSON.stringify(payload),
       credentials: "include",
@@ -65,6 +64,21 @@ const apiService = {
         "Content-Type": "application/json",
       },
       method: "DELETE",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await request.json();
+  },
+  async uploadFile(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: payload,
+      credentials: "include",
+      headers: {
+        accept: "text/plain",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryuiM9OMOoLOPmRAFU",
+      },
+      method: "POST",
       mode: "cors",
       redirect: "follow",
     });
