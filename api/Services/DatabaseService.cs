@@ -16,11 +16,11 @@ public static class DatabaseService
     static DatabaseService()
     {
         DotEnv.Load();
-        postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST");
-        postgresPort = Environment.GetEnvironmentVariable("POSTGRES_PORT");
-        postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER");
-        postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-        postgresDatabase = Environment.GetEnvironmentVariable("POSTGRES_DATABASE");
+        postgresHost = Environment.GetEnvironmentVariable("POSTGRES_HOST")!;
+        postgresPort = Environment.GetEnvironmentVariable("POSTGRES_PORT")!;
+        postgresUser = Environment.GetEnvironmentVariable("POSTGRES_USER")!;
+        postgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")!;
+        postgresDatabase = Environment.GetEnvironmentVariable("POSTGRES_DATABASE")!;
         conectionString = $"Host={postgresHost};Port={postgresPort};Username={postgresUser};Password={postgresPassword};Database={postgresDatabase}";
     }
 

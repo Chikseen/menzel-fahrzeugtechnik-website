@@ -13,59 +13,27 @@ public class ImagesController : ControllerBase
     {
         DotEnv.Load();
         userService = new UserService();
-        hostingEnv = Environment.GetEnvironmentVariable("FILE_PATH");
+        hostingEnv = Environment.GetEnvironmentVariable("FILE_PATH")!;
         path = Path.Combine(hostingEnv, "Files");
     }
 
-    /*     [HttpPost]
-        public async Task<IActionResult> Post(List<IFormFile> files)
-        {
-
-            long size = files.Sum(f => f.Length);
-            Console.WriteLine("size");
-            Console.WriteLine(size);
-
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            // full path to file in temp location
-
-            foreach (var formFile in files)
-            {
-                Console.WriteLine(formFile.Name);
-                if (formFile.Length > 0)
-                {
-                    Console.WriteLine(formFile.Name);
-                    string fileName = Path.Combine(path, formFile.Name) + ".png";
-                    using (FileStream fs = System.IO.File.Create(fileName))
-                    {
-                        formFile.CopyTo(fs);
-                    }
-                }
-            }
-            return Ok(new { count = files.Count, size, path });
-        } */
     [HttpPost]
-    public async Task<String> Post(IFormFile file)
+    public String Upload(List<IFormFile> files)
     {
-
-
-
+        long size = files.Sum(f => f.Length);
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
-        // full path to file in temp location
 
-        Console.WriteLine(file.Name);
-        if (file.Length > 0)
+        foreach (var upload in files)
         {
-            Console.WriteLine(file.Name);
-            string fileName = Path.Combine(path, file.Name) + ".png";
-            using (FileStream fs = System.IO.File.Create(fileName))
+            var fileName = upload.FileName;
+            var filePath = Path.Combine(path, fileName);
+            using (FileStream fs = System.IO.File.Create(filePath))
             {
-                file.CopyTo(fs);
+                upload.CopyTo(fs);
             }
-
         }
-        return "Oknew count = file.Count, path ";
+        return " Ok(new { count = files.Count, size, path })";
     }
 
     [HttpGet]

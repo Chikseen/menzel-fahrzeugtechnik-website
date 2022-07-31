@@ -24,7 +24,7 @@ public class NotificationsController : ControllerBase
     [HttpGet("All")]
     public List<Notification> getAllNotifications()
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             return notificationsService.getAllNotifications(); ;
         }
@@ -34,7 +34,7 @@ public class NotificationsController : ControllerBase
     [HttpPost]
     public Object setNotifications(NewNotification newNotification)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.setNewNotification(newNotification);
             return new { status = true };
@@ -45,7 +45,7 @@ public class NotificationsController : ControllerBase
     [HttpPut]
     public Object editNotifications(Notification notificationId)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.editNotifications(notificationId);
             return new { status = true };
@@ -56,7 +56,7 @@ public class NotificationsController : ControllerBase
     [HttpDelete]
     public Object deleteNotifications(NotificationId notificationId)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.deleteNotification(notificationId);
             return new { status = true };

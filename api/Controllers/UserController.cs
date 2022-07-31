@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public Object CheckKey()
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
             return new { status = true };
         else
             return new { status = false };
@@ -25,7 +25,7 @@ public class UserController : ControllerBase
     public Object GetAllUserNames()
     {
         var users = new List<String>();
-        List<String> useres = userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]);
+        List<String> useres = userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]!);
         return new { useres };
     }
 

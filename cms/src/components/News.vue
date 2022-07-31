@@ -24,51 +24,9 @@
 
     <form name="form1" method="post" enctype="multipart/form-data" :action="api">
       <label for="image1">Image File</label>
-      <input name="file" type="file" />
+      <input name="files" type="file" multiple/>
       <input type="submit" value="Submit" />
     </form>
-
-    <form name="form1" method="post" enctype="multipart/form-data" :action="api">
-      <div>
-        <label for="caption">Image Caption</label>
-        <input name="caption" type="text" />
-      </div>
-      <div>
-        <label for="image1">Image File</label>
-        <input name="file" type="file" />
-      </div>
-      <div>
-        <input type="submit" value="Submit" />
-      </div>
-    </form>
-
-    <!--     <form name="form1" method="post" enctype="multipart/form-data" :action="api">
-      <div>
-        <label for="caption">Image Caption</label>
-        <input name="caption" type="text" />
-      </div>
-      <div>
-        <label for="image1">Image File</label>
-        <input name="image1" type="file" />
-      </div>
-      <div>
-        <input type="submit" value="Submit" />
-      </div>
-    </form> -->
-
-    <!--  <FileUpload @onImagesChange="upadteImages($event)" :imagesFromAbove="images" />
-    <button @click="createnewMessage">EINTRAG ERSTELLEN</button>
-    <div>
-      <h3>Alle Nachrichten</h3>
-      <div v-for="(item, index) in allMessages" :key="index" class="newsPreviewWrapper" @click="editNews(item)">
-        <p>Erstellt {{ item.date }}</p>
-        <p>{{ item.titel }}</p>
-        <p>Erstellt {{ item.text }}</p>
-        <img v-for="(img, index) in item.imageIds" :key="index + 'imgs'" :src="url + img" alt="" class="newsImagePreview" />
-        <h6 class="test">{{ item }}</h6>
-        <button style="background-color: red; z-index: 10" @click="deleteNews(item.uuid)">Eintrag Löschen</button>
-      </div>
-    </div> -->
   </div>
 </template>
 

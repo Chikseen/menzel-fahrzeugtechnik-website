@@ -25,7 +25,7 @@ public class OpeninghoursController : ControllerBase
     [HttpGet("All")]
     public List<Openinghours> getAllDays()
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             return openinghoursService.getAllDays();
         }
@@ -36,7 +36,7 @@ public class OpeninghoursController : ControllerBase
     [HttpPost]
     public Object createNewDay(NewOpeninghours newOpeninghoursService)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.createNewDay(newOpeninghoursService);
             return new { status = true };
@@ -48,7 +48,7 @@ public class OpeninghoursController : ControllerBase
     [HttpPut]
     public Object editOpeninghours(Openinghours openinghours)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.editOpeninghours(openinghours);
             return new { status = true };
@@ -59,7 +59,7 @@ public class OpeninghoursController : ControllerBase
     [HttpDelete]
     public Object deleteOpeninghours(OpeninghoursId openinghours)
     {
-        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]))
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.deleteOpeninghours(openinghours);
             return new { status = true };
