@@ -22,9 +22,9 @@
       </div>
     </div>
 
-    <form name="form1" method="post" enctype="multipart/form-data" :action="api">
+    <form name="form1" method="post" enctype="multipart/form-data" :action="api" v-on:submit.prevent="uploadImage">
       <label for="image1">Image File</label>
-      <input name="files" type="file" multiple/>
+      <input name="files" type="file" accept="image/png" multiple />
       <input type="submit" value="Submit" />
     </form>
   </div>
@@ -57,11 +57,16 @@ export default {
     },
   },
   methods: {
-    async uploadImage(e) {
-      let formData = new FormData();
-      formData.append("image1", e.target.files[0]);
-      api.uploadFile("Images", formData);
-
+    async uploadImage($event) {
+      const form = $event.target;
+      console.log("hii", form);
+      console.log("hii", form.action);
+      let res = await api.uploadFile("Images", form);
+      /*       let res = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+      }); */
+      console.log(res);
       /*       const file = e.target.files[0];
       if (file !== undefined && config.imgTypes.includes(file.type)) {
         this.logoImage.name = file.name;

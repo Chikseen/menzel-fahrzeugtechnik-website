@@ -71,12 +71,11 @@ const apiService = {
   },
   async uploadFile(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
-      body: payload,
+      body: new FormData(payload),
       credentials: "include",
       headers: {
-        accept: "text/plain",
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryuiM9OMOoLOPmRAFU",
+        "Content-Type": "multipart/form-data",
       },
       method: "POST",
       mode: "cors",
