@@ -6,40 +6,55 @@ using dotenv.net;
 public class ImagesController : ControllerBase
 {
     private UserService userService;
+    private ImagesService imagesService;
     private String hostingEnv;
     private String path;
 
     public ImagesController()
     {
+        imagesService = new ImagesService();
         DotEnv.Load();
         userService = new UserService();
         hostingEnv = Environment.GetEnvironmentVariable("FILE_PATH")!;
         path = Path.Combine(hostingEnv, "Files");
     }
 
-    [HttpPost]
-    public String Upload(List<IFormFile> files)
+    [HttpGet]
+    public IActionResult Get(String name)
     {
-        long size = files.Sum(f => f.Length);
-        if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-
-        foreach (var upload in files)
-        {
-            var fileName = upload.FileName;
-            var filePath = Path.Combine(path, fileName);
-            using (FileStream fs = System.IO.File.Create(filePath))
-            {
-                upload.CopyTo(fs);
-            }
-        }
-        return " Ok(new { count = files.Count, size, path })";
+        var image = System.IO.File.OpenRead(Path.Combine(path, name));
+        return File(image, "image/jpeg");
     }
 
-    [HttpGet]
-    public IActionResult Get(String id)
+    [HttpGet("All")]
+    public List<String> getAllImages(int offset, int limit)
     {
-        var image = System.IO.File.OpenRead(Path.Combine(path, id));
-        return File(image, "image/jpeg");
+        return imagesService.getAllImages(offset, limit);
+    }
+
+    [HttpPost]
+    public Object uploadImage(List<IFormFile> files)
+    {
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            imagesService.uploadImage(files, path);
+            return new { staus = true };
+        }
+        else
+            return new { staus = false };
+    }
+
+
+    [HttpDelete]
+    public Object deleteImage(ImageId name)
+    {
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            imagesService.deleteImage(name.id, path);
+
+            return new { staus = true };
+        }
+        else
+            return new { staus = false };
     }
 }

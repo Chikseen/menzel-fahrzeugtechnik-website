@@ -125,6 +125,42 @@ public static class DatabaseService
                 return "error_creating_table_openinghours";
             }
             con.Close();
+
+            // __________ NEWS __________
+            try
+            {
+                con.Open();
+                var sql = "CREATE TABLE IF NOT EXISTS News (id SERIAL PRIMARY KEY, created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, titel VARCHAR(255), text TEXT NOT NULL, images VARCHAR(255)[])";
+                Console.WriteLine(sql);
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                NpgsqlDataReader dr = command.ExecuteReader();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Error While creating News Table");
+                Console.WriteLine(e);
+                con.Close();
+                return "error_creating_table_news";
+            }
+            con.Close();
+
+            // __________ IMAGES __________
+            try
+            {
+                con.Open();
+                var sql = "CREATE TABLE IF NOT EXISTS Images (id SERIAL PRIMARY KEY, mentioned_in VARCHAR(255), created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, titel VARCHAR(255) UNIQUE);";
+                Console.WriteLine(sql);
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                NpgsqlDataReader dr = command.ExecuteReader();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Error While creating Images Table");
+                Console.WriteLine(e);
+                con.Close();
+                return "error_creating_table_images";
+            }
+            con.Close();
         }
         return "success";
     }

@@ -73,10 +73,6 @@ const apiService = {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
       body: new FormData(payload),
       credentials: "include",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "multipart/form-data",
-      },
       method: "POST",
       mode: "cors",
       redirect: "follow",

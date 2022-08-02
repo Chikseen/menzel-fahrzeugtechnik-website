@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       keyValid: false,
-      toShow: "news",
+      toShow: "galerie",
     };
   },
   methods: {

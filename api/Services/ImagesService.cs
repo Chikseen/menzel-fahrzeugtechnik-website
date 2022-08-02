@@ -1,0 +1,48 @@
+public class ImagesService
+{
+    public String uploadImage(List<IFormFile> files, String path)
+    {
+        long size = files.Sum(f => f.Length);
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+
+        foreach (IFormFile upload in files)
+        {
+            DateTime localDate = DateTime.Now;
+            String fileName = upload.FileName;
+            String filePath = Path.Combine(path, fileName);
+            using (FileStream fs = System.IO.File.Create(filePath))
+            {
+                upload.CopyTo(fs);
+                String sql = $"INSERT INTO Images(titel) VALUES ('{fileName}');";
+                List<List<String>> data = DatabaseService.query(sql);
+            }
+        }
+        return "hi";
+    }
+
+    public List<String> getAllImages(int offset, int limit)
+    {
+                Console.WriteLine("Here0");
+        String sql = $"SELECT titel FROM Images LIMIT {limit} OFFSET {offset};";
+        List<List<String>> data = DatabaseService.query(sql);
+        List<String> paths = new List<String>();
+
+        Console.WriteLine("Here1");
+        for (int i = 0; i < data.Count; i++)
+        {
+            Console.WriteLine("Here2");
+            paths.Add(data[i][0]);
+        }
+
+        return paths;
+    }
+
+    public String deleteImage(String name, String path)
+    {
+        System.IO.File.Delete(Path.Combine(path, name!));
+        String sql = $"DELETE FROM Images WHERE titel = '{name!}'";
+        List<List<String>> data = DatabaseService.query(sql);
+        return "hi";
+    }
+}
