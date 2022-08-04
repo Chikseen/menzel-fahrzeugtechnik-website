@@ -2,7 +2,7 @@
   <div>
     <h1>all images</h1>
     <h3>Neue Bilder Hochladen (Diese werden nur in der Galerie angezeigt, haben aber noch keine verlinkung zu "News")</h3>
-    <form name="form1" method="post" enctype="multipart/form-data" :action="api" v-on:submit.prevent="uploadImage">
+    <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
       <label for="image1">Image File</label>
       <input name="files" type="file" accept="image/png" multiple />
       <input type="submit" value="Submit" />
@@ -10,7 +10,7 @@
     <button @click="loadMore">LoadMore</button>
     <div v-for="image in images" :key="image" class="galerieImages">
       <p>{{ image }}</p>
-      <img :src="url + image" alt="" @click="deleteImage(image)" />
+      <img :src="imageUrl + image" alt="" @click="deleteImage(image)" />
     </div>
   </div>
 </template>
@@ -24,20 +24,20 @@ export default {
       images: [],
       loadedImages: [],
       offset: 0,
-      limit: 1,
+      limit: 10,
     };
   },
   computed: {
-    url() {
+    imageUrl() {
       return `${process.env.VUE_APP_API}/Images?name=`;
     },
-    api() {
+    imageApi() {
       return `${process.env.VUE_APP_API}/Images`;
     },
   },
   methods: {
     async loadPictures() {
-      this.images = await api.get(`Images/All?offset=${this.offset}&limit=${this.limit}`);
+      this.images = await api.get(`Images/All?limit=${this.limit}&offset=${this.offset}`);
     },
     async uploadImage($event) {
       const form = $event.target;
@@ -55,7 +55,7 @@ export default {
       this.loadPictures();
     },
     async loadMore() {
-      this.offset += 1;
+      this.offset += 10;
       const newI = await api.get(`Images/All?offset=${this.offset}&limit=${this.limit}`);
       newI.forEach((img) => {
         if (this.images.indexOf(img) === -1) {

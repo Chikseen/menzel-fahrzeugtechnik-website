@@ -21,17 +21,16 @@ public class ImagesService
         return "hi";
     }
 
-    public List<String> getAllImages(int offset, int limit)
+    public List<String> getAllImages(int limit, int offset)
     {
-                Console.WriteLine("Here0");
         String sql = $"SELECT titel FROM Images LIMIT {limit} OFFSET {offset};";
         List<List<String>> data = DatabaseService.query(sql);
         List<String> paths = new List<String>();
+        Console.WriteLine(data.Count);
 
-        Console.WriteLine("Here1");
+
         for (int i = 0; i < data.Count; i++)
         {
-            Console.WriteLine("Here2");
             paths.Add(data[i][0]);
         }
 

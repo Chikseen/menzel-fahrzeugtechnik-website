@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       keyValid: false,
-      toShow: "galerie",
+      toShow: "news",
     };
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
     },
   },
   mounted() {
-   this.checkkey();
+    this.checkkey();
   },
 };
 </script>

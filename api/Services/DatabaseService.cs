@@ -40,11 +40,19 @@ public static class DatabaseService
             {
                 var rows = new List<String>();
                 for (int i = 0; i < dr.FieldCount; i++)
-                    rows.Add($"{dr[i]}");
-
+                {
+                    if (dr[i].ToString() == "System.String[]")
+                    {
+                        string[] myArray = dr.GetFieldValue<string[]>(i);
+                        rows.Add(string.Join(",#,", myArray));
+                    }
+                    else
+                    {
+                        rows.Add($"{dr[i]}");
+                    }
+                }
                 columns.Add(rows);
             }
-
             con.Close();
             return columns;
         }

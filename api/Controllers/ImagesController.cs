@@ -27,9 +27,9 @@ public class ImagesController : ControllerBase
     }
 
     [HttpGet("All")]
-    public List<String> getAllImages(int offset, int limit)
+    public List<String> getAllImages(int limit, int offset)
     {
-        return imagesService.getAllImages(offset, limit);
+        return imagesService.getAllImages(limit, offset);
     }
 
     [HttpPost]

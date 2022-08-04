@@ -13,15 +13,23 @@ public class NewsController : ControllerBase
         userService = new UserService();
     }
 
-    [HttpPost]
-    public String Upload(IFormFile upload)
+    [HttpGet]
+    public List<News> get(int limit, int offset)
     {
-        return "View()";
+        return newsService.getNews(limit, offset);
     }
 
-    [HttpGet]
-    public String get(IFormFile upload)
+    [HttpPost]
+    public Object createNews(NewNews news)
     {
-        return "View()";
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            newsService.createNews(news);
+            return new { staus = true };
+        }
+        else
+            return new { staus = false };
     }
+
+
 }
