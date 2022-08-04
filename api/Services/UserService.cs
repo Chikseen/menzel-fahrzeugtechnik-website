@@ -20,26 +20,24 @@ public class UserService
         return new { st = "st" };
     }
 
-    public List<String> getAllUserNames(String value)
+    public List<AllUser> getAllUserNames(String value)
     {
         Boolean userExits = checkUserExits(value);
         if (userExits)
         {
-            String sql = $"SELECT name, id FROM Keys";
+            String sql = $"SELECT name, value FROM Keys";
             List<List<String>> data = DatabaseService.query(sql);
 
-            var users = new List<String>();
+            var users = new List<AllUser>();
 
             for (int i = 0; i < data.Count; i++)
             {
-                String tuser = "";
-                tuser += data[i][0];
-                users.Add(tuser);
+                users.Add(new AllUser(data[i][0], data[i][1]));
             }
 
             return users;
         }
-        return new List<String>();
+        return new List<AllUser>();
     }
 
     public Boolean checkUserExits(String value)
@@ -57,5 +55,11 @@ public class UserService
 
         if (users.Count > 0) return true;
         else return false;
+    }
+
+    public void deleteUser(String value)
+    {
+        String sql = $"DELETE FROM Keys WHERE value = '{value}';";
+        List<List<String>> data = DatabaseService.query(sql);
     }
 }

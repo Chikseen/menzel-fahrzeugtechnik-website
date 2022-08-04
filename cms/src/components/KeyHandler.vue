@@ -5,8 +5,14 @@
       <h6>Sollten irgendwelche unregelmäsigkeiten auffallen bitte an an denn Betreiber wenden ;)</h6>
       <button @click="getAlluser">LoadUser</button>
       <div v-for="(item, index) in allUser" :key="index">
-        <p v-if="item == ''">NoName</p>
-        <p v-else>{{ item }}</p>
+        <div class="keyHandler_keys">
+          <p>{{ item.name }}</p>
+          <span>{{ item.value }}</span>
+        </div>
+      </div>
+      <div>
+        <input type="text" v-model="valueToDelete" />
+        <button @click="removeUser">Delete user value</button>
       </div>
     </div>
     <div v-else>
@@ -48,6 +54,7 @@ export default {
       keyInput: "",
       user: "",
       allUser: [],
+      valueToDelete: "",
     };
   },
   methods: {
@@ -60,14 +67,19 @@ export default {
     async confirmKey() {
       const data = await api.post("User/Validate", { value: this.keyInput });
       console.log("data", data);
+      document.location.reload(true);
     },
     async getAlluser() {
       const data = await api.get("User/All");
-      this.allUser = data.useres;
+      this.allUser = data;
     },
-    mounted() {
+    async removeUser() {
+      await api.delete("User", { value: this.valueToDelete });
       this.getAlluser();
     },
+  },
+  mounted() {
+    this.getAlluser();
   },
 };
 </script>
@@ -76,10 +88,19 @@ export default {
 .keyHandler_wrapper {
   max-width: 500px;
   margin: 0 auto;
+  text-align: center;
 }
 .keyHandler_newKey {
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+}
+.keyHandler_keys {
+  box-shadow: 0 0 5px 5px #2d2d2d26;
+  border-radius: 10px;
+}
+.keyHandler_keys span {
+  font-size: 0.65rem;
+  word-wrap: break-word;
 }
 </style>

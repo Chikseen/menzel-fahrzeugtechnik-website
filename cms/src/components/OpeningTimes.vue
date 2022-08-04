@@ -72,7 +72,34 @@
       <div class="existingOH">
         <h2>Alle Einträge</h2>
         <div class="opneingTimes_selction" v-for="item in oh" :key="item.id" @click="selectedEntry = item">
-          <p>{{ item }}</p>
+          <div>
+            <h4>Titel</h4>
+            <p>{{ item.days }}</p>
+          </div>
+          <div>
+            <h4>Geöffnet: {{ item.isOpen ? "Ja" : "Nein" }}</h4>
+            <div v-if="item.isOpen">
+              <h5>Zeige Text oder Zeit: {{ item.showCustomText ? "Text" : "Zeit" }}</h5>
+              <div v-if="!item.showCutomText">
+                <p>Öffnet: {{ item.open }}</p>
+                <p>Schliest: {{ item.close }}</p>
+              </div>
+              <div v-else>
+                <p>{{ item.customText }}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4>Zeitlich begränzt: {{ item.isTimeLimited ? "Ja" : "Nein" }}</h4>
+            <div v-if="item.isTimeLimited">
+              <p><bold>Wird Angezeigt ab: </bold>{{ item.startDate }}</p>
+              <p><bold>Wird Angezeigt bis: </bold>{{ item.endDate }}</p>
+            </div>
+          </div>
+          <div>
+            <h4>Position</h4>
+            <p>{{ item.orderposition }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -147,7 +174,7 @@ export default {
       const oh = await api.get("Openinghours/All");
       this.oh = oh;
       //Multi User debuging
-/*       let counter = 1;
+      /*       let counter = 1;
       while (counter > 0) {
         await this.getData();
       } */
@@ -176,7 +203,9 @@ export default {
 }
 .opneingTimes_selction {
   display: flex;
+  gap: 25px;
   margin: 15px auto;
+  padding: 0 15px;
   max-width: 1000px;
   justify-content: center;
   box-shadow: 0 0 10px 1px #1b1b1b36;

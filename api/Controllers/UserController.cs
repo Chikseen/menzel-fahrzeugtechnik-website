@@ -22,11 +22,10 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("All")]
-    public Object GetAllUserNames()
+    public List<AllUser> GetAllUserNames()
     {
-        var users = new List<String>();
-        List<String> useres = userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]!);
-        return new { useres };
+        List<AllUser> users = new List<AllUser>(userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]!));
+        return users;
     }
 
     [HttpPost]
@@ -42,6 +41,15 @@ public class UserController : ControllerBase
         if (userService.checkUserExits(value.value))
         {
             HttpContext.Response.Cookies.Append("sessionId", value.value);
+        }
+        return new { st = "st" };
+    }
+    [HttpDelete]
+    public Object DeleteUser(ValidateUser value)
+    {
+        if (userService.checkUserExits(value.value))
+        {
+            userService.deleteUser(value.value);
         }
         return new { st = "st" };
     }
