@@ -67,15 +67,15 @@ export default {
     border-radius: 10px;
 
     &_red {
-      background-color: rgb(241, 50, 50);
+      background-color: $error-red;
       box-shadow: 2px 2px 10px 2px #66141450;
     }
     &_green {
-      background-color: rgb(50, 235, 75);
+      background-color: $succes-green;
       box-shadow: 2px 2px 10px 2px #17661450;
     }
     &_white {
-      background-color: rgb(250, 250, 250);
+      background-color: $icon_base_grey;
       box-shadow: 2px 2px 10px 2px #58585850;
     }
 

@@ -1,26 +1,23 @@
 <template>
   <div>
     <h1>Aktive Nachrichten</h1>
-    <CreateNewActiveMessage @newData="getData" :setdata="setdata" />
+    <ApiResponseComponent :response="apiResponse"/>
+    <CreateNotification @newData="getData" :setdata="setdata" />
     <br />
     <div class="activeMessages_wrapper">
       <div>
         <h3>Aktive Nachrichten</h3>
         <div v-for="message in allMessages" :key="message.id">
-          <div v-if="message.isActive" @mouseup="setsetData(message)" class="activeMessages_slection">
-            <p>{{ message.titel }}</p>
-            <p>{{ message.text }}</p>
-            <button @mouseup="deleteMessage(message.id)">Entfernen</button>
+          <div v-if="message.isActive" @mouseup="setData(message)" class="activeMessages_slection">
+            <NotificationMessage :message="message" @delete="deleteMessage" />
           </div>
         </div>
       </div>
       <div>
         <h3>Inaktive Nachrichten</h3>
         <div v-for="message in allMessages" :key="message.id">
-          <div v-if="!message.isActive" @mouseup="setsetData(message)" class="activeMessages_slection">
-            <p>{{ message.titel }}</p>
-            <p>{{ message.text }}</p>
-            <button @mouseup="deleteMessage(message.id)">Entfernen</button>
+          <div v-if="!message.isActive" @mouseup="setData(message)" class="activeMessages_slection">
+            <NotificationMessage :message="message" @delete="deleteMessage" />
           </div>
         </div>
       </div>
@@ -29,24 +26,30 @@
 </template>
 
 <script>
-import api from "../apiService";
-import CreateNewActiveMessage from "@/assets/CreatenNewActiveMessage.vue";
+import api from "@/apiService";
+import CreateNotification from "@/components/Notifications/CreateNotification.vue";
+import NotificationMessage from "@/components/Notifications/NotificationMessage.vue";
+import ApiResponseComponent from "@/components/ApiResponseComponent";
 
 export default {
   components: {
-    CreateNewActiveMessage,
+    CreateNotification,
+    NotificationMessage,
+    ApiResponseComponent,
   },
   data() {
     return {
       text: "",
       allMessages: [],
       setdata: {},
+      apiResponse: {},
     };
   },
   methods: {
     async getData() {
       const data = await api.get("Notification/All");
       this.allMessages = data;
+      if (data.status >= 400) this.apiResponse = data;
     },
     async deleteMessage(id) {
       const data = await api.delete("Notification", {
@@ -54,14 +57,20 @@ export default {
       });
       if (data.status) this.getData();
       else console.log("error while deleting Notification");
+      if (data.status >= 400) this.apiResponse = data;
     },
-    setsetData(msg) {
+    setData(msg) {
       this.setdata = msg;
     },
   },
   watch: {
     allMessages() {
       this.allMessages.sort((a, b) => (new Date(a.created) > new Date(b.created) ? 1 : new Date(b.created) > new Date(a.created) ? -1 : 0)).reverse();
+    },
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = {};
+      }, 5000);
     },
   },
   mounted() {

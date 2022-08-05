@@ -22,6 +22,8 @@ public class ImagesController : ControllerBase
     [HttpGet]
     public IActionResult Get(String name)
     {
+        if (!System.IO.File.Exists(Path.Combine(path, name)))
+            return NotFound();
         var image = System.IO.File.OpenRead(Path.Combine(path, name));
         return File(image, "image/jpeg");
     }

@@ -25,6 +25,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
+    console.log("AAA", request);
     return await request.json();
   },
   async put(adress, payload) {

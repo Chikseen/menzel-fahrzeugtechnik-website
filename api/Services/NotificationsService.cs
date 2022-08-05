@@ -3,7 +3,7 @@ public class NotificationsService
 {
     public List<Notification> getActiveNotifications()
     {
-        String sql = $"SELECT * FROM notifications WHERE isactive = true";
+        String sql = $"SELECT * FROM notifications WHERE isactive = true AND (startDate <= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date AND endDate >= '{DateTime.Now.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}'::date)";
         List<List<String>> data = DatabaseService.query(sql);
         List<Notification> notifications = new List<Notification>();
 

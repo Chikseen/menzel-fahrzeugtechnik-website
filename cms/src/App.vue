@@ -9,7 +9,7 @@
       <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">
-      <ActiveMessage v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
+      <NotificationView v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
       <KeyHandler v-if="toShow == 'key'" :keyStatus="keyValid" @keyStatus="keyValid = $event" />
       <OpeningTimes v-if="toShow == 'open'" />
       <News v-if="toShow == 'news'" />
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import ActiveMessage from "@/components/ActiveMessage.vue";
+import NotificationView from "@/components/Notifications/NotificationView.vue";
 import KeyHandler from "@/components/KeyHandler.vue";
 import OpeningTimes from "@/components/OpeningTimes.vue";
 import News from "@/components/News.vue";
@@ -32,7 +32,7 @@ import api from "@/apiService";
 export default {
   name: "App",
   components: {
-    ActiveMessage,
+    NotificationView,
     KeyHandler,
     OpeningTimes,
     News,
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       keyValid: false,
-      toShow: "news",
+      toShow: "msg",
     };
   },
   methods: {
@@ -76,6 +76,7 @@ export default {
 }
 
 button {
+  cursor: pointer;
   background-color: #e9e9e9;
   border: none;
   border-radius: 5px;

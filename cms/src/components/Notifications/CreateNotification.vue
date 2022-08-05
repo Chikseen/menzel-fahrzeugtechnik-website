@@ -1,69 +1,74 @@
 <template>
-  <div class="createnewMessage">
-    <div class="createnewMessage_date">
-      <div class="createnewMessage_date_selection">
+  <div class="createNewMessage">
+    <ApiResponseComponent :response="apiResponse" />
+    <div class="createNewMessage_date">
+      <div class="createNewMessage_date_selection">
         <label>Von</label>
         <input type="date" v-model="startDate" />
       </div>
-      <div class="createnewMessage_date_selection">
+      <div class="createNewMessage_date_selection">
         <label>Bis</label>
         <input type="date" v-model="endDate" />
       </div>
     </div>
-    <div class="createnewMessage_input">
-      <div class="createnewMessage_input_text">
+    <div class="createNewMessage_input">
+      <div class="createNewMessage_input_text">
         <label>Titel</label>
         <input type="text" v-model="titel" />
       </div>
-      <div class="createnewMessage_input_text">
+      <div class="createNewMessage_input_text">
         <label>Text</label>
         <textarea name="" id="" cols="50" rows="5" v-model="text"></textarea>
       </div>
     </div>
     <div>
-      <div class="createnewMessage_coloerpicker">
+      <div class="createNewMessage_coloerpicker">
         <label>Anzeigen als:</label>
-        <div class="createnewMessage_coloerpicker_boxes">
-          <div class="createnewMessage_coloerpicker_boxes_single">
+        <div class="createNewMessage_coloerpicker_boxes">
+          <div class="createNewMessage_coloerpicker_boxes_single">
             <label>Rot</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'red'">
-              <div v-if="colorselection == 'red'" style="background-color: rgb(241, 50, 50); width: 100%; height: 100%"></div>
+            <div class="createNewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'red'">
+              <div v-if="colorselection == 'red'" style="background-color: #fa3b3b; width: 100%; height: 100%"></div>
             </div>
           </div>
-          <div class="createnewMessage_coloerpicker_boxes_single">
+          <div class="createNewMessage_coloerpicker_boxes_single">
             <label>Grün</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'green'">
-              <div v-if="colorselection == 'green'" style="background-color: rgb(50, 235, 75); width: 100%; height: 100%"></div>
+            <div class="createNewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'green'">
+              <div v-if="colorselection == 'green'" style="background-color: #43fa5b; width: 100%; height: 100%"></div>
             </div>
           </div>
-          <div class="createnewMessage_coloerpicker_boxes_single">
+          <div class="createNewMessage_coloerpicker_boxes_single">
             <label>Weiß</label>
-            <div class="createnewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'white'">
-              <div v-if="colorselection == 'white'" style="background-color: rgb(235, 235, 235); width: 100%; height: 100%"></div>
+            <div class="createNewMessage_coloerpicker_boxes_single_box" @mouseup="colorselection = 'white'">
+              <div v-if="colorselection == 'white'" style="background-color: #d1d1d1; width: 100%; height: 100%"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="createnewMessage_status">
+    <div class="createNewMessage_status">
       <label>Aktiv anzeigen</label>
       <h6>nachrichten werden nur angezeigt wenn ihr status "Aktiv" ist</h6>
       <button @mouseup="showStatus = true" :class="showStatus ? 'active' : ''">Anzeigen</button>
       <button @mouseup="showStatus = false" :class="!showStatus ? 'active' : ''">Nicht Anzeigen</button>
     </div>
-    <button @click="createnewMessage" v-if="id == ''">Nachricht Hinzufügen</button>
+    <button @click="createNewMessage" v-if="id == ''">Nachricht Hinzufügen</button>
     <div v-else>
-      <button @click="createnewMessage">Nachricht überarbeiten</button>
-      <button @click="id = ''">Nachricht neu erstellen</button>
+      <button @click="createNewMessage">Ausgewählte Nachricht überschreiben</button>
+      <button @click="id = ''">Neue Nachricht erstellen</button>
     </div>
     <button @click="resetSelection">Auswahl zurücksetzten</button>
   </div>
 </template>
 
 <script>
-import api from "../apiService";
+import api from "@/apiService";
+import ApiResponseComponent from "@/components/ApiResponseComponent";
 
 export default {
+  components: {
+    ApiResponseComponent,
+  },
   props: {
     setdata: { type: Object, default: () => {} },
   },
@@ -77,10 +82,11 @@ export default {
       showStatus: true,
       created: "",
       id: "",
+      apiResponse: {},
     };
   },
   methods: {
-    async createnewMessage() {
+    async createNewMessage() {
       if (this.id === "") {
         const data = await api.post("Notification", {
           startDate: new Date(this.startDate),
@@ -91,6 +97,7 @@ export default {
           isActive: this.showStatus,
         });
         console.log(data);
+        if (data.status >= 400) this.apiResponse = data;
       } else {
         const data = await api.put("Notification", {
           id: this.id,
@@ -101,7 +108,7 @@ export default {
           color: this.colorselection,
           isActive: this.showStatus,
         });
-        console.log(data);
+        if (data.status >= 400) this.apiResponse = data;
       }
       this.$emit("newData");
     },
@@ -125,7 +132,7 @@ export default {
   watch: {
     setdata() {
       let startDate = new Date(this.setdata.startDate);
-      let endDate = new Date(this.setdata.startDate);
+      let endDate = new Date(this.setdata.endDate);
 
       //yyyy-MM-dd
       this.startDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, "0")}-${String(startDate.getDate()).padStart(2, "0")}`;
@@ -137,82 +144,90 @@ export default {
       this.id = this.setdata.id;
       this.created = this.setdata.created;
     },
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = {};
+      }, 5000);
+    },
   },
 };
 </script>
 
 <style>
-.createnewMessage {
+.createNewMessage {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 750px;
   margin: auto;
 }
-.createnewMessage_date {
+.createNewMessage_date {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: 200px;
 }
-.createnewMessage_date_selection {
+.createNewMessage_date_selection {
   display: flex;
   justify-content: space-between;
   margin: 5px 10px;
 }
-.createnewMessage_date_selection label {
+.createNewMessage_date_selection label {
   margin: auto;
   width: 50px;
 }
-.createnewMessage_input {
+.createNewMessage_input {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.createnewMessage_input_text {
+.createNewMessage_input_text {
   display: flex;
   margin: 5px 10px;
   justify-content: flex-start;
 }
-.createnewMessage_input_text label {
+.createNewMessage_input_text label {
   width: 50px;
 }
-.createnewMessage_input_text input,
+.createNewMessage_input_text input,
 textarea {
   width: 100%;
 }
-.createnewMessage_coloerpicker {
+.createNewMessage_coloerpicker {
   display: flex;
   justify-content: flex-start;
 }
-.createnewMessage_coloerpicker label {
+.createNewMessage_coloerpicker label {
   margin: auto 20px;
 }
-.createnewMessage_coloerpicker_boxes {
+.createNewMessage_coloerpicker_boxes {
   display: flex;
 }
-.createnewMessage_coloerpicker_boxes_single {
+.createNewMessage_coloerpicker_boxes div {
+  border-radius: 5px;
+}
+.createNewMessage_coloerpicker_boxes_single {
   display: flex;
   flex-direction: column;
   width: 40px;
   margin: 0 5px;
 }
-.createnewMessage_coloerpicker_boxes_single label {
+.createNewMessage_coloerpicker_boxes_single label {
   margin: 0;
 }
-.createnewMessage_coloerpicker_boxes_single_box {
+.createNewMessage_coloerpicker_boxes_single_box {
   border: 1px solid;
   width: 40px;
   height: 40px;
 }
-.createnewMessage_status {
+.createNewMessage_status {
   display: flex;
   flex-direction: column;
   margin: 15px;
   margin-right: auto;
   text-align: left;
 }
-.createnewMessage_status label,
+.createNewMessage_status label,
 h6 {
   margin: 0;
 }
