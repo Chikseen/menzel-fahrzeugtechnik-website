@@ -105,7 +105,7 @@ createMenu()
 function createMenu() {
 
   var menu = Menu.buildFromTemplate([
-    /* {
+     {
       label: 'Server',
       submenu: [
         {
@@ -115,7 +115,7 @@ function createMenu() {
           }
         }
       ]
-    } */
+    } 
   ])
   Menu.setApplicationMenu(menu);
 }

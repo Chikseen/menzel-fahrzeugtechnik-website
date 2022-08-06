@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:8081", "http://localhost:8080", "https://dev.menzel-fahrzeugtechnik.de", "https://menzel-fahrzeugtechnik.de")
+                          policy.WithOrigins("http://localhost:8081", "http://localhost:8080", "https://dev.menzel-fahrzeugtechnik.de", "https://menzel-fahrzeugtechnik.de", "app://.")
                             .AllowAnyMethod()
                             .AllowAnyMethod()
                             .WithExposedHeaders("content-disposition")

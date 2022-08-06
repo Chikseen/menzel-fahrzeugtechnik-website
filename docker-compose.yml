@@ -30,6 +30,14 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
       FILE_PATH: ${FILE_PATH}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mfztapi.rule=Host(`api.menzel-fahrzeugtechnik.de`)
+      - traefik.http.routers.mfztapi.entrypoints=https
+      - traefik.http.routers.mfztapi.tls=true
+      - traefik.http.routers.mfztapi.middlewares=external-secure
+      - traefik.http.routers.mfztapi.service=mfztapi-service
+      - traefik.http.services.mfztapi-service.loadbalancer.server.port=7080
     depends_on:
       - postgres
     networks:
