@@ -1,10 +1,10 @@
 version: '3.4'
 
 services:
-  api:
-    build: ./api
+  webclient:
+    build: https://github.com/Chikseen/menzel-fahrzeugtechnik-website.git#feature/dotnet-be:web-client
     ports:
-      - 7080:7080
+      - 8080:80
     environment:
       POSTGRES_HOST: ${POSTGRES_HOST}
       POSTGRES_PORT: ${POSTGRES_PORT}
@@ -12,31 +12,38 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
       FILE_PATH: ${FILE_PATH}
-    depends_on:
-      - postgres
-    networks:
-      - backend
-      - frontend
-    volumes:
-      - postgres-data:/Files/images
-
-  webclient:
-    build: ./web-client
-    ports:
-      - 8080:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mfzt.rule=Host(`menzel-fahrzeugtechnik.de`,`www.menzel-fahrzeugtechnik.de`)
+      - traefik.http.routers.mfzt.entrypoints=https
+      - traefik.http.routers.mfzt.tls=true
+      - traefik.http.routers.mfzt.middlewares=external-secure,mfzt-redirect
+      - traefik.http.middlewares.mfzt-redirect.redirectregex.regex=https://www\.menzel-fahrzeugtechnik\.de
+      - traefik.http.middlewares.mfzt-redirect.redirectregex.replacement=https://menzel-fahrzeugtechnik.de
     depends_on:
       - api
     networks:
       - frontend
+      - proxy
+    volumes:
+      - postgres-data:/Files/images
+    restart: always
 
-  cms:
-    build: ./cms
+  api:
+    build: https://github.com/Chikseen/menzel-fahrzeugtechnik-website.git#feature/dotnet-be:api
     ports:
-      - 8081:80
+      - 7080:7080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mfztapi.rule=Host(`api.menzel-fahrzeugtechnik.de`)
+      - traefik.http.routers.mfztapi.entrypoints=https
+      - traefik.http.routers.mfztapi.tls=true
+      - traefik.http.routers.mfzt.middlewares=external-secure,mfzt-redirect
     depends_on:
-      - api  
+      - postgres
     networks:
       - frontend
+      - backend
 
   postgres:
     image: postgres:latest
@@ -50,21 +57,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - backend
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    user: root
-    ports:
-      - ${PGADMIN_PORT}:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
-    depends_on:
-      - postgres
-    volumes:
-      - postgres-data:/var/lib/pgadmin
-    networks:
-      - backend
       
 volumes:
   postgres-data:
@@ -74,3 +66,5 @@ networks:
     internal: true
   frontend:
     driver: bridge
+  proxy:
+    external: true

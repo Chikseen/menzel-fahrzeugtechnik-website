@@ -28,20 +28,28 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 //app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
-app.UseCors(builder =>
-    builder.WithOrigins("https://localhost:8080/")
-           .AllowAnyHeader()
-    );
+
+if (app.Environment.IsDevelopment())
+    app.UseCors(builder =>
+        builder.WithOrigins("http://localhost:8080/")
+               .AllowAnyHeader()
+        );
+else
+    app.UseCors(builder =>
+        builder.WithOrigins("https://menzel-fahrzeugtechnik.de/")
+               .AllowAnyHeader()
+        );
+
 app.MapControllers();
 
 DatabaseService.dbInit();
