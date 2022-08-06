@@ -16,10 +16,7 @@ services:
     depends_on:
       - api
     networks:
-      - frontend
       - proxy
-    volumes:
-      - postgres-data:/Files/images
     restart: always
 
   api:
@@ -42,9 +39,11 @@ services:
     depends_on:
       - postgres
     networks:
-      - frontend
       - backend
       - proxy
+    volumes:
+      - postgres-data:/Files/images
+    restart: always
 
   postgres:
     image: postgres:latest
@@ -65,7 +64,5 @@ volumes:
 networks:
   backend:
     internal: true
-  frontend:
-    driver: bridge
   proxy:
-    external: true
+    internal: true
