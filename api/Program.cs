@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:8081", "http://localhost:8080", "https://dev.menzel-fahrzeugtechnik.de/", "https://menzel-fahrzeugtechnik.de/")
+                          policy.WithOrigins("http://localhost:8081", "http://localhost:8080", "https://dev.menzel-fahrzeugtechnik.de", "https://menzel-fahrzeugtechnik.de")
                             .AllowAnyMethod()
                             .AllowAnyMethod()
                             .WithExposedHeaders("content-disposition")
@@ -39,16 +39,6 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
-if (app.Environment.IsDevelopment())
-    app.UseCors(builder =>
-        builder.WithOrigins("http://localhost:8080/")
-               .AllowAnyHeader()
-        );
-else
-    app.UseCors(builder =>
-        builder.WithOrigins("https://menzel-fahrzeugtechnik.de/")
-               .AllowAnyHeader()
-        );
 
 app.MapControllers();
 

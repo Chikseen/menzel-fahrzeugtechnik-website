@@ -4,7 +4,7 @@ services:
   webclient:
     build: https://github.com/Chikseen/menzel-fahrzeugtechnik-website.git#feature/dotnet-be:web-client
     ports:
-      - 8080:80
+      - 8080:8080
     labels:
       - traefik.enable=true
       - traefik.http.routers.mfzt.rule=Host(`menzel-fahrzeugtechnik.de`,`www.menzel-fahrzeugtechnik.de`)
@@ -30,12 +30,6 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DATABASE}
       FILE_PATH: ${FILE_PATH}
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.mfztapi.rule=Host(`api.menzel-fahrzeugtechnik.de`)
-      - traefik.http.routers.mfztapi.entrypoints=https
-      - traefik.http.routers.mfztapi.tls=true
-      - traefik.http.routers.mfzt.middlewares=external-secure,mfzt-redirect
     depends_on:
       - postgres
     networks:
