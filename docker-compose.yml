@@ -65,4 +65,4 @@ networks:
   backend:
     internal: true
   proxy:
-    internal: true
+    external: true
