@@ -5,13 +5,6 @@ services:
     build: https://github.com/Chikseen/menzel-fahrzeugtechnik-website.git#feature/dotnet-be:web-client
     ports:
       - 8080:80
-    environment:
-      POSTGRES_HOST: ${POSTGRES_HOST}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
-      FILE_PATH: ${FILE_PATH}
     labels:
       - traefik.enable=true
       - traefik.http.routers.mfzt.rule=Host(`menzel-fahrzeugtechnik.de`,`www.menzel-fahrzeugtechnik.de`)
@@ -33,6 +26,13 @@ services:
     build: https://github.com/Chikseen/menzel-fahrzeugtechnik-website.git#feature/dotnet-be:api
     ports:
       - 7080:7080
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+      FILE_PATH: ${FILE_PATH}
     labels:
       - traefik.enable=true
       - traefik.http.routers.mfztapi.rule=Host(`api.menzel-fahrzeugtechnik.de`)
@@ -44,6 +44,7 @@ services:
     networks:
       - frontend
       - backend
+      - proxy
 
   postgres:
     image: postgres:latest
