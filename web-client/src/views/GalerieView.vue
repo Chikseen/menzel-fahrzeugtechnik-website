@@ -1,9 +1,9 @@
 <template>
-  <div v-if="allMessages">
-    <div v-for="(message, index) in allMessages" :key="index">
+  <div v-if="news">
+    <div v-for="(message, index) in news" :key="index">
       <NewsMessage :message="message" />
     </div>
-    <button @click="get">Mehr</button>
+    <button @click="loadMoreNews">Mehr</button>
   </div>
 </template>
 <script>
@@ -17,31 +17,26 @@ export default {
   },
   data() {
     return {
-      allMessages: [],
-      top: 0,
-      count: 5,
+      limit: 5,
+      offset: 0,
+      news: [],
     };
   },
   methods: {
-    async get() {
-      const resp = await api.get("news/get", {
-        top: this.top,
-        count: this.count,
+    async loadNews() {
+      const resp = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
+      this.news = this.news.concat(resp);
+    },
+    async loadMoreNews() {
+      this.offset += this.limit;
+      const newNews = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
+      newNews.forEach((item) => {
+        this.news.push(item);
       });
-      this.top = this.top + 5;
-      this.count = this.count + 5;
-      console.log("resp", resp);
-      this.allMessages = this.allMessages.concat(resp);
     },
   },
   mounted() {
-    this.get();
+    this.loadNews();
   },
 };
 </script>
-
-<style>
-.tmp {
-  max-width: 500px;
-}
-</style>

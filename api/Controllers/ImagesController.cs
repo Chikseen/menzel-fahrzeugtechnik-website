@@ -35,15 +35,14 @@ public class ImagesController : ControllerBase
     }
 
     [HttpPost]
-    public Object uploadImage(List<IFormFile> files)
+    public List<String> uploadImage(List<IFormFile> files)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
-            imagesService.uploadImage(files, path);
-            return new { staus = true };
+            return imagesService.uploadImage(files, path);
         }
         else
-            return new { staus = false };
+            return new List<string>();
     }
 
 

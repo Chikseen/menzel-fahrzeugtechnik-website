@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <h2>{{ message.titel }}</h2>
+  <div class="news_wrapper">
+    <div class="news_header">
+      <h2>{{ message.titel }}</h2>
+      <h6>Erstellt am: {{ toDate(message.created) }}</h6>
+    </div>
     <p>{{ message.text }}</p>
-    <h6>Erstellt am: {{ message.date }}</h6>
     <div class="news_image_wrapper">
-      <div v-for="(img, index) in message.imageIds" :key="index + 'sec'" class="news_image_container">
-        <a class="news_image" :href="url + img"> <img :src="url + img" alt="" /></a>
-        <span class="news_image_overlay">
-          <p class="news_image_overlay_text">{{ img }}</p></span
-        >
+      <div v-for="img in message.images" :key="img + 2" class="news_image">
+        <a class="news_image" :href="imageUrl + img"> <img :src="imageUrl + img" alt="" /></a>
       </div>
     </div>
     <hr />
@@ -16,14 +15,20 @@
 </template>
 
 <script>
+import date from "@/date";
+
 export default {
   props: {
     message: { type: Object, default: () => {} },
   },
+  methods: {
+    toDate(dateT) {
+      return date.dateObjectToDDMMYYYY(dateT);
+    },
+  },
   computed: {
-    url() {
-      if (process.env.NODE_ENV == "development") return "http://192.168.2.100:7081?id=";
-      else return "https://image.menzel-fahrzeugtechnik.de?id=";
+    imageUrl() {
+      return `${process.env.VUE_APP_API}/Images?name=`;
     },
   },
 };
@@ -31,59 +36,33 @@ export default {
 
 <style lang="scss">
 .news {
+  &_wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &_image {
-    margin: auto;
-
-    img {
-      max-width: 450px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 25px 0 #38383880;
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-
-    &_overlay {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      align-content: center;
-      pointer-events: none;
-      opacity: 0;
-      transition: all 0.3;
-
-      &_text {
-        width: auto;
-        height: auto;
-        margin: auto;
-        background-color: rgba(240, 255, 255, 0.884);
-        padding: 5px;
-        border-radius: 5px;
-        font-weight: 900;
-      }
-    }
-
-    &:hover {
-      filter: blur(2px) grayscale(0.75);
-    }
+    border-radius: 5px;
+    overflow: auto;
 
     &_wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 15px;
-      max-width: 1500px;
-      width: auto;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 25px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    &_container {
-      position: relative;
-      display: flex;
-      justify-content: center;
+    img {
+      max-width: 250px;
+      max-height: 250px;
     }
   }
 }
@@ -93,30 +72,5 @@ export default {
 }
 
 @media only screen and (max-width: 460px) {
-  .news {
-    &_image {
-      margin: auto;
-
-      img {
-        max-width: 100px;
-      }
-
-      &_wrapper {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 2px;
-        max-width: 100%;
-        width: auto;
-        margin: 0 auto;
-      }
-
-      &_container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        max-width: 100%;
-      }
-    }
-  }
 }
 </style>

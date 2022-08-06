@@ -152,6 +152,24 @@ public static class DatabaseService
             }
             con.Close();
 
+            // __________ NEWS ORDER TRIGGER__________
+            try
+            {
+                con.Open();
+                var sql = "CREATE TABLE IF NOT EXISTS News (id SERIAL PRIMARY KEY, created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP, titel VARCHAR(255), text TEXT NOT NULL, images VARCHAR(255)[])";
+                Console.WriteLine(sql);
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                NpgsqlDataReader dr = command.ExecuteReader();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Error While creating News Order Trigger");
+                Console.WriteLine(e);
+                con.Close();
+                return "error_creating_trigger_news_order";
+            }
+            con.Close();
+
             // __________ IMAGES __________
             try
             {

@@ -92,8 +92,8 @@
           <div>
             <h4>Zeitlich begränzt: {{ item.isTimeLimited ? "Ja" : "Nein" }}</h4>
             <div v-if="item.isTimeLimited">
-              <p><bold>Wird Angezeigt ab: </bold>{{ item.startDate }}</p>
-              <p><bold>Wird Angezeigt bis: </bold>{{ item.endDate }}</p>
+              <p>Wird Angezeigt ab:{{ item.startDate }}</p>
+              <p>Wird Angezeigt bis: {{ item.endDate }}</p>
             </div>
           </div>
           <div>

@@ -57,7 +57,7 @@
       <button @click="createNewMessage">Ausgewählte Nachricht überschreiben</button>
       <button @click="id = ''">Neue Nachricht erstellen</button>
     </div>
-    <button @click="resetSelection">Auswahl zurücksetzten</button>
+    <button class="removeButton" @click="resetSelection">Auswahl zurücksetzten</button>
   </div>
 </template>
 

@@ -1,7 +1,8 @@
 public class ImagesService
 {
-    public String uploadImage(List<IFormFile> files, String path)
+    public List<String> uploadImage(List<IFormFile> files, String path)
     {
+        List<String> addedImages = new List<string>();
         long size = files.Sum(f => f.Length);
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
@@ -15,15 +16,16 @@ public class ImagesService
             {
                 upload.CopyTo(fs);
                 String sql = $"INSERT INTO Images(titel) VALUES ('{fileName}');";
+                addedImages.Add(fileName);
                 List<List<String>> data = DatabaseService.query(sql);
             }
         }
-        return "hi";
+        return addedImages;
     }
 
     public List<String> getAllImages(int limit, int offset)
     {
-        String sql = $"SELECT titel FROM Images LIMIT {limit} OFFSET {offset};";
+        String sql = $"SELECT titel FROM Images ORDER BY created DESC LIMIT {limit} OFFSET {offset};";
         List<List<String>> data = DatabaseService.query(sql);
         List<String> paths = new List<String>();
         Console.WriteLine(data.Count);

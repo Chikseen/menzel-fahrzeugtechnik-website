@@ -31,5 +31,29 @@ public class NewsController : ControllerBase
             return new { staus = false };
     }
 
+    [HttpPut]
+    public Object editNews(NewsEdit news)
+    {
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            newsService.editNews(news);
+            return new { staus = true };
+        }
+        else
+            return new { staus = false };
+    }
 
+    [HttpDelete]
+    public Object deleteNews(NewsId news)
+    {
+        Console.WriteLine("0");
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            Console.WriteLine("05");
+            newsService.deleteNews(news.id);
+            return new { staus = true };
+        }
+        else
+            return new { staus = false };
+    }
 }

@@ -16,7 +16,7 @@
       </div>
       <p>{{ message.text }}</p>
     </div>
-    <button @mouseup="$emit('delete', message.id)">Entfernen</button>
+    <button class="removeButton" @mouseup="$emit('delete', message.id)">Entfernen</button>
   </div>
 </template>
 

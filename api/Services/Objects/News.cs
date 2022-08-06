@@ -28,3 +28,14 @@ public class NewsId
 {
     public int id { get; set; }
 }
+
+// IDK why cant use "News"
+public class NewsEdit
+{
+    public int id { get; set; }
+    public DateTime created { get; set; }
+    public string? titel { get; set; }
+    public string? text { get; set; }
+    public String[] images { get; set; }
+}
+

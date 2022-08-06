@@ -8,9 +8,11 @@
       <input type="submit" value="Submit" />
     </form>
     <button @click="loadMore">LoadMore</button>
-    <div v-for="image in images" :key="image" class="galerieImages">
-      <p>{{ image }}</p>
-      <img :src="imageUrl + image" alt="" @click="deleteImage(image)" />
+    <div class="galeriesImageWrapper">
+      <div v-for="image in images" :key="image" class="galeriesImage">
+        <p>{{ image }}</p>
+        <img class="removeButton" :src="imageUrl + image" alt="" @click="deleteImage(image)" />
+      </div>
     </div>
   </div>
 </template>
@@ -72,10 +74,24 @@ export default {
 </script>
 
 <style>
-.galerieImages {
+.galeriesImageWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.galeriesImage {
+  box-shadow: 2px 2px 10px 0 #4d4d4d36;
+  border-radius: 5px;
+  max-height: 300px;
   max-width: 400px;
 }
-.galerieImages img {
-  max-width: 400px;
+
+.galeriesImage img{
+  max-height: 200px;
+  max-width: 300px;
 }
 </style>

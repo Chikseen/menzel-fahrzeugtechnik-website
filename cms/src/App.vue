@@ -9,11 +9,11 @@
       <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">
-      <NotificationView v-if="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
-      <KeyHandler v-if="toShow == 'key'" :keyStatus="keyValid" @keyStatus="keyValid = $event" />
-      <OpeningTimes v-if="toShow == 'open'" />
-      <News v-if="toShow == 'news'" />
-      <Galerie v-if="toShow == 'galerie'" />
+      <NotificationView v-show="toShow == 'msg'" msg="Welcome to Your Vue.js App" />
+      <KeyHandler v-show="toShow == 'key'" :keyStatus="keyValid" @keyStatus="keyValid = $event" />
+      <OpeningTimes v-show="toShow == 'open'" />
+      <NewsView v-show="toShow == 'news'" />
+      <Galerie v-show="toShow == 'galerie'" />
     </div>
     <div v-else>
       <KeyHandler :keyStatus="keyValid" @keyStatus="keyValid = $event" />
@@ -25,7 +25,7 @@
 import NotificationView from "@/components/Notifications/NotificationView.vue";
 import KeyHandler from "@/components/KeyHandler.vue";
 import OpeningTimes from "@/components/OpeningTimes.vue";
-import News from "@/components/News.vue";
+import NewsView from "@/components/News/NewsView.vue";
 import Galerie from "@/components/Galerie.vue";
 import api from "@/apiService";
 
@@ -35,13 +35,13 @@ export default {
     NotificationView,
     KeyHandler,
     OpeningTimes,
-    News,
+    NewsView,
     Galerie,
   },
   data() {
     return {
       keyValid: false,
-      toShow: "msg",
+      toShow: "news",
     };
   },
   methods: {
@@ -87,6 +87,12 @@ button {
   font-family: "BIZ UDPMincho", serif;
   font-size: 0.8rem;
 }
+
+.removeButton:hover {
+  background-color: #e71c1c;
+  box-shadow: 0 0 10px 5px #e71c1c5e;
+}
+
 input {
   border-radius: 5px;
   border: 0.5px solid rgba(151, 151, 151, 0.479);
