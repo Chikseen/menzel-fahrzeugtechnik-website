@@ -49,7 +49,7 @@ public class OpeninghoursService
 
     public Object editOpeninghours(Openinghours payload)
     {
-        String sql = $"UPDATE Openinghours Set days = '{payload.days}', isOpen = {payload.isOpen}, open = '{payload.open.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', close = '{payload.close.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', showCutomText = {payload.showCutomText}, customText = '{payload.customText}', isTimeLimited = {payload.isTimeLimited}, startDate = '{payload.startDate.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', endDate = '{payload.endDate.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}' WHERE id = {payload.id}";
+        String sql = $"UPDATE Openinghours Set days = '{payload.days}', isOpen = {payload.isOpen}, open = '{payload.open.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', close = '{payload.close.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', showCutomText = {payload.showCutomText}, customText = '{payload.customText}', isTimeLimited = {payload.isTimeLimited}, startDate = '{payload.startDate.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', endDate = '{payload.endDate.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")}', orderposition = {payload.orderposition} WHERE id = {payload.id}";
         List<List<String>> data = DatabaseService.query(sql);
 
         return new { st = "st" };

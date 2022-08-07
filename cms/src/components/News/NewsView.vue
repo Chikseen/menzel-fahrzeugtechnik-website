@@ -25,6 +25,7 @@
       </div>
       <hr />
     </div>
+    <button @click="loadMoreMessages">Mehr Laden</button>
   </div>
 </template>
 
@@ -44,7 +45,7 @@ export default {
       currenttitel: "",
       currenttext: "",
       offset: 0,
-      limit: 10,
+      limit: 5,
 
       currentimages: [],
       setdata: {},
@@ -67,6 +68,13 @@ export default {
     },
     async loadMessages() {
       this.messages = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
+    },
+    async loadMoreMessages() {
+      this.offset += this.limit;
+      const newNews = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
+      newNews.forEach((item) => {
+        this.messages.push(item);
+      });
     },
     async deleteNews(id) {
       this.messages = await api.delete("News", { id: id });

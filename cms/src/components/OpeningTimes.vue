@@ -13,7 +13,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>isOpen</label>
+              <label>Ist Geöffnet</label>
               <div :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.isOpen = !selectedEntry.isOpen"></div>
             </div>
           </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Zeitlich begränzt</label>
+              <label>Zeitlich begränzt anzeigen</label>
               <div
                 :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"
@@ -221,6 +221,8 @@ export default {
   gap: 25px;
   padding: 25px;
   height: 750px;
+  margin: 0 auto;
+  max-width: 1250px;
 }
 .OHcontainer {
   box-shadow: 0 0 10px 1px #1b1b1b18;
@@ -246,6 +248,8 @@ export default {
   height: 100%;
   overflow-y: scroll;
   padding: 10px;
+  padding-left: 25px;
+  border-left: 1px grey solid;
 }
 .activeSpan {
   background-color: green;
