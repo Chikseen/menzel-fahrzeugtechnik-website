@@ -3,8 +3,9 @@
     <div class="header" @click="testclick">
       <WheelIcon class="header_icon" />
       <div class="header_quickConntact header_quickConntact_timeing" @mouseup="$router.push('/contact')">
-        <p>{{ isOpen }}</p>
-        <p>{{ nextOpen }}</p>
+        <p>{{ openingState.status }}</p>
+        <p>{{ openingState.text }}</p>
+        <p>{{ openingState.time }}</p>
       </div>
       <nav class="header_nav">
         <router-link class="header_nav_route" to="/home">
@@ -54,7 +55,11 @@
             <h1>Menzel</h1>
             <h1>Fahrzeugtechnik</h1>
           </div>
-          <h5>{{ isOpen }}</h5>
+          <div>
+            <p>{{ openingState.status }}</p>
+            <p>{{ openingState.text }}</p>
+            <p>{{ openingState.time }}</p>
+          </div>
         </div>
         <ArrowIcon :class="['header_nav_menu_icon', menuOpen ? 'header_nav_menu_icon_open' : '']" />
         <Transition name="header-menu">
@@ -106,6 +111,7 @@
 <script>
 import WheelIcon from "@/assets/icons/WheelIcon.vue";
 import ArrowIcon from "@/assets/icons/ArrowIcon.vue";
+import date from "@/date.js";
 
 import api from "../apiService";
 
@@ -116,22 +122,63 @@ export default {
   },
   data() {
     return {
-      isOpen: "",
-      nextOpen: "",
       menuOpen: false,
+      weekdayOpen: [],
     };
   },
   computed: {
     isService() {
       return this.$router.currentRoute.value.matched.some((item) => item.path == "/service/");
     },
+    openingState() {
+      const now = new Date();
+      const today = (now.getDay() + 6) % 7;
+      const days = [...this.weekdayOpen];
+      let state = {};
+
+      if (days[today]) {
+        const open = date.dateObjectToHHMM(days[today].open);
+        const close = date.dateObjectToHHMM(days[today].close);
+        const nowTime = date.dateObjectToHHMM(now);
+
+        if (open <= nowTime && close >= nowTime) {
+          state.status = "Geöffnet";
+          state.text = "schließt um";
+          state.time = close;
+        } else {
+          state.status = "Geschlossen";
+          state.text = "öffnet um";
+          state.time = open;
+        }
+      } else {
+        for (let i = today; i < today + 7; i++) {
+          const nextOpenDay = i % 7;
+          if (days[nextOpenDay]) {
+            const open = date.dateObjectToHHMM(days[nextOpenDay].open);
+            const close = date.dateObjectToHHMM(days[nextOpenDay].close);
+            const nowTime = date.dateObjectToHHMM(now);
+
+            if (open <= nowTime && close >= nowTime) {
+              state.status = "Geöffnet";
+              state.text = "schließt um";
+              state.time = close;
+            } else {
+              state.status = "Geschlossen";
+              state.text = `öffnet am ${days[nextOpenDay].name} um`;
+              state.time = open;
+            }
+            break;
+          }
+        }
+      }
+      return state;
+    },
   },
   methods: {
     async getData() {
-      const data = await api.get("openTimes/get", {});
+      const data = await api.get("Openinghours/Weekdays");
       this.$store.commit("setOpenTime", data);
-      this.isOpen = data.isOpen;
-      this.nextOpen = data.nextOpen;
+      this.weekdayOpen = data;
     },
     async testclick(e) {},
   },
@@ -230,6 +277,7 @@ export default {
     max-width: 200px;
     color: rgb(185, 185, 185);
     transition: all 0.25s;
+    font-size: 0.8rem;
 
     p {
       margin: 2px;

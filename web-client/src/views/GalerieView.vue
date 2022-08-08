@@ -1,9 +1,15 @@
 <template>
-  <div v-if="news">
-    <div v-for="(message, index) in news" :key="index">
-      <NewsMessage :message="message" />
+  <div>
+    <div class="pageTitel pageTitel_noSpace">
+      <h1>Galer</h1>
+      <h1>ie</h1>
     </div>
-    <button @click="loadMoreNews">Mehr</button>
+    <div v-if="news">
+      <div v-for="(message, index) in news" :key="index">
+        <NewsMessage :message="message" />
+      </div>
+      <button @click="loadMoreNews">Mehr</button>
+    </div>
   </div>
 </template>
 <script>

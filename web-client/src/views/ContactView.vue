@@ -9,7 +9,7 @@
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
           <div class="contactView_openTimes_content_data_opening_wrapper" v-if="openTimes[0]">
-            <div v-for="item in openTimes" :key="item.id">
+            <div v-for="item in openTimes" :key="item.id" class="contactView_openTimes_content_data_opening">
               <!-- {{ item }} -->
               <p v-if="!item.showCutomText">{{ item.days }}</p>
               <p v-if="!item.showCutomText">{{ convertToTime(item.open) }} - {{ convertToTime(item.close) }}</p>
@@ -36,6 +36,7 @@
 
 <script>
 import api from "@/apiService";
+import date from "@/date.js";
 import MapComponent from "@/components/MapComponent";
 
 export default {
@@ -51,39 +52,9 @@ export default {
     async getTimes() {
       const data = await api.get("Openinghours");
       this.openTimes = data;
-      //Multi User debuging
-      /* let counter = 1;
-      while (counter > 0) {
-        await this.getTimes();
-      } */
-
-      /*       let allOpenDays = [];
-      data.weekdays.forEach((day) => {
-        if (day.isOpen) allOpenDays.push(day);
-      });
-
-      let squshed = [];
-      let diffrent = [];
-      this.openTimes = [];
-
-      if (allOpenDays.length > 1) {
-        for (let i = 1; i < allOpenDays.length; i++) {
-          if (allOpenDays[i].timeStart == allOpenDays[i - 1].timeStart && allOpenDays[i].timeEnd == allOpenDays[i - 1].timeEnd) {
-            if (i == 1) {
-              squshed.push(allOpenDays[i - 1]);
-            }
-            squshed.push(allOpenDays[i]);
-          } else {
-            diffrent.push(allOpenDays[i]);
-          }
-        }
-      }
-      this.openTimes.push(squshed);
-      this.openTimes.push(diffrent); */
     },
     convertToTime(time) {
-      const date = new Date(time);
-      return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+      return date.dateObjectToHHMM(time);
     },
   },
   mounted() {
@@ -110,13 +81,15 @@ export default {
         margin: 10px;
         flex-direction: column;
         display: flex;
-        width: 150px;
+        width: 100%;
 
         &_opening {
           margin: 5px;
+          min-width: 120px;
 
           &_wrapper {
             display: flex;
+            justify-content: space-evenly;
             width: calc(100% - 20px);
           }
 

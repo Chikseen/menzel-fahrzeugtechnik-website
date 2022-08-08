@@ -46,6 +46,11 @@ public static class DatabaseService
                         string[] myArray = dr.GetFieldValue<string[]>(i);
                         rows.Add(string.Join(",#,", myArray));
                     }
+                    else if (dr[i].ToString() == "System.Int32[]")
+                    {
+                        int[] myArray = dr.GetFieldValue<int[]>(i);
+                        rows.Add(string.Join(",#,", myArray));
+                    }
                     else
                     {
                         rows.Add($"{dr[i]}");
@@ -120,7 +125,7 @@ public static class DatabaseService
             try
             {
                 con.Open();
-                var sql = "CREATE TABLE IF NOT EXISTS Openinghours (id SERIAL PRIMARY KEY, days VARCHAR(255), isOpen boolean, open TIMESTAMP, close TIMESTAMP, showCutomText boolean, customText VARCHAR(255), isTimeLimited boolean, startDate TIMESTAMP, endDate TIMESTAMP, orderposition INT);";
+                var sql = "CREATE TABLE IF NOT EXISTS Openinghours (id SERIAL PRIMARY KEY, days VARCHAR(255), isOpen boolean, open TIMESTAMP, close TIMESTAMP, showCutomText boolean, customText VARCHAR(255), isTimeLimited boolean, startDate TIMESTAMP, endDate TIMESTAMP, orderposition INT, allowWeekdays boolean, weekdays int[]);";
                 Console.WriteLine(sql);
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader dr = command.ExecuteReader();

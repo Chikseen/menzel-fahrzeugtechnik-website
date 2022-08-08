@@ -2,16 +2,6 @@ using System.Net.Http;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 
-/* 
-WEEKDAY PROBLEM SOLUTION
-Every entry should have the prop "isActive"
-and a prop with "allowWeekdayControll"
-with extra table wich should be controled
--> only the first active entry should be able to show the days (No matter if complete or not) 
--> if one entry has mon - wed and other hs don - fri the one with lower pos has higher prio
--> is no data mark as closed
- */
-
 [ApiController]
 [Route("Openinghours")]
 public class OpeninghoursController : ControllerBase
@@ -43,6 +33,12 @@ public class OpeninghoursController : ControllerBase
             return new List<Openinghours>();
     }
 
+    [HttpGet("Weekdays")]
+    public OpeninghoursWeekdays[] getWeekdays()
+    {
+        return openinghoursService.getWeekdays();
+    }
+
     [HttpPost]
     public Object createNewDay(NewOpeninghours newOpeninghoursService)
     {
@@ -56,7 +52,7 @@ public class OpeninghoursController : ControllerBase
     }
 
     [HttpPut]
-    public Object editOpeninghours(Openinghours openinghours)
+    public Object editOpeninghours(EditOpeninghours openinghours)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {

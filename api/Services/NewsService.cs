@@ -34,11 +34,8 @@ public class NewsService
 
     public List<News> editNews(NewsEdit payload)
     {
-        Console.WriteLine("1");
         List<String> images = payload.images.Select(image => $"'{image}'").ToList();
-        Console.WriteLine("2");
         string imageString = string.Join(",", images);
-        Console.WriteLine("3");
         String sql = "";
         if (imageString == "")
             sql = $"UPDATE News Set titel = '{payload.titel}', text = '{payload.text}' WHERE id = {payload.id}";

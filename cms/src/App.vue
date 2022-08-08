@@ -24,7 +24,7 @@
 <script>
 import NotificationView from "@/components/Notifications/NotificationView.vue";
 import KeyHandler from "@/components/KeyHandler.vue";
-import OpeningTimes from "@/components/OpeningTimes.vue";
+import OpeningTimes from "@/components/Openinghours/OpeningTimes.vue";
 import NewsView from "@/components/News/NewsView.vue";
 import Galerie from "@/components/Galerie.vue";
 import api from "@/apiService";

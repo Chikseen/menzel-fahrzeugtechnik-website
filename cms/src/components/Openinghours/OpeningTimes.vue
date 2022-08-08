@@ -14,16 +14,16 @@
           <div class="OHcontainer">
             <div class="newOH">
               <label>Ist Geöffnet</label>
-              <div :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.isOpen = !selectedEntry.isOpen"></div>
+              <span :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.isOpen = !selectedEntry.isOpen"></span>
             </div>
           </div>
           <div class="OHcontainer">
             <div class="newOH">
               <label>{{ selectedEntry.showCutomText ? "Eigener Text" : "Von - Bis" }}</label>
-              <div
+              <span
                 :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"
-              ></div>
+              ></span>
             </div>
             <div class="newOH" v-if="!selectedEntry.showCutomText">
               <label>Von</label>
@@ -40,11 +40,29 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
+              <label>Wochtags bestimmung Erlauben</label>
+              <span
+                :class="selectedEntry.allowWeekdays ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.allowWeekdays = !selectedEntry.allowWeekdays"
+              ></span>
+            </div>
+            <div v-if="selectedEntry.allowWeekdays" class="OHcontainer_Weekdayselection">
+              <span :class="selectedEntry.weekdays.includes(0) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(0)"><p>M</p></span>
+              <span :class="selectedEntry.weekdays.includes(1) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(1)"><p>D</p></span>
+              <span :class="selectedEntry.weekdays.includes(2) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(2)"><p>M</p></span>
+              <span :class="selectedEntry.weekdays.includes(3) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(3)"><p>D</p></span>
+              <span :class="selectedEntry.weekdays.includes(4) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(4)"><p>F</p></span>
+              <span :class="selectedEntry.weekdays.includes(5) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(5)"><p>S</p></span>
+              <span :class="selectedEntry.weekdays.includes(6) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(6)"><p>S</p></span>
+            </div>
+          </div>
+          <div class="OHcontainer">
+            <div class="newOH">
               <label>Zeitlich begränzt anzeigen</label>
-              <div
+              <span
                 :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"
-              ></div>
+              ></span>
             </div>
             <div class="newOH" v-if="selectedEntry.isTimeLimited">
               <label>Start Date</label>
@@ -62,7 +80,7 @@
             </div>
           </div>
         </div>
-        <button @click="selectedEntry = defaultEntry">Auswahl Zurücksetzten</button>
+        <button @click="selectedEntry = { ...defaultEntry }">Auswahl Zurücksetzten</button>
         <div>
           <button @click="saveEntry" v-if="selectedEntry.id">Eintrag Überarbeiten</button>
           <button @click="deleteEntry" v-if="selectedEntry.id">Eintrag entfernen</button>
@@ -70,36 +88,23 @@
         </div>
       </div>
       <div class="existingOH">
+        <div class="OHReadWeekdaysWrapper">
+          <div class="OHReadWeekdaysState">
+            <p>{{ openingState.status }}</p>
+            <p>{{ openingState.text }}</p>
+            <p>{{ openingState.time }}</p>
+          </div>
+          <div v-for="(item, index) in weekdayOpen" :key="index">
+            <div v-if="item != null">
+              <p>{{ item.name }}</p>
+              <p>{{ toTime(item.open) }}</p>
+              <p>{{ toTime(item.close) }}</p>
+            </div>
+          </div>
+        </div>
         <h2>Alle Einträge</h2>
-        <div class="opneingTimes_selction" v-for="item in oh" :key="item.id" @click="selectedEntry = item">
-          <div>
-            <h4>Titel</h4>
-            <p>{{ item.days }}</p>
-          </div>
-          <div>
-            <h4>Geöffnet: {{ item.isOpen ? "Ja" : "Nein" }}</h4>
-            <div v-if="item.isOpen">
-              <h5>Zeige Text oder Zeit: {{ item.showCustomText ? "Text" : "Zeit" }}</h5>
-              <div v-if="!item.showCutomText">
-                <p>Öffnet: {{ item.open }}</p>
-                <p>Schliest: {{ item.close }}</p>
-              </div>
-              <div v-else>
-                <p>{{ item.customText }}</p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h4>Zeitlich begränzt: {{ item.isTimeLimited ? "Ja" : "Nein" }}</h4>
-            <div v-if="item.isTimeLimited">
-              <p>Wird Angezeigt ab:{{ item.startDate }}</p>
-              <p>Wird Angezeigt bis: {{ item.endDate }}</p>
-            </div>
-          </div>
-          <div>
-            <h4>Position</h4>
-            <p>{{ item.orderposition }}</p>
-          </div>
+        <div v-for="item in oh" :key="item.id" @click="selectedEntry = item">
+          <ShowCurrentOpeninghours :item="item" />
         </div>
       </div>
     </div>
@@ -108,10 +113,14 @@
 
 <script>
 import api from "@/apiService";
+import date from "@/date.js";
+import ShowCurrentOpeninghours from "@/components/Openinghours/ShowCurrentOpeninghours";
 
 export default {
   name: "OpeningTimes",
-  components: {},
+  components: {
+    ShowCurrentOpeninghours,
+  },
   props: {},
   data() {
     return {
@@ -124,11 +133,14 @@ export default {
         close: new Date(),
         showCutomText: false,
         customText: "Wird angezeigt wenn ausgewählt",
-        isTimeLimited: true,
+        isTimeLimited: false,
         startDate: new Date(),
         endDate: new Date(),
         orderposition: -1,
+        allowWeekdays: false,
+        weekdays: [],
       },
+      weekdayOpen: [],
     };
   },
   computed: {
@@ -142,17 +154,58 @@ export default {
     },
     startDate() {
       const date = new Date(this.selectedEntry.startDate);
-      return `${date.getFullYear()}-${String(date.getMonth()).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
     },
     endDate() {
       const date = new Date(this.selectedEntry.endDate);
-      return `${date.getFullYear()}-${String(date.getMonth() + 2).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    },
+    openingState() {
+      const now = new Date();
+      const today = (now.getDay() + 6) % 7;
+      const days = [...this.weekdayOpen];
+      let state = {};
+
+      if (days[today]) {
+        const open = this.toTime(days[today].open);
+        const close = this.toTime(days[today].close);
+        const nowTime = this.toTime(now);
+
+        if (open <= nowTime && close >= nowTime) {
+          state.status = "Geöffnet";
+          state.text = "schließt um";
+          state.time = close;
+        } else {
+          state.status = "Geschlossen";
+          state.text = "öffnet um";
+          state.time = open;
+        }
+      } else {
+        for (let i = today; i < today + 7; i++) {
+          const nextOpenDay = i % 7;
+          if (days[nextOpenDay]) {
+            const open = this.toTime(days[nextOpenDay].open);
+            const close = this.toTime(days[nextOpenDay].close);
+            const nowTime = this.toTime(now);
+
+            if (open <= nowTime && close >= nowTime) {
+              state.status = "Geöffnet";
+              state.text = "schließt um";
+              state.time = close;
+            } else {
+              state.status = "Geschlossen";
+              state.text = `öffnet am ${days[nextOpenDay].name} um`;
+              state.time = open;
+            }
+            break;
+          }
+        }
+      }
+      return state;
     },
   },
   methods: {
     setTime(e, key) {
-      console.log(e.target.value);
-      console.log(e.target.value.match(/[0-9]*:/)[0].replace(/:/, ""), e.target.value.match(/:[0-9]*/)[0]);
       const date = new Date(
         null,
         null,
@@ -164,56 +217,75 @@ export default {
       this.selectedEntry[key] = date;
     },
     setDate(e, key) {
-      console.log(e.target.value);
       const date = new Date(e.target.value);
-      console.log("time", date);
       this.selectedEntry[key] = date;
+    },
+    weekdayToggle(day) {
+      if (this.selectedEntry.weekdays.includes(day)) this.selectedEntry.weekdays.splice(this.selectedEntry.weekdays.indexOf(day), 1);
+      else this.selectedEntry.weekdays.push(day);
+    },
+    toDate(dateT) {
+      return date.dateObjectToDDMMYYYY(dateT);
+    },
+    toTime(dateT) {
+      return date.dateObjectToHHMM(dateT);
+    },
+    isTimeOutOfRange(start, end) {
+      const now = new Date();
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      return !(new Date(startDate) <= now && new Date(endDate) >= now);
     },
     async getData() {
       this.oh = [];
       const oh = await api.get("Openinghours/All");
       this.oh = oh;
-      //Multi User debuging
-      /*       let counter = 1;
-      while (counter > 0) {
-        await this.getData();
-      } */
+    },
+    async getWeekdayOpen() {
+      this.weekdayOpen = await api.get("Openinghours/Weekdays");
     },
     async saveEntry() {
       if (this.selectedEntry.id) await api.put("Openinghours", this.selectedEntry);
       else await api.post("Openinghours", this.selectedEntry);
       this.getData();
+      this.getWeekdayOpen();
     },
     async deleteEntry() {
       await api.delete("Openinghours", { id: this.selectedEntry.id });
       this.getData();
-      this.selectedEntry = this.defaultEntry;
+      this.selectedEntry = { ...this.defaultEntry };
+      this.getWeekdayOpen();
     },
   },
   mounted() {
+    this.getWeekdayOpen();
     this.getData();
-    this.selectedEntry = this.defaultEntry;
+    this.selectedEntry = { ...this.defaultEntry };
   },
 };
 </script>
 
 <style>
-.isActive {
-  background-color: rgb(218, 245, 178);
-}
 .opneingTimes_selction {
   display: flex;
+
   gap: 25px;
   margin: 15px auto;
-  padding: 0 15px;
+  padding: 15px;
   max-width: 1000px;
   justify-content: center;
   box-shadow: 0 0 10px 1px #1b1b1b36;
   border-radius: 10px;
 }
+.opneingTimes_selction > div {
+  flex: 1 1 20%;
+}
 .opneingTimes_selction_newTime {
   display: flex;
   margin: 0 5px;
+}
+.opneingTimes_selction h4 {
+  margin: 5px;
 }
 .OHMain {
   display: flex;
@@ -244,6 +316,10 @@ export default {
   align-items: center;
   gap: 10px;
 }
+.OHcontainer_Weekdayselection {
+  display: flex;
+  justify-content: space-evenly;
+}
 .existingOH {
   height: 100%;
   overflow-y: scroll;
@@ -251,14 +327,32 @@ export default {
   padding-left: 25px;
   border-left: 1px grey solid;
 }
+.OHReadWeekdaysWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.OHReadWeekdaysState {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid gray;
+  padding-right: 25px;
+}
 .activeSpan {
   background-color: green;
-  width: 24px;
-  height: 24px;
 }
 .inActiveSpan {
   background-color: red;
+}
+.activeSpan,
+.inActiveSpan {
   width: 24px;
   height: 24px;
+  text-align: center;
+  border-radius: 5px;
+}
+.activeSpan p,
+.inActiveSpan p {
+  margin: 4px 0 0 0;
+  font-weight: 600;
 }
 </style>
