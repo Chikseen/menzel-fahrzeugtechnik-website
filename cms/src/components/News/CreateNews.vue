@@ -1,7 +1,6 @@
 <template>
   <div class="createNews">
     <h1>News</h1>
-    <ApiResponseComponent :response="apiResponse" />
     <div class="createNews_input">
       <div class="createNews_input_text">
         <label>Titel</label>
@@ -44,16 +43,17 @@
       </div>
       <button class="removeButton" @click="resetSelection">Auswahl zurücksetzten</button>
     </div>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
 <script>
 import api from "@/apiService";
-import ApiResponseComponent from "@/components/ApiResponseComponent";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
   components: {
-    ApiResponseComponent,
+    SFC,
   },
   props: {
     setdata: { type: Object, default: () => {} },
@@ -63,11 +63,11 @@ export default {
       text: "",
       titel: "",
       id: "",
-      apiResponse: {},
       galerieImagesOffset: 0,
       galerieImagesLimit: 20,
       galerieImages: [],
       currentImages: [],
+      apiResponse: null,
     };
   },
   computed: {
@@ -96,28 +96,31 @@ export default {
       });
     },
     async saveNews() {
-      await api.post("News", {
+      const data = await api.post("News", {
         titel: this.titel,
         text: this.text,
         images: this.currentImages,
       });
+      this.apiResponse = data;
       this.$emit("newData");
     },
     async editNews() {
-      await api.put("News", {
+      const data = await api.put("News", {
         id: this.id,
         titel: this.titel,
         text: this.text,
         images: this.currentImages,
       });
+      this.apiResponse = data;
       this.$emit("newData");
     },
     async uploadImage($event) {
       const form = $event.target;
       const addedimages = await api.uploadFile("Images", form);
+      this.apiResponse = addedimages;
       this.galerieImagesOffset = 0;
       this.loadGalerieImages();
-      addedimages.forEach((img) => {
+      addedimages?.forEach((img) => {
         this.currentImages.push(img);
       });
     },
@@ -132,6 +135,11 @@ export default {
       this.id = this.setdata.id;
       this.created = this.setdata.created;
       this.currentImages = this.setdata.images;
+    },
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = null;
+      }, 5000);
     },
   },
 };

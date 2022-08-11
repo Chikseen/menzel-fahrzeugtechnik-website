@@ -11,7 +11,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    return await request.json();
+    return await this.tryJson(request);
   },
   async post(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
@@ -25,8 +25,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    console.log("AAA", request);
-    return await request.json();
+    return await this.tryJson(request);
   },
   async put(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
@@ -40,7 +39,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    return await request.json();
+    return await this.tryJson(request);
   },
   async patch(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
@@ -54,7 +53,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    return await request.json();
+    return await this.tryJson(request);
   },
   async delete(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
@@ -68,7 +67,7 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    return await request.json();
+    return await this.tryJson(request);
   },
   async uploadFile(adress, payload) {
     const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
@@ -78,7 +77,15 @@ const apiService = {
       mode: "cors",
       redirect: "follow",
     });
-    return await request.json();
+    return await this.tryJson(request);
+  },
+  
+  async tryJson(payload) {
+    try {
+      return await payload.json();
+    } catch (error) {
+      return payload;
+    }
   },
 };
 

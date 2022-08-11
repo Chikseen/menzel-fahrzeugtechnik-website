@@ -22,24 +22,24 @@ public class NotificationsController : ControllerBase
     }
 
     [HttpGet("All")]
-    public List<Notification> getAllNotifications()
+    public ActionResult<List<Notification>> getAllNotifications()
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             return notificationsService.getAllNotifications(); ;
         }
-        return new List<Notification>();
+        return Unauthorized();
     }
 
     [HttpPost]
-    public Object setNotifications(NewNotification newNotification)
+    public ActionResult<Object> setNotifications(NewNotification newNotification)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.setNewNotification(newNotification);
-            return new { status = true };
+            return new ActionResult<Object>(Ok());
         }
-        return new { status = false };
+        return Unauthorized();
     }
 
     [HttpPut]
@@ -48,19 +48,19 @@ public class NotificationsController : ControllerBase
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.editNotifications(notificationId);
-            return new { status = true };
+            return Ok();
         }
-        return new { status = false };
+        return Unauthorized();
     }
 
     [HttpDelete]
-    public Object deleteNotifications(NotificationId notificationId)
+    public ActionResult deleteNotifications(NotificationId notificationId)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             notificationsService.deleteNotification(notificationId);
-            return new { status = true };
+            return Ok();
         }
-        return new { status = false };
+        return Unauthorized();
     }
 }

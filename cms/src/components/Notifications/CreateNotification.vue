@@ -1,6 +1,5 @@
 <template>
   <div class="createNewMessage">
-    <ApiResponseComponent :response="apiResponse" />
     <div class="createNewMessage_date">
       <div class="createNewMessage_date_selection">
         <label>Von</label>
@@ -58,16 +57,17 @@
       <button @click="id = ''">Neue Nachricht erstellen</button>
     </div>
     <button class="removeButton" @click="resetSelection">Auswahl zurücksetzten</button>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
 <script>
 import api from "@/apiService";
-import ApiResponseComponent from "@/components/ApiResponseComponent";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
   components: {
-    ApiResponseComponent,
+    SFC,
   },
   props: {
     setdata: { type: Object, default: () => {} },
@@ -82,7 +82,7 @@ export default {
       showStatus: true,
       created: "",
       id: "",
-      apiResponse: {},
+      apiResponse: null,
     };
   },
   methods: {
@@ -96,8 +96,7 @@ export default {
           color: this.colorselection,
           isActive: this.showStatus,
         });
-        console.log(data);
-        if (data.status >= 400) this.apiResponse = data;
+        this.apiResponse = data;
       } else {
         const data = await api.put("Notification", {
           id: this.id,
@@ -108,7 +107,7 @@ export default {
           color: this.colorselection,
           isActive: this.showStatus,
         });
-        if (data.status >= 400) this.apiResponse = data;
+        this.apiResponse = data;
       }
       this.$emit("newData");
     },
@@ -146,7 +145,7 @@ export default {
     },
     apiResponse() {
       setTimeout(() => {
-        this.apiResponse = {};
+        this.apiResponse = null;
       }, 5000);
     },
   },

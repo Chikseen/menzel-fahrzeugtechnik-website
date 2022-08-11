@@ -26,6 +26,7 @@
       <hr />
     </div>
     <button @click="loadMoreMessages">Mehr Laden</button>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
@@ -33,10 +34,12 @@
 import api from "@/apiService";
 import date from "@/date.js";
 import CreateNews from "@/components/News/CreateNews.vue";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
   components: {
     CreateNews,
+    SFC,
   },
   data() {
     return {
@@ -46,9 +49,9 @@ export default {
       currenttext: "",
       offset: 0,
       limit: 5,
-
       currentimages: [],
       setdata: {},
+      apiResponse: null,
     };
   },
   computed: {
@@ -79,10 +82,18 @@ export default {
     async deleteNews(id) {
       this.messages = await api.delete("News", { id: id });
       this.loadMessages();
+      this.apiResponse = this.messages;
     },
   },
   mounted() {
     this.loadMessages();
+  },
+  watch: {
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = null;
+      }, 5000);
+    },
   },
 };
 </script>

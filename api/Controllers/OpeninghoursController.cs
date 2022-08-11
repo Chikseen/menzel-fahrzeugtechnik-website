@@ -23,14 +23,14 @@ public class OpeninghoursController : ControllerBase
     }
 
     [HttpGet("All")]
-    public List<Openinghours> getAllDays()
+    public ActionResult<List<Openinghours>> getAllDays()
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             return openinghoursService.getAllDays();
         }
         else
-            return new List<Openinghours>();
+            return Unauthorized();
     }
 
     [HttpGet("Weekdays")]
@@ -40,37 +40,37 @@ public class OpeninghoursController : ControllerBase
     }
 
     [HttpPost]
-    public Object createNewDay(NewOpeninghours newOpeninghoursService)
+    public ActionResult createNewDay(NewOpeninghours newOpeninghoursService)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.createNewDay(newOpeninghoursService);
-            return new { status = true };
+            return Ok();
         }
         else
-            return new { status = false };
+            return Unauthorized();
     }
 
     [HttpPut]
-    public Object editOpeninghours(EditOpeninghours openinghours)
+    public ActionResult editOpeninghours(EditOpeninghours openinghours)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.editOpeninghours(openinghours);
-            return new { status = true };
+            return Ok();
         }
-        return new { status = false };
+        return Unauthorized();
     }
 
     [HttpDelete]
-    public Object deleteOpeninghours(OpeninghoursId openinghours)
+    public ActionResult deleteOpeninghours(OpeninghoursId openinghours)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             openinghoursService.deleteOpeninghours(openinghours);
-            return new { status = true };
+            return Ok();
         }
-        return new { status = false };
+        return Unauthorized();
     }
 
 }

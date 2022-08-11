@@ -14,19 +14,25 @@
         <img class="removeButton" :src="imageUrl + image" alt="" @click="deleteImage(image)" />
       </div>
     </div>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
 <script>
 import api from "@/apiService";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
+  components: {
+    SFC,
+  },
   data() {
     return {
       images: [],
       loadedImages: [],
       offset: 0,
       limit: 10,
+      apiResponse: null,
     };
   },
   computed: {
@@ -43,15 +49,15 @@ export default {
     },
     async uploadImage($event) {
       const form = $event.target;
-      await api.uploadFile("Images", form);
+      const data = await api.uploadFile("Images", form);
+      this.apiResponse = data;
       this.limit += this.offset;
       this.offset = 0;
       this.loadPictures();
     },
     async deleteImage(image) {
-      console.log("hi1");
       const res = await api.delete("Images", { id: image });
-      console.log(res);
+      this.apiResponse = res;
       this.limit += this.offset;
       this.offset = 0;
       this.loadPictures();
@@ -66,7 +72,13 @@ export default {
       });
     },
   },
-  watch: {},
+  watch: {
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = null;
+      }, 5000);
+    },
+  },
   mounted() {
     this.loadPictures();
   },
@@ -90,7 +102,7 @@ export default {
   max-width: 400px;
 }
 
-.galeriesImage img{
+.galeriesImage img {
   max-height: 200px;
   max-width: 300px;
 }

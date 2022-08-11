@@ -108,6 +108,7 @@
         </div>
       </div>
     </div>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
@@ -115,11 +116,13 @@
 import api from "@/apiService";
 import date from "@/date.js";
 import ShowCurrentOpeninghours from "@/components/Openinghours/ShowCurrentOpeninghours";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
   name: "OpeningTimes",
   components: {
     ShowCurrentOpeninghours,
+    SFC,
   },
   props: {},
   data() {
@@ -141,6 +144,7 @@ export default {
         weekdays: [],
       },
       weekdayOpen: [],
+      apiResponse: null,
     };
   },
   computed: {
@@ -245,16 +249,26 @@ export default {
       this.weekdayOpen = await api.get("Openinghours/Weekdays");
     },
     async saveEntry() {
-      if (this.selectedEntry.id) await api.put("Openinghours", this.selectedEntry);
-      else await api.post("Openinghours", this.selectedEntry);
+      let data;
+      if (this.selectedEntry.id) data = await api.put("Openinghours", this.selectedEntry);
+      else data = await api.post("Openinghours", this.selectedEntry);
+      this.apiResponse = data;
       this.getData();
       this.getWeekdayOpen();
     },
     async deleteEntry() {
-      await api.delete("Openinghours", { id: this.selectedEntry.id });
+      const data = await api.delete("Openinghours", { id: this.selectedEntry.id });
+      this.apiResponse = data;
       this.getData();
       this.selectedEntry = { ...this.defaultEntry };
       this.getWeekdayOpen();
+    },
+  },
+  watch: {
+    apiResponse() {
+      setTimeout(() => {
+        this.apiResponse = null;
+      }, 5000);
     },
   },
   mounted() {

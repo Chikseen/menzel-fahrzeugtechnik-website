@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>Aktive Nachrichten</h1>
-    <ApiResponseComponent :response="apiResponse"/>
     <CreateNotification @newData="getData" :setdata="setdata" />
     <br />
     <div class="activeMessages_wrapper">
@@ -22,27 +21,29 @@
         </div>
       </div>
     </div>
+    <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>
 
 <script>
 import api from "@/apiService";
+
 import CreateNotification from "@/components/Notifications/CreateNotification.vue";
 import NotificationMessage from "@/components/Notifications/NotificationMessage.vue";
-import ApiResponseComponent from "@/components/ApiResponseComponent";
+import SFC from "@/components/SimpleFeedbackComponent.vue";
 
 export default {
   components: {
     CreateNotification,
     NotificationMessage,
-    ApiResponseComponent,
+    SFC,
   },
   data() {
     return {
       text: "",
       allMessages: [],
       setdata: {},
-      apiResponse: {},
+      apiResponse: null,
     };
   },
   methods: {
@@ -55,9 +56,8 @@ export default {
       const data = await api.delete("Notification", {
         id: id,
       });
-      if (data.status) this.getData();
-      else console.log("error while deleting Notification");
-      if (data.status >= 400) this.apiResponse = data;
+      this.apiResponse = data;
+      this.getData();
     },
     setData(msg) {
       this.setdata = msg;
@@ -69,7 +69,7 @@ export default {
     },
     apiResponse() {
       setTimeout(() => {
-        this.apiResponse = {};
+        this.apiResponse = null;
       }, 5000);
     },
   },

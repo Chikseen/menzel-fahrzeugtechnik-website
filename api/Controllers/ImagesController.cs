@@ -20,10 +20,10 @@ public class ImagesController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get(String name)
+    public ActionResult Get(String name)
     {
         if (!System.IO.File.Exists(Path.Combine(path, name)))
-            return NotFound();
+            return Ok(); // dont want to trowh error since this can occur oftne
         var image = System.IO.File.OpenRead(Path.Combine(path, name));
         return File(image, "image/jpeg");
     }
@@ -35,27 +35,26 @@ public class ImagesController : ControllerBase
     }
 
     [HttpPost]
-    public List<String> uploadImage(List<IFormFile> files)
+    public ActionResult<List<String>> uploadImage(List<IFormFile> files)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             return imagesService.uploadImage(files, path);
         }
         else
-            return new List<string>();
+            return Unauthorized();
     }
 
 
     [HttpDelete]
-    public Object deleteImage(ImageId name)
+    public ActionResult deleteImage(ImageId name)
     {
         if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
         {
             imagesService.deleteImage(name.id, path);
-
-            return new { staus = true };
+            return Ok();
         }
         else
-            return new { staus = false };
+            return Unauthorized();
     }
 }
