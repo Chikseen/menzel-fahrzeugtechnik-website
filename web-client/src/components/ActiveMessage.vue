@@ -13,10 +13,6 @@
           <h2>{{ message.titel }}</h2>
           <p>{{ message.text }}</p>
         </div>
-        <div class="active_textwrapper_date">
-          <p>Vom: {{ dateFormatter(message.startDate) }}</p>
-          <p>Bis: {{ dateFormatter(message.endDate) }}</p>
-        </div>
       </div>
     </div>
   </div>
@@ -96,6 +92,8 @@ export default {
 @media only screen and (max-width: 870px) {
   .active {
     &_textwrapper {
+      padding: 0 25px;
+
       h2,
       p {
         text-align: left;

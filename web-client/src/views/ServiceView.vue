@@ -29,7 +29,7 @@
       <h3>Wir sind für Sie da</h3>
       <p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
     </div>
-    <router-view></router-view>
+    <router-view class="serviceView_content"></router-view>
   </div>
 </template>
 
@@ -96,9 +96,19 @@ export default {
 @media only screen and (max-width: 870px) {
   .serviceView {
     &_overview {
-      display: flex;
-      overflow-x: scroll;
-      height: calc(100% + 15px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+
+      &_container {
+        min-width: 6rem;
+        max-height: 8rem;
+        font-size: 0.7rem;
+        overflow: hidden;
+      }
+    }
+
+    &_content {
+      padding: 10px;
     }
   }
 }

@@ -45,6 +45,10 @@ html {
   }
 }
 
+.tempDotShow {
+  display: none !important;
+}
+
 .pageTitel {
   position: relative;
   display: flex;
