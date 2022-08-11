@@ -108,12 +108,13 @@ export default {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 870px) {
   .contactView {
     transition: all 0.3s;
 
     &_openTimes {
       overflow: hidden;
+      margin-top: 6rem;
 
       &_content {
         flex-direction: column;

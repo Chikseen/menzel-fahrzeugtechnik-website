@@ -32,6 +32,10 @@ html {
   padding: 0;
 }
 
+#map {
+  z-index: 1;
+}
+
 .underlined {
   &::after {
     content: "";

@@ -67,6 +67,7 @@ export default {
     async confirmKey() {
       const data = await api.post("User/Validate", { value: this.keyInput });
       console.log("data", data);
+      localStorage.setItem("key", this.keyInput);
       document.location.reload(true);
     },
     async getAlluser() {
@@ -79,6 +80,7 @@ export default {
     },
   },
   mounted() {
+    this.keyInput = localStorage.getItem("key");
     this.getAlluser();
   },
 };

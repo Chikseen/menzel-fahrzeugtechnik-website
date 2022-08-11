@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="galerie_wrapper">
     <div class="pageTitel pageTitel_noSpace">
       <h1>Galer</h1>
       <h1>ie</h1>
@@ -46,3 +46,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.galerie {
+  &_wrapper {
+    margin-top: 6rem;
+  }
+}
+</style>

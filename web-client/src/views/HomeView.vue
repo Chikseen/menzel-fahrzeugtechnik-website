@@ -56,26 +56,6 @@
           </div>
         </div>
       </div>
-      <!--  <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divFouracc')">
-        <div class="home_content_picture_wrapper">
-          <div class="home_content_picture" id="divFouracc">
-            <p>DAS IST EIN BILD</p>
-          </div>
-        </div>
-        <div class="home_content_text">
-          <h2>Glassschaden</h2>
-          <p>Wir wechseln Gläßer</p>
-          <button @mouseup="$router.push('service')">Erfahre mehr</button>
-        </div>
-
-        Versicherungsschadenabwicklung 
-
-Hol- und Bringeservice 
-
-Werkstattersatzwagen 
-
-
-      </div> -->
       <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
         <div class="home_content_picture_wrapper">
           <RepairService />
@@ -190,6 +170,8 @@ export default {
 
 @media only screen and (max-width: 870px) {
   .home {
+    margin-top: 6rem;
+
     &_content {
       &_wrapper {
         position: relative;

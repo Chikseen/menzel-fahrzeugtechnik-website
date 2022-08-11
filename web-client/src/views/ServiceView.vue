@@ -36,7 +36,7 @@
 <script>
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
 import WheelIcon from "@/assets/icons/WheelIcon2.vue";
-import ACIcon from "@/assets/icons/ACIcon.vue";
+import ACIcon from "@/assets/icons/MenuIcon.vue";
 import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
 
 export default {
@@ -96,6 +96,7 @@ export default {
 @media only screen and (max-width: 870px) {
   .serviceView {
     &_overview {
+      margin-top: 6rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
 

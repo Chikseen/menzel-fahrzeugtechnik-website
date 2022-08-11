@@ -75,6 +75,10 @@ const routes = [
     name: "impressum",
     component: ImpressumView,
   },
+  {
+    path: "/:catchAll(.*)",
+    component: HomeView,
+  },
 ];
 
 const router = createRouter({

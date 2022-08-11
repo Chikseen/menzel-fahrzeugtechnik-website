@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="impressum_wrapper">
     <div class="pageTitel pageTitel_noSpace">
       <h1>Impres</h1>
       <h1>sum</h1>
@@ -19,3 +19,11 @@
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.impressum {
+  &_wrapper {
+    margin-top: 6rem;
+  }
+}
+</style>

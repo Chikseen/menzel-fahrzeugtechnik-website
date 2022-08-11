@@ -169,11 +169,11 @@ export default {
       const today = (now.getDay() + 6) % 7;
       const days = [...this.weekdayOpen];
       let state = {};
+      const nowTime = this.toTime(now);
 
-      if (days[today]) {
+      if (days[today] && !days[today].close >= nowTime) {
         const open = this.toTime(days[today].open);
         const close = this.toTime(days[today].close);
-        const nowTime = this.toTime(now);
 
         if (open <= nowTime && close >= nowTime) {
           state.status = "Geöffnet";
@@ -190,7 +190,6 @@ export default {
           if (days[nextOpenDay]) {
             const open = this.toTime(days[nextOpenDay].open);
             const close = this.toTime(days[nextOpenDay].close);
-            const nowTime = this.toTime(now);
 
             if (open <= nowTime && close >= nowTime) {
               state.status = "Geöffnet";
