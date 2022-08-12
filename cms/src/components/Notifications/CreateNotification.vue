@@ -56,7 +56,7 @@
       <button @click="createNewMessage">Ausgewählte Nachricht überschreiben</button>
       <button @click="id = ''">Neue Nachricht erstellen</button>
     </div>
-    <button class="removeButton" @click="resetSelection">Auswahl zurücksetzten</button>
+    <button class="removeButton" @click="resetSelection">Auswahl zurücksetzen</button>
     <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
 </template>

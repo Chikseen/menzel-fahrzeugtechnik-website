@@ -17,20 +17,27 @@
           <div v-for="img in galerieImages" :key="img + 0" @click="currentImages.indexOf(img) == -1 ? currentImages.push(img) : ''">
             <p v-if="currentImages.indexOf(img) === -1">{{ img }}</p>
           </div>
-          <button @click="loadMoreGalerieImages">Mehr</button>
+          <button @click="loadMoreGalerieImages">Mehr Bilder laden</button>
+          <button @click="reloadPictures">Bilder neu laden</button>
         </div>
         <div class="createNews_imageSelection_current">
           <h4>Bilder die zu diesen Eintrag hinzugefügt werden</h4>
-          <div v-for="img in currentImages" :key="img + 1" @click="currentImages.splice(currentImages.indexOf(img), 1)" class="removeButton">
-            <img :src="imageUrl + img" alt="" />
+          <div class="createNews_imageSelection_current_wrapper">
+            <div
+              v-for="img in currentImages"
+              :key="img + 1"
+              @click="currentImages.splice(currentImages.indexOf(img), 1)"
+              class="removeButton createNews_imageSelection_current_img"
+            >
+              <img :src="imageUrl + img" alt="" />
+            </div>
           </div>
         </div>
         <div>
           <h4>Bilder hochladen undhinzufügen</h4>
           <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
-            <p>Image File</p>
             <input name="files" type="file" accept="image/png" multiple />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Bilder Hochladen" />
           </form>
         </div>
       </div>
@@ -41,7 +48,7 @@
         <button @click="editNews">Ausgewählte Nachricht überschreiben</button>
         <button @click="id = ''">Neue Nachricht erstellen</button>
       </div>
-      <button class="removeButton" @click="resetSelection">Auswahl zurücksetzten</button>
+      <button class="removeButton" @click="resetSelection">Auswahl zurücksetzen</button>
     </div>
     <SFC v-if="apiResponse" :res="apiResponse" @remove="apiResponse = null" />
   </div>
@@ -84,6 +91,11 @@ export default {
       this.titel = "";
       this.id = "";
       this.currentImages = [];
+    },
+    reloadPictures() {
+      this.galerieImagesOffset = 0;
+      this.galerieImagesLimit = 20;
+      this.loadGalerieImages();
     },
     async loadGalerieImages() {
       this.galerieImages = await api.get(`Images/All?limit=${this.galerieImagesLimit}&offset=${this.galerieImagesOffset}`);
@@ -177,14 +189,32 @@ textarea {
   gap: 25px;
   margin: 0 auto;
 }
+.createNews_imageSelection p {
+  cursor: pointer;
+  text-align: left;
+  border-bottom: 0.1px solid rgba(77, 77, 77, 0.274);
+}
+
+.createNews_imageSelection_current_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 5px;
+}
 .createNews_imageSelection_current {
   border-left: 1px grey solid;
   border-right: 1px grey solid;
   padding: 0 25px;
 }
+.createNews_imageSelection_current_img {
+  cursor: pointer;
+  text-align: left;
+  max-width: 125px;
+  border-radius: 5px;
+}
 .createNews_imageSelection_current img {
-  max-width: 150px;
+  max-width: 125px;
   max-height: 150px;
+  border-radius: 5px;
 }
 .createNews_buttons {
   max-width: 750px;

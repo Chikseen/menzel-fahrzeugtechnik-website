@@ -40,7 +40,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Wochtags bestimmung Erlauben</label>
+              <label>Wochentagsbestimmung Erlauben</label>
               <span
                 :class="selectedEntry.allowWeekdays ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.allowWeekdays = !selectedEntry.allowWeekdays"
@@ -80,7 +80,7 @@
             </div>
           </div>
         </div>
-        <button @click="selectedEntry = { ...defaultEntry }">Auswahl Zurücksetzten</button>
+        <button @click="selectedEntry = { ...defaultEntry }">Auswahl zurücksetzen</button>
         <div>
           <button @click="saveEntry" v-if="selectedEntry.id">Eintrag Überarbeiten</button>
           <button @click="deleteEntry" v-if="selectedEntry.id">Eintrag entfernen</button>

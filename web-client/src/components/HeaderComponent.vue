@@ -66,6 +66,11 @@
               <p v-else-if="$route.name === 'galerie'">Galerie</p>
               <p v-else-if="$route.name === 'about'">Über mich</p>
               <p v-else-if="$route.name === 'impressum'">Impressum</p>
+              <p v-else-if="$route.name === 'tuev'">TÜV</p>
+              <p v-else-if="$route.name === 'tiers'">Reifen</p>
+              <p v-else-if="$route.name === 'ac'">Klima</p>
+              <p v-else-if="$route.name === 'repair'">Reperatur</p>
+              <p v-else-if="$route.name === 'glasService'">Glasschäden</p>
             </transition>
           </div>
         </div>
@@ -363,7 +368,7 @@ nav {
         transition: all 0.5s ease;
 
         &_extendet {
-          height: 20rem;
+          height: 23rem;
         }
 
         &_icon {
@@ -381,6 +386,7 @@ nav {
           height: 5rem;
           padding: 0 0 0 25px;
           background-color: $company-blue;
+          box-shadow: 0 0 5px 1px $company-blue;
           z-index: 5;
 
           &_titel {
@@ -461,29 +467,17 @@ nav {
     }
   }
   nav {
-    /*   a {
     a {
-      font-weight: bold;
-      color: #d3d7df;
-      transition: all 1s;
-    }
-
-    &.router-link-active {
-      a {
-        color: $company_blue;
-      }
-    }
-  } */
-
-    a {
-      margin: 0 0;
+      margin: 5px 0;
+      padding: 5px 0;
       transition: all 0.5s;
 
       &.router-link-active {
         a {
           background-color: #d3d7df;
           color: $company_blue;
-          padding: 5px;
+          padding: 15px;
+          margin: 30px 0;
           border-radius: 5px;
         }
       }
@@ -506,7 +500,7 @@ nav {
 
 .header-active-smallwindow-enter-from,
 .header-active-smallwindow-leave-to {
-  transform: translateX(-100px);
+  transform: translateX(-150px);
 }
 .header-menu {
   position: absolute;

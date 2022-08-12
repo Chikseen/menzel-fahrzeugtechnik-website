@@ -5,9 +5,10 @@
     <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
       <label for="image1">Image File</label>
       <input name="files" type="file" accept="image/png" multiple />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Bilder Hochladen" />
     </form>
-    <button @click="loadMore">LoadMore</button>
+    <button @click="loadMore">Mehr Bilder laden</button>
+    <button @click="reloadPictures">Bilder neu laden</button>
     <div class="galeriesImageWrapper">
       <div v-for="image in images" :key="image" class="galeriesImage">
         <p>{{ image }}</p>
@@ -44,6 +45,11 @@ export default {
     },
   },
   methods: {
+    reloadPictures() {
+      this.offset = 0;
+      this.limit = 10;
+      this.loadPictures();
+    },
     async loadPictures() {
       this.images = await api.get(`Images/All?limit=${this.limit}&offset=${this.offset}`);
     },
