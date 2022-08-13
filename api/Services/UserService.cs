@@ -75,13 +75,13 @@ public class UserService
         var day = DateTime.Now.ToString("dd");
 
         ClientInfo c = uaParser.Parse(userAgent);
-        String sql = $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.UA.Family} int DEFAULT 0;" +
+        String sql = $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.UA.Family.Replace(" ", "-")} int DEFAULT 0;" +
                      $"INSERT INTO UserCount (id, year, month, day) VALUES ({year + month + day}, {year}, {month}, {day}) ON CONFLICT DO NOTHING;" +
-                        $"UPDATE UserCount SET {c.UA.Family} = {c.UA.Family} + 1 WHERE id = {year + month + day};" +
-                     $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.OS.Family} int DEFAULT 0;" +
-                        $"UPDATE UserCount SET {c.OS.Family} = {c.OS.Family} + 1 WHERE id = {year + month + day};" +
-                     $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.Device.Family} int DEFAULT 0;" +
-                        $"UPDATE UserCount SET {c.Device.Family} = {c.Device.Family} + 1 WHERE id = {year + month + day};" +
+                        $"UPDATE UserCount SET {c.UA.Family.Replace(" ", "-")} = {c.UA.Family.Replace(" ", "-")} + 1 WHERE id = {year + month + day};" +
+                     $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.OS.Family.Replace(" ", "-")} int DEFAULT 0;" +
+                        $"UPDATE UserCount SET {c.OS.Family.Replace(" ", "-")} = {c.OS.Family.Replace(" ", "-")} + 1 WHERE id = {year + month + day};" +
+                     $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {c.Device.Family.Replace(" ", "-")} int DEFAULT 0;" +
+                        $"UPDATE UserCount SET {c.Device.Family.Replace(" ", "-")} = {c.Device.Family.Replace(" ", "-")} + 1 WHERE id = {year + month + day};" +
                      $"ALTER TABLE UserCount ADD COLUMN IF NOT EXISTS {route} int DEFAULT 0;" +
                         $"UPDATE UserCount SET {route} = {route} + 1 WHERE id = {year + month + day};";
         DatabaseService.query(sql);

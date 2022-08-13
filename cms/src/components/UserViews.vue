@@ -1,5 +1,6 @@
 <template>
   <table class="viewsTable">
+    <button @click="getData">Neu laden</button>
     <tr>
       <th v-for="header in views.header" :key="header + 'h'">{{ header }}</th>
     </tr>
