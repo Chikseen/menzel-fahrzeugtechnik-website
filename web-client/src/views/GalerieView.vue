@@ -4,12 +4,13 @@
       <h1>Galer</h1>
       <h1>ie</h1>
     </div>
-    <div v-if="news">
-      <div v-for="(message, index) in news" :key="index">
-        <NewsMessage :message="message" />
+    <div class="galerie_content">
+      <div v-for="image in images" :key="image" class="galeriesImage">
+        <p>{{ image }}</p>
+        <img class="galerie_image" :src="imageUrl + image" alt="" @click="deleteImage(image)" />
       </div>
-      <button @click="loadMoreNews">Mehr</button>
     </div>
+    <button @click="loadMoreImages">Mehr laden</button>
   </div>
 </template>
 <script>
@@ -23,34 +24,54 @@ export default {
   },
   data() {
     return {
-      limit: 5,
+      limit: 20,
       offset: 0,
-      news: [],
+      images: [],
     };
   },
-  methods: {
-    async loadNews() {
-      const resp = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
-      this.news = this.news.concat(resp);
+  computed: {
+    imageUrl() {
+      return `${process.env.VUE_APP_API}/Images?name=`;
     },
-    async loadMoreNews() {
+  },
+  methods: {
+    async loadImages() {
+      const resp = await api.get(`Images/All?limit=${this.limit}&offset=${this.offset}`);
+      this.images = this.images.concat(resp);
+    },
+    async loadMoreImages() {
       this.offset += this.limit;
-      const newNews = await api.get(`News?limit=${this.limit}&offset=${this.offset}`);
-      newNews.forEach((item) => {
-        this.news.push(item);
+      const newImages = await api.get(`Images/All?limit=${this.limit}&offset=${this.offset}`);
+      newImages.forEach((item) => {
+        this.images.push(item);
       });
     },
   },
   mounted() {
-    this.loadNews();
+    this.loadImages();
   },
 };
 </script>
 
 <style lang="scss">
 .galerie {
-  &_wrapper {
-    margin-top: 6rem;
+  &_content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  &_image {
+    box-shadow: 2px 2px 10px 0 #4d4d4d36;
+    border-radius: 5px;
+    max-height: 300px;
+    max-width: 300px;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 5px 5px rgba(90, 90, 90, 0.301);
+    }
   }
 }
+
 </style>

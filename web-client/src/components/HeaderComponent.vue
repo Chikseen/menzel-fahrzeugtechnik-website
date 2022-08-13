@@ -26,6 +26,12 @@
           </transition>
           <a>Kontakt</a>
         </router-link>
+        <router-link class="header_nav_route" to="/news">
+          <transition name="header-active">
+            <div v-if="this.$route.name == 'news'" class="header_nav_route_active"></div>
+          </transition>
+          <a>News</a>
+        </router-link>
         <router-link class="header_nav_route" to="/galerie">
           <transition name="header-active">
             <div v-if="this.$route.name == 'galerie'" class="header_nav_route_active"></div>
@@ -63,6 +69,7 @@
               <p v-if="$route.name === 'home'">Home</p>
               <p v-else-if="$route.name === 'service'">Service</p>
               <p v-else-if="$route.name === 'contact'">Kontakt</p>
+              <p v-else-if="$route.name === 'news'">News</p>
               <p v-else-if="$route.name === 'galerie'">Galerie</p>
               <p v-else-if="$route.name === 'about'">Über mich</p>
               <p v-else-if="$route.name === 'impressum'">Impressum</p>
@@ -84,6 +91,9 @@
           </router-link>
           <router-link class="header_nav_route" to="/contact">
             <a>Kontakt</a>
+          </router-link>
+          <router-link class="header_nav_route" to="/news">
+            <a>News</a>
           </router-link>
           <router-link class="header_nav_route" to="/galerie">
             <a>Galerie</a>
@@ -303,14 +313,14 @@ nav {
   }
 }
 
-@media only screen and (max-width: 1400px) {
+@media only screen and (max-width: 1550px) {
   .header {
     margin-left: 0;
     padding-right: 0;
   }
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1300px) {
   .header {
     &_quickConntact {
       display: none;
@@ -318,12 +328,12 @@ nav {
   }
 }
 
-@media only screen and (max-width: 990px) {
+@media only screen and (max-width: 1100px) {
   .header {
     margin-left: 0;
   }
 }
-@media only screen and (max-width: 870px) {
+@media only screen and (max-width: 1050px) {
   .header {
     position: fixed;
     width: 100%;
@@ -368,7 +378,7 @@ nav {
         transition: all 0.5s ease;
 
         &_extendet {
-          height: 23rem;
+          height: 25rem;
         }
 
         &_icon {

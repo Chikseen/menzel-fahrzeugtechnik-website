@@ -5,6 +5,7 @@ import ContactView from "@/views/ContactView.vue";
 import AboutView from "@/views/AboutView.vue";
 import GalerieView from "@/views/GalerieView.vue";
 import ImpressumView from "@/views/ImpressumView";
+import NewsView from "@/views/NewsView";
 
 // Service Views
 import Tuev from "@/views/ServiceViews/Tuev";
@@ -64,6 +65,11 @@ const routes = [
     path: "/about",
     name: "about",
     component: AboutView,
+  },
+  {
+    path: "/news",
+    name: "news",
+    component: NewsView,
   },
   {
     path: "/galerie",
