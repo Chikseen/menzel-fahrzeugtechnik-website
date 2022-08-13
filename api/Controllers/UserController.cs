@@ -24,6 +24,7 @@ public class UserController : ControllerBase
     [HttpGet("All")]
     public List<AllUser> GetAllUserNames()
     {
+        userService.countUser(HttpContext.Request.Headers["User-Agent"], "AllUser");
         List<AllUser> users = new List<AllUser>(userService.getAllUserNames(HttpContext.Request.Cookies["sessionId"]!));
         return users;
     }
@@ -41,8 +42,9 @@ public class UserController : ControllerBase
         if (userService.checkUserExits(value.value))
         {
             HttpContext.Response.Cookies.Append("sessionId", value.value);
+            return Ok();
         }
-        return new { st = "st" };
+        return Unauthorized();
     }
     [HttpDelete]
     public Object DeleteUser(ValidateUser value)
@@ -51,6 +53,16 @@ public class UserController : ControllerBase
         {
             userService.deleteUser(value.value);
         }
-        return new { st = "st" };
+        return Unauthorized();
+    }
+
+    [HttpGet("Count/{start?}/{end?}")]
+    public ActionResult<Object> UserCount(String start = "-1", String end = "-1")
+    {
+        if (userService.checkUserExits(HttpContext.Request.Cookies["sessionId"]!))
+        {
+            return userService.getCount(start, end);
+        }
+        return Unauthorized();
     }
 }

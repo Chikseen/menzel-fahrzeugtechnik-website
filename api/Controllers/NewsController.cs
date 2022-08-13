@@ -16,6 +16,7 @@ public class NewsController : ControllerBase
     [HttpGet]
     public List<News> get(int limit, int offset)
     {
+        userService.countUser(HttpContext.Request.Headers["User-Agent"], "News");
         return newsService.getNews(limit, offset);
     }
 

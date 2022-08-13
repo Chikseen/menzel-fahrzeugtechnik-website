@@ -192,6 +192,23 @@ public static class DatabaseService
                 return "error_creating_table_images";
             }
             con.Close();
+
+            try
+            {
+                con.Open();
+                var sql = "CREATE TABLE IF NOT EXISTS UserCount (id int PRIMARY KEY, year int, month int, day int)";
+                Console.WriteLine(sql);
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                NpgsqlDataReader dr = command.ExecuteReader();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Error While creating UserCount Table");
+                Console.WriteLine(e);
+                con.Close();
+                return "error_creating_table_UserCount";
+            }
+            con.Close();
         }
         return "success";
     }

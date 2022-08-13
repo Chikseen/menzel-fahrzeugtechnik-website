@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Net.Http;
 
 [ApiController]
 [Route("Notification")]
@@ -18,6 +16,7 @@ public class NotificationsController : ControllerBase
     [HttpGet]
     public List<Notification> getActiveNotifications()
     {
+        userService.countUser(HttpContext.Request.Headers["User-Agent"], "ActiveNotification");
         return notificationsService.getActiveNotifications(); ;
     }
 

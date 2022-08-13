@@ -19,6 +19,7 @@ public class OpeninghoursController : ControllerBase
     [HttpGet]
     public List<Openinghours> getDays()
     {
+        userService.countUser(HttpContext.Request.Headers["User-Agent"], "OpeningHours");
         return openinghoursService.getDays();
     }
 

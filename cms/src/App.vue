@@ -6,6 +6,7 @@
       <button @click="toShow = 'news'" :class="toShow == 'news' ? 'active' : ''">News</button>
       <button @click="toShow = 'galerie'" :class="toShow == 'galerie' ? 'active' : ''">Galerie</button>
       <button @click="toShow = 'open'" :class="toShow == 'open' ? 'active' : ''">Öffnungszeiten</button>
+      <button @click="toShow = 'views'" :class="toShow == 'key' ? 'views' : ''">Meta</button>
       <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">
@@ -14,6 +15,7 @@
       <OpeningTimes v-show="toShow == 'open'" />
       <NewsView v-show="toShow == 'news'" />
       <Galerie v-show="toShow == 'galerie'" />
+      <UserViews v-show="toShow == 'views'" />
     </div>
     <div v-else>
       <KeyHandler :keyStatus="keyValid" @keyStatus="keyValid = $event" />
@@ -27,6 +29,7 @@ import KeyHandler from "@/components/KeyHandler.vue";
 import OpeningTimes from "@/components/Openinghours/OpeningTimes.vue";
 import NewsView from "@/components/News/NewsView.vue";
 import Galerie from "@/components/Galerie.vue";
+import UserViews from "@/components/UserViews.vue";
 import api from "@/apiService";
 
 export default {
@@ -37,6 +40,7 @@ export default {
     OpeningTimes,
     NewsView,
     Galerie,
+    UserViews,
   },
   data() {
     return {
