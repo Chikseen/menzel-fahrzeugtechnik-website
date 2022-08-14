@@ -90,10 +90,10 @@ public class UserService
     public Object getCount(String start, String end)
     {
         String sql = "";
-        if (start == "-1" && end == "-1") sql = $"SELECT * FROM UserCount";
-        else if (end == "-1") sql = $"SELECT * FROM UserCount WHERE id >= {start.Replace("-", "")}";
-        else if (start == "-1") sql = $"SELECT * FROM UserCount WHERE id <= {end.Replace("-", "")}";
-        else sql = $"SELECT * FROM UserCount WHERE id >= {start.Replace("-", "")} AND id <= {end.Replace("-", "")}";
+        if (start == "-1" && end == "-1") sql = $"SELECT * FROM UserCount ORDER BY id DESC";
+        else if (end == "-1") sql = $"SELECT * FROM UserCount WHERE id >= {start.Replace("-", "")} ORDER BY id DESC";
+        else if (start == "-1") sql = $"SELECT * FROM UserCount WHERE id <= {end.Replace("-", "")} ORDER BY id DESC";
+        else sql = $"SELECT * FROM UserCount WHERE id >= {start.Replace("-", "")} AND id <= {end.Replace("-", "")} ORDER BY id DESC";
 
         String columnNamesSQL = $"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'usercount';";
         List<List<String>> columnNames = DatabaseService.query(columnNamesSQL);
