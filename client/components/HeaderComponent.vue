@@ -11,7 +11,7 @@
         <p>{{ openingState.time }}</p>
       </div>
       <nav class="header_nav">
-        <router-link class="header_nav_route" to="/home">
+        <NuxtLink class="header_nav_route" to="/home">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'home'"
@@ -19,14 +19,14 @@
             ></div>
           </transition>
           <a>Home</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/service">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/service">
           <transition name="header-active">
             <div v-if="isService" class="header_nav_route_active"></div>
           </transition>
           <a>Service</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/contact">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/contact">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'contact'"
@@ -34,8 +34,8 @@
             ></div>
           </transition>
           <a>Kontakt</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/news">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/news">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'news'"
@@ -43,8 +43,8 @@
             ></div>
           </transition>
           <a>News</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/galerie">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/galerie">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'galerie'"
@@ -52,8 +52,8 @@
             ></div>
           </transition>
           <a>Galerie</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/about">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/about">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'about'"
@@ -61,8 +61,8 @@
             ></div>
           </transition>
           <a>Über mich</a>
-        </router-link>
-        <router-link class="header_nav_route" to="/impressum">
+        </NuxtLink>
+        <NuxtLink class="header_nav_route" to="/impressum">
           <transition name="header-active">
             <div
               v-if="this.$route.name == 'impressum'"
@@ -70,7 +70,7 @@
             ></div>
           </transition>
           <a>Impressum</a>
-        </router-link>
+        </NuxtLink>
       </nav>
       <div class="header_quickConntact" @mouseup="$router.push('/contact')">
         <p>Städtelner Straße 62</p>
@@ -107,27 +107,27 @@
         </div>
         <MenuIcon class="header_nav_menu_icon" />
         <nav class="header_nav_smallWindow">
-          <router-link class="header_nav_route" to="/home">
+          <NuxtLink class="header_nav_route" to="/home">
             <a>Home</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/service">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/service">
             <a>Service</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/contact">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/contact">
             <a>Kontakt</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/news">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/news">
             <a>News</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/galerie">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/galerie">
             <a>Galerie</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/about">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/about">
             <a>Über mich</a>
-          </router-link>
-          <router-link class="header_nav_route" to="/impressum">
+          </NuxtLink>
+          <NuxtLink class="header_nav_route" to="/impressum">
             <a>Impressum</a>
-          </router-link>
+          </NuxtLink>
         </nav>
       </div>
     </div>
@@ -154,11 +154,9 @@ export default {
     }
   },
   computed: {
-    /*  isService() {
-      return this.$nuxt.$router.currentRoute.name.matched.some(
-        (item) => item.path == '/service/'
-      )
-    }, */
+    isService() {
+      return this.$route.name.matched?.some((item) => item.path == '/service/')
+    },
     openingState() {
       const now = new Date()
       const today = (now.getDay() + 6) % 7
@@ -331,7 +329,7 @@ nav {
       transition: all 1s;
     }
 
-    &.router-link-active {
+    &.NuxtLink-active {
       a {
         color: $company_blue;
       }
@@ -508,7 +506,7 @@ nav {
       padding: 5px 0;
       transition: all 0.5s;
 
-      &.router-link-active {
+      &.NuxtLink-active {
         a {
           background-color: #d3d7df;
           color: $company_blue;

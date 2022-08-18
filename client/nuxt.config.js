@@ -43,4 +43,16 @@ export default {
   styleResources: {
     scss: ['./assets/scss/*.scss'],
   },
+
+  server: {
+    port: 8080,
+  },
+
+  env: {
+    api: process.env.VUE_APP_API,
+  },
+
+  publicRuntimeConfig: {
+    api: process.env.VUE_APP_API,
+  },
 }
