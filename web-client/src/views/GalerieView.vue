@@ -1,26 +1,37 @@
 <template>
   <div v-if="allMessages">
     <div v-for="(message, index) in allMessages" :key="index">
-      <h3>{{ message.titel }}</h3>
-      <p>{{ message.text }}</p>
-      <h6>{{ message.date }}</h6>
-      <hr />
+      <NewsMessage :message="message" />
     </div>
+    <button @click="get">Mehr</button>
   </div>
 </template>
 <script>
 import api from "@/apiService.js";
 
+import NewsMessage from "@/components/NewsMessage";
+
 export default {
+  components: {
+    NewsMessage,
+  },
   data() {
     return {
       allMessages: [],
+      top: 0,
+      count: 5,
     };
   },
   methods: {
     async get() {
-      this.allMessages = await api.fetchData("news/get", {});
-      console.log("data", this.allMessages);
+      const resp = await api.get("news/get", {
+        top: this.top,
+        count: this.count,
+      });
+      this.top = this.top + 5;
+      this.count = this.count + 5;
+      console.log("resp", resp);
+      this.allMessages = this.allMessages.concat(resp);
     },
   },
   mounted() {
@@ -28,3 +39,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.tmp {
+  max-width: 500px;
+}
+</style>

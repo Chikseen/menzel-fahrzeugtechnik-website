@@ -1,20 +1,22 @@
 <template>
-  <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
-    <div
-      class="active_textwrapper"
-      :class="[
-        message.colorselection == '0' ? 'active_textwrapper_red' : '',
-        message.colorselection == '1' ? 'active_textwrapper_green' : '',
-        message.colorselection == '2' ? 'active_textwrapper_white' : '',
-      ]"
-    >
-      <div>
-        <h2>{{ message.titel }}</h2>
-        <p>{{ message.text }}</p>
-      </div>
-      <div class="active_textwrapper_date">
-        <p>Vom: {{ dateFormatter(message.startDate) }}</p>
-        <p>Bis: {{ dateFormatter(message.endDate) }}</p>
+  <div v-if="allActviveMessages.length">
+    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
+      <div
+        class="active_textwrapper"
+        :class="[
+          message.colorselection == '0' ? 'active_textwrapper_red' : '',
+          message.colorselection == '1' ? 'active_textwrapper_green' : '',
+          message.colorselection == '2' ? 'active_textwrapper_white' : '',
+        ]"
+      >
+        <div>
+          <h2>{{ message.titel }}</h2>
+          <p>{{ message.text }}</p>
+        </div>
+        <div class="active_textwrapper_date">
+          <p>Vom: {{ dateFormatter(message.startDate) }}</p>
+          <p>Bis: {{ dateFormatter(message.endDate) }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +34,7 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("activeMessages/getFilterd", {});
+      const data = await api.get("activeMessages/getFilterd", {});
       this.$store.commit("setMessage", data);
       this.allActviveMessages = data;
     },
@@ -84,6 +86,27 @@ export default {
     &_date {
       p {
         text-align: right;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .active {
+    &_textwrapper {
+      h2,
+      p {
+        text-align: left;
+        margin: 5px 0;
+        font-size: 0.91rem;
+      }
+
+      &_date {
+        min-width: 120px;
+
+        p {
+          text-align: right;
+        }
       }
     }
   }

@@ -21,7 +21,7 @@ module.exports = {
     const dateEnd = new Date(`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}${data.timeEnd}`);
 
     if (date > dateStart && date < dateEnd && data.isOpen) {
-      payload.isOpen = "Geöffnet";
+      payload.isOpen = "geöffnet";
       payload.nextOpen = `Schließt ${String(dateEnd.getHours()).padStart(2, "0")}:${String(dateEnd.getMinutes()).padStart(2, "0")}`;
     } else {
       payload.isOpen = "Geschlossen";
@@ -41,7 +41,7 @@ module.exports = {
       console.log("closed tilkl", `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}${
         dataFile.get("weekdays")[(date.getDay() + i) % 7].timeStart
       }`);
-      payload.nextOpen = `Öffnet wieder am ${dataFile.get("weekdays")[(date.getDay() + i) % 7].day} um ${String(closedTill.getHours()).padStart(
+      payload.nextOpen = `öffnet wieder am ${dataFile.get("weekdays")[(date.getDay() + i) % 7].day} um ${String(closedTill.getHours()).padStart(
         2,
         "0"
       )}.${String(closedTill.getMinutes()).padStart(2, "0")}`;

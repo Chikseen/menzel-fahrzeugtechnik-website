@@ -16,7 +16,7 @@ module.exports = {
     }
     if (!fs.existsSync(pathPreFix + "/database/activeMessages.json")) {
       console.log("creating activeMessages.json");
-      fs.writeFile(pathPreFix + "/database/activeMessages.json", "", "utf8", function (err) {});
+      fs.writeFile(pathPreFix + "/database/activeMessages.json", "utf8", function (err) {});
       const am = new JSONdb(pathPreFix + "/database/activeMessages.json");
       am.set("data", []);
     }
@@ -25,6 +25,10 @@ module.exports = {
       fs.writeFile(pathPreFix + "/database/news.json", "", "utf8", function (err) {});
       const news = new JSONdb(pathPreFix + "/database/news.json");
       news.set("data", []);
+    }
+    if (!fs.existsSync(pathPreFix + "/database/images")) {
+      console.log("creating images Folder");
+      fs.mkdirSync(pathPreFix + "/database/images");
     }
     if (!fs.existsSync(pathPreFix + "/database/openTimes.json")) {
       console.log("creating openTimes.json");

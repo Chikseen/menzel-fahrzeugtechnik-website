@@ -4,8 +4,11 @@ const fs = require("fs");
 const express = require("express");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const corsImage = require("cors");
 const { v4: uuidGen } = require("uuid");
 const nodemailer = require("nodemailer");
+const path = require("path");
+
 const initMailTemplate = require("./mailHandling/initMailTemplate.js");
 const databaseIntegrity = require("./dbHandler/init.js");
 const ot = require("./dbHandler/openTimes.js");
@@ -19,8 +22,30 @@ if (process.env.NODE_ENV === "development") {
 } else {
   pathPreFix = "";
 }
+let root = "";
+if (process.env.NODE_ENV === "development") root = path.join(__dirname, `database/images`);
+else root = "/database/images";
 
-const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
+var whitelist = [
+  "https://dev.menzel-fahrzeugtechnik.de",
+  "https://menzel-fahrzeugtechnik.de",
+  "http://localhost:7080",
+  "http://localhost:8080",
+  "http://localhost:8081",
+  "app://.",
+];
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -2) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+/* const mailAuth = new JSONdb(pathPreFix + "/database/mailAuth.json", { asyncWrite: false, syncOnWrite: true, jsonSpaces: 4 });
 var transporter = nodemailer.createTransport({
   auth: {
     user: mailAuth.get("name"),
@@ -55,16 +80,16 @@ function sendMail(transporter, from, to, data) {
       return { status: "success" };
     }
   });
-}
+} */
 
 // DATAINIT
 databaseIntegrity.init(fs, pathPreFix);
 
 // EXPRESS SETUP
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "100mb" }));
 const port = 7080;
 app.listen(port, () => console.log("Connecet with Port: " + port));
 
@@ -135,7 +160,7 @@ app.post("/activeMessages/get", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(am.getAll(pathPreFix));
   else res.json({ status: "invalidKey" });
 });
-app.post("/activeMessages/getFilterd", async (req, res) => {
+app.get("/activeMessages/getFilterd", async (req, res) => {
   res.json(am.getFilterd(pathPreFix));
 });
 
@@ -144,11 +169,11 @@ app.post("/activeMessages/delete", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
-app.post("/openTimes/get", async (req, res) => {
+app.get("/openTimes/get", async (req, res) => {
   res.json(ot.getDay(pathPreFix));
 });
 
-app.post("/openTimes/getAll", async (req, res) => {
+app.get("/openTimes/getAll", async (req, res) => {
   res.json(ot.getAll(pathPreFix));
 });
 
@@ -157,7 +182,7 @@ app.post("/openTimes/set", async (req, res) => {
   else res.json({ status: "invalidKey" });
 });
 
-app.post("/news/get", async (req, res) => {
+app.get("/news/get", async (req, res) => {
   res.json(news.get(pathPreFix, req));
 });
 
@@ -174,4 +199,43 @@ app.post("/news/create", async (req, res) => {
 app.post("/news/delete", async (req, res) => {
   if (await checkKey(req.body.key)) res.json(news.delete(pathPreFix, req));
   else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/uploadImage", async (req, res) => {
+  if (await checkKey(req.body.key)) res.json(news.uploadImage(pathPreFix, req));
+  else res.json({ status: "invalidKey" });
+});
+
+app.post("/news/getAllImage", (req, res) => {
+  console.log("news.getAllImage(root)", news.getAllImage(root));
+  res.json(news.getAllImage(root));
+});
+
+// EXPRESS SETUP
+const imageapp = express();
+imageapp.use(corsImage());
+imageapp.use(express.urlencoded({ extended: true }));
+imageapp.use(express.json({ limit: "100mb" }));
+const portimage = 7081;
+imageapp.listen(portimage, () => console.log("Connecet with Port: " + portimage));
+
+imageapp.get("/", (req, res) => {
+  const header = JSON.stringify(req.query.id);
+  console.log(header);
+  console.log(root);
+  var options = {
+    root: root,
+    dotfiles: "deny",
+    headers: {
+      "x-timestamp": Date.now(),
+      "x-sent": true,
+    },
+  };
+  res.sendFile(`${req.query.id}.png`, options, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Sent:", `${req.query.id}.png`);
+    }
+  });
 });

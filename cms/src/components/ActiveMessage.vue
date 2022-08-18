@@ -45,13 +45,13 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.fetchData("activeMessages/get", {
+      const data = await api.post("activeMessages/get", {
         key: localStorage.getItem("authKey"),
       });
       this.allMessages = data;
     },
     async deleteMessage(uuid) {
-      const data = await api.fetchData("activeMessages/delete", {
+      const data = await api.post("activeMessages/delete", {
         uuid: uuid,
         key: localStorage.getItem("authKey"),
       });
@@ -63,6 +63,7 @@ export default {
   },
   watch: {
     allMessages() {
+      console.log("222", this.allMessages);
       this.allMessages.sort((a, b) => (new Date(a.startDate) > new Date(b.startDate) ? 1 : new Date(b.startDate) > new Date(a.startDate) ? -1 : 0));
     },
   },
