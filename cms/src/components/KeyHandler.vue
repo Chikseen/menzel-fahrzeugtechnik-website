@@ -3,9 +3,16 @@
     <div v-if="keyStatus">
       <p>Alle Regrestierten Benutzter</p>
       <h6>Sollten irgendwelche unregelmäsigkeiten auffallen bitte an an denn Betreiber wenden ;)</h6>
+      <button @click="getAlluser">LoadUser</button>
       <div v-for="(item, index) in allUser" :key="index">
-        <p v-if="item == ''">NoName</p>
-        <p v-else>{{ item }}</p>
+        <div class="keyHandler_keys">
+          <p>{{ item.name }}</p>
+          <span>{{ item.value }}</span>
+        </div>
+      </div>
+      <div>
+        <input type="text" v-model="valueToDelete" />
+        <button @click="removeUser">Delete user value</button>
       </div>
     </div>
     <div v-else>
@@ -47,31 +54,33 @@ export default {
       keyInput: "",
       user: "",
       allUser: [],
+      valueToDelete: "",
     };
   },
   methods: {
     async requestNewKey() {
-      const data = await api.post("key/sendNew", {
-        key: localStorage.getItem("authKey"),
-        user: this.user,
+      const data = await api.post("User", {
+        name: this.user,
       });
       console.log("data", data);
     },
     async confirmKey() {
-      const data = await api.post("key/check", { key: this.keyInput });
-      if (data.status) this.$emit("keyStatus", false);
-      if (data.status) {
-        localStorage.setItem("authKey", this.keyInput);
-        this.$emit("keyStatus", true);
-      }
+      const data = await api.post("User/Validate", { value: this.keyInput });
+      console.log("data", data);
+      localStorage.setItem("key", this.keyInput);
+      document.location.reload(true);
     },
     async getAlluser() {
-      console.log("hi");
-      const data = await api.post("key/getuser", { key: localStorage.getItem("authKey") });
-      this.allUser = data.data;
+      const data = await api.get("User/All");
+      this.allUser = data;
+    },
+    async removeUser() {
+      await api.delete("User", { value: this.valueToDelete });
+      this.getAlluser();
     },
   },
   mounted() {
+    this.keyInput = localStorage.getItem("key");
     this.getAlluser();
   },
 };
@@ -81,10 +90,19 @@ export default {
 .keyHandler_wrapper {
   max-width: 500px;
   margin: 0 auto;
+  text-align: center;
 }
 .keyHandler_newKey {
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+}
+.keyHandler_keys {
+  box-shadow: 0 0 5px 5px #2d2d2d26;
+  border-radius: 10px;
+}
+.keyHandler_keys span {
+  font-size: 0.65rem;
+  word-wrap: break-word;
 }
 </style>

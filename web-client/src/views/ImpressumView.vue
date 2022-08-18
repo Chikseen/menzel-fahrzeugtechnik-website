@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="impressum_wrapper">
     <div class="pageTitel pageTitel_noSpace">
       <h1>Impres</h1>
       <h1>sum</h1>
@@ -15,6 +15,15 @@
       <p>04564 Böhlen Germany</p>
       <p>Phone: <a href="tel:+49 62929704">0176 62929704</a></p>
       <p>E-Mail: <a href="mailto:Tim_Menzel@t-online.de">Tim_Menzel@t-online.de</a></p>
+      <p>Source Code: <a href="https://github.com/Chikseen/menzel-fahrzeugtechnik-website">https://github.com/Chikseen</a></p>
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.impressum {
+  &_wrapper {
+    margin-top: 6rem;
+  }
+}
+</style>

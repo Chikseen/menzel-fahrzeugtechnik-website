@@ -1,0 +1,14 @@
+### .env Template
+'
+POSTGRES_HOST=localhost
+POSTGRES_PORT=6080
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=password
+POSTGRES_DATABASE=test
+
+PGADMIN_PORT=6081
+PGADMIN_PASSWORD=password
+PGADMIN_EMAIL=admin@admin.com
+
+FILE_PATH=/var/lib/files/images
+'

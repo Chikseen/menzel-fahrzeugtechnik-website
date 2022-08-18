@@ -29,14 +29,14 @@
       <h3>Wir sind für Sie da</h3>
       <p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
     </div>
-    <router-view></router-view>
+    <router-view class="serviceView_content"></router-view>
   </div>
 </template>
 
 <script>
 import TuevIcon from "@/assets/icons/TuevIcon.vue";
 import WheelIcon from "@/assets/icons/WheelIcon2.vue";
-import ACIcon from "@/assets/icons/ACIcon.vue";
+import ACIcon from "@/assets/icons/MenuIcon.vue";
 import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
 
 export default {
@@ -89,6 +89,27 @@ export default {
       li {
         margin-top: 10px;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 870px) {
+  .serviceView {
+    &_overview {
+      margin-top: 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+
+      &_container {
+        min-width: 6rem;
+        max-height: 8rem;
+        font-size: 0.7rem;
+        overflow: hidden;
+      }
+    }
+
+    &_content {
+      padding: 10px;
     }
   }
 }

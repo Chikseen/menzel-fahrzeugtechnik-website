@@ -1,21 +1,17 @@
 <template>
   <div v-if="allActviveMessages.length">
-    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.uuid">
+    <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.id">
       <div
         class="active_textwrapper"
         :class="[
-          message.colorselection == '0' ? 'active_textwrapper_red' : '',
-          message.colorselection == '1' ? 'active_textwrapper_green' : '',
-          message.colorselection == '2' ? 'active_textwrapper_white' : '',
+          message.color == 'red' ? 'active_textwrapper_red' : '',
+          message.color == 'green' ? 'active_textwrapper_green' : '',
+          message.color == 'white' ? 'active_textwrapper_white' : '',
         ]"
       >
         <div>
           <h2>{{ message.titel }}</h2>
           <p>{{ message.text }}</p>
-        </div>
-        <div class="active_textwrapper_date">
-          <p>Vom: {{ dateFormatter(message.startDate) }}</p>
-          <p>Bis: {{ dateFormatter(message.endDate) }}</p>
         </div>
       </div>
     </div>
@@ -34,13 +30,14 @@ export default {
   },
   methods: {
     async getData() {
-      const data = await api.get("activeMessages/getFilterd", {});
+      const data = await api.get("Notification");
       this.$store.commit("setMessage", data);
       this.allActviveMessages = data;
     },
     dateFormatter(data) {
       const date = new Date(data);
-      return `${date.getDay()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
+      return `${String(date.getDate()).padStart(2, "0")}.${String(date.getMonth() + 1).padStart(2, "0")}.${date.getFullYear()}`;
     },
   },
   mounted() {
@@ -65,15 +62,15 @@ export default {
     border-radius: 10px;
 
     &_red {
-      background-color: rgb(241, 50, 50);
+      background-color: $error-red;
       box-shadow: 2px 2px 10px 2px #66141450;
     }
     &_green {
-      background-color: rgb(50, 235, 75);
+      background-color: $succes-green;
       box-shadow: 2px 2px 10px 2px #17661450;
     }
     &_white {
-      background-color: rgb(250, 250, 250);
+      background-color: $icon_base_grey;
       box-shadow: 2px 2px 10px 2px #58585850;
     }
 
@@ -94,6 +91,8 @@ export default {
 @media only screen and (max-width: 870px) {
   .active {
     &_textwrapper {
+      padding: 0 25px;
+
       h2,
       p {
         text-align: left;

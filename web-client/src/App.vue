@@ -32,6 +32,10 @@ html {
   padding: 0;
 }
 
+#map {
+  z-index: 1;
+}
+
 .underlined {
   &::after {
     content: "";
@@ -43,6 +47,10 @@ html {
     background-color: $company_blue;
     box-shadow: 0 0 10px 1px #4d4d4d57;
   }
+}
+
+.tempDotShow {
+  display: none !important;
 }
 
 .pageTitel {
@@ -154,6 +162,7 @@ html {
   border-radius: 3px;
   background-color: lighten($company_blue, 75);
   transition: all 0.5s;
+  color: #f13232;
 }
 
 ::-webkit-scrollbar-thumb:hover {

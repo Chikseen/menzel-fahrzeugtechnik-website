@@ -1,92 +1,90 @@
 const apiService = {
   //DATA FETCHER
   async get(adress) {
-    let call;
-    if (process.env.NODE_ENV == "development") {
-      console.log("mode is development");
-      call = "http://192.168.2.100:7080";
-    } else {
-      call = "https://api.menzel-fahrzeugtechnik.de";
-    }
-
-    try {
-      const request = await fetch(`${call}/${adress}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-        mode: "cors",
-        redirect: "follow",
-      });
-      return await request.json();
-    } catch (error) {
-      return {
-        isError: true,
-        succes: false,
-        errormsg: "unexpected",
-        msg: "Something unexepted happend",
-      };
-    }
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
   },
   async post(adress, payload) {
-    let call;
-    if (process.env.NODE_ENV == "development") {
-      console.log("mode is development");
-      call = "http://192.168.2.100:7080";
-    } else {
-      call = "https://api.menzel-fahrzeugtechnik.de";
-    }
-
-    try {
-      const request = await fetch(`${call}/${adress}`, {
-        body: JSON.stringify(payload),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-      });
-      return await request.json();
-    } catch (error) {
-      return {
-        isError: true,
-        succes: false,
-        errormsg: "unexpected",
-        msg: "Something unexepted happend",
-      };
-    }
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: JSON.stringify(payload),
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
   },
-  async uploadFiles(adress, payload) {
-    let call;
-    if (process.env.NODE_ENV == "development") {
-      console.log("mode is development");
-      call = "http://192.168.2.100:7080";
-    } else {
-      call = "https://api.menzel-fahrzeugtechnik.de";
-    }
-
+  async put(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: JSON.stringify(payload),
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
+  },
+  async patch(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: JSON.stringify(payload),
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
+  },
+  async delete(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: JSON.stringify(payload),
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
+  },
+  async uploadFile(adress, payload) {
+    const request = await fetch(`${process.env.VUE_APP_API}/${adress}`, {
+      body: new FormData(payload),
+      credentials: "include",
+      method: "POST",
+      mode: "cors",
+      redirect: "follow",
+    });
+    return await this.tryJson(request);
+  },
+  
+  async tryJson(payload) {
     try {
-      const request = await fetch(`${call}/${adress}`, {
-        body: payload,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "multipart/form-data",
-        },
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-      });
-      return await request.json();
+      return await payload.json();
     } catch (error) {
-      return {
-        isError: true,
-        succes: false,
-        errormsg: "unexpected",
-        msg: "Something unexepted happend",
-      };
+      return payload;
     }
   },
 };

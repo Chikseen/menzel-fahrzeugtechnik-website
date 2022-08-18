@@ -9,21 +9,11 @@
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
           <div class="contactView_openTimes_content_data_opening_wrapper" v-if="openTimes[0]">
-            <div class="contactView_openTimes_content_data_opening">
-              <p>{{ openTimes[0][0].day }} - {{ openTimes[0][openTimes[0].length - 1].day }}</p>
-              <div class="contactView_openTimes_content_data_opening_dates">
-                <p>{{ openTimes[0][0].timeStart.slice(1, 6) }}</p>
-                <p>{{ openTimes[0][0].timeEnd.slice(1, 6) }}</p>
-              </div>
-            </div>
-            <div v-for="(day, index) in openTimes[1]" :key="index" class="contactView_openTimes_content_data_opening">
-              <p>{{ day.day }}</p>
-              <div v-if="day.day != 'Samstag'" class="contactView_openTimes_content_data_opening_dates">
-                <p>{{ day.timeStart.slice(1, 6) }}</p>
-                <p>{{ day.timeEnd.slice(1, 6) }}</p>
-              </div>
-              <!-- For now hardcoded, Change later -->
-              <p v-if="day.day == 'Samstag'">nach Vereinbarung</p>
+            <div v-for="item in openTimes" :key="item.id" class="contactView_openTimes_content_data_opening">
+              <!-- {{ item }} -->
+              <p v-if="!item.showCutomText">{{ item.days }}</p>
+              <p v-if="!item.showCutomText">{{ convertToTime(item.open) }} - {{ convertToTime(item.close) }}</p>
+              <p v-else="item.showCutomText">{{ item.customText }}</p>
             </div>
           </div>
         </div>
@@ -46,6 +36,7 @@
 
 <script>
 import api from "@/apiService";
+import date from "@/date.js";
 import MapComponent from "@/components/MapComponent";
 
 export default {
@@ -59,31 +50,11 @@ export default {
   },
   methods: {
     async getTimes() {
-      const data = await api.get("openTimes/getAll", {});
-
-      let allOpenDays = [];
-      data.weekdays.forEach((day) => {
-        if (day.isOpen) allOpenDays.push(day);
-      });
-
-      let squshed = [];
-      let diffrent = [];
-      this.openTimes = [];
-
-      if (allOpenDays.length > 1) {
-        for (let i = 1; i < allOpenDays.length; i++) {
-          if (allOpenDays[i].timeStart == allOpenDays[i - 1].timeStart && allOpenDays[i].timeEnd == allOpenDays[i - 1].timeEnd) {
-            if (i == 1) {
-              squshed.push(allOpenDays[i - 1]);
-            }
-            squshed.push(allOpenDays[i]);
-          } else {
-            diffrent.push(allOpenDays[i]);
-          }
-        }
-      }
-      this.openTimes.push(squshed);
-      this.openTimes.push(diffrent);
+      const data = await api.get("Openinghours");
+      this.openTimes = data;
+    },
+    convertToTime(time) {
+      return date.dateObjectToHHMM(time);
     },
   },
   mounted() {
@@ -110,12 +81,15 @@ export default {
         margin: 10px;
         flex-direction: column;
         display: flex;
+        width: 100%;
 
         &_opening {
           margin: 5px;
+          min-width: 120px;
 
           &_wrapper {
             display: flex;
+            justify-content: space-evenly;
             width: calc(100% - 20px);
           }
 
@@ -134,12 +108,13 @@ export default {
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 870px) {
   .contactView {
     transition: all 0.3s;
 
     &_openTimes {
       overflow: hidden;
+      margin-top: 6rem;
 
       &_content {
         flex-direction: column;
