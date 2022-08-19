@@ -1,56 +1,55 @@
 <template>
   <div>
-    <div :class="['header_nav_menu', menuOpen ? 'header_nav_menu_extendet' : '']" @mouseup="menuOpen = !menuOpen">
-      <div class="header_nav_menu_quickinfo">
-        <div class="header_nav_menu_quickinfo_titel">
+    <div :class="['headerMobile_nav_menu', menuOpen ? 'headerMobile_nav_menu_extendet' : '']"
+      @mouseup="menuOpen = !menuOpen">
+      <div class="headerMobile_nav_menu_quickinfo">
+        <div class="headerMobile_nav_menu_quickinfo_titel">
           <h1>Menzel</h1>
           <h1>Fahrzeugtechnik</h1>
         </div>
-        <HeaderOpeningHours class="header_nav_menu_quickinfo_openinghours" />
-        <div class="header_nav_menu_quickinfo_currentRoute">
-          <transition name="header-active-smallwindow" mode="out-in">
-            <p v-if="$route.name === 'home'">Home</p>
-            <p v-else-if="$route.name === 'service'">Service</p>
-            <p v-else-if="$route.name === 'contact'">Kontakt</p>
-            <p v-else-if="$route.name === 'news'">News</p>
-            <p v-else-if="$route.name === 'galerie'">Galerie</p>
-            <p v-else-if="$route.name === 'about'">Über mich</p>
-            <p v-else-if="$route.name === 'impressum'">Impressum</p>
-            <p v-else-if="$route.name === 'tuev'">TÜV</p>
-            <p v-else-if="$route.name === 'tiers'">Reifen</p>
-            <p v-else-if="$route.name === 'ac'">Klima</p>
-            <p v-else-if="$route.name === 'repair'">Reperatur</p>
-            <p v-else-if="$route.name === 'glasService'">Glasschäden</p>
+        <HeaderOpeningHours class="headerMobile_nav_menu_quickinfo_openinghours" />
+        <div class="headerMobile_nav_menu_quickinfo_currentRoute">
+          <transition name="fade">
+            <p v-if="$route.path === '/home'">Home</p>
+            <p v-else-if="$route.path === '/service'">Service</p>
+            <p v-else-if="$route.path === '/contact'">Kontakt</p>
+            <p v-else-if="$route.path === '/news'">News</p>
+            <p v-else-if="$route.path === '/galerie'">Galerie</p>
+            <p v-else-if="$route.path === '/about'">Über mich</p>
+            <p v-else-if="$route.path === '/impressum'">Impressum</p>
+            <p v-else-if="$route.path === '/service/tuev'">TÜV</p>
+            <p v-else-if="$route.path === '/service/tiers'">Reifen</p>
+            <p v-else-if="$route.path === '/service/ac'">Klima</p>
+            <p v-else-if="$route.path === '/service/repair'">Reperatur</p>
+            <p v-else-if="$route.path === '/service/glasservice'">Glasschäden</p>
           </transition>
         </div>
       </div>
-      <MenuIcon class="header_nav_menu_icon" />
-      <nav class="header_nav_smallWindow">
-        <NuxtLink class="header_nav_route" to="/home">
+      <MenuIcon class="headerMobile_nav_menu_icon" />
+      <nav class="headerMobile_nav_smallWindow">
+        <NuxtLink class="headerMobile_nav_route" to="/home">
           <p>Home</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/service">
+        <NuxtLink class="headerMobile_nav_route" to="/service">
           <p>Service</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/contact">
+        <NuxtLink class="headerMobile_nav_route" to="/contact">
           <p>Kontakt</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/news">
+        <NuxtLink class="headerMobile_nav_route" to="/news">
           <p>News</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/galerie">
+        <NuxtLink class="headerMobile_nav_route" to="/galerie">
           <p>Galerie</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/about">
+        <NuxtLink class="headerMobile_nav_route" to="/about">
           <p>Über mich</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/impressum">
+        <NuxtLink class="headerMobile_nav_route" to="/impressum">
           <p>Impressum</p>
         </NuxtLink>
       </nav>
     </div>
-
-
     <nuxt />
   </div>
 </template>
@@ -81,17 +80,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
+.nuxt-link-active {
+  p {
+    background-color: #d3d7df;
+    color: $company_blue;
+    padding: 15px;
+    margin: 0;
+    border-radius: 5px;
+  }
+}
+</style>
+
+<style lang="scss">
+.headerMobile {
   position: fixed;
   width: 100%;
   background-color: #8f8f8f00;
 
-  &_icon {
-    display: none;
-  }
-
   &_nav {
-    display: none;
 
     &_smallWindow {
       position: absolute;
@@ -107,6 +113,13 @@ export default {
       font-size: 0.9rem;
       text-align: left;
       background-color: $company_blue;
+      overflow: hidden;
+
+      p {
+        margin: 5px 0;
+        padding: 5px 0;
+        transition: all 0.5s;
+      }
     }
 
     &_menu {
@@ -125,7 +138,7 @@ export default {
       transition: all 0.5s ease;
 
       &_extendet {
-        height: 25rem;
+        height: 26rem;
       }
 
       &_icon {
@@ -139,9 +152,9 @@ export default {
       &_quickinfo {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        width: calc(100% - 40px);
         height: 5rem;
-        padding: 0 0 0 25px;
+        padding: 0 15px 0 25px;
         background-color: $company-blue;
         box-shadow: 0 0 5px 1px $company-blue;
         z-index: 5;
@@ -186,9 +199,9 @@ export default {
         &_openinghours {
           display: flex;
           justify-content: flex-end;
+          padding-right: 0;
 
           p {
-            text-align: right;
             margin: 10px 0 0 7px;
             font-size: 0.8rem;
           }
@@ -223,64 +236,44 @@ export default {
       font-size: 1.2rem;
       color: $ligth_font_color;
       text-decoration: none;
-      width: 120px;
-    }
-  }
-}
+      width: 150px;
 
-nav {
-  p {
-    margin: 5px 0;
-    padding: 5px 0;
-    transition: all 0.5s;
-
-    &.router-link-active {
       p {
-        background-color: #d3d7df;
-        color: $company_blue;
-        padding: 15px;
-        margin: 30px 0;
-        border-radius: 5px;
+        margin: 0;
+        padding: 5px 0;
+        transition: all 0.5s;
       }
+
     }
   }
 }
 
-.header-active-smallwindow {
-  position: absolute;
-}
-
-.header-active-smallwindow-enter-from,
-.header-active-smallwindow-leave-to {
-  transform: translateX(0);
-}
-
-.header-active-smallwindow-enter-active,
-.header-active-smallwindow-leave-active {
+.headerMobile-active-enter-from,
+.headerMobile-active-leave-to {
   transition: all 0.25s ease;
-}
-
-.header-active-smallwindow-enter-from,
-.header-active-smallwindow-leave-to {
-  transform: translateX(-150px);
-}
-
-.header-menu {
-  position: absolute;
-}
-
-.header-menu-enter-from,
-.header-menu-leave-to {
   transform: translateX(0);
+  background-color: antiquewhite;
 }
 
-.header-menu-enter-active,
-.header-menu-leave-active {
-  transition: all 1s ease;
+.headerMobile-active-enter-active,
+.headerMobile-active-leave-active {
+  transition: all 0.25s ease;
+  background-color: antiquewhite;
 }
 
-.header-menu-enter-from,
-.header-menu-leave-to {
-  transform: translateX(105%);
+.headerMobile-active-enter,
+.headerMobile-active-leave {
+  transition: all 0.25s ease;
+  transform: translateX(-150px);
+  background-color: antiquewhite;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

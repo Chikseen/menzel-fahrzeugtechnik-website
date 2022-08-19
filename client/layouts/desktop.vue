@@ -1,53 +1,53 @@
 <template>
   <div class="">
-    <div class="header">
-      <WheelIcon class="header_icon" />
-      <HeaderOpeningHours class="header_quickConntact header_quickConntact_timeing" />
-      <nav class="header_nav">
-        <NuxtLink class="header_nav_route" to="/home">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'home'" class="header_nav_route_active"></div>
+    <div class="headerDesktop">
+      <WheelIcon class="headerDesktop_icon" />
+      <HeaderOpeningHours class="headerDesktop_quickConntact headerDesktop_quickConntact_timeing" />
+      <nav class="headerDesktop_nav">
+        <NuxtLink class="headerDesktop_nav_route" to="/home">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'home'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Home</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/service">
-          <transition name="header-active">
-            <div v-if="isService" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/service">
+          <transition name="headerDesktop-menu">
+            <div v-if="isService" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Service</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/contact">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'contact'" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/contact">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'contact'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Kontakt</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/news">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'news'" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/news">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'news'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>News</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/galerie">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'galerie'" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/galerie">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'galerie'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Galerie</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/about">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'about'" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/about">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'about'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Über mich</p>
         </NuxtLink>
-        <NuxtLink class="header_nav_route" to="/impressum">
-          <transition name="header-active">
-            <div v-if="this.$route.name == 'impressum'" class="header_nav_route_active"></div>
+        <NuxtLink class="headerDesktop_nav_route" to="/impressum">
+          <transition name="headerDesktop-menu">
+            <div v-if="this.$route.name == 'impressum'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>Impressum</p>
         </NuxtLink>
       </nav>
-      <div class="header_quickConntact" @mouseup="$router.push('/contact')">
+      <div class="headerDesktop_quickConntact headerDesktop_quickConntact_address" @mouseup="$router.push('/contact')">
         <p>Städtelner Straße 62</p>
         <p>04416 Markkleeberg</p>
       </div>
@@ -81,7 +81,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
+.nuxt-link-active {
+  p {
+    margin-top: 15px;
+    color: $company-blue;
+  }
+}
+</style>
+
+<style lang="scss">
+.headerDesktop {
   position: sticky;
   top: 0;
   right: 0;
@@ -103,6 +112,24 @@ export default {
     height: 100%;
   }
 
+  &_quickConntact {
+    cursor: pointer;
+    max-width: 200px;
+    color: rgb(185, 185, 185);
+    transition: all 0.25s;
+    font-size: 0.8rem;
+
+    p {
+      margin: 2px;
+    }
+
+    &_timeing {
+      padding-left: 100px;
+    }
+
+    margin: auto;
+  }
+
   &_nav {
     display: flex;
     flex-direction: row;
@@ -115,6 +142,13 @@ export default {
       font-size: 1.5rem;
       color: $ligth_font_color;
       text-decoration: none;
+
+      p {
+        margin: 0;
+        font-weight: bold;
+        color: white;
+        transition: all 1s;
+      }
 
       &_active {
         position: absolute;
@@ -141,6 +175,7 @@ export default {
           box-shadow: 0 -25px 0 0 #f66969; */
         }
       }
+
     }
 
     &_menu {
@@ -153,68 +188,44 @@ export default {
   }
 }
 
-nav {
-  padding: 0 30px;
-  white-space: nowrap;
+@media only screen and (max-width: 1500px) {
+  .headerDesktop {
+    justify-content: flex-end;
+    padding-right: 5px;
 
-  p {
-    p {
-      font-weight: bold;
-      color: #d3d7df;
-      transition: all 1s;
-    }
-
-    &.NuxtLink-active {
-      p {
-        color: $company_blue;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 1300px) {
-  .header {
-    &_quickConntact {
+    &_quickConntact_address {
       display: none;
     }
   }
 }
 
-.header-active-smallwindow {
-  position: absolute;
+
+@media only screen and (max-width: 1225px) {
+  .headerDesktop {
+    margin-left: 0;
+  }
 }
 
-.header-active-smallwindow-enter-from,
-.header-active-smallwindow-leave-to {
-  transform: translateX(0);
+@media only screen and (max-width: 1100px) {
+  .headerDesktop_quickConntact {
+    display: none;
+  }
 }
 
-.header-active-smallwindow-enter-active,
-.header-active-smallwindow-leave-active {
-  transition: all 0.25s ease;
+.headerDesktop-menu {
+  transition: all 0.5s;
 }
 
-.header-active-smallwindow-enter-from,
-.header-active-smallwindow-leave-to {
-  transform: translateX(-150px);
+.headerDesktop-menu-enter-active,
+.headerDesktop-menu-leave-active {
+  transform: translateY(0) rotateZ(0deg);
 }
 
-.header-menu {
-  position: absolute;
+.headerDesktop-menu-enter {
+  transform: translateY(-110%) rotateZ(-10deg);
 }
 
-.header-menu-enter-from,
-.header-menu-leave-to {
-  transform: translateX(0);
-}
-
-.header-menu-enter-active,
-.header-menu-leave-active {
-  transition: all 1s ease;
-}
-
-.header-menu-enter-from,
-.header-menu-leave-to {
-  transform: translateX(105%);
+.headerDesktop-menu-leave-to {
+  transform: translateY(110%) rotateZ(10deg);
 }
 </style>

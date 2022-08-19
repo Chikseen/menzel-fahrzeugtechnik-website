@@ -1,5 +1,5 @@
 <template>
-    <div @mouseup="$router.push('/contact')">
+    <div @mouseup="checkcilck">
         <p v-if="$device.isDesktop">{{ openingState.status }}</p>
         <p>{{ openingState.text }}</p>
         <p>{{ openingState.time }}</p>
@@ -62,6 +62,9 @@ export default {
         },
     },
     methods: {
+        checkcilck() {
+            if (this.$device.isDesktop) this.$router.push('/contact')
+        },
         async getData() {
             const data = await api.get('Openinghours/Weekdays')
             this.$store.commit('setOpenTime', data)
@@ -73,29 +76,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss">
-.header {
-    &_quickConntact {
-        cursor: pointer;
-        max-width: 200px;
-        color: rgb(185, 185, 185);
-        transition: all 0.25s;
-        font-size: 0.8rem;
-
-        p {
-            margin: 2px;
-        }
-
-        &_timeing {
-            padding-left: 100px;
-        }
-
-        margin: auto;
-    }
-
-    &_quickConntact:hover {
-        color: rgb(230, 230, 230);
-    }
-}
-</style>

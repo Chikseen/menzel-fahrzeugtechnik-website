@@ -130,7 +130,6 @@ export default {
 
     &_openTimes {
       overflow: hidden;
-      margin-top: 6rem;
 
       &_content {
         flex-direction: column;

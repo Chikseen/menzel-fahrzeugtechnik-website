@@ -170,7 +170,6 @@ export default {
 
 @media only screen and (max-width: 870px) {
   .home {
-    margin-top: 6rem;
 
     &_content {
       &_wrapper {

@@ -27,11 +27,3 @@
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.impressum {
-  &_wrapper {
-    margin-top: 6rem;
-  }
-}
-</style>
