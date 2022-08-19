@@ -8,7 +8,7 @@
         M+S-Kennzeichnung und vereinen sowohl die Eigenschaften eines Sommer- als auch eines Winterreifens. Sie dürfen bei allen Wettersituationen gefahren
         werden, also auch auf winterlichen Straßen. Aber: Auf Eis und Schnee sind sie dem Winterreifen deutlich in puncto Handling, Bremsen und Traktion
         unterlegen. Das hat der Autofahrer intus: Die Reifen werden zu <strong>Ostern</strong> und im <strong>Oktober</strong> gewechselt. Diese Faustregel ist
-        im Großen und Ganzen sinnvoll, denn es kann bereits im Oktober schneien. Man sollte spätestens <string>Ende April</string> und frühestens im
+        im Großen und Ganzen sinnvoll, denn es kann bereits im Oktober schneien. Man sollte spätestens <strong>Ende April</strong> und frühestens im
         <strong>Oktober</strong> umgerüstet haben. Gesetzlich vorgeschrieben ist eine Mindestprofiltiefe von <strong>1,6 Millimetern</strong> Doch sicher sind
         Reifen erst mit <strong>4 Millimetern</strong> Profiltiefe.
       </p>

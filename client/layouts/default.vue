@@ -1,15 +1,22 @@
 <template>
   <div>
-    <HeaderComponent />
+    <div>
+      <MobileHeader v-if="$device.isMobile" />
+      <DesktopHeader v-else />
+    </div>
   </div>
 </template>
 
 <script>
-import HeaderComponent from "~/components/HeaderComponent.vue";
+import DesktopHeader from "~/layouts/desktop.vue";
+import MobileHeader from "~/layouts/mobile.vue";
+
 export default {
   components: {
-    HeaderComponent,
+    DesktopHeader,
+    MobileHeader
   },
+  layout: (ctx) => ctx.isMobile
 };
 </script>
 
@@ -19,7 +26,7 @@ html {
   margin: 0;
   padding: 0;
   overflow-y: overlay;
-  
+
   //font-family: Helvetica, Arial, sans-serif;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -66,6 +73,7 @@ html {
           width: calc(100% + 10px) !important;
         }
       }
+
       &:nth-child(2) {
         &::after {
           margin: 0 !important;
@@ -73,13 +81,15 @@ html {
         }
       }
     }
+
     &:hover {
       h1 {
         &:nth-child(1) {
-          color: $akzent_blue !important;
+          color: $akzent_blue  !important;
         }
+
         &:nth-child(2) {
-          color: $akzent_blue !important;
+          color: $akzent_blue  !important;
         }
       }
     }
@@ -131,6 +141,7 @@ html {
       }
     }
   }
+
   /*     &::before {
       content: "";
       position: absolute;

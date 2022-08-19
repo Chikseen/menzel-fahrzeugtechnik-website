@@ -5,35 +5,23 @@
       <h1>Leistungen</h1>
     </div>
     <div class="serviceView_overview">
-      <div
-        class="serviceView_overview_container"
-        @click="$router.push({ name: `tuev` })"
-      >
+      <NuxtLink class="serviceView_overview_container" to="/service/tuev">
         <p>Hauptuntersuchung und Abgasuntersuchung</p>
         <TuevIcon :fontSize="'1.5'" />
-      </div>
-      <div
-        class="serviceView_overview_container"
-        @click="$router.push({ name: `ac` })"
-      >
+      </NuxtLink>
+      <NuxtLink class="serviceView_overview_container" to="/service/ac">
         <p>Klimaservice</p>
         <ACIcon />
-      </div>
-      <div
-        class="serviceView_overview_container"
-        @click="$router.push({ name: `tiers` })"
-      >
+      </NuxtLink>
+      <NuxtLink class="serviceView_overview_container" to="/service/tiers">
         <p>Reifen und Räder</p>
         <WheelIcon />
-      </div>
-      <div
-        class="serviceView_overview_container"
-        @click="$router.push({ name: `repair` })"
-      >
+      </NuxtLink>
+      <NuxtLink class="serviceView_overview_container" to="/service/repair">
         <p>Unfallreparaturen</p>
         <RepairService />
-      </div>
-      <NuxtLink class="serviceView_overview_container" to="/service/ac">
+      </NuxtLink>
+      <NuxtLink class="serviceView_overview_container" to="/service/glasservice">
         <p>Glasschäden</p>
       </NuxtLink>
     </div>
@@ -58,7 +46,7 @@ export default {
     ACIcon,
     RepairService,
   },
-  mounted() {},
+  mounted() { },
 }
 </script>
 
@@ -92,6 +80,7 @@ export default {
       }
     }
   }
+
   &_detailed {
     &_text {
       text-align: left;
