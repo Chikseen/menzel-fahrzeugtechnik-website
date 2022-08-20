@@ -18,7 +18,7 @@
         </div>
         <div class="newsImageWrapper">
           <div v-for="img in item.images" :key="img + 2" class="newsImage">
-            <img :src="imageUrl + img" alt="" />
+            <img :src="imageUrl + img" :alt="img" />
           </div>
         </div>
         <button class="removeButton" @mouseup="deleteNews(item.id)">Entfernen</button>

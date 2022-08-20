@@ -29,7 +29,7 @@
               @click="currentImages.splice(currentImages.indexOf(img), 1)"
               class="removeButton createNews_imageSelection_current_img"
             >
-              <img :src="imageUrl + img" alt="" />
+              <img :src="imageUrl + img" :alt="img" />
             </div>
           </div>
         </div>
