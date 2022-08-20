@@ -70,7 +70,7 @@ export default {
         data.forEach((item) => {
           sum += item[indexOfElectron] * 1;
         });
-        return sum;
+        return this.smu - sum;
       } else return null;
     },
     tableBodyToShow() {
