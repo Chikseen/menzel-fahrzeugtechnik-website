@@ -1,18 +1,13 @@
 <template>
   <div class="galerie_wrapper">
     <div class="pageTitel pageTitel_noSpace">
-      <h1>Galer</h1>
-      <h1>ie</h1>
+      <span>Galer</span>
+      <span>ie</span>
     </div>
-    <div class="galerie_content">
+    <div :class="['galerie_content', $device.isMobile ? 'mobileOffset' : '']">
       <div v-for="image in images" :key="image" class="galeriesImage">
         <p>{{ image }}</p>
-        <img
-          class="galerie_image"
-          :src="imageUrl + image"
-          alt=""
-          @click="deleteImage(image)"
-        />
+        <img class="galerie_image" :src="imageUrl + image" alt="" @click="deleteImage(image)" />
       </div>
     </div>
     <button @click="loadMoreImages">Mehr laden</button>
@@ -24,6 +19,31 @@ import api from '@/apiService.js'
 import NewsMessage from '@/components/NewsMessage'
 
 export default {
+  name: "galerie",
+  head() {
+    return {
+      title: "Galerie",
+      meta: [
+        {
+          hid: 'description_galerie',
+          name: 'description',
+          content: 'Alle Fotos und Bilder von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_news',
+          name: 'keywords',
+          content: 'Fotos, Bilder'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/galerie'
+        }
+      ]
+    }
+  },
   components: {
     NewsMessage,
   },

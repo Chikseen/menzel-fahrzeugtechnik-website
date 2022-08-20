@@ -1,10 +1,10 @@
 <template>
   <div class="serviceView_wrapper">
     <div class="pageTitel">
-      <h1>Unsere</h1>
-      <h1>Leistungen</h1>
+      <span>Unsere</span>
+      <span>Leistungen</span>
     </div>
-    <div class="serviceView_overview">
+    <div :class="['serviceView_overview', $device.isMobile ? 'mobileOffset' : '']">
       <NuxtLink class="serviceView_overview_container" to="/service/tuev">
         <p>Hauptuntersuchung und Abgasuntersuchung</p>
         <TuevIcon :fontSize="'1.5'" />
@@ -40,6 +40,31 @@ import ACIcon from '@/assets/icons/ACIcon.vue'
 import RepairService from '@/assets/icons/repairService/RepairServiceCluster.vue'
 
 export default {
+  name: "service",
+  head() {
+    return {
+      title: "Leistungen",
+      meta: [
+        {
+          hid: 'description_service',
+          name: 'description',
+          content: 'Alle Leistungen und Angebote von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_service',
+          name: 'keywords',
+          content: 'Leistungen'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/service'
+        }
+      ]
+    }
+  },
   components: {
     TuevIcon,
     WheelIcon,

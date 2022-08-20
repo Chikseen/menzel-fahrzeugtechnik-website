@@ -4,8 +4,8 @@
       @mouseup="menuOpen = !menuOpen">
       <div class="headerMobile_nav_menu_quickinfo">
         <div class="headerMobile_nav_menu_quickinfo_titel">
-          <h1>Menzel</h1>
-          <h1>Fahrzeugtechnik</h1>
+          <span>Menzel</span>
+          <span>Fahrzeugtechnik</span>
         </div>
         <HeaderOpeningHours class="headerMobile_nav_menu_quickinfo_openinghours" />
         <div class="headerMobile_nav_menu_quickinfo_currentRoute">
@@ -93,7 +93,6 @@ export default {
 
 <style lang="scss">
 .headerMobile {
-  position: fixed;
   width: 100%;
   background-color: #8f8f8f00;
 
@@ -123,7 +122,9 @@ export default {
     }
 
     &_menu {
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
       display: flex;
       color: aliceblue;
       width: 100%;
@@ -135,6 +136,7 @@ export default {
       border-radius: 0 0 15px 15px;
       height: 5rem;
       overflow: hidden;
+      z-index: 10;
       transition: all 0.5s ease;
 
       &_extendet {
@@ -162,11 +164,13 @@ export default {
         &_titel {
           display: flex;
 
-          h1 {
+          span {
             position: relative;
             padding: 0 5px;
             font-size: 1.2rem;
+            margin-top: 10px;
             margin-bottom: 0;
+            font-weight: 700;
 
             &:nth-child(1) {
               &::after {
@@ -272,6 +276,7 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

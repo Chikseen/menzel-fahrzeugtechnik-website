@@ -1,10 +1,10 @@
 <template>
   <div class="news_wrapper">
     <div class="pageTitel pageTitel_noSpace">
-      <h1>Ne</h1>
-      <h1>ws</h1>
+      <span>Ne</span>
+      <span>ws</span>
     </div>
-    <div v-if="news">
+    <div v-if="news" :class="$device.isMobile ? 'mobileOffset' : ''">
       <div v-for="(message, index) in news" :key="index">
         <NewsMessage :message="message" />
       </div>
@@ -18,6 +18,31 @@ import api from '@/apiService.js'
 import NewsMessage from '@/components/NewsMessage'
 
 export default {
+  name: "news",
+  head() {
+    return {
+      title: "News",
+      meta: [
+        {
+          hid: 'description_news',
+          name: 'description',
+          content: 'Neuigkeiten und Blog von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_news',
+          name: 'keywords',
+          content: 'Neuigkeiten, News, Blog'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/news'
+        }
+      ]
+    }
+  },
   components: {
     NewsMessage,
   },
@@ -50,8 +75,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.news {
-}
-</style>

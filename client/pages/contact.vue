@@ -1,22 +1,15 @@
 <template>
   <div>
     <div class="pageTitel pageTitel_noSpace">
-      <h1>Kon</h1>
-      <h1>takt</h1>
+      <span>Kon</span>
+      <span>takt</span>
     </div>
-    <div class="contactView_openTimes">
+    <div :class="['contactView_openTimes', $device.isMobile ? 'mobileOffset' : '']">
       <h2>Öffnungszeiten</h2>
       <div class="contactView_openTimes_content">
         <div class="contactView_openTimes_content_data">
-          <div
-            class="contactView_openTimes_content_data_opening_wrapper"
-            v-if="openTimes[0]"
-          >
-            <div
-              v-for="item in openTimes"
-              :key="item.id"
-              class="contactView_openTimes_content_data_opening"
-            >
+          <div class="contactView_openTimes_content_data_opening_wrapper" v-if="openTimes[0]">
+            <div v-for="item in openTimes" :key="item.id" class="contactView_openTimes_content_data_opening">
               <!-- {{ item }} -->
               <p v-if="!item.showCutomText">{{ item.days }}</p>
               <p v-if="!item.showCutomText">
@@ -31,17 +24,13 @@
     <MapComponent />
     <div class="contactView_openTimes">
       <h2>Anschrift</h2>
-      <div
-        class="contactView_openTimes_content contactView_openTimes_content_adress"
-      >
+      <div class="contactView_openTimes_content contactView_openTimes_content_adress">
         <p>Dirk Menzel</p>
         <p>Städtelner Straße 62</p>
         <p>04416 Markkleeberg</p>
         <p>
           E-Mail:
-          <a href="mailto:menzel-fahrzeugtechnik@t-online.de"
-            >menzel-fahrzeugtechnik@t-online.de</a
-          >
+          <a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a>
         </p>
         <p>Telefon: <a href="tel:+034135424333">0341 35424333</a></p>
         <p>Mobil: <a href="tel:+497725199">0160 7725199</a></p>
@@ -56,6 +45,31 @@ import date from '@/date.js'
 import MapComponent from '@/components/MapComponent'
 
 export default {
+  name: "contact",
+  head() {
+    return {
+      title: "Kontakt",
+      meta: [
+        {
+          hid: 'description_contact_overview',
+          name: 'description',
+          content: 'Unsere Anschrift und Öffnungszeiten von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_contact',
+          name: 'keywords',
+          content: 'Öffnungszeiten, Adresse, Anschrift'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/contact'
+        }
+      ]
+    }
+  },
   components: {
     MapComponent,
   },
@@ -138,7 +152,8 @@ export default {
         &_data {
           width: 100%;
           margin: 0;
-          &_opening > div {
+
+          &_opening>div {
             margin: 5px;
             display: flex;
             flex-direction: row;

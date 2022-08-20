@@ -1,14 +1,11 @@
 <template>
   <div v-if="allActviveMessages.length">
     <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.id">
-      <div
-        class="active_textwrapper"
-        :class="[
-          message.color == 'red' ? 'active_textwrapper_red' : '',
-          message.color == 'green' ? 'active_textwrapper_green' : '',
-          message.color == 'white' ? 'active_textwrapper_white' : '',
-        ]"
-      >
+      <div class="active_textwrapper" :class="[
+        message.color == 'red' ? 'active_textwrapper_red' : '',
+        message.color == 'green' ? 'active_textwrapper_green' : '',
+        message.color == 'white' ? 'active_textwrapper_white' : '',
+      ]">
         <div>
           <h2>{{ message.titel }}</h2>
           <p>{{ message.text }}</p>
@@ -22,6 +19,7 @@
 import api from "../apiService";
 
 export default {
+  name: "activeMessage",
   components: {},
   data() {
     return {
@@ -65,10 +63,12 @@ export default {
       background-color: $error-red;
       box-shadow: 2px 2px 10px 2px #66141450;
     }
+
     &_green {
       background-color: $succes-green;
       box-shadow: 2px 2px 10px 2px #17661450;
     }
+
     &_white {
       background-color: $icon_base_grey;
       box-shadow: 2px 2px 10px 2px #58585850;

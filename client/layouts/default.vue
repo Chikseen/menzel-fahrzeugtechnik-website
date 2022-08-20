@@ -54,6 +54,10 @@ html {
   }
 }
 
+.mobileOffset {
+  margin-top: 6rem !important;
+}
+
 .tempDotShow {
   display: none !important;
 }
@@ -64,8 +68,11 @@ html {
   justify-content: center;
 
   &_noSpace {
-    h1 {
+    span {
       padding: 0 !important;
+      font-weight: 700;
+      margin-top: 15px;
+      letter-spacing: 2px;
 
       &:nth-child(1) {
         &::after {
@@ -83,7 +90,7 @@ html {
     }
 
     &:hover {
-      h1 {
+      span {
         &:nth-child(1) {
           color: $akzent_blue  !important;
         }
@@ -96,20 +103,22 @@ html {
   }
 
   &:hover {
-    h1 {
+    span {
       &:nth-child(1) {
         color: $akzent_blue;
       }
     }
   }
 
-  h1 {
+  span {
     position: relative;
     font-size: 3rem;
     color: $company_blue;
     padding: 0 10px;
     background-color: #fff;
     letter-spacing: 2px;
+    font-weight: 700;
+    margin-top: 15px;
     z-index: 2;
     transition: all 0.5s;
 

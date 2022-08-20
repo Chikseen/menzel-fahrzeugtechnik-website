@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div :class="['home', $device.isMobile ? 'mobileOffset' : '']">
     <div class="pageTitel">
-      <h1>Menzel</h1>
-      <h1>Fahrzeugtechnik</h1>
+      <span>Menzel</span>
+      <span>Fahrzeugtechnik</span>
     </div>
     <ActiveMessage />
     <div class="home_content">
@@ -15,8 +15,10 @@
           <h2 class="underlined">Hauptuntersuchung und Abgasuntersuchung</h2>
           <div class="home_content_text">
             <ul>
-              <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den Zweijahresrhythmus.</li>
-              <li>Die Hauptuntersuchung stellt die "Verkehrssicherheit, Vorschriftsmäßigkeit und Umweltverträglichkeit" der Fahrzeuge sicher.</li>
+              <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall
+                in den Zweijahresrhythmus.</li>
+              <li>Die Hauptuntersuchung stellt die "Verkehrssicherheit, Vorschriftsmäßigkeit und Umweltverträglichkeit"
+                der Fahrzeuge sicher.</li>
             </ul>
           </div>
         </div>
@@ -28,9 +30,6 @@
         <div class="home_content_titel" @mouseup="$router.push({ name: 'service' })">
           <h2 class="underlined">Freie KFZ-Werkstatt</h2>
           <div class="home_content_text">
-            <!--             <ul>
-              <li></li>
-            </ul> -->
           </div>
         </div>
       </div>
@@ -45,12 +44,16 @@
           <div class="home_content_text">
             <ul>
               <li>
-                Die regelmäßige Wartung der Klimaanlage erhöht die Sicherheit und verhindert teure Reparaturen. Jede Klimaanlage verliert pro Jahr Kältemittel,
-                dadurch verringert sich die Kühlleistung der Klimaanlage deutlich. Deshalb sollte das Kältemittel alle 2 Jahre aufgefüllt werden.
+                Die regelmäßige Wartung der Klimaanlage erhöht die Sicherheit und verhindert teure Reparaturen. Jede
+                Klimaanlage verliert pro Jahr Kältemittel,
+                dadurch verringert sich die Kühlleistung der Klimaanlage deutlich. Deshalb sollte das Kältemittel alle 2
+                Jahre aufgefüllt werden.
               </li>
               <li>
-                Eine Klimaanlage kühlt nicht nur, sie hält bei optimaler Leistung auch die Innenraumluft trocken. Deshalb ist es auch wichtig im Herbst und
-                Winter die Klimaanlage einzuschalten, denn es gilt: je trockener die Innenraumluft, desto weniger beschlagen die Scheiben.
+                Eine Klimaanlage kühlt nicht nur, sie hält bei optimaler Leistung auch die Innenraumluft trocken.
+                Deshalb ist es auch wichtig im Herbst und
+                Winter die Klimaanlage einzuschalten, denn es gilt: je trockener die Innenraumluft, desto weniger
+                beschlagen die Scheiben.
               </li>
             </ul>
           </div>
@@ -84,6 +87,30 @@ import ACIcon from "@/assets/icons/ACIcon.vue";
 
 export default {
   name: "HomeView",
+  head() {
+    return {
+      title: "Übersicht",
+      meta: [
+        {
+          hid: 'description_home',
+          name: 'description',
+          content: 'Informationen über die wichtigsten Leistungen und Angebote von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_home',
+          name: 'keywords',
+          content: 'Übersicht'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/home'
+        }
+      ]
+    }
+  },
   components: {
     ActiveMessage,
     TuevIcon,
@@ -170,7 +197,6 @@ export default {
 
 @media only screen and (max-width: 870px) {
   .home {
-
     &_content {
       &_wrapper {
         position: relative;

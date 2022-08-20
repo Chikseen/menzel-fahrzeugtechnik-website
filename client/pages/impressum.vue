@@ -1,10 +1,10 @@
 <template>
   <div class="impressum_wrapper">
     <div class="pageTitel pageTitel_noSpace">
-      <h1>Impres</h1>
-      <h1>sum</h1>
+      <span>Impres</span>
+      <span>sum</span>
     </div>
-    <div>
+    <div :class="$device.isMobile ? 'mobileOffset' : ''">
       <p>UmsatzsteuerID: DE297053411</p>
       <p>Steuernummer: 238/248/07256</p>
       <p>Bankverbindung: Sparkasse Leipzig, DE41 8605 5592 1090 2002 22</p>
@@ -20,10 +20,38 @@
       </p>
       <p>
         Source Code:
-        <a href="https://github.com/Chikseen/menzel-fahrzeugtechnik-website"
-          >https://github.com/Chikseen</a
-        >
+        <a href="https://github.com/Chikseen/menzel-fahrzeugtechnik-website">https://github.com/Chikseen</a>
       </p>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "impressum",
+  head() {
+    return {
+      title: "Impressum",
+      meta: [
+        {
+          hid: 'description_impressum',
+          name: 'description',
+          content: 'Impressum von Menzel Fahrzeugtechnik'
+        },
+        {
+          hid: 'keywords_impressum',
+          name: 'keywords',
+          content: 'About'
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: 'https://menzel-fahrzeugtechnik.de/impressum'
+        }
+      ]
+    }
+  },
+}
+</script>

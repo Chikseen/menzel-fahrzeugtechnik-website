@@ -2,14 +2,13 @@
   <div class="news_wrapper">
     <div class="news_header">
       <h2>{{ message.titel }}</h2>
-      <h6>Erstellt am: {{ toDate(message.created) }}</h6>
+      <p>Erstellt am: {{ toDate(message.created) }}</p>
     </div>
     <p>{{ message.text }}</p>
     <div class="news_image_wrapper">
       <div v-for="img in message.images" :key="img + 2" class="news_image">
         <a class="news_image" :href="imageUrl + img">
-          <img :src="imageUrl + img" alt=""
-        /></a>
+          <img :src="imageUrl + img" :alt="img.replace('.png', '')" loading="lazy" /></a>
       </div>
     </div>
     <hr />
@@ -21,7 +20,7 @@ import date from '@/date'
 
 export default {
   props: {
-    message: { type: Object, default: () => {} },
+    message: { type: Object, default: () => { } },
   },
   methods: {
     toDate(dateT) {
@@ -47,6 +46,10 @@ export default {
   &_header {
     display: flex;
     justify-content: space-between;
+
+    p {
+      font-size: 0.8rem;
+    }
   }
 
   &_image {
@@ -69,10 +72,9 @@ export default {
   }
 }
 
-.news_image:hover + .news_image_overlay {
+.news_image:hover+.news_image_overlay {
   opacity: 1;
 }
 
-@media only screen and (max-width: 460px) {
-}
+@media only screen and (max-width: 460px) {}
 </style>
