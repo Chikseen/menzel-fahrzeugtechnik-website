@@ -2,10 +2,25 @@
   <div id="map"></div>
 </template>
 <script>
+import markerIcon from "~/assets/mapIcons/marker-icon.png"
+import markerIconShadow from "~/assets/mapIcons/marker-shadow.png"
+
 export default {
   name: 'leaflet-map',
   mounted() {
+
     const lmap = L.map("map").setView([51.271428, 12.369805], 16);
+
+    var greenIcon = L.icon({
+      iconUrl: markerIcon,
+      shadowUrl: markerIconShadow,
+
+      iconSize: [24, 40], // size of the icon
+      shadowSize: [24, 40], // size of the shadow
+      iconAnchor: [12, 40], // point of the icon which will correspond to marker's location
+      shadowAnchor: [7, 40],  // the same for the shadow
+      popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
 
     const tileURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
     const tiles = L.tileLayer(tileURL, {
@@ -17,8 +32,7 @@ export default {
     });
 
     tiles.addTo(lmap);
-
-    L.marker([51.271428, 12.369805]).addTo(lmap);
+    L.marker([51.271428, 12.369805], {icon: greenIcon}).addTo(lmap);
   },
 }
 </script>
