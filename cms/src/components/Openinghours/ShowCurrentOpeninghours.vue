@@ -6,7 +6,7 @@
     </div>
     <div>
       <div class="opneingTimes_selction_header">
-        <h4>Geöffnet:</h4>
+        <h4>geöffnet:</h4>
         <span :class="item.isOpen ? 'activeSpan' : 'inActiveSpan'"></span>
       </div>
       <div v-if="item.isOpen">
@@ -22,7 +22,7 @@
     </div>
     <div>
       <div class="opneingTimes_selction_header">
-        <h4>Zeitlich begränzt:</h4>
+        <h4>Zeitlich begrenzt:</h4>
         <span :class="item.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"></span>
       </div>
       <div v-if="item.isTimeLimited" :style="`color: ${isTimeOutOfRange ? 'red' : ''}`">
@@ -32,7 +32,7 @@
     </div>
     <div>
       <div class="opneingTimes_selction_header">
-        <h4>Erlaube Wochentage:</h4>
+        <h4>erlaube Wochentage:</h4>
         <span :class="item.allowWeekdays ? '' : 'inActiveSpan'"></span>
       </div>
       <div v-if="item.allowWeekdays" class="OHcontainer_Weekdayselection">

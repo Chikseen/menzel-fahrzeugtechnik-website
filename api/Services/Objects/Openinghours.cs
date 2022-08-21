@@ -103,7 +103,7 @@ public class OpeninghoursWeekdays
     public DateTime close { get; set; }
     public int weekday { get; set; }
     public String name { get; set; }
-    public String[] weekdayNames = { "Monatg", "Dienstag", "Mittwoch", "Donerstag", "Freitag", "Samstag", "Sonntag" };
+    public String[] weekdayNames = { "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag" };
 
     public OpeninghoursWeekdays(DateTime open, DateTime close, int weekday)
     {

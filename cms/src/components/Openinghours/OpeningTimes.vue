@@ -14,16 +14,15 @@
           <div class="OHcontainer">
             <div class="newOH">
               <label>Ist Geöffnet</label>
-              <span :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'" @click="selectedEntry.isOpen = !selectedEntry.isOpen"></span>
+              <span :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.isOpen = !selectedEntry.isOpen"></span>
             </div>
           </div>
           <div class="OHcontainer">
             <div class="newOH">
               <label>{{ selectedEntry.showCutomText ? "Eigener Text" : "Von - Bis" }}</label>
-              <span
-                :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'"
-                @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"
-              ></span>
+              <span :class="selectedEntry.showCutomText ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.showCutomText = !selectedEntry.showCutomText"></span>
             </div>
             <div class="newOH" v-if="!selectedEntry.showCutomText">
               <label>Von</label>
@@ -41,28 +40,45 @@
           <div class="OHcontainer">
             <div class="newOH">
               <label>Wochentagsbestimmung Erlauben</label>
-              <span
-                :class="selectedEntry.allowWeekdays ? 'activeSpan' : 'inActiveSpan'"
-                @click="selectedEntry.allowWeekdays = !selectedEntry.allowWeekdays"
-              ></span>
+              <span :class="selectedEntry.allowWeekdays ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.allowWeekdays = !selectedEntry.allowWeekdays"></span>
             </div>
             <div v-if="selectedEntry.allowWeekdays" class="OHcontainer_Weekdayselection">
-              <span :class="selectedEntry.weekdays.includes(0) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(0)"><p>M</p></span>
-              <span :class="selectedEntry.weekdays.includes(1) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(1)"><p>D</p></span>
-              <span :class="selectedEntry.weekdays.includes(2) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(2)"><p>M</p></span>
-              <span :class="selectedEntry.weekdays.includes(3) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(3)"><p>D</p></span>
-              <span :class="selectedEntry.weekdays.includes(4) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(4)"><p>F</p></span>
-              <span :class="selectedEntry.weekdays.includes(5) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(5)"><p>S</p></span>
-              <span :class="selectedEntry.weekdays.includes(6) ? 'activeSpan' : 'inActiveSpan'" @click="weekdayToggle(6)"><p>S</p></span>
+              <span :class="selectedEntry.weekdays.includes(0) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(0)">
+                <p>M</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(1) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(1)">
+                <p>D</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(2) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(2)">
+                <p>M</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(3) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(3)">
+                <p>D</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(4) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(4)">
+                <p>F</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(5) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(5)">
+                <p>S</p>
+              </span>
+              <span :class="selectedEntry.weekdays.includes(6) ? 'activeSpan' : 'inActiveSpan'"
+                @click="weekdayToggle(6)">
+                <p>S</p>
+              </span>
             </div>
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Zeitlich begränzt anzeigen</label>
-              <span
-                :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
-                @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"
-              ></span>
+              <label>Zeitlich begrenzt anzeigen</label>
+              <span :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
+                @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"></span>
             </div>
             <div class="newOH" v-if="selectedEntry.isTimeLimited">
               <label>Start Date</label>
@@ -171,7 +187,7 @@ export default {
       let state = {};
       const nowTime = this.toTime(now);
 
-      if (days[today] && !days[today].close >= nowTime) {
+      if (days[today] && days[today].close.replace(/^.+T/, "") >= nowTime) {
         const open = this.toTime(days[today].open);
         const close = this.toTime(days[today].close);
 
@@ -185,21 +201,13 @@ export default {
           state.time = open;
         }
       } else {
-        for (let i = today; i < today + 7; i++) {
+        for (let i = today + 1; i < today + 7; i++) {
           const nextOpenDay = i % 7;
           if (days[nextOpenDay]) {
             const open = this.toTime(days[nextOpenDay].open);
-            const close = this.toTime(days[nextOpenDay].close);
-
-            if (open <= nowTime && close >= nowTime) {
-              state.status = "Geöffnet";
-              state.text = "schließt um";
-              state.time = close;
-            } else {
-              state.status = "Geschlossen";
-              state.text = `öffnet am ${days[nextOpenDay].name} um`;
-              state.time = open;
-            }
+            state.status = "Geschlossen";
+            state.text = `öffnet am ${days[nextOpenDay].name} um`;
+            state.time = open;
             break;
           }
         }
@@ -290,16 +298,20 @@ export default {
   box-shadow: 0 0 10px 1px #1b1b1b36;
   border-radius: 10px;
 }
-.opneingTimes_selction > div {
+
+.opneingTimes_selction>div {
   flex: 1 1 20%;
 }
+
 .opneingTimes_selction_newTime {
   display: flex;
   margin: 0 5px;
 }
+
 .opneingTimes_selction h4 {
   margin: 5px;
 }
+
 .OHMain {
   display: flex;
   flex-direction: row;
@@ -309,18 +321,21 @@ export default {
   margin: 0 auto;
   max-width: 1250px;
 }
+
 .OHcontainer {
   box-shadow: 0 0 10px 1px #1b1b1b18;
   border-radius: 10px;
   padding: 5px 15px;
   margin: 10px 0;
 }
+
 .newOHWrapper {
   display: flex;
   flex-direction: column;
   max-width: 300px;
   margin: auto;
 }
+
 .newOH {
   display: flex;
   justify-content: space-evenly;
@@ -329,10 +344,12 @@ export default {
   align-items: center;
   gap: 10px;
 }
+
 .OHcontainer_Weekdayselection {
   display: flex;
   justify-content: space-evenly;
 }
+
 .existingOH {
   height: 100%;
   overflow-y: scroll;
@@ -340,22 +357,27 @@ export default {
   padding-left: 25px;
   border-left: 1px grey solid;
 }
+
 .OHReadWeekdaysWrapper {
   display: flex;
   justify-content: space-between;
 }
+
 .OHReadWeekdaysState {
   display: flex;
   flex-direction: column;
   border-right: 1px solid gray;
   padding-right: 25px;
 }
+
 .activeSpan {
   background-color: green;
 }
+
 .inActiveSpan {
   background-color: red;
 }
+
 .activeSpan,
 .inActiveSpan {
   width: 24px;
@@ -363,6 +385,7 @@ export default {
   text-align: center;
   border-radius: 5px;
 }
+
 .activeSpan p,
 .inActiveSpan p {
   margin: 4px 0 0 0;

@@ -25,7 +25,7 @@ export default {
             let state = {}
             const nowTime = date.dateObjectToHHMM(now)
 
-            if (days[today] && !days[today].close >= nowTime) {
+            if (days[today] && days[today].close.replace(/^.+T/, "") >= nowTime) {
                 const open = date.dateObjectToHHMM(days[today].open)
                 const close = date.dateObjectToHHMM(days[today].close)
 
@@ -39,21 +39,15 @@ export default {
                     state.time = open
                 }
             } else {
-                for (let i = today; i < today + 7; i++) {
+                for (let i = today + 1; i < today + 7; i++) {
                     const nextOpenDay = i % 7
+
                     if (days[nextOpenDay]) {
                         const open = date.dateObjectToHHMM(days[nextOpenDay].open)
-                        const close = date.dateObjectToHHMM(days[nextOpenDay].close)
 
-                        if (open <= nowTime && close >= nowTime) {
-                            state.status = 'Geöffnet'
-                            state.text = 'schließt um'
-                            state.time = close
-                        } else {
-                            state.status = 'Geschlossen'
-                            state.text = `öffnet am ${days[nextOpenDay].name} um`
-                            state.time = open
-                        }
+                        state.status = 'Geschlossen'
+                        state.text = `öffnet am ${days[nextOpenDay].name} um`
+                        state.time = open
                         break
                     }
                 }

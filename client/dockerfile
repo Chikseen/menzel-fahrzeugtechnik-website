@@ -8,6 +8,8 @@ WORKDIR /usr/src/nuxt-app
 RUN apk update && apk upgrade
 RUN apk add git
 
+ENV VUE_APP_API=https://api.menzel-fahrzeugtechnik.de
+
 # copy the app, note .dockerignore
 COPY . /usr/src/nuxt-app/
 RUN npm install
