@@ -22,7 +22,7 @@
     </div>
     <div>
       <div class="opneingTimes_selction_header">
-        <h4>Zeitlich begrenzt:</h4>
+        <h4>zeitlich begrenzt:</h4>
         <span :class="item.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"></span>
       </div>
       <div v-if="item.isTimeLimited" :style="`color: ${isTimeOutOfRange ? 'red' : ''}`">
@@ -32,7 +32,7 @@
     </div>
     <div>
       <div class="opneingTimes_selction_header">
-        <h4>erlaube Wochentage:</h4>
+        <h4>erlaubte Wochentage:</h4>
         <span :class="item.allowWeekdays ? '' : 'inActiveSpan'"></span>
       </div>
       <div v-if="item.allowWeekdays" class="OHcontainer_Weekdayselection">

@@ -13,7 +13,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Ist Geöffnet</label>
+              <label>Ist geöffnet</label>
               <span :class="selectedEntry.isOpen ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.isOpen = !selectedEntry.isOpen"></span>
             </div>
@@ -39,7 +39,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Wochentagsbestimmung Erlauben</label>
+              <label>Wochentagsbestimmung erlauben</label>
               <span :class="selectedEntry.allowWeekdays ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.allowWeekdays = !selectedEntry.allowWeekdays"></span>
             </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="OHcontainer">
             <div class="newOH">
-              <label>Zeitlich begrenzt anzeigen</label>
+              <label>zeitlich begrenzt anzeigen</label>
               <span :class="selectedEntry.isTimeLimited ? 'activeSpan' : 'inActiveSpan'"
                 @click="selectedEntry.isTimeLimited = !selectedEntry.isTimeLimited"></span>
             </div>
@@ -98,9 +98,9 @@
         </div>
         <button @click="selectedEntry = { ...defaultEntry }">Auswahl zurücksetzen</button>
         <div>
-          <button @click="saveEntry" v-if="selectedEntry.id">Eintrag Überarbeiten</button>
+          <button @click="saveEntry" v-if="selectedEntry.id">Eintrag überarbeiten</button>
           <button @click="deleteEntry" v-if="selectedEntry.id">Eintrag entfernen</button>
-          <button @click="saveEntry" v-if="!selectedEntry.id">Eintrag Erstellen</button>
+          <button @click="saveEntry" v-if="!selectedEntry.id">Eintrag erstellen</button>
         </div>
       </div>
       <div class="existingOH">
@@ -118,7 +118,7 @@
             </div>
           </div>
         </div>
-        <h2>Alle Einträge</h2>
+        <h2>alle Einträge</h2>
         <div v-for="item in oh" :key="item.id" @click="selectedEntry = item">
           <ShowCurrentOpeninghours :item="item" />
         </div>

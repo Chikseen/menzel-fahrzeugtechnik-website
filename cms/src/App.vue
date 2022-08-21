@@ -6,7 +6,7 @@
       <button @click="toShow = 'news'" :class="toShow == 'news' ? 'active' : ''">News</button>
       <button @click="toShow = 'galerie'" :class="toShow == 'galerie' ? 'active' : ''">Galerie</button>
       <button @click="toShow = 'open'" :class="toShow == 'open' ? 'active' : ''">Öffnungszeiten</button>
-      <button @click="toShow = 'views'" :class="toShow == 'views' ? 'active' : ''">Meta</button>
+      <button @click="toShow = 'views'" :class="toShow == 'views' ? 'active' : ''">Aufrufe</button>
       <button @click="toShow = 'key'" :class="toShow == 'key' ? 'active' : ''">Zugriffskontrolle</button>
     </div>
     <div v-if="keyValid">

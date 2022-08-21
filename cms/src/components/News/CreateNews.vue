@@ -17,7 +17,7 @@
           <div v-for="img in galerieImages" :key="img + 0" @click="currentImages.indexOf(img) == -1 ? currentImages.push(img) : ''">
             <p v-if="currentImages.indexOf(img) === -1">{{ img }}</p>
           </div>
-          <button @click="loadMoreGalerieImages">Mehr Bilder laden</button>
+          <button @click="loadMoreGalerieImages">mehr Bilder laden</button>
           <button @click="reloadPictures">Bilder neu laden</button>
         </div>
         <div class="createNews_imageSelection_current">
@@ -34,16 +34,16 @@
           </div>
         </div>
         <div>
-          <h4>Bilder hochladen undhinzufügen</h4>
+          <h4>Bilder hochladen und hinzufügen</h4>
           <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
             <input name="files" type="file" accept="image/png" multiple />
-            <input type="submit" value="Bilder Hochladen" />
+            <input type="submit" value="Bilder hochladen" />
           </form>
         </div>
       </div>
     </div>
     <div class="createNews_buttons">
-      <button @click="saveNews" v-if="id == ''">Nachricht Hinzufügen</button>
+      <button @click="saveNews" v-if="id == ''">Nachricht hinzufügen</button>
       <div v-else>
         <button @click="editNews">Ausgewählte Nachricht überschreiben</button>
         <button @click="id = ''">Neue Nachricht erstellen</button>

@@ -2,7 +2,6 @@
   <div class="keyHandler_wrapper">
     <div v-if="keyStatus">
       <p>Alle Regrestierten Benutzter</p>
-      <h6>Sollten irgendwelche unregelmäsigkeiten auffallen bitte an an denn Betreiber wenden ;)</h6>
       <button @click="getAlluser">LoadUser</button>
       <div v-for="(item, index) in allUser" :key="index">
         <div class="keyHandler_keys">
@@ -19,7 +18,8 @@
       <h2>Der authKey ist ungültig oder sie sind nicht authentifiziert!</h2>
       <div>
         <p>
-          Um dieses produkt nutzten zu können müssen sie sich authentifizieren. Dazu können sie einen neuen Code an die bestimme E-Mail addresse anfordern und
+          Um dieses produkt nutzten zu können müssen sie sich authentifizieren. Dazu können sie einen neuen Code an die
+          bestimme E-Mail addresse anfordern und
           ihn anschliesend hier eingeben
         </p>
       </div>
@@ -92,15 +92,18 @@ export default {
   margin: 0 auto;
   text-align: center;
 }
+
 .keyHandler_newKey {
   display: flex;
   flex-direction: column;
   margin-top: 15px;
 }
+
 .keyHandler_keys {
   box-shadow: 0 0 5px 5px #2d2d2d26;
   border-radius: 10px;
 }
+
 .keyHandler_keys span {
   font-size: 0.65rem;
   word-wrap: break-word;

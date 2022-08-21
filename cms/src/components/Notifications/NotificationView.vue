@@ -65,7 +65,7 @@ export default {
   },
   watch: {
     allMessages() {
-      this.allMessages.sort((a, b) => (new Date(a.created) > new Date(b.created) ? 1 : new Date(b.created) > new Date(a.created) ? -1 : 0)).reverse();
+      this.allMessages?.sort((a, b) => (new Date(a.created) > new Date(b.created) ? 1 : new Date(b.created) > new Date(a.created) ? -1 : 0)).reverse();
     },
     apiResponse() {
       setTimeout(() => {
