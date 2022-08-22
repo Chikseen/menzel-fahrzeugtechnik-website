@@ -20,10 +20,13 @@
 .windowIcon {
     position: relative;
     height: 100%;
+    width: 100%;
 
 
     &_wrapper {
-        height: 120px;
+        height: 100%;
+        width: 100%;
+        max-height: 120px;
     }
 
     &_frame {
@@ -51,14 +54,14 @@
 
         &_1 {
             top: 20px;
-            left: 90px;
-            width: 50px;
+            left: 30%;
+            width: 40px;
         }
 
         &_2 {
             top: 45px;
-            left: 200px;
-            width: 50px;
+            left: 55%;
+            width: 20px;
             transform: rotateX(160deg) rotateZ(255deg);
         }
     }

@@ -125,6 +125,15 @@ export default {
       li {
         margin-top: 10px;
       }
+
+    }
+
+    &_img {
+      margin: 15px;
+      border-radius: 5px;
+      width: calc(100% - 30px);
+      max-width: 400px;
+      max-height: 400px;
     }
   }
 }

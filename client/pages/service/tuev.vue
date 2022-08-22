@@ -2,6 +2,7 @@
   <div>
     <h1>Hauptuntersuchung und Abgasuntersuchung</h1>
     <div class="serviceView_detailed_text">
+      <img class="serviceView_detailed_img" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt">
       <ul>
         <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den
           Zweijahresrhythmus.</li>
