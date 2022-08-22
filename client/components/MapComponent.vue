@@ -42,7 +42,7 @@ export default {
   height: 400px;
   max-width: 550px;
   margin: 15px auto;
-  border-radius: 10px;
+  border-radius: 3px;
 }
 </style>
 

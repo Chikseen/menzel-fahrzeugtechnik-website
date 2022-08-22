@@ -23,6 +23,7 @@
       </NuxtLink>
       <NuxtLink class="serviceView_overview_container" to="/service/glasservice">
         <p>Glasschäden</p>
+        <WindowIcon />
       </NuxtLink>
     </div>
     <div v-if="this.$route.name == 'service'">
@@ -38,6 +39,7 @@ import TuevIcon from '@/assets/icons/TuevIcon.vue'
 import WheelIcon from '@/assets/icons/WheelIcon2.vue'
 import ACIcon from '@/assets/icons/ACIcon.vue'
 import RepairService from '@/assets/icons/repairService/RepairServiceCluster.vue'
+import WindowIcon from '@/assets/icons/WindowIcon.vue'
 
 export default {
   name: "service",
@@ -70,6 +72,7 @@ export default {
     WheelIcon,
     ACIcon,
     RepairService,
+    WindowIcon
   },
   mounted() { },
 }
@@ -90,6 +93,8 @@ export default {
 
     &_container {
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
       height: 200px;
       width: 100%;
       border-radius: 5px;
@@ -103,6 +108,11 @@ export default {
         position: relative;
         font-weight: 750;
       }
+
+    }
+
+    & a {
+      text-decoration: none;
     }
   }
 

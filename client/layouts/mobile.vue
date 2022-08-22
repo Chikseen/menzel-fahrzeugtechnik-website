@@ -9,20 +9,20 @@
         </div>
         <HeaderOpeningHours class="headerMobile_nav_menu_quickinfo_openinghours" />
         <div class="headerMobile_nav_menu_quickinfo_currentRoute">
-          <transition name="fade">
-            <p v-if="$route.path === '/home'">Home</p>
-            <p v-else-if="$route.path === '/service'">Service</p>
-            <p v-else-if="$route.path === '/contact'">Kontakt</p>
-            <p v-else-if="$route.path === '/news'">News</p>
-            <p v-else-if="$route.path === '/galerie'">Galerie</p>
-            <p v-else-if="$route.path === '/about'">Über mich</p>
-            <p v-else-if="$route.path === '/impressum'">Impressum</p>
-            <p v-else-if="$route.path === '/service/tuev'">TÜV</p>
-            <p v-else-if="$route.path === '/service/tiers'">Reifen</p>
-            <p v-else-if="$route.path === '/service/ac'">Klima</p>
-            <p v-else-if="$route.path === '/service/repair'">Reperatur</p>
-            <p v-else-if="$route.path === '/service/glasservice'">Glasschäden</p>
-          </transition>
+          <TransitionGroup name="headerMobile" mode="out-in">
+            <p v-if="$route.path === '/home'" key="mvhome">Home</p>
+            <p v-else-if="$route.path === '/service'" key="mvservice">Service</p>
+            <p v-else-if="$route.path === '/contact'" key="mvcontact">Kontakt</p>
+            <p v-else-if="$route.path === '/news'" key="mvnews">News</p>
+            <p v-else-if="$route.path === '/galerie'" key="mvgalerie">Galerie</p>
+            <p v-else-if="$route.path === '/about'" key="mvabout">Über mich</p>
+            <p v-else-if="$route.path === '/impressum'" key="mvimpressum">Impressum</p>
+            <p v-else-if="$route.path === '/service/tuev'" key="mvtuev">TÜV</p>
+            <p v-else-if="$route.path === '/service/tiers'" key="mvtiers">Reifen</p>
+            <p v-else-if="$route.path === '/service/ac'" key="mvac">Klima</p>
+            <p v-else-if="$route.path === '/service/repair'" key="mvrepair">Reperatur</p>
+            <p v-else-if="$route.path === '/service/glasservice'" key="mvglasservice">Glasschäden</p>
+          </TransitionGroup>
         </div>
       </div>
       <MenuIcon class="headerMobile_nav_menu_icon" />
@@ -152,6 +152,7 @@ export default {
       }
 
       &_quickinfo {
+        position: relative;
         display: flex;
         flex-direction: column;
         width: calc(100% - 40px);
@@ -163,6 +164,7 @@ export default {
 
         &_titel {
           display: flex;
+          justify-content: center;
 
           span {
             position: relative;
@@ -171,6 +173,7 @@ export default {
             margin-top: 10px;
             margin-bottom: 0;
             font-weight: 700;
+            width: 100%;
 
             &:nth-child(1) {
               &::after {
@@ -180,7 +183,7 @@ export default {
                 right: 0;
                 margin-right: 5px;
                 height: 2px;
-                width: 100%;
+                width: calc(100% - 5px);
                 background-color: white;
               }
             }
@@ -214,7 +217,7 @@ export default {
         &_currentRoute {
           position: absolute;
           top: 27px;
-          left: 30px;
+          left: 25px;
           margin: 0;
 
           p {
@@ -252,33 +255,25 @@ export default {
   }
 }
 
-.headerMobile-active-enter-from,
-.headerMobile-active-leave-to {
-  transition: all 0.25s ease;
+.headerMobile {
+  position: absolute;
+}
+
+.headerMobile-enter-from,
+.headerMobile-leave-to {
+  position: absolute;
   transform: translateX(0);
-  background-color: antiquewhite;
 }
 
-.headerMobile-active-enter-active,
-.headerMobile-active-leave-active {
-  transition: all 0.25s ease;
-  background-color: antiquewhite;
+.headerMobile-enter-active,
+.headerMobile-leave-active {
+  position: absolute;
+  transition: all 0.5s ease;
 }
 
-.headerMobile-active-enter,
-.headerMobile-active-leave {
-  transition: all 0.25s ease;
-  transform: translateX(-150px);
-  background-color: antiquewhite;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.headerMobile-enter,
+.headerMobile-leave-to {
+  position: absolute;
+  transform: translateX(-175px);
 }
 </style>

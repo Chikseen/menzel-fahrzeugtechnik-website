@@ -1,8 +1,8 @@
 const apiService = {
   //DATA FETCHER
   async get(adress) {
-    process.env.VUE_APP_API = 'https://api.menzel-fahrzeugtechnik.de'
-    //process.env.VUE_APP_API = 'http://localhost:7080'
+    //process.env.VUE_APP_API = 'https://api.menzel-fahrzeugtechnik.de'
+    process.env.VUE_APP_API = 'http://localhost:7080'
     const request = await fetch(
       `${process.env.VUE_APP_API}/${adress}`,
       {

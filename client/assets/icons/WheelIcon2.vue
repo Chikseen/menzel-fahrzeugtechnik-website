@@ -14,6 +14,7 @@
 
   &:hover {
     animation: rotateWheel 4s infinite ease-in-out;
+    transition: 1s all;
   }
 
   &_outerPath {
@@ -31,6 +32,7 @@
 .whellIcon2:hover .whellIcon2_outerPath {
   fill: $icon_active_grey;
 }
+
 .whellIcon2:hover .whellIcon2_spine {
   stroke: $icon_active_grey;
 }
@@ -39,6 +41,7 @@
   0% {
     transform: rotateZ(0deg);
   }
+
   100% {
     transform: rotateZ(720deg);
   }
