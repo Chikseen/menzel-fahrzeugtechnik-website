@@ -4,28 +4,7 @@
       <span>Unsere</span>
       <span>Leistungen</span>
     </div>
-    <div :class="['serviceView_overview', $device.isMobile ? 'mobileOffset' : '']">
-      <NuxtLink class="serviceView_overview_container" to="/service/tuev">
-        <p>Hauptuntersuchung und Abgasuntersuchung</p>
-        <TuevIcon :fontSize="'1.5'" />
-      </NuxtLink>
-      <NuxtLink class="serviceView_overview_container" to="/service/ac">
-        <p>Klimaservice</p>
-        <ACIcon />
-      </NuxtLink>
-      <NuxtLink class="serviceView_overview_container" to="/service/tiers">
-        <p>Reifen und Räder</p>
-        <WheelIcon />
-      </NuxtLink>
-      <NuxtLink class="serviceView_overview_container" to="/service/repair">
-        <p>Unfallreparaturen</p>
-        <RepairService />
-      </NuxtLink>
-      <NuxtLink class="serviceView_overview_container" to="/service/glasservice">
-        <p>Glasschäden</p>
-        <WindowIcon />
-      </NuxtLink>
-    </div>
+    <ServiceSelection />
     <div v-if="this.$route.name == 'service'">
       <h3>Wir sind für Sie da</h3>
       <p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
@@ -35,12 +14,7 @@
 </template>
 
 <script>
-import TuevIcon from '@/assets/icons/TuevIcon.vue'
-import WheelIcon from '@/assets/icons/WheelIcon2.vue'
-import ACIcon from '@/assets/icons/ACIcon.vue'
-import RepairService from '@/assets/icons/repairService/RepairServiceCluster.vue'
-import WindowIcon from '@/assets/icons/WindowIcon.vue'
-
+import ServiceSelection from '~/components/ServiceSelection.vue';
 export default {
   name: "service",
   head() {
@@ -68,11 +42,7 @@ export default {
     }
   },
   components: {
-    TuevIcon,
-    WheelIcon,
-    ACIcon,
-    RepairService,
-    WindowIcon
+    ServiceSelection
   },
   mounted() { },
 }
@@ -83,37 +53,6 @@ export default {
   &_wrapper {
     max-width: 1500px;
     margin: 0 auto;
-  }
-
-  &_overview {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px;
-    margin: 30px;
-
-    &_container {
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      height: 200px;
-      width: 100%;
-      border-radius: 5px;
-      box-shadow: 1px 1px 7px 1px lighten($company_blue, 78);
-
-      & div {
-        height: 120px;
-      }
-
-      & p {
-        position: relative;
-        font-weight: 750;
-      }
-
-    }
-
-    & a {
-      text-decoration: none;
-    }
   }
 
   &_detailed {
@@ -131,8 +70,7 @@ export default {
     &_img {
       margin: 15px;
       border-radius: 5px;
-      width: calc(100% - 30px);
-      max-width: 400px;
+      max-width: calc(100% - 30px);
       max-height: 400px;
     }
   }

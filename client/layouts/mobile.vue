@@ -22,6 +22,7 @@
             <p v-else-if="$route.path === '/service/ac'" key="mvac">Klima</p>
             <p v-else-if="$route.path === '/service/repair'" key="mvrepair">Reperatur</p>
             <p v-else-if="$route.path === '/service/glasservice'" key="mvglasservice">Glasschäden</p>
+            <p v-else key="mv404">404</p>
           </TransitionGroup>
         </div>
       </div>
@@ -36,9 +37,9 @@
         <NuxtLink class="headerMobile_nav_route" to="/contact">
           <p>Kontakt</p>
         </NuxtLink>
-        <NuxtLink class="headerMobile_nav_route" to="/news">
+        <!--  <NuxtLink class="headerMobile_nav_route" to="/news">
           <p>News</p>
-        </NuxtLink>
+        </NuxtLink> -->
         <NuxtLink class="headerMobile_nav_route" to="/galerie">
           <p>Galerie</p>
         </NuxtLink>
@@ -93,9 +94,6 @@ export default {
 
 <style lang="scss">
 .headerMobile {
-  width: 100%;
-  background-color: #8f8f8f00;
-
   &_nav {
 
     &_smallWindow {

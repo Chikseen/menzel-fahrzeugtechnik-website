@@ -1,12 +1,33 @@
 <template>
   <div :class="['home', $device.isMobile ? 'mobileOffset' : '']">
-    <div class="pageTitel">
-      <span>Menzel</span>
-      <span>Fahrzeugtechnik</span>
+    <div class="home_section">
+      <h1 v-if="!$device.isMobile">
+        Herzlich willkommen bei
+        <div class="pageTitel">
+          <span>Menzel</span>
+          <span>Fahrzeugtechnik</span>
+        </div>
+      </h1>
+      <h1 v-else class="home_smallTitel">
+        Herzlich willkommen bei Menzel Fahrzeugtechnik
+      </h1>
     </div>
-    <ActiveMessage />
-    <div class="home_content">
-      <!-- TEMPORARY PLACEHOLDER -->
+    <div class="home_section">
+      <ActiveMessage />
+    </div>
+    <div class="home_section">
+      <img class="home_images home_images_big" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt" />
+    </div>
+    <div class="home_section">
+      <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
+      <h4 v-else>Unsere Leistungen im Überblick</h4>
+      <ServiceSelection class="home_serviceSelection" />
+    </div>
+    <div class="home_section">
+      <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
+      <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
+    </div>
+    <!-- <div class="home_content">
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
         <div class="home_content_picture_wrapper">
           <TuevIcon />
@@ -73,50 +94,45 @@
             </ul>
           </div>
         </div>
-      </div>
-    </div>
+      </div> 
+    </div>-->
   </div>
 </template>
 
 <script>
-import ActiveMessage from "@/components/ActiveMessage";
-import TuevIcon from "@/assets/icons/TuevIcon.vue";
-import BrandCluster from "@/assets/icons/logos/LogoClusterIcon.vue";
-import RepairService from "@/assets/icons/repairService/RepairServiceCluster.vue";
-import ACIcon from "@/assets/icons/ACIcon.vue";
+import ActiveMessage from '@/components/ActiveMessage'
+import ServiceSelection from '~/components/ServiceSelection.vue'
 
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   head() {
     return {
-      title: "Übersicht",
+      title: 'Übersicht',
       meta: [
         {
           hid: 'description_home',
           name: 'description',
-          content: 'Informationen über die wichtigsten Leistungen und Angebote von Menzel Fahrzeugtechnik'
+          content:
+            'Informationen über die wichtigsten Leistungen und Angebote von Menzel Fahrzeugtechnik',
         },
         {
           hid: 'keywords_home',
           name: 'keywords',
-          content: 'Übersicht'
+          content: 'Übersicht',
         },
       ],
       link: [
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: 'https://menzel-fahrzeugtechnik.de/home'
-        }
-      ]
+          href: 'https://menzel-fahrzeugtechnik.de/home',
+        },
+      ],
     }
   },
   components: {
     ActiveMessage,
-    TuevIcon,
-    BrandCluster,
-    RepairService,
-    ACIcon,
+    ServiceSelection,
   },
   methods: {
     mouseMove(event, elem) {
@@ -125,11 +141,16 @@ export default {
       } */
     },
   },
-};
+}
 </script>
 
 <style lang="scss">
 .home {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
   &_content {
     position: relative;
     display: flex;
@@ -192,6 +213,26 @@ export default {
         width: 100%;
       }
     }
+  }
+
+  &_smallTitel {
+    font-size: 1.3rem;
+  }
+
+  &_images {
+    max-width: 45%;
+    max-height: 500px;
+    border-radius: 5px;
+
+    &_big {
+       max-width: 100%;
+    }
+  }
+
+  &_serviceSelection {
+    margin-top: 0 !important;
+    max-width: 650px;
+    margin: 0 auto;
   }
 }
 

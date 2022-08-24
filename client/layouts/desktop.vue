@@ -22,12 +22,12 @@
           </transition>
           <p>Kontakt</p>
         </NuxtLink>
-        <NuxtLink class="headerDesktop_nav_route" to="/news">
+        <!--  <NuxtLink class="headerDesktop_nav_route" to="/news">
           <transition name="headerDesktop-menu">
             <div v-if="this.$route.name == 'news'" class="headerDesktop_nav_route_active"></div>
           </transition>
           <p>News</p>
-        </NuxtLink>
+        </NuxtLink> -->
         <NuxtLink class="headerDesktop_nav_route" to="/galerie">
           <transition name="headerDesktop-menu">
             <div v-if="this.$route.name == 'galerie'" class="headerDesktop_nav_route_active"></div>

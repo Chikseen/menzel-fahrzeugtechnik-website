@@ -23,8 +23,8 @@ export default {
 <style lang="scss">
 body,
 html {
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow-y: overlay;
 
   //font-family: Helvetica, Arial, sans-serif;
@@ -33,13 +33,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 0;
-  padding: 0;
 }
 
 #map {
   z-index: 1;
+
+  img {
+    box-shadow: none;
+  }
 }
+
 
 .underlined {
   &::after {
@@ -150,17 +153,6 @@ html {
       }
     }
   }
-
-  /*     &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      margin: 0 10%;
-      height: 2px;
-      width: 80%;
-      background-color: $company_blue;
-    }  */
 }
 
 ::-webkit-scrollbar {
@@ -185,6 +177,10 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: $company_blue;
+}
+
+img {
+  box-shadow: 0 0 7px 5px #4444442d;
 }
 
 @media only screen and (max-width: 870px) {

@@ -7,7 +7,7 @@
         message.color == 'white' ? 'active_textwrapper_white' : '',
       ]">
         <div>
-          <h2>{{ message.titel }}</h2>
+          <h3>{{ message.titel }}</h3>
           <p>{{ message.text }}</p>
         </div>
       </div>
@@ -48,33 +48,38 @@ export default {
 .active {
   &_wrapper {
     position: relative;
-    max-width: 1250px;
-    margin: 15px auto;
+    width: calc(100% - 10px);
+    margin: 10px auto;
   }
 
   &_textwrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 25px;
+    padding: 5px 25px;
     border-radius: 10px;
+    max-width: 750px;
+    margin: 0 auto;
 
     &_red {
-      background-color: $error-red;
-      box-shadow: 2px 2px 10px 2px #66141450;
+      border: 3px $error-red solid;
+      background-color: lighten($error-red, 35);
+      box-shadow: 2px 2px 5px 2px #66141450;
     }
 
     &_green {
-      background-color: $succes-green;
-      box-shadow: 2px 2px 10px 2px #17661450;
+      border: 3px $succes-green solid;
+      background-color: lighten($succes-green, 35);
+      box-shadow: 2px 2px 5px 2px #17661450;
     }
 
     &_white {
-      background-color: $icon_base_grey;
-      box-shadow: 2px 2px 10px 2px #58585850;
+      border: 3px white;
+      background-color: white;
+      box-shadow: 2px 2px 5px 2px #58585850;
     }
 
-    h2,
+    h3,
     p {
       text-align: left;
       margin: 5px 0;
@@ -93,11 +98,11 @@ export default {
     &_textwrapper {
       padding: 0 25px;
 
-      h2,
+      h3,
       p {
         text-align: left;
         margin: 5px 0;
-        font-size: 0.91rem;
+        font-size: 0.85rem;
       }
 
       &_date {
