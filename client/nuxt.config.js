@@ -53,10 +53,6 @@ export default {
   },
 
   env: {
-    api: process.env.VUE_APP_API,
-  },
-
-  publicRuntimeConfig: {
-    api: process.env.VUE_APP_API,
+    VUE_APP_API: process.env.VUE_APP_API,
   },
 }
