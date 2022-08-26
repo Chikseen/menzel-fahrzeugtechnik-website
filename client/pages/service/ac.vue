@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Klimaservice</h1>
+    <h1>Klimageräteservice</h1>
     <div class="serviceView_detailed_text">
       <ul>
         <li>
@@ -16,6 +16,10 @@
           Scheiben.
         </li>
       </ul>
+      <div class="serviceView_detailed_img_wrapper">
+        <img class="serviceView_detailed_img" src="~/assets/images/clima_device.png"
+          alt="Bild eines Kältemitteltauschgerätes">
+      </div>
       <div>
         <h3>So funktioniert die Klimaanlage im Auto</h3>
         <p>
@@ -45,7 +49,7 @@ export default {
   name: "ac",
   head() {
     return {
-      title: "Klimaservice",
+      title: "Klimageräteservice",
       meta: [
         {
           hid: 'description_ac',
@@ -55,7 +59,7 @@ export default {
         {
           hid: 'keywords_ac',
           name: 'keywords',
-          content: 'Klimaservice'
+          content: 'Klimageräteservice'
         },
       ],
       link: [

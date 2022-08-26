@@ -18,10 +18,10 @@
             <p v-else-if="$route.path === '/about'" key="mvabout">Über mich</p>
             <p v-else-if="$route.path === '/impressum'" key="mvimpressum">Impressum</p>
             <p v-else-if="$route.path === '/service/tuev'" key="mvtuev">TÜV</p>
-            <p v-else-if="$route.path === '/service/tiers'" key="mvtiers">Reifen</p>
+            <p v-else-if="$route.path === '/service/tires'" key="mvtires">Reifen</p>
             <p v-else-if="$route.path === '/service/ac'" key="mvac">Klima</p>
             <p v-else-if="$route.path === '/service/repair'" key="mvrepair">Reperatur</p>
-            <p v-else-if="$route.path === '/service/glasservice'" key="mvglasservice">Glasschäden</p>
+            <p v-else-if="$route.path === '/service/oilchange'" key="mvoilchange">Öl</p>
             <p v-else key="mv404">404</p>
           </TransitionGroup>
         </div>

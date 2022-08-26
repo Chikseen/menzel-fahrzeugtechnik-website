@@ -5,10 +5,10 @@
             <TuevIcon :fontSize="'1.5'" />
         </NuxtLink>
         <NuxtLink class="serviceView_overview_container" to="/service/ac">
-            <p>Klimaservice</p>
+            <p>Klimageräteservice</p>
             <ACIcon />
         </NuxtLink>
-        <NuxtLink class="serviceView_overview_container" to="/service/tiers">
+        <NuxtLink class="serviceView_overview_container" to="/service/tires">
             <p>Reifen und Räder</p>
             <WheelIcon />
         </NuxtLink>
@@ -20,6 +20,10 @@
             <p>Glasschäden</p>
             <WindowIcon />
         </NuxtLink>
+        <NuxtLink class="serviceView_overview_container" to="/service/oilchange">
+            <p>Öl wechsel</p>
+            <OilChangeIcon />
+        </NuxtLink>
     </div>
 </template>
 
@@ -29,6 +33,7 @@ import WheelIcon from '@/assets/icons/WheelIcon2.vue'
 import ACIcon from '@/assets/icons/ACIcon.vue'
 import RepairService from '@/assets/icons/repairService/RepairServiceCluster.vue'
 import WindowIcon from '@/assets/icons/WindowIcon.vue'
+import OilChangeIcon from '@/assets/icons/OilChangeIcon.vue'
 
 export default {
     name: "serviceSelection",
@@ -61,7 +66,8 @@ export default {
         WheelIcon,
         ACIcon,
         RepairService,
-        WindowIcon
+        WindowIcon,
+        OilChangeIcon,
     },
     mounted() { },
 }

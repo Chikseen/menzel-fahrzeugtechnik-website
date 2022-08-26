@@ -8,7 +8,8 @@
         Versicherung.
       </p>
     </div>
-    <img class="serviceView_detailed_img" src="~/assets/images/holding_windshield.png" alt="Inhaber hält getauschte Windschutzscheibe">
+    <img class="serviceView_detailed_img" src="~/assets/images/holding_windshield.png"
+      alt="Inhaber hält getauschte Windschutzscheibe">
   </div>
 </template>
 

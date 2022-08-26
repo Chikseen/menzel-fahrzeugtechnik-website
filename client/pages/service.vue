@@ -60,6 +60,7 @@ export default {
       text-align: left;
       max-width: 1000px;
       margin: auto;
+      padding: 0 25px;
 
       li {
         margin-top: 10px;
@@ -68,10 +69,14 @@ export default {
     }
 
     &_img {
-      margin: 15px;
+      margin: 15px auto;
       border-radius: 5px;
       max-width: calc(100% - 30px);
       max-height: 400px;
+
+      &_wrapper {
+        text-align: center
+      }
     }
   }
 }

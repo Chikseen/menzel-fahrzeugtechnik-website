@@ -24,6 +24,8 @@
       <ServiceSelection class="home_serviceSelection" />
     </div>
     <div class="home_section">
+      <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
+      <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
       <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
       <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
     </div>
@@ -61,7 +63,7 @@
           </div>
         </div>
         <div class="home_content_titel" @mouseup="$router.push({ name: 'ac' })">
-          <h2 class="underlined">Klimaservice</h2>
+          <h2 class="underlined">Klimageräteservice</h2>
           <div class="home_content_text">
             <ul>
               <li>
@@ -225,7 +227,7 @@ export default {
     border-radius: 5px;
 
     &_big {
-       max-width: 100%;
+      max-width: 100%;
     }
   }
 

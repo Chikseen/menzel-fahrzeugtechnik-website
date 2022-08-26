@@ -20,24 +20,29 @@
         Reifen erst mit <strong>4 Millimetern</strong> Profiltiefe.
       </p>
       <h3>Bei Schnee und Eis sind Winterreifen die beste Wahl</h3>
+      <div class="serviceView_detailed_img_wrapper">
+        <img class="serviceView_detailed_img" src="~/assets/images/tire_machine.png" alt=""> <!-- Add later -->
+        <img class="serviceView_detailed_img" src="~/assets/images/tire_machine_II.png" alt=""> <!-- Add later -->
+        <img class="serviceView_detailed_img" src="~/assets/images/tire_upclose.png" alt="Bild einer Felge">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "tierst",
+  name: "tirest",
   head() {
     return {
       title: "Reifen und Räder",
       meta: [
         {
-          hid: 'description_tierst',
+          hid: 'description_tirest',
           name: 'description',
           content: 'Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes Reifenprofil gewährleistet eine optimale Straßenhaftung. Auf Wunsch können die Reifen auch eingelagert werden.'
         },
         {
-          hid: 'keywords_tiers',
+          hid: 'keywords_tires',
           name: 'keywords',
           content: 'Reifen, Räder'
         },
@@ -46,7 +51,7 @@ export default {
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: 'https://menzel-fahrzeugtechnik.de/service/tiers'
+          href: 'https://menzel-fahrzeugtechnik.de/service/tires'
         }
       ]
     }

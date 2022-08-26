@@ -19,10 +19,12 @@
       </p>
     </div>
     <div class="about_images">
+      <img src="~/assets/images/being_productive.png" alt="Inhaber steht am Leptop">
       <img src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt">
       <img src="~/assets/images/standing_under_car.png" alt="Inhaber steht unter einem Fahrzeug">
-      <img src="~/assets/images/dirty_hand.png" alt="Inhaber hat eine dreckige Hand">
       <img src="~/assets/images/holding_master_certificate.png" alt="Inhaber hält seinen silbernen Meisterbrief">
+      <img src="~/assets/images/car_under_repair.png" alt="Auto während der Reperatur">
+      <img src="~/assets/images/dirty_hand.png" alt="Inhaber hat eine dreckige Hand">
     </div>
   </div>
 </template>

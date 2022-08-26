@@ -1,7 +1,7 @@
 <template>
   <div class="keyHandler_wrapper">
     <div v-if="keyStatus">
-      <p>Alle Regrestierten Benutzter</p>
+      <p>Alle Regrestireten Benutzter</p>
       <button @click="getAlluser">LoadUser</button>
       <div v-for="(item, index) in allUser" :key="index">
         <div class="keyHandler_keys">

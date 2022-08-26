@@ -2,7 +2,7 @@ const apiService = {
   //DATA FETCHER
   async get(adress) {
     const request = await fetch(
-      `${process.env.VUE_APP_API}/${adress}`,
+      `${process.env.VUE_APP_API || 'http://localhost:7080'}/${adress}`,
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
