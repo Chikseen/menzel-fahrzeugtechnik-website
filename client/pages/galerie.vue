@@ -5,9 +5,9 @@
       <span>ie</span>
     </div>
     <div :class="['galerie_content', $device.isMobile ? 'mobileOffset' : '']">
-      <div v-for="image in images" :key="image" class="galeriesImage">
-        <p>{{ image }}</p>
-        <img class="galerie_image" :src="imageUrl + image" alt="" @click="deleteImage(image)" />
+      <div v-for="image in images" :key="image" class="galerie_image_wrapper">
+        <p class="galerie_image_titel">{{ image }}</p>
+        <img class="galerie_image" :src="imageUrl + image" :alt="image.replace('.png', '')" />
       </div>
     </div>
     <button @click="loadMoreImages">Mehr laden</button>
@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     imageUrl() {
-      return `${process.env.VUE_APP_API}/Images?name=`
+      return `${process.env.VUE_APP_API || 'http://localhost:7080'}/Images?name=`
     },
   },
   methods: {
@@ -90,16 +90,43 @@ export default {
   }
 
   &_image {
+    cursor: pointer;
     box-shadow: 2px 2px 10px 0 #4d4d4d36;
     border-radius: 5px;
+    width: calc(100% - 20px);
     max-height: 300px;
     max-width: 300px;
     transition: all 0.5s;
 
-    &:hover {
-      cursor: pointer;
-      box-shadow: 0 0 5px 5px rgba(90, 90, 90, 0.301);
+    &_wrapper {
+      position: relative;
+      overflow: hidden;
+      margin: 10px;
+      padding: 7px;
     }
+
+    &_titel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1rem;
+      margin: 0;
+      padding: 5px;
+      background-color: #ffffff;
+      z-index: 15;
+      transition: all 0.5s;
+      transform: translateY(-3rem);
+    }
+
+    &:hover {
+      box-shadow: 0 0 5px 5px rgba(90, 90, 90, 0.301);
+
+      .galerie_image_titel {
+        transform: translateY(0);
+      }
+    }
+
   }
 }
 </style>

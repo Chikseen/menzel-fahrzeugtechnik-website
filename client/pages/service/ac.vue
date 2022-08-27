@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Klimageräteservice</h1>
+    <h1>Klimaanlagenservice</h1>
     <div class="serviceView_detailed_text">
       <ul>
         <li>
@@ -49,7 +49,7 @@ export default {
   name: "ac",
   head() {
     return {
-      title: "Klimageräteservice",
+      title: "Klimaanlagenservice",
       meta: [
         {
           hid: 'description_ac',
@@ -59,7 +59,7 @@ export default {
         {
           hid: 'keywords_ac',
           name: 'keywords',
-          content: 'Klimageräteservice'
+          content: 'Klimaanlagenservice'
         },
       ],
       link: [

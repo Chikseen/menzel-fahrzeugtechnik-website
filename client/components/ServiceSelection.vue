@@ -5,7 +5,7 @@
             <TuevIcon :fontSize="'1.5'" />
         </NuxtLink>
         <NuxtLink class="serviceView_overview_container" to="/service/ac">
-            <p>Klimageräteservice</p>
+            <p>Klimaanlagenservice</p>
             <ACIcon />
         </NuxtLink>
         <NuxtLink class="serviceView_overview_container" to="/service/tires">
@@ -21,7 +21,7 @@
             <WindowIcon />
         </NuxtLink>
         <NuxtLink class="serviceView_overview_container" to="/service/oilchange">
-            <p>Öl wechsel</p>
+            <p>Ölwechsel</p>
             <OilChangeIcon />
         </NuxtLink>
     </div>

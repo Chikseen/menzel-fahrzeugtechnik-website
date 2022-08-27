@@ -34,8 +34,10 @@ export default {
     },
     tuevColor() {
       const opacity = ""; // yyyyyyxx hex value
-      const colors = ["#1bb1f1", "#f4f017", "#d65c4b", "#f79cb8", "#1baf82", "#e59101"];
-      return colors.map((item) => item + opacity)[Math.floor(Math.random() * colors.length)];
+      const colors = ["#d65c4b", "#f79cb8", "#1baf82", "#e59101", "#1bb1f1", "#f4f017"];
+      const color = (new Date().getFullYear() % 6)
+      console.log("col", color)
+      return colors[color];
     },
   },
 };

@@ -19,7 +19,6 @@
           Millimetern</strong> Doch sicher sind
         Reifen erst mit <strong>4 Millimetern</strong> Profiltiefe.
       </p>
-      <h3>Bei Schnee und Eis sind Winterreifen die beste Wahl</h3>
       <div class="serviceView_detailed_img_wrapper">
         <img class="serviceView_detailed_img" src="~/assets/images/tire_machine.png" alt=""> <!-- Add later -->
         <img class="serviceView_detailed_img" src="~/assets/images/tire_machine_II.png" alt=""> <!-- Add later -->

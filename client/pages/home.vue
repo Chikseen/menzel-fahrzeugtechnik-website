@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="home_content_titel" @mouseup="$router.push({ name: 'ac' })">
-          <h2 class="underlined">Klimageräteservice</h2>
+          <h2 class="underlined">Klimaanlagenservice</h2>
           <div class="home_content_text">
             <ul>
               <li>
