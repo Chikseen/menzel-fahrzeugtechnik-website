@@ -14,7 +14,8 @@
       <div class="createNews_imageSelection">
         <div>
           <h4>Bilder in der Galerie verfügbar</h4>
-          <div v-for="img in galerieImages" :key="img + 0" @click="currentImages.indexOf(img) == -1 ? currentImages.push(img) : ''">
+          <div v-for="img in galerieImages" :key="img + 0"
+            @click="currentImages.indexOf(img) == -1 ? currentImages.push(img) : ''">
             <p v-if="currentImages.indexOf(img) === -1">{{ img }}</p>
           </div>
           <button @click="loadMoreGalerieImages">mehr Bilder laden</button>
@@ -23,21 +24,19 @@
         <div class="createNews_imageSelection_current">
           <h4>Bilder die zu diesen Eintrag hinzugefügt werden</h4>
           <div class="createNews_imageSelection_current_wrapper">
-            <div
-              v-for="img in currentImages"
-              :key="img + 1"
+            <div v-for="img in currentImages" :key="img + 1"
               @click="currentImages.splice(currentImages.indexOf(img), 1)"
-              class="removeButton createNews_imageSelection_current_img"
-            >
+              class="removeButton createNews_imageSelection_current_img">
               <img :src="imageUrl + img" :alt="img" />
             </div>
           </div>
         </div>
         <div>
           <h4>Bilder hochladen und hinzufügen</h4>
-          <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
+          <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi"
+            v-on:submit.prevent="uploadImage">
             <input name="files" type="file" accept="image/png" multiple />
-            <input type="submit" value="Bilder hochladen" />
+            <input type="submit" value="Bilder hochladen" class="buttonPointer" />
           </form>
         </div>
       </div>
@@ -63,7 +62,7 @@ export default {
     SFC,
   },
   props: {
-    setdata: { type: Object, default: () => {} },
+    setdata: { type: Object, default: () => { } },
   },
   data() {
     return {
@@ -165,11 +164,13 @@ export default {
   max-width: 1250px;
   margin: auto;
 }
+
 .createNews_input {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 .createNews_input_text {
   max-width: 750px;
   min-width: 750px;
@@ -177,18 +178,22 @@ export default {
   margin: 5px auto;
   justify-content: flex-start;
 }
+
 .createNews_input_text label {
   width: 50px;
 }
+
 .createNews_input_text input,
 textarea {
   width: 100%;
 }
+
 .createNews_imageSelection {
   display: flex;
   gap: 25px;
   margin: 0 auto;
 }
+
 .createNews_imageSelection p {
   cursor: pointer;
   text-align: left;
@@ -200,22 +205,26 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
   gap: 5px;
 }
+
 .createNews_imageSelection_current {
   border-left: 1px grey solid;
   border-right: 1px grey solid;
   padding: 0 25px;
 }
+
 .createNews_imageSelection_current_img {
   cursor: pointer;
   text-align: left;
   max-width: 125px;
   border-radius: 5px;
 }
+
 .createNews_imageSelection_current img {
   max-width: 125px;
   max-height: 150px;
   border-radius: 5px;
 }
+
 .createNews_buttons {
   max-width: 750px;
   min-width: 250px;

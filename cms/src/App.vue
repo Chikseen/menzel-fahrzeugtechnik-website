@@ -96,17 +96,23 @@ button {
   background-color: #e71c1c;
   box-shadow: 0 0 10px 5px #e71c1c5e;
 }
+
 .header_buttons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   border-radius: 10px;
   overflow: hidden;
 }
-.header_buttons > button {
+
+.header_buttons>button {
   min-width: 150px;
   margin: 0;
   border-radius: 0;
   box-shadow: none;
+}
+
+.buttonPointer {
+  cursor: pointer;
 }
 
 input {
@@ -117,6 +123,7 @@ input {
   font-family: "BIZ UDPMincho", serif;
   font-size: 0.8rem;
 }
+
 textarea {
   border-radius: 5px;
   border: 0.5px solid rgba(151, 151, 151, 0.479);

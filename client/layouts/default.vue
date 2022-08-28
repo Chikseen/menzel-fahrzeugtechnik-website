@@ -159,7 +159,7 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5px;
+  width: 10px;
   height: 5px;
   transition: all 0.5s;
 }
@@ -170,7 +170,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 3px;
-  background-color: lighten($company_blue, 75);
+  background-color: lighten($company_blue, 50);
   transition: all 0.5s;
   color: #f13232;
 }

@@ -21,7 +21,7 @@
     <div class="home_section">
       <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
       <h4 v-else>Unsere Leistungen im Überblick</h4>
-      <ServiceSelection class="home_serviceSelection" />
+      <ServiceSelection />
     </div>
     <div class="home_section">
       <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
@@ -227,7 +227,8 @@ export default {
     border-radius: 5px;
 
     &_big {
-      max-width: 100%;
+      width: 100%;
+      max-width: 600px;
     }
   }
 

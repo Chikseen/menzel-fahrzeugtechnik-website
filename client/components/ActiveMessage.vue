@@ -1,5 +1,5 @@
 <template>
-  <div v-if="allActviveMessages.length">
+  <div v-if="allActviveMessages.length" class="active">
     <div class="active_wrapper" v-for="message in allActviveMessages" :key="message.id">
       <div class="active_textwrapper" :class="[
         message.color == 'red' ? 'active_textwrapper_red' : '',
@@ -46,10 +46,15 @@ export default {
 
 <style lang="scss">
 .active {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 15px;
+  max-width: 1000px;
+  margin: 0 auto;
+
   &_wrapper {
     position: relative;
-    width: calc(100% - 10px);
-    margin: 10px auto;
+    max-width: 100%;
   }
 
   &_textwrapper {

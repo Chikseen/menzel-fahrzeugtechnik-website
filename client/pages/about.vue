@@ -2,7 +2,7 @@
   <div :class="['about', $device.isMobile ? 'mobileOffset' : '']">
     <div class="about_text">
       <h3>Mein Name ist
-        <div v-if="!$device.isMobile" class="pageTitel pageTitel_noSpace">
+        <div v-if="!$device.isMobile" class="pageTitel pageTitel">
           <span>Dirk</span>
           <span>Menzel</span>
         </div>
@@ -66,6 +66,10 @@ export default {
   &_text {
     max-width: 500px;
     margin: 0 auto;
+
+    p {
+      text-align: left;
+    }
   }
 
   &_images {

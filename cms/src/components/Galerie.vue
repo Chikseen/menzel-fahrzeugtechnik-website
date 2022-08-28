@@ -5,7 +5,7 @@
     <form name="form1" method="post" enctype="multipart/form-data" :action="imageApi" v-on:submit.prevent="uploadImage">
       <label for="image1">Image File</label>
       <input name="files" type="file" accept="image/png" multiple />
-      <input type="submit" value="Bilder hochladen" />
+      <input type="submit" value="Bilder hochladen" class="buttonPointer"/>
     </form>
     <button @click="loadMore">Mehr Bilder laden</button>
     <button @click="reloadPictures">Bilder neu laden</button>

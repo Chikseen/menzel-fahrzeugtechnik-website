@@ -4,12 +4,12 @@
       <span>Unsere</span>
       <span>Leistungen</span>
     </div>
-    <ServiceSelection />
     <div v-if="this.$route.name == 'service'">
       <h3>Wir sind für Sie da</h3>
       <p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
     </div>
     <router-view class="serviceView_content"></router-view>
+    <ServiceSelection />
   </div>
 </template>
 
