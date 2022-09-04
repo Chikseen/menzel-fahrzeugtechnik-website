@@ -48,8 +48,9 @@ export default {
     scss: ['./assets/scss/*.scss'],
   },
 
-  server: {
-    port: 8080,
+  server: {     
+    port: 8080, 
+    host: '192.168.0.158', 
   },
 
   env: {

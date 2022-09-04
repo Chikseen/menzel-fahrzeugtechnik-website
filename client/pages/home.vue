@@ -1,33 +1,42 @@
 <template>
   <div :class="['home', $device.isMobile ? 'mobileOffset' : '']">
-    <div class="home_section">
-      <h1 v-if="!$device.isMobile">
-        Herzlich willkommen bei
-        <div class="pageTitel">
-          <span>Menzel</span>
-          <span>Fahrzeugtechnik</span>
-        </div>
-      </h1>
-      <h1 v-else class="home_smallTitel">
-        Herzlich willkommen bei Menzel Fahrzeugtechnik
-      </h1>
+    <div class="home_viewport_withHeader">
+      <div class="home_section">
+        <h1 v-if="!$device.isMobile">
+          Herzlich willkommen bei
+          <div class="pageTitel">
+            <span>Menzel</span>
+            <span>Fahrzeugtechnik</span>
+          </div>
+        </h1>
+        <h1 v-else class="home_smallTitel">
+          Herzlich willkommen bei Menzel Fahrzeugtechnik
+        </h1>
+      </div>
+      <div class="home_section">
+        <ActiveMessage />
+      </div>
+      <div class="home_section">
+        <img class="home_images home_images_big" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt" />
+      </div>
+      <div :class="['home_viewport_scrollArrow', {'home_viewport_scrollArrow_mobile': $device.isMobile}]">
+        <p>PFEIL NACH UNTEN</p>
+      </div>
     </div>
-    <div class="home_section">
-      <ActiveMessage />
+    <div class="home_viewport">
+      <div class="home_section">
+        <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
+        <h4 v-else>Unsere Leistungen im Überblick</h4>
+        <ServiceSelection />
+      </div>
     </div>
-    <div class="home_section">
-      <img class="home_images home_images_big" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt" />
-    </div>
-    <div class="home_section">
-      <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
-      <h4 v-else>Unsere Leistungen im Überblick</h4>
-      <ServiceSelection />
-    </div>
-    <div class="home_section">
-      <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
-      <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
-      <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
-      <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
+    <div class="home_viewport">
+      <div class="home_section">
+        <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
+        <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
+        <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
+        <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
+      </div>
     </div>
     <!-- <div class="home_content">
       <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
@@ -236,6 +245,29 @@ export default {
     margin-top: 0 !important;
     max-width: 650px;
     margin: 0 auto;
+  }
+
+  &_viewport {
+    min-height: 100vh;
+
+    &_withHeader {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 6rem - 15px);
+
+    }
+
+    &_scrollArrow {
+      margin-top: auto;
+
+      &_mobile {
+        margin-bottom: 8rem;
+      }
+    }
+  }
+
+  &_section {
+    margin-bottom: 10px;
   }
 }
 
