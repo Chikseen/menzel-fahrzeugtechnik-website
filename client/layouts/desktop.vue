@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <div class="headerDesktop">
       <WheelIcon class="headerDesktop_icon" />
       <HeaderOpeningHours class="headerDesktop_quickConntact headerDesktop_quickConntact_timeing" />

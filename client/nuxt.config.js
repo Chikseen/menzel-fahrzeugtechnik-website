@@ -2,14 +2,22 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     htmlAttrs: {
-      lang: 'de'
+      lang: 'de',
     },
     title: 'Menzel Fahrzeugtechnik',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description_main', name: 'description', content: 'Homepage der KFZ Werkstatt Menzel Fahrzeugtechnik' },
-      { hid: 'keywords_main', name: 'keywords', content: 'Menzel Fahrzeugtechnik, Werkstatt, Markkleeberg, Leipzig' },
+      {
+        hid: 'description_main',
+        name: 'description',
+        content: 'Homepage der KFZ Werkstatt Menzel Fahrzeugtechnik',
+      },
+      {
+        hid: 'keywords_main',
+        name: 'keywords',
+        content: 'Menzel Fahrzeugtechnik, Werkstatt, Markkleeberg, Leipzig',
+      },
       { hid: 'author_main', name: 'author', content: 'Tim Menzel' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -50,6 +58,7 @@ export default {
 
   server: {
     port: 8080,
+    /* host: 'myip',  */
   },
 
   env: {

@@ -1,109 +1,55 @@
 <template>
-  <div :class="['home', $device.isMobile ? 'mobileOffset' : '']">
-    <div class="home_section">
-      <h1 v-if="!$device.isMobile">
-        Herzlich willkommen bei
-        <div class="pageTitel">
-          <span>Menzel</span>
-          <span>Fahrzeugtechnik</span>
-        </div>
-      </h1>
-      <h1 v-else class="home_smallTitel">
-        Herzlich willkommen bei Menzel Fahrzeugtechnik
-      </h1>
-    </div>
-    <div class="home_section">
-      <ActiveMessage />
-    </div>
-    <div class="home_section">
-      <img class="home_images home_images_big" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt" />
-    </div>
-    <div class="home_section">
-      <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
-      <h4 v-else>Unsere Leistungen im Überblick</h4>
-      <ServiceSelection />
-    </div>
-    <div class="home_section">
-      <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
-      <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
-      <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
-      <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
-    </div>
-    <!-- <div class="home_content">
-      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'TuevImg')">
-        <div class="home_content_picture_wrapper">
-          <TuevIcon />
-        </div>
-        <div class="home_content_titel" @mouseup="$router.push({ name: 'tuev' })">
-          <h2 class="underlined">Hauptuntersuchung und Abgasuntersuchung</h2>
-          <div class="home_content_text">
-            <ul>
-              <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall
-                in den Zweijahresrhythmus.</li>
-              <li>Die Hauptuntersuchung stellt die "Verkehrssicherheit, Vorschriftsmäßigkeit und Umweltverträglichkeit"
-                der Fahrzeuge sicher.</li>
-            </ul>
+  <div id="home" :class="['home', $device.isMobile ? 'mobileOffset' : '']" ref="home">
+    <div class="home_viewport home_viewport_withHeader">
+      <div class="home_section">
+        <h1 v-if="!$device.isMobile">
+          Herzlich willkommen bei
+          <div class="pageTitel">
+            <span>Menzel</span>
+            <span>Fahrzeugtechnik</span>
           </div>
-        </div>
+        </h1>
+        <h1 v-else class="home_smallTitel">
+          Herzlich willkommen bei Menzel Fahrzeugtechnik
+        </h1>
       </div>
-      <div class="home_content_rigth home_content_wrapper tempDotShow" @mousemove="mouseMove($event, 'divTwoWheel')">
-        <div class="home_content_picture_wrapper">
-          <BrandCluster />
-        </div>
-        <div class="home_content_titel" @mouseup="$router.push({ name: 'service' })">
-          <h2 class="underlined">Freie KFZ-Werkstatt</h2>
-          <div class="home_content_text">
-          </div>
-        </div>
+      <div class="home_section">
+        <ActiveMessage />
       </div>
-      <div class="home_content_left home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
-        <div class="home_content_picture_wrapper">
-          <div class="home_content_picture" id="divThreeGlas">
-            <ACIcon />
-          </div>
-        </div>
-        <div class="home_content_titel" @mouseup="$router.push({ name: 'ac' })">
-          <h2 class="underlined">Klimaanlagenservice</h2>
-          <div class="home_content_text">
-            <ul>
-              <li>
-                Die regelmäßige Wartung der Klimaanlage erhöht die Sicherheit und verhindert teure Reparaturen. Jede
-                Klimaanlage verliert pro Jahr Kältemittel,
-                dadurch verringert sich die Kühlleistung der Klimaanlage deutlich. Deshalb sollte das Kältemittel alle 2
-                Jahre aufgefüllt werden.
-              </li>
-              <li>
-                Eine Klimaanlage kühlt nicht nur, sie hält bei optimaler Leistung auch die Innenraumluft trocken.
-                Deshalb ist es auch wichtig im Herbst und
-                Winter die Klimaanlage einzuschalten, denn es gilt: je trockener die Innenraumluft, desto weniger
-                beschlagen die Scheiben.
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div class="home_section">
+        <img class="home_images home_images_big" src="~/assets/images/teuv_sign.png" alt="Schild der Werkstatt" />
       </div>
-      <div class="home_content_rigth home_content_wrapper" @mousemove="mouseMove($event, 'divThreeGlas')">
-        <div class="home_content_picture_wrapper">
-          <RepairService />
-        </div>
-        <div class="home_content_titel">
-          <h2 class="underlined">Unfallreparaturen</h2>
-          <div class="home_content_text" @mouseup="$router.push({ name: 'repair' })">
-            <ul>
-              <li>Versicherungsschadenabwicklung</li>
-              <li>Hol- und Bringeservice</li>
-              <li>Werkstattersatzwagen</li>
-            </ul>
-          </div>
-        </div>
-      </div> 
-    </div>-->
+      <div :class="['home_viewport_scrollArrow', { 'home_viewport_scrollArrow_mobile': $device.isMobile }]"
+        @click="scrollDown(1)">
+        <ArrowIcon class="home_viewport_scrollArrow_icon" />
+      </div>
+    </div>
+    <div class="home_viewport">
+      <div class="home_section">
+        <h2 v-if="!$device.isMobile">Unsere Leistungen im Überblick</h2>
+        <h4 v-else>Unsere Leistungen im Überblick</h4>
+        <ServiceSelection />
+      </div>
+      <div :class="['home_viewport_scrollArrow', { 'home_viewport_scrollArrow_mobile': $device.isMobile }]"
+        @click="scrollDown(2)">
+        <ArrowIcon class="home_viewport_scrollArrow_icon" />
+      </div>
+    </div>
+    <div class="home_viewport">
+      <div class="home_section">
+        <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
+        <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
+        <img class="home_images" src="~/assets/images/home_gen_view.png" alt="Blick in die Werkstatt" />
+        <img class="home_images" src="~/assets/images/smart_in_transporter.png" alt="Smart in einem Transporter" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import ActiveMessage from '@/components/ActiveMessage'
 import ServiceSelection from '~/components/ServiceSelection.vue'
+import ArrowIcon from '~/assets/icons/ArrowIcon.vue'
 
 export default {
   name: 'HomeView',
@@ -135,6 +81,7 @@ export default {
   components: {
     ActiveMessage,
     ServiceSelection,
+    ArrowIcon,
   },
   methods: {
     mouseMove(event, elem) {
@@ -142,6 +89,13 @@ export default {
         document.getElementById(elem + "Layer" + i).style.transform = `translateX(${(event.screenX - event.screenX / 2 - 400) / (10 * (i + 1))}px)`;
       } */
     },
+    scrollDown(multi) {
+      //Multi is the number of viewport
+      window.scroll({
+        top: (window.innerHeight * multi) + (this.$device.isMobile ? -50 : 30), // x + gap
+        behavior: 'smooth'
+      });
+    }
   },
 }
 </script>
@@ -236,6 +190,32 @@ export default {
     margin-top: 0 !important;
     max-width: 650px;
     margin: 0 auto;
+  }
+
+  &_viewport {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    &_withHeader {
+      min-height: calc(100vh - 6rem - 15px);
+    }
+
+    &_scrollArrow {
+      margin-top: auto;
+
+      &_mobile {
+        margin-bottom: 8rem;
+      }
+
+      &_icon {
+        width: 4rem;
+      }
+    }
+  }
+
+  &_section {
+    margin-bottom: 10px;
   }
 }
 
