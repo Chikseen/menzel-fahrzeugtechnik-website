@@ -64,7 +64,7 @@ export default {
     padding: 5px 25px;
     border-radius: 10px;
     max-width: 750px;
-    height: calc(100% - 20px);
+    min-height: calc(100% - 20px);
     margin: 0 auto;
 
     &_red {

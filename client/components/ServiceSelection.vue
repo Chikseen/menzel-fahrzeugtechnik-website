@@ -1,5 +1,5 @@
 <template>
-    <div :class="['serviceView_overview', $device.isMobile ? 'mobileOffset' : '']">
+    <div :class="['serviceView_overview', $device.isMobile ? 'mobileOffset' : '']" @click="scrollToTop">
         <NuxtLink class="serviceView_overview_container" to="/service/tuev">
             <p>Hauptuntersuchung und Abgasuntersuchung</p>
             <TuevIcon :fontSize="'1.5'" />
@@ -69,7 +69,14 @@ export default {
         WindowIcon,
         OilChangeIcon,
     },
-    mounted() { },
+    methods: {
+        scrollToTop() {
+            window.scroll({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    },
 }
 </script>
 

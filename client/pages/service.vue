@@ -1,5 +1,5 @@
 <template>
-  <div class="serviceView_wrapper">
+  <div :class="['serviceView_wrapper', { 'serviceView_wrapper_mobile': $device.isMobile }]">
     <div class="pageTitel">
       <span>Unsere</span>
       <span>Leistungen</span>
@@ -44,7 +44,6 @@ export default {
   components: {
     ServiceSelection
   },
-  mounted() { },
 }
 </script>
 
@@ -53,6 +52,10 @@ export default {
   &_wrapper {
     max-width: 1500px;
     margin: 0 auto;
+
+    &_mobile {
+      margin-top: 6rem;
+    }
   }
 
   &_detailed {
