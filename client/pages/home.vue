@@ -30,12 +30,10 @@
         <h4 v-else>Unsere Leistungen im Überblick</h4>
         <ServiceSelection />
       </div>
-      <div :class="['home_viewport_scrollArrow', { 'home_viewport_scrollArrow_mobile': $device.isMobile }]"
+<!--       <div :class="['home_viewport_scrollArrow', { 'home_viewport_scrollArrow_mobile': $device.isMobile }]"
         @click="scrollDown(2)">
         <ArrowIcon class="home_viewport_scrollArrow_icon" />
-      </div>
-    </div>
-    <div class="home_viewport">
+      </div> -->
       <div class="home_section">
         <img class="home_images" src="~/assets/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" />
         <img class="home_images" src="~/assets/images/repair_area.png" alt="Blick in die Werkstatt" />
@@ -95,7 +93,7 @@ export default {
         top: (window.innerHeight * multi) + (this.$device.isMobile ? -50 : 30), // x + gap
         behavior: 'smooth'
       });
-    }
+    },
   },
 }
 </script>

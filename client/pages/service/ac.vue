@@ -24,7 +24,7 @@
         <h3>So funktioniert die Klimaanlage im Auto</h3>
         <p>
           Ein Gas, das man komprimiert, erwärmt sich. Umgekehrt kühlt es sich ab, wenn es sich wieder ausdehnt.
-          <strong>Dieses Prinzip nutzen Klimaanlagen:</strong> Das enthaltene, gasförmige Kühlmittel wird vom Verdichter
+          <b>Dieses Prinzip nutzen Klimaanlagen:</b> Das enthaltene, gasförmige Kühlmittel wird vom Verdichter
           angesaugt und komprimiert. Durch den
           Druck wird das Gas erwärmt und anschließend in einem nachfolgenden Wärmetauscher abgekühlt. Hier geht es in
           einen flüssigen Zustand über. Ein Trockner

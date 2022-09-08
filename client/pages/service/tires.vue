@@ -5,19 +5,19 @@
       <p>
         Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes
         Reifenprofil gewährleistet eine optimale
-        Straßenhaftung. Auf Wunsch können die Reifen auch eingelagert werden. <strong>Allwetter- oder
-          Ganzjahresreifen</strong> verfügen über die
+        Straßenhaftung. Auf Wunsch können die Reifen auch eingelagert werden. <b>Allwetter- oder
+          Ganzjahresreifen</b> verfügen über die
         M+S-Kennzeichnung und vereinen sowohl die Eigenschaften eines Sommer- als auch eines Winterreifens. Sie dürfen
         bei allen Wettersituationen gefahren
         werden, also auch auf winterlichen Straßen. Aber: Auf Eis und Schnee sind sie dem Winterreifen deutlich in
         puncto Handling, Bremsen und Traktion
-        unterlegen. Das hat der Autofahrer intus: Die Reifen werden zu <strong>Ostern</strong> und im
-        <strong>Oktober</strong> gewechselt. Diese Faustregel ist
-        im Großen und Ganzen sinnvoll, denn es kann bereits im Oktober schneien. Man sollte spätestens <strong>Ende
-          April</strong> und frühestens im
-        <strong>Oktober</strong> umgerüstet haben. Gesetzlich vorgeschrieben ist eine Mindestprofiltiefe von <strong>1,6
-          Millimetern</strong> Doch sicher sind
-        Reifen erst mit <strong>4 Millimetern</strong> Profiltiefe.
+        unterlegen. Das hat der Autofahrer intus: Die Reifen werden zu <b>Ostern</b> und im
+        <b>Oktober</b> gewechselt. Diese Faustregel ist
+        im Großen und Ganzen sinnvoll, denn es kann bereits im Oktober schneien. Man sollte spätestens <b>Ende
+          April</b> und frühestens im
+        <b>Oktober</b> umgerüstet haben. Gesetzlich vorgeschrieben ist eine Mindestprofiltiefe von <b>1,6
+          Millimetern</b> Doch sicher sind
+        Reifen erst mit <b>4 Millimetern</b> Profiltiefe.
       </p>
       <div class="serviceView_detailed_img_wrapper">
         <img class="serviceView_detailed_img" src="~/assets/images/tire_machine.png" alt=""> <!-- Add later -->

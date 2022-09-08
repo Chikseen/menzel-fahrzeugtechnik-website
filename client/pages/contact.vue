@@ -26,8 +26,8 @@
       <h2>Anschrift</h2>
       <div class="contactView_openTimes_content contactView_openTimes_content_adress">
         <p>Dirk Menzel</p>
-        <p>Städtelner Straße 62</p>
-        <p>04416 Markkleeberg</p>
+        <a :href="mapAdress" target="_blank">Städtelner Straße 62</a>
+        <a :href="mapAdress" target="_blank">04416 Markkleeberg</a>
         <p>
           E-Mail:
           <a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a>
@@ -76,6 +76,17 @@ export default {
   data() {
     return {
       openTimes: [],
+    }
+  },
+  computed: {
+    mapAdress() {
+      if (this.$device.isIos) {
+        return "http://maps.apple.com/?ll=51.2712801,12.3680665"
+      } else if (this.$device.isAndroid) {
+        return "geo:51.2712801,12.3680665"
+      } else {
+        return "https://www.google.com/maps/place/Menzel+Fahrzeugtechnik/@51.2712801,12.3680665,17z/data=!3m1!4b1!4m5!3m4!1s0x47a6fa232e12aaf5:0x5c63bbdad67219bd!8m2!3d51.2712768!4d12.3702552"
+      }
     }
   },
   methods: {

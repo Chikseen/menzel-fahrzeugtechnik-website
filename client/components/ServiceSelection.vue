@@ -1,5 +1,5 @@
 <template>
-    <div :class="['serviceView_overview', $device.isMobile ? 'mobileOffset' : '']" @click="scrollToTop">
+    <div :class="['serviceView_overview', $device.isMobile && this.$route.name != 'home'? 'mobileOffset' : '']" @click="scrollToTop">
         <NuxtLink class="serviceView_overview_container" to="/service/tuev">
             <p>Hauptuntersuchung und Abgasuntersuchung</p>
             <TuevIcon :fontSize="'1.5'" />
