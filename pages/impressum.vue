@@ -25,6 +25,10 @@
 			</p>
 			<p>Sie haben interesse an einer eigenen Website?</p>
 			<p>Kontakieren sie mich!</p>
+			<p>
+				Meine Webseite:
+				<a href="https://timmenzel.me/">timmenzel.me</a>
+			</p>
 		</div>
 	</MainContentWrapper>
 </template>
