@@ -3,9 +3,9 @@
     <h2>Hauptuntersuchung und Abgasuntersuchung</h2>
     <div>
       <div class="imageContainer">
-        <a href="/images/teuv_sign.png">
-          <NuxtImg src="/images/teuv_sign.png" alt="Schild der Werkstatt" loading="lazy" fit='outside'
-            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+        <a href="/images/teuv_sign.webp">
+          <NuxtImg src="/images/teuv_sign.webp" alt="Schild der Werkstatt" format="webp" fit='outside'
+            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="460" height="330" />
         </a>
       </div>
       <ul>

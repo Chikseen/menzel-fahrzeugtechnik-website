@@ -1,24 +1,30 @@
 <template>
 	<MainContentWrapper>
 		<p class="index_title"> Herzlich willkommen bei</p>
-		<NuxtImg src="images/teuv_sign.png" />
+		<div class="imageContainer">
+			<NuxtImg src="images/teuv_sign.webp" alt="Bild vom Eingangsschild" format="webp" fit='outside'
+				sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="460" height="330" />
+		</div>
 		<ServiceSelection />
 		<div class="imageContainer">
-			<a href="/images/standing_under_car_II.png">
-				<NuxtImg src="/images/standing_under_car_II.png" alt="Inhaber steht unter einem Auto" loading="lazy"
-					fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+			<a href="/images/standing_under_car_II.webp">
+				<NuxtImg src="/images/standing_under_car_II.webp" alt="Inhaber steht unter einem Auto" format="webp"
+					fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690"
+					height="920" />
 			</a>
-			<a href="/images/repair_area.png">
-				<NuxtImg src="/images/repair_area.png" alt="Blick in die Werkstatt" loading="lazy" fit='outside'
-					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+			<a href="/images/repair_area.webp">
+				<NuxtImg src="/images/repair_area.webp" alt="Blick in die Werkstatt" format="webp" fit='outside'
+					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" loading="lazy" width="690"
+					height="920" />
 			</a>
-			<a href="/images/home_gen_view.png">
-				<NuxtImg src="/images/home_gen_view.png" alt="Blick in die Werkstatt" loading="lazy" fit='outside'
-					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+			<a href="/images/home_gen_view.webp">
+				<NuxtImg src="/images/home_gen_view.webp" alt="Blick in die Werkstatt" format="webp" fit='outside'
+					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
 			</a>
-			<a href="/images/smart_in_transporter.png">
-				<NuxtImg src="/images/smart_in_transporter.png" alt="Smart in einem Transporter" loading="lazy"
-					fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+			<a href="/images/smart_in_transporter.webp">
+				<NuxtImg src="/images/smart_in_transporter.webp" alt="Smart in einem Transporter" format="webp"
+					fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="625"
+					height="920" />
 			</a>
 		</div>
 	</MainContentWrapper>
@@ -64,6 +70,12 @@ definePageMeta({
 .index {
 	&_title {
 		font-size: 1.5rem;
+
+	}
+
+	&_img {
+		max-width: 300px;
+		object-fit: fill;
 	}
 }
 </style>

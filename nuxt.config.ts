@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 		format: ["webp"],
 		provider: "ipx",
 		ipx: {
-			maxAge: 31536000,
+			maxAge: 31535000,
 		},
 		screens: {
 			xxs: 100,

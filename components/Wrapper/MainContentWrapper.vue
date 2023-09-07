@@ -45,8 +45,8 @@
 		&_wrapper {
 			top: 0;
 			min-height: 100%;
-			margin: 10px;
-			width: calc(100% - 20px);
+			margin: 50px 5px;
+			width: calc(100% - 10px);
 		}
 	}
 }

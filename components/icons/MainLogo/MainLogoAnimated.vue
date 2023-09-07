@@ -1,8 +1,8 @@
 <template>
   <div class="MainLogoA_wrapper">
-    <a href="/images/master_certificate.png">
-      <NuxtImg src="/images/master_certificate.png" class="MainLogoA_img" alt="Image of master certificate"
-        sizes="xxs:100px" densities="x1" />
+    <a href="/images/master_certificate.webp">
+      <NuxtImg src="/images/master_certificate.webp" class="MainLogoA_img" alt="Image of master certificate" format="webp"
+        sizes="xxs:100px" densities="x1" width="330" height="500" />
     </a>
     <svg class="MainLogoA" viewBox="-1 -1 12 12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
       fill="#00000000" li>

@@ -28,6 +28,8 @@ body {
   img {
     max-width: 400px;
     width: 100%;
+    height: 100%;
+    max-height: 500px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: $image-shadow;

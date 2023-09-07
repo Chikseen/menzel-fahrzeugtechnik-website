@@ -20,17 +20,17 @@
         Reifen erst mit <b>4 Millimetern</b> Profiltiefe.
       </p>
       <div class="imageContainer">
-        <a href="/images/tire_machine.png">
-          <NuxtImg src="/images/tire_machine.png" alt="Bild einer Reifenmachine" loading="lazy" fit='outside'
-            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+        <a href="/images/tire_machine.webp">
+          <NuxtImg src="/images/tire_machine.webp" alt="Bild einer Reifenmachine" format="webp" fit='outside'
+            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
         </a>
-        <a href="/images/tire_machine_II.png">
-          <NuxtImg src="/images/tire_machine_II.png" alt="Bild einer Reifenmachine" loading="lazy" fit='outside'
-            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+        <a href="/images/tire_machine_II.webp">
+          <NuxtImg src="/images/tire_machine_II.webp" alt="Bild einer Reifenmachine" format="webp" fit='outside'
+            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
         </a>
-        <a href="/images/tire_upclose.png">
-          <NuxtImg src="/images/tire_upclose.png" alt="Bild einer Felge" loading="lazy" fit='outside'
-            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+        <a href="/images/tire_upclose.webp">
+          <NuxtImg src="/images/tire_upclose.webp" alt="Bild einer Felge" format="webp" fit='outside'
+            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="920" height="690" />
         </a>
       </div>
     </div>

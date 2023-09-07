@@ -5,8 +5,7 @@
     </PageTitelWrapper>
     <div>
       <p>Mein Name ist
-        <span>Dirk</span>
-        <span>Menzel</span>
+        <span>Dirk Menzel</span>
       </p>
       <p>
         Ich habe mich hier in der Städtelner Straße 62 in Markkleeberg im August 2018
@@ -17,21 +16,22 @@
       </p>
     </div>
     <div class="imageContainer">
-      <a href="/images/being_productive.png">
-        <NuxtImg src="/images/being_productive.png" alt="Inhaber steht am Leptop" loading="lazy" fit='outside'
-          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+      <a href="/images/being_productive.webp">
+        <NuxtImg src="/images/being_productive.webp" alt="Inhaber steht am Leptop" format="webp" fit='outside'
+          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
       </a>
-      <a href="/images/standing_under_car.png">
-        <NuxtImg src="/images/standing_under_car.png" alt="Inhaber steht unter einem Fahrzeug" loading="lazy"
-          fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+      <a href="/images/standing_under_car.webp">
+        <NuxtImg src="/images/standing_under_car.webp" alt="Inhaber steht unter einem Fahrzeug" format="webp" fit='outside'
+          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
       </a>
-      <a href="/images/holding_master_certificate.png">
-        <NuxtImg src="/images/holding_master_certificate.png" alt="Inhaber hält seinen silbernen Meisterbrief"
-          loading="lazy" fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+      <a href="/images/holding_master_certificate.webp">
+        <NuxtImg src="/images/holding_master_certificate.webp" alt="Inhaber hält seinen silbernen Meisterbrief"
+          format="webp" fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3"
+          width="491" height="919" />
       </a>
-      <a href="/images/dirty_hand.png">
-        <NuxtImg src="/images/dirty_hand.png" alt="Inhaber hat eine dreckige Hand" loading="lazy" fit='outside'
-          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" />
+      <a href="/images/dirty_hand.webp">
+        <NuxtImg src="/images/dirty_hand.webp" alt="Inhaber hat eine dreckige Hand" format="webp" fit='outside'
+          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="737" height="919" />
       </a>
     </div>
   </MainContentWrapper>
