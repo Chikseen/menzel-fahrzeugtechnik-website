@@ -5,8 +5,8 @@
 		</PageTitelWrapper>
 		<div class="contact_box_wrappper">
 			<div class="contact_map">
-				<LMap ref="map" zoom="15" :center="[51.271428, 12.369805]">
-					<LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp"
+				<LMap ref="map" :zoom="15" :center="[51.271428, 12.369805]">
+					<LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
 						layer-type="base" name="OpenStreetMap" />
 					<l-marker :lat-lng="[51.271428, 12.369805]">

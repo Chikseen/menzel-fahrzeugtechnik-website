@@ -119,7 +119,7 @@ export default defineNuxtConfig({
 				},
 				{
 					name: "Saturday",
-					isOpen: true,
+					isOpen: false,
 					open: "08:00:00",
 					close: "16:00:00",
 					translated: "Samstag",
