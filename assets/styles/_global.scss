@@ -1,9 +1,38 @@
 $company_blue: #121F3A;
 $image-shadow: 0.2rem 0.2rem 0.8rem 0px #5e5e5e79;
 $akzent_blue: #0e317c;
+
 $light-font-color: #D3D7DF;
+$dark-font-color: #181818;
+
+$light-background-color: #ffffff;
+$dark-background-color: #181818;
+
 $icon_base_grey: #d1d1d1;
 $icon_active_grey: #474747;
 
-$header_hight: 5rem;
+$header_hight: 75px;
 $mobile_threshold: 450px;
+$max_content_width: 1500px;
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: $dark-background-color;
+		color: $light-font-color !important;
+	}
+
+	.repairCluster_good {
+		background-color: $dark-background-color;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: $light-background-color;
+		color: $dark-font-color !important;
+	}
+
+	.repairCluster_good {
+		background-color: $light-background-color;
+	}
+}

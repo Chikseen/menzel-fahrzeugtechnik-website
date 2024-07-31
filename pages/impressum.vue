@@ -16,7 +16,7 @@
 			<p>Phone: <a href="tel:+49 62929704">0176 62929704</a></p>
 			<p>
 				E-Mail:
-				<a href="mailto:Tim_Menzel@t-online.de">Tim_Menzel@t-online.de</a>
+				<a href="mailto:tim@keutel.me">tim@keutel.me</a>
 			</p>
 			<p>
 				Source:
@@ -25,10 +25,10 @@
 			</p>
 			<p>Sie haben interesse an einer eigenen Website?</p>
 			<p>Kontakieren sie mich!</p>
-			<p>
+			<!--<p>
 				Meine Webseite:
 				<a href="https://timmenzel.me/">timmenzel.me</a>
-			</p>
+			</p>-->
 		</div>
 	</MainContentWrapper>
 </template>

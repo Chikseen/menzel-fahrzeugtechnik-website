@@ -117,5 +117,6 @@ export default {
 	cursor: pointer;
 	color: $light-font-color;
 	user-select: none;
+	text-align: center;
 }
 </style>

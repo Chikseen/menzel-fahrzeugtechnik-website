@@ -6,7 +6,7 @@
 		<router-view></router-view>
 		<p>Wir sind für Sie da</p>
 		<p>Klicken sie auf eine Leistung um mehr zu erfahren</p>
-		<ServiceSelection />
+		<!--<ServiceSelection />-->
 	</MainContentWrapper>
 </template>
 

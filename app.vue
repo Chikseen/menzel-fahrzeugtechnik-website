@@ -15,8 +15,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #2c3e50;
   scroll-behavior: smooth;
+  max-width: 100dvw;
+  max-height: 100dvh;
+  overflow: hidden;
+  transition: 0.5s all ease-in-out;
 }
 
 .imageContainer {
@@ -40,7 +43,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 10px;
+  width: 5px;
   height: 5px;
   transition: all .5s;
 }

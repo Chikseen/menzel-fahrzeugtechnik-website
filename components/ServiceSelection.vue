@@ -80,7 +80,7 @@ export default {
             height: 200px;
             width: 100%;
             border-radius: 5px;
-            box-shadow: 1px 1px 7px 1px lighten($company_blue, 78);
+            box-shadow: $image-shadow;
 
             & div {
                 height: 120px;
@@ -89,6 +89,7 @@ export default {
             & p {
                 position: relative;
                 font-weight: 750;
+                text-decoration: none;
             }
 
         }

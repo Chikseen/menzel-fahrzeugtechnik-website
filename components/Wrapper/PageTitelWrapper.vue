@@ -18,7 +18,6 @@
 			position: relative;
 			font-size: 2rem;
 			margin: 0;
-			color: $company_blue;
 
 			&::after {
 				content: "";

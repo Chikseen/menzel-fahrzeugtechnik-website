@@ -1,14 +1,10 @@
 <template>
   <div class="MainLogoS_wrapper">
-    <a href="/images/master_certificate.webp">
-      <NuxtImg src="/images/master_certificate.webp" class="MainLogoS_img" alt="Image of master certificate" format="webp"
-        sizes="xxs: 100px" densities="x1" width="330" height="500" />
-    </a>
-    <svg class="MainLogoS" viewBox="-1 -1 12 12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+    <svg class="MainLogoS" viewBox="-1 -1 10 12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
       fill="#00000000" li>
-      <path stroke="#d3d7df" stroke-width="0.5"
-        d="M3 2 5 2 5 0A1 1 0 015 10L5 8 3 8M5 8 5 7 4 7 4 3 5 3 5 2A1 1 0 015 8" />
-      <path class="MainLogoS_openPath" stroke="#d3d7df" stroke-width="0.5" d="M4 10 4 9 2 9 2 1 4 1 4 0" />
+      <path stroke="#d1d1d1" stroke-width="0.5"
+        d="M1 2 3 2 3 0A1 1 0 013 10L3 8 1 8M3 8 3 7 2 7 2 3 3 3 3 2A1 1 0 013 8" />
+      <path class="MainLogoS_openPath" stroke="#d1d1d1" stroke-width="0.5" d="M2 10 2 9 0 9 0 1 2 1 2 0" />
     </svg>
   </div>
 </template>
@@ -17,21 +13,13 @@
 .MainLogoS {
   max-width: 100%;
   max-height: 100%;
+  aspect-ratio: 379/455;
   overflow: visible;
 
   &_wrapper {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     position: relative;
-  }
-
-  &_img {
-    cursor: pointer;
-    position: absolute;
-    top: -10px;
-    left: -4.5rem;
-    width: 0;
-    height: 100px;
   }
 }
 </style>

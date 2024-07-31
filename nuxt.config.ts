@@ -37,6 +37,7 @@ export default defineNuxtConfig({
 			title: "Menzel",
 			meta: [
 				{ charset: "utf-8" },
+				{ name: "theme-color", content: "#319197" },
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				{
 					hid: "description_main",

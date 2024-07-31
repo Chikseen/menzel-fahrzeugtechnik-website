@@ -1,10 +1,5 @@
 <template>
 	<MainContentWrapper>
-		<p class="index_title"> Herzlich willkommen bei</p>
-		<div class="imageContainer">
-			<NuxtImg src="images/teuv_sign.webp" alt="Bild vom Eingangsschild" format="webp" fit='outside'
-				sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="460" height="330" />
-		</div>
 		<ServiceSelection />
 		<div class="imageContainer">
 			<a href="/images/standing_under_car_II.webp">
@@ -19,7 +14,8 @@
 			</a>
 			<a href="/images/home_gen_view.webp">
 				<NuxtImg src="/images/home_gen_view.webp" alt="Blick in die Werkstatt" format="webp" fit='outside'
-					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
+					sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690"
+					height="920" />
 			</a>
 			<a href="/images/smart_in_transporter.webp">
 				<NuxtImg src="/images/smart_in_transporter.webp" alt="Smart in einem Transporter" format="webp"
@@ -65,17 +61,3 @@ definePageMeta({
 	scrollToTop: false,
 })
 </script>
-
-<style lang="scss">
-.index {
-	&_title {
-		font-size: 1.5rem;
-
-	}
-
-	&_img {
-		max-width: 300px;
-		object-fit: fill;
-	}
-}
-</style>

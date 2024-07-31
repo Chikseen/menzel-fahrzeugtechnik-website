@@ -118,10 +118,6 @@ definePageMeta({
 			justify-content: center;
 			gap: 15px;
 		}
-
-		p {
-			color: black;
-		}
 	}
 
 	&_item {
@@ -142,6 +138,7 @@ definePageMeta({
 		border-radius: 10px;
 		box-shadow: $image-shadow;
 		overflow: hidden;
+		z-index: 5;
 	}
 }
 </style>

@@ -23,21 +23,6 @@ export default {
       const parent = document.getElementById("repairClusterID");
       const posInPercent = ((evt.x - parent.getBoundingClientRect().left) / parent.clientWidth) * 100;
       this.posInPercent = posInPercent;
-
-      /*  
-      
-      @mouseover="setParent" 
-
-      
-      setOverlayPos(evt) {
-      const posInPercent = ((evt.x - this.posParentLeft) / this.posParentWidth) * 100;
-      this.posInPercent = posInPercent;
-    },
-
-    setParent(evt) {
-      this.posParentLeft = evt.fromElement.getBoundingClientRect().left;
-      this.posParentWidth = evt.fromElement.clientWidth;
-    }, */
     },
   },
 };
@@ -72,7 +57,6 @@ export default {
     width: 50%;
     height: 100%;
     transition: all 0.1s;
-    background-color: rgb(255, 255, 255);
     z-index: 5;
   }
 

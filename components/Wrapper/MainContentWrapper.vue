@@ -15,15 +15,16 @@
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-
+	
 	&_wrapper {
 		position: absolute;
 		display: flex;
 		justify-content: center;
 		top: $header_hight;
 		left: 0;
-		width: 100%;
-		min-height: calc(100% - $header_hight);
+		width: 100dvw;
+		height: calc(100dvh - $header_hight);
+		overflow: auto;
 	}
 
 	h2,

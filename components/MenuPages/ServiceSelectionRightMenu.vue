@@ -1,0 +1,55 @@
+<template>
+	<div class="menuServiceView_overview">
+		<NuxtLink class="menuServiceView_overview_container" to="/service/tuev">
+			<p>Hauptuntersuchung und Abgasuntersuchung</p>
+		</NuxtLink>
+		<NuxtLink class="menuServiceView_overview_container" to="/service/ac">
+			<p>Klimaanlagenservice</p>
+		</NuxtLink>
+		<NuxtLink class="menuServiceView_overview_container" to="/service/tires">
+			<p>Reifen und Räder</p>
+		</NuxtLink>
+		<NuxtLink class="menuServiceView_overview_container" to="/service/repair">
+			<p>Unfallreparaturen</p>
+		</NuxtLink>
+		<NuxtLink class="menuServiceView_overview_container" to="/service/glasservice">
+			<p>Glasschäden</p>
+		</NuxtLink>
+		<NuxtLink class="menuServiceView_overview_container" to="/service/oilchange">
+			<p>Ölwechsel</p>
+		</NuxtLink>
+	</div>
+</template>
+
+<style lang="scss">
+.menuServiceView {
+	&_overview {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		z-index: 99;
+
+		&_container {
+			cursor: pointer;
+			display: flex;
+			flex-direction: column;
+			height: 75px;
+			width: 100%;
+			border-bottom: 1px solid $icon_base_grey;
+
+			& p {
+				margin: auto;
+				position: relative;
+				font-weight: 500;
+				font-size: 1rem;
+				line-break: auto;
+			}
+		}
+
+		a {
+			text-decoration: none;
+			color: $light-font-color;
+		}
+	}
+}
+</style>
