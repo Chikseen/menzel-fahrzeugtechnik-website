@@ -176,6 +176,7 @@ export default {
 				margin: 5px;
 				font-size: 3rem;
 				margin: auto 0;
+				color: $light-font-color !important
 			}
 		}
 	}
@@ -227,6 +228,7 @@ export default {
 		&_text {
 			p {
 				font-size: 1rem;
+				color: $light-font-color !important
 			}
 		}
 	}
