@@ -17,8 +17,8 @@
         </li>
       </ul>
       <div class="imageContainer">
-        <a href="/images/clima_device.webp">
-          <NuxtImg src="/images/clima_device.webp" alt="Bild eines Kältemitteltauschgerätes" format="webp" fit='outside'
+        <a href="https://mfztmedia.blob.core.windows.net/images/clima_device.webp">
+          <NuxtImg src="https://mfztmedia.blob.core.windows.net/images/clima_device.webp" alt="Bild eines Kältemitteltauschgerätes" format="webp" fit='outside'
             sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
         </a>
       </div>
