@@ -19,6 +19,10 @@ $max_content_width: 1500px;
 	body {
 		background-color: $dark-background-color;
 		color: $light-font-color !important;
+
+		p {
+			color: $light-font-color !important;
+		}
 	}
 
 	.repairCluster_good {
@@ -29,6 +33,10 @@ $max_content_width: 1500px;
 @media (prefers-color-scheme: light) {
 	body {
 		background-color: $light-background-color;
+		color: $dark-font-color !important;
+	}
+
+	p {
 		color: $dark-font-color !important;
 	}
 
