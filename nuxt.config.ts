@@ -16,18 +16,8 @@ export default defineNuxtConfig({
 	modules: ["@nuxt/image", "nuxt3-leaflet"],
 	image: {
 		format: ["webp"],
-		provider: "ipx",
-		ipx: {
-			maxAge: 31535000,
-		},
-		screens: {
-			xxs: 100,
-			xs: 300,
-			sm: 325,
-			md: 350,
-			lg: 375,
-			xl: 400,
-		},
+		provider: "edgio",
+		baseURL: ""
 	},
 	app: {
 		head: {
@@ -43,7 +33,7 @@ export default defineNuxtConfig({
 					hid: "description_main",
 					name: "description",
 					content: "Ihre freie Kfz-Meisterwerkstatt in Markkleeberg",
-				},
+				}, 
 				{
 					hid: "keywords_main",
 					name: "keywords",

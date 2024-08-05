@@ -1,7 +1,7 @@
 <template>
   <div class="MainLogoA_wrapper">
-    <a href="https://mfztmedia.blob.core.windows.net/images/master_certificate.webp">
-      <NuxtImg src="https://mfztmedia.blob.core.windows.net/images/master_certificate.webp" class="MainLogoA_img" alt="Image of master certificate" format="webp"
+    <a href="https://mfzt-cdn.azureedge.net/images/master_certificate.webp">
+      <NuxtImg src="https://mfzt-cdn.azureedge.net/images/master_certificate.webp" class="MainLogoA_img" alt="Image of master certificate" format="webp"
         sizes="xxs:100px" densities="x1" width="330" height="500" />
     </a>
     <svg class="MainLogoA" viewBox="-1 -1 12 12" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
