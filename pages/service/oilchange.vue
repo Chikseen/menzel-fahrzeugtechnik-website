@@ -3,11 +3,7 @@
         <h2>Ölwechsel</h2>
         <p> Wir führen Ölwechsel durch </p>
         <div class="imageContainer">
-            <a href="https://mfzt-cdn.azureedge.net/images/oil_change_device.webp">
-                <NuxtImg class="serviceView_detailed_img" src="https://mfzt-cdn.azureedge.net/images/oil_change_device.webp"
-                    alt="Bild eines Gerätes um Öl zu tauschen" format="webp" fit='outside'
-                    sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
-            </a>
+            <ImageComponent image="oil_change_device.webp" />
         </div>
     </div>
 </template>

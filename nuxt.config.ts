@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
 	devtools: { enabled: true },
+	ssr: false,
 	vite: {
 		css: {
 			preprocessorOptions: {
@@ -57,6 +58,8 @@ export default defineNuxtConfig({
 	},
 	runtimeConfig: {
 		public: {
+			contentBaseUrl: "https://mfzt-cdn.azureedge.net",
+			containerName: "images",
 			openingHours: [
 				{
 					name: "Sunday",

@@ -16,23 +16,10 @@
       </p>
     </div>
     <div class="imageContainer">
-      <a href="https://mfzt-cdn.azureedge.net/images/being_productive.webp">
-        <NuxtImg src="https://mfzt-cdn.azureedge.net/images/being_productive.webp" alt="Inhaber steht am Leptop" format="webp" fit='outside'
-          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
-      </a>
-      <a href="https://mfzt-cdn.azureedge.net/images/standing_under_car.webp">
-        <NuxtImg src="https://mfzt-cdn.azureedge.net/images/standing_under_car.webp" alt="Inhaber steht unter einem Fahrzeug" format="webp" fit='outside'
-          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="690" height="920" />
-      </a>
-      <a href="https://mfzt-cdn.azureedge.net/images/holding_master_certificate.webp">
-        <NuxtImg src="https://mfzt-cdn.azureedge.net/images/holding_master_certificate.webp" alt="Inhaber hält seinen silbernen Meisterbrief"
-          format="webp" fit='outside' sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3"
-          width="491" height="919" />
-      </a>
-      <a href="https://mfzt-cdn.azureedge.net/images/dirty_hand.webp">
-        <NuxtImg src="https://mfzt-cdn.azureedge.net/images/dirty_hand.webp" alt="Inhaber hat eine dreckige Hand" format="webp" fit='outside'
-          sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="737" height="919" />
-      </a>
+      <ImageComponent image="being_productive.webp" />
+      <ImageComponent image="standing_under_car.webp" />
+      <ImageComponent image="holding_master_certificate.webp" />
+      <ImageComponent image="dirty_hand.webp" />
     </div>
   </MainContentWrapper>
 </template>

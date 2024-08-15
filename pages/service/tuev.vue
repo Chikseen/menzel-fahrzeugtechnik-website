@@ -3,10 +3,7 @@
     <h2>Hauptuntersuchung und Abgasuntersuchung</h2>
     <div>
       <div class="imageContainer">
-        <a href="https://mfzt-cdn.azureedge.net/images/teuv_sign.webp">
-          <NuxtImg src="https://mfzt-cdn.azureedge.net/images/teuv_sign.webp" alt="Schild der Werkstatt" format="webp" fit='outside'
-            sizes="xs:300px sm:325px md:350px lg:375px xl:400px" densities="x1 x2 x3" width="460" height="330" />
-        </a>
+        <ImageComponent image="teuv_sign.webp" />
       </div>
       <ul>
         <li>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den
