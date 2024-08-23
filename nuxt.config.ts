@@ -1,6 +1,9 @@
 export default defineNuxtConfig({
 	devtools: { enabled: true },
 	ssr: false,
+
+	devtools: { enabled: false },
+
 	vite: {
 		css: {
 			preprocessorOptions: {
@@ -10,16 +13,25 @@ export default defineNuxtConfig({
 			},
 		},
 	},
+
 	components: [{ path: "~/components", pathPrefix: false }],
+
 	server: {
 		port: 8000, // default: 3000
 	},
-	modules: ["@nuxt/image", "nuxt3-leaflet"],
+
+	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet"],
+
+	robots: {
+		UserAgent: "*",
+		Disallow: "",
+	},
 	image: {
 		format: ["webp"],
 		provider: "edgio",
 		baseURL: ""
 	},
+
 	app: {
 		head: {
 			htmlAttrs: {
@@ -34,7 +46,7 @@ export default defineNuxtConfig({
 					hid: "description_main",
 					name: "description",
 					content: "Ihre freie Kfz-Meisterwerkstatt in Markkleeberg",
-				}, 
+				},
 				{
 					hid: "keywords_main",
 					name: "keywords",
@@ -113,4 +125,6 @@ export default defineNuxtConfig({
 			],
 		},
 	},
+
+	compatibilityDate: "2024-08-16",
 });

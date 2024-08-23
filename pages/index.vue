@@ -1,18 +1,89 @@
 <template>
-	<MainContentWrapper>
-		<ServiceSelection />
-		<div class="imageContainer">
-			<ImageComponent image="standing_under_car_II.webp" />
-			<ImageComponent image="repair_area.webp" />
-			<ImageComponent image="home_gen_view.webp" />
-			<ImageComponent image="smart_in_transporter.webp" />
+	<div class="home">
+		<div class="home_content">
+
+			<div class="home_image">
+				<NuxtImg fit="outside"
+					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
+					provider="edgio" quality="100" alt="background Image"
+					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960" />
+
+				<span class="home_image_text">
+					<span class="home_image_text_titel">
+						<span>
+							<h1>Menzel Fahrzeugtechnik</h1>
+							<h4>Fachmännische Autoreparaturen, damit Sie schnell und sicher wieder auf
+								die
+								Straße kommen</h4>
+						</span>
+						<button @click="scrollToSerivces">
+							Leistungen
+						</button>
+					</span>
+				</span>
+			</div>
+			<!--
+			<div id="services">
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
+					hic
+					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
+					velit
+					atque ex pariatur ad!</p>
+			</div>-->
+
+			<div id="services">
+				<ServiceSelection />
+				<div class="imageContainer">
+					<ImageComponent image="standing_under_car_II.webp" />
+					<ImageComponent image="repair_area.webp" />
+					<ImageComponent image="home_gen_view.webp" />
+					<ImageComponent image="smart_in_transporter.webp" />
+				</div>
+			</div>
+
 		</div>
-	</MainContentWrapper>
+	</div>
 </template>
 
 <script>
 export default {
 	name: 'Home',
+	data() {
+		return {
+			config: useRuntimeConfig()
+		}
+	},
+	methods: {
+		scrollToSerivces() {
+			const element = document.getElementById("services");
+			element.scrollIntoView(true);
+		}
+	}
 }
 </script>
 
@@ -45,3 +116,82 @@ definePageMeta({
 	scrollToTop: false,
 })
 </script>
+
+<style lang="scss" scoped>
+#services {
+	margin: 20px;
+	margin-top: 100px;
+}
+
+.home {
+	padding-top: $header_hight;
+	position: relative;
+	width: 100dvw;
+	height: 100dvh;
+	overflow: auto;
+	scroll-behavior: smooth;
+
+	&_content {
+		display: flex;
+		flex-direction: column;
+		min-height: calc(200dvh - $header_hight);
+		height: min-content;
+	}
+
+	&_image {
+		position: relative;
+		display: flex;
+		height: calc(100dvh - $header_hight);
+		width: 100dvw;
+		overflow: hidden;
+
+		&_text {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: calc(100dvh - $header_hight);
+			width: 100dvw;
+
+			&_titel {
+				position: absolute;
+				left: 15px;
+				right: 15px;
+				top: 0;
+				bottom: 15%;
+				max-width: 750px;
+				margin: auto;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			h1,
+			h4,
+			p {
+				padding: 15px 0;
+			}
+
+			button {
+				cursor: pointer;
+				max-width: min-content;
+				padding: 12px 28px;
+				background-color: $company_blue;
+				color: $light-font-color;
+				border: none;
+				font-size: larger;
+				border-radius: $border-radius
+			}
+		}
+
+		img {
+			width: 100dvw;
+			height: 100dvh;
+			max-width: $max_content_width;
+			margin: 0 auto;
+			object-fit: cover;
+			object-position: 50% 50%;
+			filter: brightness(0.5);
+		}
+	}
+}
+</style>

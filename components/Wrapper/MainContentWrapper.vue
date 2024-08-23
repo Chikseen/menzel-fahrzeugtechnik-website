@@ -15,7 +15,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
-	
+
 	&_wrapper {
 		position: absolute;
 		display: flex;
@@ -24,6 +24,7 @@
 		left: 0;
 		width: 100dvw;
 		height: calc(100dvh - $header_hight);
+		background-color: inherit;
 		overflow: auto;
 	}
 

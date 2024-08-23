@@ -1,25 +1,34 @@
 <template>
   <HeaderComponent />
   <main>
-    <NuxtPage />
+    <NuxtLoadingIndicator />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </main>
 </template>
 
 <style lang="scss">
+/*
+* {
+  outline: 1px #df0808 solid;
+  background-color: #5abd321a;
+}
+*/
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-display: swap;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  scroll-behavior: smooth;
   max-width: 100dvw;
   max-height: 100dvh;
   overflow: hidden;
   transition: 0.5s all ease-in-out;
+  font-family: Manrope, sans-serif;
 }
 
 .imageContainer {

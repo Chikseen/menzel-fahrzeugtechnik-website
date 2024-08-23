@@ -2,7 +2,7 @@ $company_blue: #121F3A;
 $image-shadow: 0.2rem 0.2rem 0.8rem 0px #5e5e5e79;
 $akzent_blue: #0e317c;
 
-$light-font-color: #D3D7DF;
+$light-font-color: #ebecf0;
 $dark-font-color: #181818;
 
 $light-background-color: #ffffff;
@@ -15,6 +15,22 @@ $header_hight: 75px;
 $mobile_threshold: 450px;
 $max_content_width: 1500px;
 
+$border-radius: .5rem;
+
+@mixin theme-based-background-and-text() {
+	@media (prefers-color-scheme: dark) {
+		background-color: $dark-background-color;
+		color: $light-font-color;
+		border-radius: $border-radius;
+	}
+
+	@media (prefers-color-scheme: light) {
+		background-color: $light-background-color;
+		color: $dark-font-color;
+		border-radius: $border-radius;
+	}
+}
+
 @media (prefers-color-scheme: dark) {
 	body {
 		background-color: $dark-background-color;
@@ -23,10 +39,11 @@ $max_content_width: 1500px;
 		p {
 			color: $light-font-color !important;
 		}
-	}
 
-	.repairCluster_good {
-		background-color: $dark-background-color;
+		a {
+			color: $light-font-color !important;
+			text-decoration: underline;
+		}
 	}
 }
 
@@ -40,7 +57,8 @@ $max_content_width: 1500px;
 		color: $dark-font-color !important;
 	}
 
-	.repairCluster_good {
-		background-color: $light-background-color;
+	a {
+		color: $light-font-color !important;
+		text-decoration: underline;
 	}
 }

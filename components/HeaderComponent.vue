@@ -12,10 +12,14 @@
 			<MainLogoStatic id="header_content_logo"
 				:class="['header_content_logo', { 'header_content_logo_active': isLoaded }]" />
 		</div>
-		<div id="header_menuIcon"
-			:class="['header_menuIcon', { 'header_menuIcon_active': isLoaded, 'header_menuIcon_open': isMenuOpen }]">
-			<MenuIcon @click="isMenuOpen = !isMenuOpen" />
-		</div>
+		<span class="header_left">
+			<h3 class="header_left_services" @click="scrollToSerivces">Leistungen</h3>
+			<h3 class="header_left_contact">Kontakt</h3>
+			<div id="header_left_menuIcon"
+				:class="['header_left_menuIcon', { 'header_left_menuIcon_active': isLoaded, 'header_left_menuIcon_open': isLoaded }]">
+				<MenuIcon @click="isMenuOpen = !isMenuOpen" />
+			</div>
+		</span>
 	</header>
 	<div :class="['header_menuField', 'header_menuField_right', { 'header_menuField_open': !isMenuOpen }]">
 		<ServiceSelectionRightMenu />
@@ -35,24 +39,34 @@ export default {
 	},
 	watch: {
 		$route() {
-			setTimeout(() => this.isMenuOpen = false, 10);
+			setTimeout(() => {
+				this.isMenuOpen = false
+			}, 1);
+		}
+	},
+	methods: {
+		scrollToSerivces() {
+			const element = document.getElementById("services");
+			element.scrollIntoView();
 		}
 	},
 	mounted() {
-		this.isLoaded = true;
 		setTimeout(() => {
-			const transition = "all 0.25s ease-out 0s"
-			document.getElementById("header_wrapper").style.transition = transition;
-			document.getElementById("header_content_logo_placeholder").style.transition = transition;
-			document.getElementById("header_content_text").style.transition = transition;
-			document.getElementById("header_content_logo").style.transition = transition;
-			document.getElementById("header_menuIcon").style.transition = transition;
-		}, 3000);
+			this.isLoaded = true;
+			setTimeout(() => {
+				const transition = "all 0.25s ease-out 0s"
+				document.getElementById("header_wrapper").style.transition = transition;
+				document.getElementById("header_content_logo_placeholder").style.transition = transition;
+				document.getElementById("header_content_text").style.transition = transition;
+				document.getElementById("header_content_logo").style.transition = transition;
+				document.getElementById("header_menuIcon").style.transition = transition;
+			}, 3000);
+		}, 1)
 	},
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
 	&_wrapper {
 		position: absolute;
@@ -75,28 +89,47 @@ export default {
 		}
 	}
 
-	&_menuIcon {
+	&_left {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		margin: auto 0;
-		margin-right: 15px;
-		width: 0;
-		height: 0;
-		opacity: 0;
-		transition: all 0.75s ease-out 2.75s;
-		z-index: 99;
+		gap: 20px;
+		flex-direction: row;
 
-		&_active {
-			opacity: 1;
-			height: 100%;
-			max-height: 50px;
-			width: 100%;
-			max-width: 50px;
+		&_services {
+			cursor: pointer;
+			margin: auto 0;
+			padding: 10px 20px;
 		}
 
-		&_open {
-			background-color: $company_blue;
+		&_contact {
+			cursor: pointer;
+			margin: auto 0;
+			padding: 10px 20px;
+			@include theme-based-background-and-text;
+		}
+
+		&_menuIcon {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin: auto 0;
+			margin-right: 15px;
+			width: 0;
+			height: 0;
+			opacity: 0;
+			transition: all 0.75s ease-out 2.75s;
+			z-index: 99;
+
+			&_active {
+				opacity: 1;
+				height: 100%;
+				max-height: 50px;
+				width: 100%;
+				max-width: 50px;
+			}
+
+			&_open {
+				background-color: $company_blue;
+			}
 		}
 	}
 
@@ -110,7 +143,7 @@ export default {
 		max-width: 100%;
 		width: min-content;
 		transition: all 0.75s ease-out;
-		opacity: 0;
+		opacity: 1;
 
 		&_active {
 			opacity: 1;
@@ -210,38 +243,64 @@ export default {
 			transform: rotateY(90deg);
 			transition: all 0.4s ease-in-out 0s;
 		}
+
+		p {
+			color: $light-font-color !important
+		}
 	}
 }
 
-@media only screen and (max-width: 1000px) {
-	.header_content {
-		&_logo {
-			height: 100%;
-			width: 50px;
+@media only screen and (max-width: 1050px) {
+	.header {
+		&_left {
+			&_services {
+				display: none;
+			}
+		}
 
-			&_placeholder {
+		&_content {
+			&_logo {
 				height: 100%;
 				width: 50px;
-			}
-		}
 
-		&_text {
-			p {
-				font-size: 1rem;
-				color: $light-font-color !important
+				&_placeholder {
+					height: 100%;
+					width: 50px;
+				}
+			}
+
+			&_text {
+				p {
+					font-size: 1.3rem;
+					color: $light-font-color !important
+				}
 			}
 		}
 	}
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
 	.header {
+		&_left {
+			&_contact {
+				display: none;
+			}
+		}
+
 		&_menuField {
 			&_left {
 				left: 0;
 				width: calc(51% - 20px);
 				transform-origin: left;
 				transition: all 0.4s ease-in-out 0s;
+			}
+		}
+
+		&_content {
+			&_text {
+				p {
+					font-size: 1rem;
+				}
 			}
 		}
 	}
