@@ -18,6 +18,7 @@
 		"sass-loader": "^13.2.0"
 	},
 	"dependencies": {
-		"@nuxtjs/robots": "^3.0.0"
+		"@nuxtjs/robots": "^3.0.0",
+		"nuxt3-leaflet": "^1.0.13"
 	}
 }

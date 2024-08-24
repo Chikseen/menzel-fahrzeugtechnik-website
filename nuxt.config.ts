@@ -26,6 +26,7 @@ export default defineNuxtConfig({
 		UserAgent: "*",
 		Disallow: "",
 	},
+	
 	image: {
 		format: ["webp"],
 		provider: "edgio",
