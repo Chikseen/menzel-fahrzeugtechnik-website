@@ -8,7 +8,11 @@ export default defineNuxtConfig({
 		css: {
 			preprocessorOptions: {
 				scss: {
-					additionalData: '@import  "@/assets/styles/_global.scss";',
+					additionalData: `
+						@import  "@/assets/styles/global.scss";
+						@import  "@/assets/styles/akzent_blue_cta.scss";
+						@import  "@/assets/styles/morphism_shadow.scss";
+					`
 				},
 			},
 		},
@@ -26,7 +30,7 @@ export default defineNuxtConfig({
 		UserAgent: "*",
 		Disallow: "",
 	},
-	
+
 	image: {
 		format: ["webp"],
 		provider: "edgio",

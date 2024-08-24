@@ -109,7 +109,7 @@ definePageMeta({
 		padding: 15px;
 		width: 100%;
 		border-radius: 10px;
-		box-shadow: $image-shadow;
+		@include theme_based_morphism_shadow;
 
 		&_wrappper {
 			width: 100%;
@@ -136,9 +136,9 @@ definePageMeta({
 		max-width: 500px;
 		max-height: 500px;
 		border-radius: 10px;
-		box-shadow: $image-shadow;
 		overflow: hidden;
 		z-index: 5;
+		@include theme_based_morphism_shadow;
 	}
 }
 </style>

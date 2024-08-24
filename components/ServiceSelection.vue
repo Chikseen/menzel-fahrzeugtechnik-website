@@ -80,7 +80,7 @@ export default {
             height: 200px;
             width: 100%;
             border-radius: 5px;
-            box-shadow: $image-shadow;
+            @include theme_based_morphism_shadow;
 
             & div {
                 height: 120px;

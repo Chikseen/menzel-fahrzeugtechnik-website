@@ -36,9 +36,9 @@
 	>img {
 		margin: 0 auto;
 		border-radius: 20px;
-		box-shadow: $image-shadow;
 		max-width: calc(100% - 50px);
 		width: 750px;
+		@include theme_based_morphism_shadow;
 	}
 }
 

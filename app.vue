@@ -44,7 +44,7 @@ body {
     max-height: 500px;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: $image-shadow;
+    @include theme_based_morphism_shadow;
   }
 }
 

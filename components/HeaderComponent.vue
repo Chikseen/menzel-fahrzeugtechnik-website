@@ -14,7 +14,7 @@
 		</div>
 		<span class="header_left">
 			<h3 class="header_left_services" @click="scrollToSerivces">Leistungen</h3>
-			<h3 class="header_left_contact">Kontakt</h3>
+			<h3 class="header_left_contact" @click="$router.push('contact')">Kontakt</h3>
 			<div id="header_left_menuIcon"
 				:class="['header_left_menuIcon', { 'header_left_menuIcon_active': isLoaded, 'header_left_menuIcon_open': isLoaded }]">
 				<MenuIcon @click="isMenuOpen = !isMenuOpen" />
@@ -46,6 +46,7 @@ export default {
 	},
 	methods: {
 		scrollToSerivces() {
+			this.$router.push('/')
 			const element = document.getElementById("services");
 			element.scrollIntoView();
 		}
@@ -59,7 +60,7 @@ export default {
 				document.getElementById("header_content_logo_placeholder").style.transition = transition;
 				document.getElementById("header_content_text").style.transition = transition;
 				document.getElementById("header_content_logo").style.transition = transition;
-				document.getElementById("header_menuIcon").style.transition = transition;
+				document.getElementById("header_left_menuIcon").style.transition = transition;
 			}, 3000);
 		}, 1)
 	},
@@ -98,13 +99,14 @@ export default {
 			cursor: pointer;
 			margin: auto 0;
 			padding: 10px 20px;
+			color: $light-font-color;
 		}
 
 		&_contact {
 			cursor: pointer;
 			margin: auto 0;
 			padding: 10px 20px;
-			@include theme-based-background-and-text;
+			@include akzent_blue_cta;
 		}
 
 		&_menuIcon {

@@ -16,46 +16,12 @@
 								die
 								Straße kommen</h4>
 						</span>
-						<button @click="scrollToSerivces">
+						<button class="home_image_text_button" @click="scrollToSerivces">
 							Leistungen
 						</button>
 					</span>
 				</span>
 			</div>
-			<!--
-			<div id="services">
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-				<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam dignissimos illum beatae, cumque
-					hic
-					obcaecati est perspiciatis. Facilis officiis incidunt, quod, distinctio necessitatibus culpa quis
-					velit
-					atque ex pariatur ad!</p>
-			</div>-->
-
 			<div id="services">
 				<ServiceSelection />
 				<div class="imageContainer">
@@ -81,7 +47,7 @@ export default {
 	methods: {
 		scrollToSerivces() {
 			const element = document.getElementById("services");
-			element.scrollIntoView(true);
+			element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 		}
 	}
 }
@@ -124,7 +90,7 @@ definePageMeta({
 }
 
 .home {
-	padding-top: $header_hight;
+	margin-top: $header_hight;
 	position: relative;
 	width: 100dvw;
 	height: 100dvh;
@@ -163,6 +129,11 @@ definePageMeta({
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
+				color: $light-font-color;
+			}
+
+			&_button {
+				@include mono_akzent_blue_cta;
 			}
 
 			h1,

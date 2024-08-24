@@ -1,5 +1,4 @@
 $company_blue: #121F3A;
-$image-shadow: 0.2rem 0.2rem 0.8rem 0px #5e5e5e79;
 $akzent_blue: #0e317c;
 
 $light-font-color: #ebecf0;
@@ -16,20 +15,6 @@ $mobile_threshold: 450px;
 $max_content_width: 1500px;
 
 $border-radius: .5rem;
-
-@mixin theme-based-background-and-text() {
-	@media (prefers-color-scheme: dark) {
-		background-color: $dark-background-color;
-		color: $light-font-color;
-		border-radius: $border-radius;
-	}
-
-	@media (prefers-color-scheme: light) {
-		background-color: $light-background-color;
-		color: $dark-font-color;
-		border-radius: $border-radius;
-	}
-}
 
 @media (prefers-color-scheme: dark) {
 	body {

@@ -1,0 +1,9 @@
+@mixin theme_based_morphism_shadow() {
+	@media (prefers-color-scheme: dark) {
+		box-shadow: 4px 4px 12px #000000a1, -3px -3px 12px #ffffff1a;
+	}
+
+	@media (prefers-color-scheme: light) {
+		box-shadow: 4px 4px 12px #0000001a, -3px -3px 12px #ffffff;
+	}
+}
