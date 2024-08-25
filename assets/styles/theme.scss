@@ -1,0 +1,25 @@
+$light-font-color: #ebecf0;
+$dark-font-color: #181818;
+
+$light-background-color: #ffffff;
+$dark-background-color: #181818;
+
+@mixin theme_based_background() {
+	@media (prefers-color-scheme: dark) {
+		background-color: $dark-background-color;
+		color: $light-font-color;
+
+		a {
+			color: $light-font-color;
+		}
+	}
+
+	@media (prefers-color-scheme: light) {
+		background-color: $light-background-color;
+		color: $dark-font-color;
+
+		a {
+			color: $dark-font-color;
+		}
+	}
+}

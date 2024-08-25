@@ -71,14 +71,15 @@ export default {
     &_overview {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 10px;
+        gap: 20px;
 
         &_container {
             cursor: pointer;
             display: flex;
             flex-direction: column;
             height: 200px;
-            width: 100%;
+            padding: 15px;
+            width: calc(100% - 30px);
             border-radius: 5px;
             @include theme_based_morphism_shadow;
 

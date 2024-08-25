@@ -29,6 +29,8 @@ body {
   overflow: hidden;
   transition: 0.5s all ease-in-out;
   font-family: Manrope, sans-serif;
+  scrollbar-gutter: stable;
+  @include theme_based_background;
 }
 
 .imageContainer {
@@ -52,9 +54,10 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5px;
+  width: 0;
   height: 5px;
   transition: all .5s;
+  opacity: 0;
 }
 
 ::-webkit-scrollbar-thumb {

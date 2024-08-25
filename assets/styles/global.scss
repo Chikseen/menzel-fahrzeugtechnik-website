@@ -1,49 +1,11 @@
 $company_blue: #121F3A;
 $akzent_blue: #0e317c;
 
-$light-font-color: #ebecf0;
-$dark-font-color: #181818;
-
-$light-background-color: #ffffff;
-$dark-background-color: #181818;
-
 $icon_base_grey: #d1d1d1;
 $icon_active_grey: #474747;
 
-$header_hight: 75px;
+$header_hight: 4rem;
 $mobile_threshold: 450px;
 $max_content_width: 1500px;
 
 $border-radius: .5rem;
-
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: $dark-background-color;
-		color: $light-font-color !important;
-
-		p {
-			color: $light-font-color !important;
-		}
-
-		a {
-			color: $light-font-color !important;
-			text-decoration: underline;
-		}
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	body {
-		background-color: $light-background-color;
-		color: $dark-font-color !important;
-	}
-
-	p {
-		color: $dark-font-color !important;
-	}
-
-	a {
-		color: $light-font-color !important;
-		text-decoration: underline;
-	}
-}

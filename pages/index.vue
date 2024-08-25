@@ -1,13 +1,11 @@
 <template>
 	<div class="home">
 		<div class="home_content">
-
 			<div class="home_image">
 				<NuxtImg fit="outside"
 					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
 					provider="edgio" quality="100" alt="background Image"
 					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960" />
-
 				<span class="home_image_text">
 					<span class="home_image_text_titel">
 						<span>
@@ -22,7 +20,8 @@
 					</span>
 				</span>
 			</div>
-			<div id="services">
+			<div id="services" class="home_content_info">
+				<h2>Alles für dein Fahrzeug</h2>
 				<ServiceSelection />
 				<div class="imageContainer">
 					<ImageComponent image="standing_under_car_II.webp" />
@@ -85,7 +84,6 @@ definePageMeta({
 
 <style lang="scss" scoped>
 #services {
-	margin: 20px;
 	margin-top: 100px;
 }
 
@@ -94,7 +92,9 @@ definePageMeta({
 	position: relative;
 	width: 100dvw;
 	height: 100dvh;
-	overflow: auto;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
 	scroll-behavior: smooth;
 
 	&_content {
@@ -102,6 +102,13 @@ definePageMeta({
 		flex-direction: column;
 		min-height: calc(200dvh - $header_hight);
 		height: min-content;
+
+		&_info {
+			padding: 15px;
+			z-index: 10;
+			@include theme_based_background;
+
+		}
 	}
 
 	&_image {
@@ -155,6 +162,7 @@ definePageMeta({
 		}
 
 		img {
+			position: fixed;
 			width: 100dvw;
 			height: 100dvh;
 			max-width: $max_content_width;
