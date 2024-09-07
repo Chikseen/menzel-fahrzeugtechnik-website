@@ -5,7 +5,7 @@
 				<NuxtImg fit="outside"
 					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
 					provider="edgio" quality="100" alt="background Image"
-					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960" />
+					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960 2xl:2560 3xl:3840 " />
 				<span class="home_image_text">
 					<span class="home_image_text_titel">
 						<span>
@@ -94,7 +94,7 @@ definePageMeta({
 	height: 100dvh;
 	padding: 0;
 	overflow-x: hidden;
-	overflow-y: auto;
+	overflow-y: scroll;
 	scroll-behavior: smooth;
 
 	&_content {
@@ -114,8 +114,10 @@ definePageMeta({
 	&_image {
 		position: relative;
 		display: flex;
+		justify-content: center;
 		height: calc(100dvh - $header_hight);
 		width: 100dvw;
+		margin: 0 auto;
 		overflow: hidden;
 
 		&_text {
