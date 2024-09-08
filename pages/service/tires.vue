@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div class="serviceContent">
     <h2>Reifen und Räder</h2>
-    <div>
+    <div class="imageContainer">
+      <ImageComponent image="tire_machine.webp" />
+      <ImageComponent image="tire_machine_II.webp" />
+      <ImageComponent image="tire_upclose.webp" />
+    </div>
+    <div class="serviceContent_banner">
       <p>
         Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes
         Reifenprofil gewährleistet eine optimale
@@ -19,11 +24,6 @@
           Millimetern</b> Doch sicher sind
         Reifen erst mit <b>4 Millimetern</b> Profiltiefe.
       </p>
-      <div class="imageContainer">
-        <ImageComponent image="tire_machine.webp" />
-        <ImageComponent image="tire_machine_II.webp" />
-        <ImageComponent image="tire_upclose.webp" />
-      </div>
     </div>
   </div>
 </template>

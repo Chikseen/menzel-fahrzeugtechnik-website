@@ -9,7 +9,7 @@
 <style lang="scss">
 .content {
 	position: relative;
-	width: 1500px;
+	width: $max_content_width;
 	margin: 0;
 	padding: 25px;
 	display: flex;
@@ -24,12 +24,12 @@
 		left: 0;
 		width: 100dvw;
 		height: calc(100dvh - $header_hight);
+		padding-bottom: -150px;
 		background-color: inherit;
-		overflow: auto;
+		//overflow: auto;
 	}
 
-	h2,
-	p {
+	h2 {
 		text-align: center;
 	}
 
@@ -37,7 +37,7 @@
 		margin: 0 auto;
 		border-radius: 20px;
 		max-width: calc(100% - 50px);
-		width: 750px;
+		width: $max_content_width;
 		@include theme_based_morphism_shadow;
 	}
 }
@@ -46,7 +46,6 @@
 	.content {
 		&_wrapper {
 			top: 0;
-			min-height: 100%;
 			margin: 50px 5px;
 			width: calc(100% - 10px);
 		}

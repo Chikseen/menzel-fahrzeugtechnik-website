@@ -30,7 +30,6 @@
 					<ImageComponent image="smart_in_transporter.webp" />
 				</div>
 			</div>
-
 		</div>
 	</div>
 </template>
@@ -46,7 +45,7 @@ export default {
 	methods: {
 		scrollToSerivces() {
 			const element = document.getElementById("services");
-			element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+			element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 		}
 	}
 }
@@ -93,21 +92,23 @@ definePageMeta({
 	width: 100dvw;
 	height: 100dvh;
 	padding: 0;
-	overflow-x: hidden;
-	overflow-y: scroll;
+	//overflow-x: hidden;
+	//overflow-y: scroll;
 	scroll-behavior: smooth;
 
 	&_content {
 		display: flex;
 		flex-direction: column;
-		min-height: calc(200dvh - $header_hight);
 		height: min-content;
 
 		&_info {
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+			min-height: calc(100dvh - $header_hight);
 			padding: 15px;
 			z-index: 10;
 			@include theme_based_background;
-
 		}
 	}
 
@@ -118,7 +119,7 @@ definePageMeta({
 		height: calc(100dvh - $header_hight);
 		width: 100dvw;
 		margin: 0 auto;
-		overflow: hidden;
+		//overflow: hidden;
 
 		&_text {
 			position: absolute;
@@ -133,7 +134,7 @@ definePageMeta({
 				right: 15px;
 				top: 0;
 				bottom: 15%;
-				max-width: 750px;
+				max-width: $max_content_width;
 				margin: auto;
 				display: flex;
 				flex-direction: column;
@@ -167,7 +168,6 @@ definePageMeta({
 			position: fixed;
 			width: 100dvw;
 			height: 100dvh;
-			max-width: $max_content_width;
 			margin: 0 auto;
 			object-fit: cover;
 			object-position: 50% 50%;

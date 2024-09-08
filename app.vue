@@ -1,7 +1,6 @@
 <template>
   <HeaderComponent />
   <main>
-    <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -26,7 +25,7 @@ body {
   text-align: left;
   max-width: 100dvw;
   max-height: 100dvh;
-  overflow: hidden;
+  //overflow: hidden;
   transition: 0.5s all ease-in-out;
   font-family: Manrope, sans-serif;
   scrollbar-gutter: stable;
@@ -38,6 +37,7 @@ body {
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
+  width: 100%;
 
   img {
     max-width: 400px;
@@ -46,6 +46,38 @@ body {
     max-height: 500px;
     object-fit: cover;
     border-radius: 10px;
+    @include theme_based_morphism_shadow;
+  }
+}
+
+.serviceContent {
+  max-width: $max_content_width;
+  margin: 0 auto;
+
+  &_banner {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    @include theme_based_morphism_shadow;
+  }
+
+  h3,
+  p {
+    margin: 0;
+    text-align: left !important;
+    line-height: 1.25rem;
+  }
+
+  button {
+    width: 250px;
+    max-width: calc(100% - 30px);
+    margin: 15px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: $company_blue;
+    color: $light-font-color;
     @include theme_based_morphism_shadow;
   }
 }

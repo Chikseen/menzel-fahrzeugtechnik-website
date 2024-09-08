@@ -37,6 +37,10 @@
 			width: 100%;
 			border-bottom: 1px solid $icon_base_grey;
 
+			&_openhours {
+				margin-top: auto;
+			}
+
 			& p {
 				margin: auto;
 				position: relative;

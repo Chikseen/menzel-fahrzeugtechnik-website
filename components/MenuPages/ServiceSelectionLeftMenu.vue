@@ -12,7 +12,7 @@
 		<NuxtLink class="menuServiceView_overview_container" to="/impressum">
 			<p>Impressum</p>
 		</NuxtLink>
-		<div class="menuServiceView_overview_container">
+		<div class="menuServiceView_overview_container menuServiceView_overview_container_openhours">
 			<OpeningIn />
 		</div>
 	</div>

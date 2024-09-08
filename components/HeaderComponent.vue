@@ -17,7 +17,7 @@
 			<h3 class="header_left_contact" @click="$router.push('contact')">Kontakt</h3>
 			<div id="header_left_menuIcon"
 				:class="['header_left_menuIcon', { 'header_left_menuIcon_active': isLoaded, 'header_left_menuIcon_open': isLoaded }]">
-				<MenuIcon @click="isMenuOpen = !isMenuOpen" />
+				<MenuIcon @click="isMenuOpen = !isMenuOpen" :isMenuOpen="isMenuOpen"/>
 			</div>
 		</span>
 	</header>
@@ -70,7 +70,7 @@ export default {
 <style lang="scss">
 .header {
 	&_wrapper {
-		position: absolute;
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -81,7 +81,7 @@ export default {
 		flex-direction: row;
 		justify-content: space-between;
 		background-color: $company_blue;
-		overflow: hidden;
+		//overflow: hidden;
 		transition: height 1s ease-out 2s;
 		z-index: 99;
 
@@ -217,7 +217,7 @@ export default {
 	}
 
 	&_menuField {
-		position: absolute;
+		position: fixed;
 		top: $header_hight;
 		right: 0;
 		height: calc(100dvh - $header_hight);

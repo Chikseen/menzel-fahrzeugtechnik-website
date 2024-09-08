@@ -4,16 +4,14 @@
 			<h1>Kontakt</h1>
 		</PageTitelWrapper>
 		<div class="contact_box_wrappper">
-			<div class="contact_map">
-				<LMap ref="map" :zoom="15" :center="[51.271428, 12.369805]" :use-global-leaflet="false">
-					<LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-						attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-						layer-type="base" name="OpenStreetMap" />
-					<l-marker :lat-lng="[51.271428, 12.369805]">
-					</l-marker>
-				</LMap>
-			</div>
-			<div class="contact_box" style="max-width: 250px;">
+			<LMap class="contact_map" ref="map" :zoom="15" :center="[51.271428, 12.369805]" :use-global-leaflet="false">
+				<LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+					layer-type="base" name="OpenStreetMap" />
+				<l-marker :lat-lng="[51.271428, 12.369805]">
+				</l-marker>
+			</LMap>
+			<div class="contact_box">
 				<OpeningIn />
 				<hr>
 				<ul class="contact" v-for="(day, i) in openingHours" :key="i">
@@ -28,7 +26,7 @@
 					<hr>
 				</ul>
 			</div>
-			<div class="contact_box" style="max-width: 450px;">
+			<div class="contact_box">
 				<ul class="contact">
 					<li>
 						<p>Dirk Menzel</p>
@@ -108,6 +106,7 @@ definePageMeta({
 	&_box {
 		padding: 15px;
 		width: 100%;
+		max-width: 400px;
 		border-radius: 10px;
 		@include theme_based_morphism_shadow;
 
@@ -136,7 +135,7 @@ definePageMeta({
 		max-width: 500px;
 		max-height: 500px;
 		border-radius: 10px;
-		overflow: hidden;
+		//overflow: hidden;
 		z-index: 5;
 		@include theme_based_morphism_shadow;
 	}
