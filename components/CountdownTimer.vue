@@ -1,8 +1,10 @@
 <template>
-	<p class="openingIn" @click="cycleForceFrame()">{{ timeText }}</p>
+	<p class="CountdownTimer" @click="cycleForceFrame()">{{ timeText }}</p>
 </template>
 
 <script>
+import { GetCountDown } from "@/helper/countDownTimeHelper.js"
+
 export default {
 	data() {
 		return {
@@ -60,35 +62,7 @@ export default {
 		},
 		calc() {
 			const diff = (this.future - new Date().getTime()) / 1000;
-			let timeText = "";
-			if (this.forceFrame == 0 || diff < 60) {
-				const d = diff.toFixed(0)
-				if (d <= 1)
-					timeText = `${d} Sekunde`;
-				else
-					timeText = `${d} Sekunden`;
-			}
-			else if (this.forceFrame == 1 || diff < 3600) {
-				const d = (diff / 60).toFixed(0)
-				if (d <= 1)
-					timeText = `${d} Minute`;
-				else
-					timeText = `${d} Minuten`;
-			}
-			else if (this.forceFrame == 2 || diff < 86400) {
-				const d = (diff / 3600).toFixed(0)
-				if (d <= 1)
-					timeText = `${d} Stunde`;
-				else
-					timeText = `${d} Stunden`;
-			}
-			else {
-				const d = (diff / 86400).toFixed(0)
-				if (d <= 1)
-					timeText = `${d} Tag`;
-				else
-					timeText = `${d} Tagen`;
-			}
+			let timeText = GetCountDown(this.forceFrame, this.future);
 
 			this.timeText = `${this.state} ${timeText}`;
 			this.timer = setTimeout(() => {
@@ -113,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss">
-.openingIn {
+.CountdownTimer {
 	cursor: pointer;
 	color: $light-font-color;
 	user-select: none;

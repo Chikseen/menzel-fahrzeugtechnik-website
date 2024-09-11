@@ -12,7 +12,7 @@
 				</l-marker>
 			</LMap>
 			<div class="contact_box">
-				<OpeningIn />
+				<CountdownTimer />
 				<hr>
 				<ul class="contact" v-for="(day, i) in openingHours" :key="i">
 					<li class="contact_item">

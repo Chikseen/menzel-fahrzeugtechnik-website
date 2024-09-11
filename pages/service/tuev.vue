@@ -17,7 +17,7 @@
         in der Mitte verrät das Jahr, die Zahl auf 12 Uhr den Monat, in dem Ihr Wagen wieder zur Hauptuntersuchung
         muss.
       </p>
-      <button>Plaketten Rechner</button>
+      <button @click="$router.push('/tuevcalculator')">Plaketten Rechner</button>
     </div>
     <div class="serviceContent_banner">
       <h3>Vorbereitung zur HU/AU</h3>
