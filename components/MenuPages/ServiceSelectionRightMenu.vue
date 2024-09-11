@@ -29,7 +29,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		min-height: 100%;
+		min-height: calc(100% - $header_hight);
 		gap: 15px;
 		z-index: 99;
 

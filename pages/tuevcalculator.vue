@@ -1,7 +1,9 @@
 <template>
 	<MainContentWrapper>
+		<PageTitelWrapper>
+			<h1>Plaketten Rechner</h1>
+		</PageTitelWrapper>
 		<div class="tuevcalc">
-			<h2>Plaketten Rechner</h2>
 			<p>Um herauszufinden, wann du zum TÜV musst, einfach das Jahr auswählen und solange den Monat anpassen bis
 				die TÜV Plakette genau so aussieht wie auf deinem Auto</p>
 			<span>
@@ -88,8 +90,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-height: 100dvh;
-	overflow: hidden;
+	height: 100dvh;
+	margin-top: 20px;
 
 	&_year {
 		&_buttons {
@@ -106,6 +108,7 @@ export default {
 				border: none;
 				border-radius: 15px;
 				aspect-ratio: 1/1;
+				color: black;
 				font-size: 1.25rem;
 				font-weight: bolder;
 				@include theme_based_morphism_shadow;
@@ -127,6 +130,7 @@ export default {
 				border: none;
 				border-radius: 15px;
 				aspect-ratio: 1/1;
+				color: black;
 				max-height: 50px;
 				font-size: 1.25rem;
 				font-weight: bolder;

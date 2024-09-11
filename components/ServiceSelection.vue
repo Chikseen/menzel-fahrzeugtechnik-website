@@ -24,6 +24,10 @@
             <p>Ölwechsel</p>
             <OilChangeIcon />
         </NuxtLink>
+        <NuxtLink class="serviceView_overview_container" to="/tuevcalculator">
+            <p>Plaketten Rechner</p>
+            <TuevIcon :fontSize="'1.5'" />
+        </NuxtLink>
     </div>
 </template>
 
