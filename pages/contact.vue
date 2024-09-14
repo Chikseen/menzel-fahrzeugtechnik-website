@@ -112,10 +112,12 @@ definePageMeta({
 
 		&_wrappper {
 			width: 100%;
+			height: max-content;
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: center;
 			gap: 15px;
+			margin-bottom: 15px;
 		}
 	}
 

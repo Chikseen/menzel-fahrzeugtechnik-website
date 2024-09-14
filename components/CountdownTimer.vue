@@ -89,7 +89,6 @@ export default {
 <style lang="scss">
 .CountdownTimer {
 	cursor: pointer;
-	color: $light-font-color;
 	user-select: none;
 	text-align: center;
 }

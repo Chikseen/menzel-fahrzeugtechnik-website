@@ -7,7 +7,7 @@
 			<p>Um herauszufinden, wann du zum TÜV musst, einfach das Jahr auswählen und solange den Monat anpassen bis
 				die TÜV Plakette genau so aussieht wie auf deinem Auto</p>
 			<span>
-				<h3>Jahre</h3>
+				<h3>Jahr</h3>
 				<span class="tuevcalc_year_buttons">
 					<button @click="year = currentYear()"
 						:style="`background-color: ${tuevColor(currentYear(0))};`">20{{
@@ -33,6 +33,7 @@
 			<span class="tuevcalc_result" @click="cycleForceFrame()">
 				<span v-if="remaingTime != '0 Sekunde' && !remaingTime.includes('-')">
 					<p>Dein TÜV läuft in <b>{{ remaingTime }}</b> ab.</p>
+					<p>Fälligkeits Datum: <b>{{ currentMonthString }}, {{ year }}</b></p>
 				</span>
 				<span v-else-if="!remaingTime.includes('-')">
 					<p>Dein TÜV läuft diesen Monat ab, vereinbare jetzt einen Termin bei Uns. </p>
@@ -58,6 +59,41 @@ export default {
 			forceFrame: -1,
 		}
 	},
+	computed: {
+		remaingTime() {
+			const now = new Date;
+			return GetCountDown(this.forceFrame, now.setFullYear(`20${this.year}`, (this.month % 12) + 1));
+		},
+		currentMonthString() {
+			console.log(this.month)
+			switch (this.month % 12) {
+				case 0:
+					return "Januar"
+				case 1:
+					return "Februar"
+				case 2:
+					return "März"
+				case 3:
+					return "April"
+				case 4:
+					return "Mai"
+				case 5:
+					return "Juni"
+				case 6:
+					return "Juli"
+				case 7:
+					return "August"
+				case 8:
+					return "September"
+				case 9:
+					return "Oktober"
+				case 10:
+					return "November"
+				case 11:
+					return "Dezember"
+			}
+		}
+	},
 	methods: {
 		currentYear(year) {
 			return GetCurrentYear(year)
@@ -69,12 +105,6 @@ export default {
 			this.forceFrame++
 			if (this.forceFrame > 3)
 				this.forceFrame = 0
-		}
-	},
-	computed: {
-		remaingTime() {
-			const now = new Date;
-			return GetCountDown(this.forceFrame, now.setFullYear(`20${this.year}`, (this.month % 12) + 1));
 		}
 	},
 	mounted() {

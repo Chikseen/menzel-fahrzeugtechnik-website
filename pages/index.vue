@@ -90,7 +90,7 @@ definePageMeta({
 	margin-top: $header_hight;
 	position: relative;
 	width: 100dvw;
-	height: 100dvh;
+	height: 100vh;
 	padding: 0;
 	//overflow-x: hidden;
 	//overflow-y: scroll;
@@ -102,10 +102,11 @@ definePageMeta({
 		height: min-content;
 
 		&_info {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
-			min-height: calc(100dvh - $header_hight);
+			min-height: calc(100vh - $header_hight);
 			padding: 15px;
 			z-index: 10;
 			@include theme_based_background;
@@ -116,7 +117,7 @@ definePageMeta({
 		position: relative;
 		display: flex;
 		justify-content: center;
-		height: calc(100dvh - $header_hight);
+		height: calc(100vh - $header_hight);
 		width: 100dvw;
 		margin: 0 auto;
 		//overflow: hidden;
@@ -125,7 +126,7 @@ definePageMeta({
 			position: absolute;
 			top: 0;
 			left: 0;
-			height: calc(100dvh - $header_hight);
+			height: calc(100vh - $header_hight);
 			width: 100dvw;
 
 			&_titel {
@@ -167,7 +168,7 @@ definePageMeta({
 		img {
 			position: fixed;
 			width: 100dvw;
-			height: 100dvh;
+			height: 100vh;
 			margin: 0 auto;
 			object-fit: cover;
 			object-position: 50% 50%;
