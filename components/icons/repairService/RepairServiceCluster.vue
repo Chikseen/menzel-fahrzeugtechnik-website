@@ -1,7 +1,6 @@
 <template>
   <div id="repairClusterID" class="repairCluster_wrapper" @mouseover="setOverlayPos">
     <CarGoodCondtionIcon :style="`width:${posInPercent}%`" id="repairClusterGoodID" class="repairCluster_good" />
-    <!--   <RepairDevice class="repairCluster_repairdevice" /> -->
     <CarBadCondtionIcon class="repairCluster_bad" />
   </div>
 </template>
@@ -56,8 +55,9 @@ export default {
     left: 0;
     width: 50%;
     height: 100%;
-    transition: all 0.1s;
+    transition: all 0.1s !important;
     z-index: 5;
+    @include theme_based_background;
   }
 
   &_bad {

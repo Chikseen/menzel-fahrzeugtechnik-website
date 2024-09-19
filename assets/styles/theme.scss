@@ -8,6 +8,7 @@ $dark-background-color: #181818;
 	@media (prefers-color-scheme: dark) {
 		background-color: $dark-background-color;
 		color: $light-font-color;
+		transition: 1s all;
 
 		a {
 			color: $light-font-color;
@@ -17,6 +18,7 @@ $dark-background-color: #181818;
 	@media (prefers-color-scheme: light) {
 		background-color: $light-background-color;
 		color: $dark-font-color;
+		transition: 1s all;
 
 		a {
 			color: $dark-font-color;
