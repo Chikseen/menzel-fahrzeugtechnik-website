@@ -11,7 +11,7 @@
 		<br>
 		<div>
 			<p>Betreiber der Webseite</p>
-			<p>Tim Menzel</p>
+			<p>Tim Keutel</p>
 			<p>04564 Böhlen Germany</p>
 			<p>Phone: <a href="tel:+49 62929704">0176 62929704</a></p>
 			<p>

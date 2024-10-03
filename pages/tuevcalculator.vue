@@ -4,8 +4,8 @@
 			<h1>Plaketten Rechner</h1>
 		</PageTitelWrapper>
 		<div class="tuevcalc">
-			<p>Um herauszufinden, wann du zum TÜV musst, einfach das Jahr auswählen und solange den Monat anpassen bis
-				die TÜV Plakette genau so aussieht wie auf deinem Auto</p>
+			<p>Um herauszufinden, wann du zu deiner Hauptuntersuchung musst, einfach das Jahr auswählen und solange den Monat anpassen bis
+				die Plakette genau so aussieht wie auf deinem Auto</p>
 			<span>
 				<h3>Jahr</h3>
 				<span class="tuevcalc_year_buttons">
@@ -32,14 +32,14 @@
 			</span>
 			<span class="tuevcalc_result" @click="cycleForceFrame()">
 				<span v-if="remaingTime != '0 Sekunde' && !remaingTime.includes('-')">
-					<p>Dein TÜV läuft in <b>{{ remaingTime }}</b> ab.</p>
-					<p>Fälligkeits Datum: <b>{{ currentMonthString }}, {{ year }}</b></p>
+					<p>Deine Hauptuntersuchung läuft in <b>{{ remaingTime }}</b> ab.</p>
+					<p>Fälligkeitsdatum: <b>{{ currentMonthString }}, {{ year }}</b></p>
 				</span>
 				<span v-else-if="!remaingTime.includes('-')">
-					<p>Dein TÜV läuft diesen Monat ab, vereinbare jetzt einen Termin bei Uns. </p>
+					<p>Deine Hauptuntersuchung läuft diesen Monat ab, vereinbare jetzt einen Termin bei Uns. </p>
 				</span>
 				<span v-else>
-					<p>Dein TÜV ist fallig, vereinbare jetzt einen Termin bei Uns.</p>
+					<p>Deine Hauptuntersuchung ist fallig, vereinbare jetzt einen Termin bei Uns.</p>
 				</span>
 			</span>
 		</div>
