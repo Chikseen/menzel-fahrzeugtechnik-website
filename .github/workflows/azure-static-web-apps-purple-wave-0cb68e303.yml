@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [21.x]
+        node-version: [21.1.0]
     steps:
       - uses: actions/checkout@v4
       - uses: azure/login@v1

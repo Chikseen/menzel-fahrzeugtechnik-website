@@ -28,6 +28,7 @@ body {
   //overflow: hidden;
   transition: 0.5s all ease-in-out;
   font-family: Manrope, sans-serif;
+  touch-action: manipulation;
   @include theme_based_background;
 }
 
