@@ -85,6 +85,8 @@ export default {
     margin: auto;
     text-align: center;
     font-weight: 900;
+    font-size: 1.2rem;
+
   }
 
   &_outter {

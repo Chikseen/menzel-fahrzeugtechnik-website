@@ -23,12 +23,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  max-width: 100dvw;
-  max-height: 100dvh;
+  max-width: 100%;
+  max-height: 100%;
   //overflow: hidden;
   transition: 0.5s all ease-in-out;
   font-family: Manrope, sans-serif;
-  scrollbar-gutter: stable;
   @include theme_based_background;
 }
 
@@ -82,24 +81,9 @@ body {
   }
 }
 
-::-webkit-scrollbar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 5px;
-  transition: all .5s;
-  opacity: 0;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: $company_blue;
-  transition: all .5s;
-  border-radius: 0 0 10px 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f100;
+button {
+  &:active {
+    animation: clickAnimation 0.25s;
+  }
 }
 </style>

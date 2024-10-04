@@ -17,7 +17,7 @@
 			<h3 class="header_left_contact" @click="$router.push('contact')">Kontakt</h3>
 			<div id="header_left_menuIcon"
 				:class="['header_left_menuIcon', { 'header_left_menuIcon_active': isLoaded, 'header_left_menuIcon_open': isLoaded }]">
-				<MenuIcon @click="isMenuOpen = !isMenuOpen" :isMenuOpen="isMenuOpen"/>
+				<MenuIcon @click="isMenuOpen = !isMenuOpen" :isMenuOpen="isMenuOpen" />
 			</div>
 		</span>
 	</header>
@@ -74,8 +74,8 @@ export default {
 		top: 0;
 		left: 0;
 		right: 0;
-		width: 100dvw;
-		height: 100dvh;
+		width: 100%;
+		height: 100%;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
@@ -84,10 +84,14 @@ export default {
 		//overflow: hidden;
 		transition: height 1s ease-out 2s;
 		z-index: 99;
+		border-radius: 0 0 10px 10px;
+		box-shadow: 4px 4px 12px #000000a1, -3px -3px 12px #ffffff1a;
 
 		&_active {
 			height: $header_hight;
+			;
 		}
+
 	}
 
 	&_left {

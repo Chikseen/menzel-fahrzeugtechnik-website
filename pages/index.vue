@@ -4,6 +4,7 @@
 			<div class="home_image">
 				<NuxtImg fit="outside"
 					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
+					:placeholder="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II_placeholder.webp'}`"
 					provider="edgio" quality="100" alt="background Image"
 					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960 2xl:2560 3xl:3840 " />
 				<span class="home_image_text">
@@ -24,7 +25,6 @@
 				<h2>Alles für dein Fahrzeug</h2>
 				<ServiceSelection />
 				<div class="imageContainer">
-					<ImageComponent image="standing_under_car_II.webp" />
 					<ImageComponent image="repair_area.webp" />
 					<ImageComponent image="home_gen_view.webp" />
 					<ImageComponent image="smart_in_transporter.webp" />
@@ -89,7 +89,7 @@ definePageMeta({
 .home {
 	margin-top: $header_hight;
 	position: relative;
-	width: 100dvw;
+	width: 100%;
 	height: 100vh;
 	padding: 0;
 	//overflow-x: hidden;
@@ -118,7 +118,7 @@ definePageMeta({
 		display: flex;
 		justify-content: center;
 		height: calc(100vh - $header_hight);
-		width: 100dvw;
+		width: 100%;
 		margin: 0 auto;
 		//overflow: hidden;
 
@@ -127,7 +127,7 @@ definePageMeta({
 			top: 0;
 			left: 0;
 			height: calc(100vh - $header_hight);
-			width: 100dvw;
+			width: 100%;
 
 			&_titel {
 				position: absolute;
@@ -167,7 +167,7 @@ definePageMeta({
 
 		img {
 			position: fixed;
-			width: 100dvw;
+			width: 100%;
 			height: 100vh;
 			margin: 0 auto;
 			object-fit: cover;

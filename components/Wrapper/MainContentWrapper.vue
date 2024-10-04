@@ -22,7 +22,7 @@
 		justify-content: center;
 		top: $header_hight;
 		left: 0;
-		width: 100dvw;
+		width: 100%;
 		height: calc(100dvh - $header_hight);
 		padding-bottom: -150px;
 		background-color: inherit;

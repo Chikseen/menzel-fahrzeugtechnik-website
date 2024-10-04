@@ -10,6 +10,7 @@ export default defineNuxtConfig({
 				scss: {
 					additionalData: `
 						@import  "@/assets/styles/global.scss";
+						@import  "@/assets/styles/globalAnimations.scss";
 						@import  "@/assets/styles/akzent_blue_cta.scss";
 						@import  "@/assets/styles/morphism_shadow.scss";
 						@import  "@/assets/styles/theme.scss";

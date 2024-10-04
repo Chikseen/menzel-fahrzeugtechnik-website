@@ -4,7 +4,8 @@
 			<h1>Plaketten Rechner</h1>
 		</PageTitelWrapper>
 		<div class="tuevcalc">
-			<p>Um herauszufinden, wann du zu deiner Hauptuntersuchung musst, einfach das Jahr auswählen und solange den Monat anpassen bis
+			<p>Um herauszufinden, wann du zu deiner Hauptuntersuchung musst, einfach das Jahr auswählen und solange den
+				Monat anpassen bis
 				die Plakette genau so aussieht wie auf deinem Auto</p>
 			<span>
 				<h3>Jahr</h3>
@@ -21,14 +22,17 @@
 				</span>
 			</span>
 			<span>
-				<h3>Monat</h3>
 				<span class="tuevcalc_month_buttons">
-					<button @click="month = (month + 1)">^</button>
-					<button @click="month = (month - 1)">^</button>
+					<button @click="changeMonthBy(1)">^</button>
 				</span>
 			</span>
 			<span class="tuevcalc_icon">
 				<TuevIcon :year="year" :month="month" :isActive="true" />
+			</span>
+			<span>
+				<span class="tuevcalc_month_buttons tuevcalc_month_buttons_inverted">
+					<button @click="changeMonthBy(-1)">^</button>
+				</span>
 			</span>
 			<span class="tuevcalc_result" @click="cycleForceFrame()">
 				<span v-if="remaingTime != '0 Sekunde' && !remaingTime.includes('-')">
@@ -62,11 +66,14 @@ export default {
 	computed: {
 		remaingTime() {
 			const now = new Date;
-			return GetCountDown(this.forceFrame, now.setFullYear(`20${this.year}`, (this.month % 12) + 1));
+			return GetCountDown(this.forceFrame, now.setFullYear(`20${this.year}`, (Math.abs(this.month) % 12) + 1));
 		},
 		currentMonthString() {
-			console.log(this.month)
-			switch (this.month % 12) {
+			let adjustedMonth = this.month
+			if (adjustedMonth < 0)
+				adjustedMonth += 1200;
+
+			switch (adjustedMonth % 12) {
 				case 0:
 					return "Januar"
 				case 1:
@@ -105,6 +112,9 @@ export default {
 			this.forceFrame++
 			if (this.forceFrame > 3)
 				this.forceFrame = 0
+		},
+		changeMonthBy(amount) {
+			this.month += amount;
 		}
 	},
 	mounted() {
@@ -129,7 +139,7 @@ export default {
 			flex-direction: row;
 			gap: 15px;
 			padding: 15px;
-			max-height: 150px;
+			max-height: 75px;
 
 			button {
 				cursor: pointer;
@@ -157,18 +167,20 @@ export default {
 				cursor: pointer;
 				user-select: none;
 				width: 100%;
+				max-height: 40px;
+				max-width: 250px;
+				margin: 0 auto;
 				border: none;
 				border-radius: 15px;
 				aspect-ratio: 1/1;
 				color: black;
-				max-height: 50px;
 				font-size: 1.25rem;
 				font-weight: bolder;
 				@include theme_based_morphism_shadow;
+			}
 
-				&:last-child {
-					transform: rotateX(180deg);
-				}
+			&_inverted {
+				transform: rotateX(180deg);
 			}
 		}
 	}

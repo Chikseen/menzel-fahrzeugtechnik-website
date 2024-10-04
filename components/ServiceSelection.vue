@@ -96,7 +96,6 @@ export default {
                 font-weight: 750;
                 text-decoration: none;
             }
-
         }
 
         a {
