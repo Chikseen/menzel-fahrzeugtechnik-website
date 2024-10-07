@@ -1,9 +1,10 @@
 <template>
-	<header id="header_wrapper" :class="['header_wrapper', { 'header_wrapper_active': isLoaded }]">
+	<header id="header_wrapper"
+		:class="['header_wrapper', { 'header_wrapper_active': isLoaded, 'header_wrapper_openMenu': isMenuOpen, }]">
 		<div :class="['header_content', { 'header_content_active': isLoaded }]">
 			<div id="header_content_logo_placeholder"
 				:class="['header_content_logo_placeholder', { 'header_content_logo_placeholder_active': isLoaded }]" />
-			<NuxtLink id="header_content_text"
+			<NuxtLink v-show="isLoaded" id="header_content_text"
 				:class="['header_content_text', { 'header_content_text_active': isLoaded }]" to="/">
 				<p>Menzel</p>
 				<p>-</p>
@@ -12,7 +13,7 @@
 			<MainLogoStatic id="header_content_logo"
 				:class="['header_content_logo', { 'header_content_logo_active': isLoaded }]" />
 		</div>
-		<span class="header_left">
+		<span :class="['header_left', { 'header_left_active': isNavControllActive }]">
 			<h3 class="header_left_services" @click="scrollToSerivces">Leistungen</h3>
 			<h3 class="header_left_contact" @click="$router.push('contact')">Kontakt</h3>
 			<div id="header_left_menuIcon"
@@ -34,7 +35,8 @@ export default {
 	data() {
 		return {
 			isLoaded: false,
-			isMenuOpen: false
+			isMenuOpen: false,
+			isNavControllActive: false
 		}
 	},
 	watch: {
@@ -61,6 +63,7 @@ export default {
 				document.getElementById("header_content_text").style.transition = transition;
 				document.getElementById("header_content_logo").style.transition = transition;
 				document.getElementById("header_left_menuIcon").style.transition = transition;
+				this.isNavControllActive = true
 			}, 3000);
 		}, 1)
 	},
@@ -75,29 +78,37 @@ export default {
 		left: 0;
 		right: 0;
 		width: 100%;
-		height: 100%;
+		height: 100vh;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		background-color: $company_blue;
-		//overflow: hidden;
 		transition: height 1s ease-out 2s;
 		z-index: 99;
-		border-radius: 0 0 10px 10px;
+		border-radius: 0 0 $border-radius $border-radius;
 		box-shadow: 4px 4px 12px #000000a1, -3px -3px 12px #ffffff1a;
 
 		&_active {
 			height: $header_hight;
-			;
 		}
 
+		&_openMenu {
+			border-radius: 0 0 0 0;
+
+		}
 	}
 
 	&_left {
 		display: flex;
 		gap: 20px;
 		flex-direction: row;
+		transition: all 0.25s ease-out 0s;
+		opacity: 0;
+
+		&_active {
+			opacity: 1;
+		}
 
 		&_services {
 			cursor: pointer;
@@ -127,7 +138,7 @@ export default {
 
 			&_active {
 				opacity: 1;
-				height: 100%;
+				height: 100vh;
 				max-height: 50px;
 				width: 100%;
 				max-width: 50px;
@@ -146,7 +157,8 @@ export default {
 		flex-direction: row;
 		margin: auto 0;
 		margin-left: 12.5%;
-		max-width: 100%;
+		max-width: 100vh;
+		max-height: $header_hight;
 		width: min-content;
 		transition: all 0.75s ease-out;
 		opacity: 1;
@@ -198,18 +210,14 @@ export default {
 		&_text {
 			display: flex;
 			gap: 5px;
-			height: 50dvh;
+			left: 0;
 			margin: auto 0;
 			color: $light-font-color;
+			height: min-content;
+			line-height: 2rem;
+			font-size: 2rem;
 			transition: all 1s ease-in-out 2s;
 			text-decoration: none;
-
-			&_active {
-				left: 0;
-				height: min-content;
-				line-height: 2rem;
-				font-size: 2rem;
-			}
 
 			p {
 				margin: 5px;
@@ -224,7 +232,7 @@ export default {
 		position: fixed;
 		top: $header_hight;
 		right: 0;
-		height: calc(100dvh - $header_hight);
+		height: calc(100vh - $header_hight);
 		width: calc(250px - 20px);
 		max-width: calc(50% - 20px);
 		padding: 10px;

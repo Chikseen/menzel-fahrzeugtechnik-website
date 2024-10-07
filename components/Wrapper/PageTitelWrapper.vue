@@ -27,7 +27,7 @@
 				width: 120%;
 				height: 100%;
 				border-bottom: 1px double $akzent_blue;
-				border-radius: 10px;
+				border-radius: $border-radius;
 				transition: all 0.5s;
 			}
 

@@ -63,7 +63,7 @@ export default {
 		calc() {
 			const diff = (this.future - new Date().getTime()) / 1000;
 			let timeText = GetCountDown(this.forceFrame, this.future);
-
+			//console.log(this.state, timeText)
 			this.timeText = `${this.state} ${timeText}`;
 			this.timer = setTimeout(() => {
 				this.calc();

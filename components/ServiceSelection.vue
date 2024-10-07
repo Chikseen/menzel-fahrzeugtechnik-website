@@ -84,10 +84,10 @@ export default {
             height: 200px;
             padding: 15px;
             width: calc(100% - 30px);
-            border-radius: 5px;
+            border-radius: $border-radius;
             @include theme_based_morphism_shadow;
 
-            & div {
+            &>div {
                 height: 120px;
             }
 

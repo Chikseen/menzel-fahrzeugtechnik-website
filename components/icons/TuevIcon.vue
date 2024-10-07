@@ -1,8 +1,7 @@
 <template>
   <div class="tuevIcon_wrapper" @mouseover="isActive ? true : active = true"
     @mouseleave="isActive ? true : active = false">
-    <p class="tuevIcon_currentYearText" :style="`font-size: ${fontSize}rem;`">{{ year ??
-      currentYear }}</p>
+    <CounterComponent :input="year ?? currentYear" :default="year ?? currentYear" />
     <svg :class="['tuevIcon', 'tuevIcon_outter', { 'tuevIcon_outter_active': !active }]"
       :style="`transform: rotateZ(${(month ?? currentMonth) * 30}deg)`" viewBox="-1 -1 22 22"
       xmlns="http://www.w3.org/2000/svg" fill="#00000000">

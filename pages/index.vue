@@ -45,7 +45,7 @@ export default {
 	methods: {
 		scrollToSerivces() {
 			const element = document.getElementById("services");
-			element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+			element.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
 		}
 	}
 }
@@ -87,7 +87,7 @@ definePageMeta({
 }
 
 .home {
-	margin-top: $header_hight;
+	margin-top: calc($header_hight - $border-radius);
 	position: relative;
 	width: 100%;
 	height: 100vh;
@@ -103,6 +103,7 @@ definePageMeta({
 
 		&_info {
 			position: relative;
+			scroll-margin-top: calc($header_hight - $border-radius);
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
@@ -168,7 +169,7 @@ definePageMeta({
 		img {
 			position: fixed;
 			width: 100%;
-			height: 100vh;
+			height: calc(100vh + $border-radius);
 			margin: 0 auto;
 			object-fit: cover;
 			object-position: 50% 50%;

@@ -35,7 +35,7 @@
 
 	>img {
 		margin: 0 auto;
-		border-radius: 20px;
+		border-radius: $border-radius;
 		max-width: calc(100% - 50px);
 		width: $max_content_width;
 		@include theme_based_morphism_shadow;

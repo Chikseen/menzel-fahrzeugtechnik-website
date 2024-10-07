@@ -45,7 +45,7 @@ body {
     height: 100%;
     max-height: 500px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: $border-radius;
     @include theme_based_morphism_shadow;
   }
 }
@@ -57,7 +57,7 @@ body {
   &_banner {
     padding: 10px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: $border-radius;
     @include theme_based_morphism_shadow;
   }
 
@@ -75,7 +75,7 @@ body {
     padding: 10px;
     font-size: 1rem;
     border: none;
-    border-radius: 10px;
+    border-radius: $border-radius;
     background-color: $company_blue;
     color: $light-font-color;
     @include theme_based_morphism_shadow;
