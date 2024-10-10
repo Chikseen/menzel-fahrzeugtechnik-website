@@ -22,8 +22,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
 
-      - if: always()
+      - name: Ggenerate
         uses: actions/setup-node@v3
+        if: always()
       - run: npm run generate
         timeout-minutes: 5
 
