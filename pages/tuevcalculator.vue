@@ -35,11 +35,14 @@
 				</span>
 			</span>
 			<span class="tuevcalc_result" @click="cycleForceFrame()">
-				<span v-if="remaingTime != '0 Sekunde' && !remaingTime.includes('-')">
-					<p>Deine Hauptuntersuchung läuft in <b>{{ remaingTime }}</b> ab.</p>
+				<span v-if="remaingTime[0] > 0">
+					<p class="tuevcalc_result_counter">Deine Hauptuntersuchung läuft in <b>
+							<CounterComponent :input="remaingTime[0] * 1" :default="0" style="margin: 0" />
+							{{ remaingTime[1] }}
+						</b> ab.</p>
 					<p>Fälligkeitsdatum: <b>{{ currentMonthString }}, {{ year }}</b></p>
 				</span>
-				<span v-else-if="!remaingTime.includes('-')">
+				<span v-else-if="remaingTime[0] == 0">
 					<p>Deine Hauptuntersuchung läuft diesen Monat ab, vereinbare jetzt einen Termin bei Uns. </p>
 				</span>
 				<span v-else>
@@ -191,6 +194,19 @@ export default {
 
 	&_result {
 		font-size: 1.2rem;
+		height: 6rem;
+
+		&_counter {
+			display: flex;
+			gap: 5px;
+			margin: 0;
+			width: max-content;
+
+			b {
+				display: flex;
+				gap: 5px;
+			}
+		}
 	}
 }
 </style>

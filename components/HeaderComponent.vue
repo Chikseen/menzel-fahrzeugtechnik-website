@@ -4,7 +4,7 @@
 		<div :class="['header_content', { 'header_content_active': isLoaded }]">
 			<div id="header_content_logo_placeholder"
 				:class="['header_content_logo_placeholder', { 'header_content_logo_placeholder_active': isLoaded }]" />
-			<NuxtLink v-show="isLoaded" id="header_content_text"
+			<NuxtLink id="header_content_text"
 				:class="['header_content_text', { 'header_content_text_active': isLoaded }]" to="/">
 				<p>Menzel</p>
 				<p>-</p>
@@ -78,7 +78,7 @@ export default {
 		left: 0;
 		right: 0;
 		width: 100%;
-		height: 100vh;
+		height: 100dvh;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
@@ -213,6 +213,7 @@ export default {
 			left: 0;
 			margin: auto 0;
 			color: $light-font-color;
+			width: min-content;
 			height: min-content;
 			line-height: 2rem;
 			font-size: 2rem;

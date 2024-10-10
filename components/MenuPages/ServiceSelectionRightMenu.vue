@@ -53,7 +53,6 @@
 					margin: auto;
 					position: relative;
 					font-weight: 500;
-					font-size: 1rem;
 					line-break: auto;
 				}
 			}

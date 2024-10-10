@@ -1,5 +1,9 @@
 <template>
-	<p class="CountdownTimer" @click="cycleForceFrame()">{{ timeText }}</p>
+	<div v-if="time != null" class="CountdownTimer" @click="cycleForceFrame()">
+		<p>{{ state }}</p>
+		<CounterComponent :input="time[0] * 1" style="margin: auto 5px; width: min-content" />
+		<p>{{ time[1] }}</p>
+	</div>
 </template>
 
 <script>
@@ -10,7 +14,7 @@ export default {
 		return {
 			future: null,
 			state: null,
-			timeText: null,
+			time: null,
 			forceFrame: -1,
 			timer: null,
 		}
@@ -61,10 +65,7 @@ export default {
 			this.future = future
 		},
 		calc() {
-			const diff = (this.future - new Date().getTime()) / 1000;
-			let timeText = GetCountDown(this.forceFrame, this.future);
-			//console.log(this.state, timeText)
-			this.timeText = `${this.state} ${timeText}`;
+			this.time = GetCountDown(this.forceFrame, this.future);
 			this.timer = setTimeout(() => {
 				this.calc();
 			}, 1000);
@@ -91,5 +92,12 @@ export default {
 	cursor: pointer;
 	user-select: none;
 	text-align: center;
+	margin: auto ;
+	display: flex;
+	flex-wrap: wrap;
+
+	p {
+		text-wrap: nowrap;
+	}
 }
 </style>

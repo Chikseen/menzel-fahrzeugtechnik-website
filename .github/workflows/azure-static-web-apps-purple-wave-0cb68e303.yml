@@ -6,10 +6,10 @@ on:
 
 jobs:
   build:
-    runs-on: windows
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [21.1.0]
+        node-version: [20.1.0]
     steps:
       - uses: actions/checkout@v4
       - uses: azure/login@v1
@@ -20,9 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
       - run: npm install
+
+      - if: always()
+        uses: actions/setup-node@v3
       - run: npm run generate
+        timeout-minutes: 5
 
       - name: Upload to blob storage
         uses: azure/CLI@v1

@@ -19,7 +19,6 @@
 export default {
 	props: {
 		input: { type: Number, default: 0 },
-		default: { type: Number, default: 0 }
 	},
 	data() {
 		return {
@@ -29,6 +28,11 @@ export default {
 	},
 	watch: {
 		input() {
+			this.updateValue()
+		}
+	},
+	methods: {
+		updateValue() {
 			this.length = this.input.toString().length
 			if (this.length != this.value?.toString().length) {
 				this.value = new Array(this.length + 1).join("0");
@@ -41,22 +45,13 @@ export default {
 		}
 	},
 	mounted() {
-		setTimeout(() => {
-			this.length = this.default.toString().length
-			if (this.length != this.value?.toString().length) {
-				this.value = new Array(this.length + 1).join("0");
-				setTimeout(() => {
-					this.value = this.default.toString()
-				}, 50);
-			}
-			else
-				this.value = this.default.toString()
-		}, 100);
+		this.value = 0
+		setTimeout(() => this.updateValue(), 100);
 	}
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .counter {
 	display: flex;
 	justify-content: center;
@@ -78,29 +73,30 @@ export default {
 
 		&:nth-child(1) {
 			.counter_gauge_spinner {
-				transition: transform 1.5s ease-out;
+				transition: transform 0.25s ease-out;
 			}
 		}
 
 		&:nth-child(2) {
 			.counter_gauge_spinner {
-				transition: transform 1s ease-out;
+				transition: transform 0.25s ease-out;
 			}
 		}
 
 		&:nth-child(+n+3) {
 			.counter_gauge_spinner {
-				transition: transform 0.5s ease-out;
+				transition: transform 0.25s ease-out;
 			}
 		}
 
 		&_spinner {
 			&_number {
 				height: 25px;
-				font-size: 25px;
+				font-size: 1.2rem;
 				margin: 0;
 				padding: 0;
-				transition: scroll 2s;
+				transition: scroll 0.25s;
+				text-align: center;
 			}
 		}
 	}
@@ -108,11 +104,12 @@ export default {
 
 .counterAnimation-enter-active,
 .counterAnimation-leave-active {
-	transition: all 0.5s ease;
+	transition: all 0.25s ease;
 }
 
 .counterAnimation-enter-from,
 .counterAnimation-leave-to {
+	position: absolute;
 	opacity: 0;
 	transform: translateX(-100%);
 }
