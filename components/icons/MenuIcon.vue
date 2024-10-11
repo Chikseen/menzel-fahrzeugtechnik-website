@@ -29,22 +29,23 @@ export default {
 
 	&_top {
 		&_active {
-			transform: rotateZ(90deg);
+			transform: translateX(30%) rotateZ(-45deg);
 		}
 	}
 
 	&_mid {
 		&_active {
 			transform-origin: 50% 50%;
-			transform: rotateZ(90deg);
+			transform: rotateZ(45deg);
 			d: path("M3 12C3 11.4477 3.4477 11 4 11L20 11C20.5523 11 21 11.4477 21 12 21 12.5523 20.5523 13 20 13L4 13C3.4477 13 3 12.5523 3 12");
 		}
 	}
 
 	&_bot {
 		&_active {
+			opacity: 0;
 			transform-origin: 50% 50%;
-			transform: translateX(-25%) rotateZ(90deg);
+			transform: translateX(-10%) translateY(-30%) rotateZ(-45deg);
 			d: path("M3 18C3 17.4477 3.4477 17 4 17L20 17C20.5523 17 21 17.4477 21 18 21 18.5523 20.5523 19 20 19L4 19C3.4477 19 3 18.5523 3 18");
 		}
 	}

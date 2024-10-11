@@ -4,13 +4,10 @@
 			<h1>Kontakt</h1>
 		</PageTitelWrapper>
 		<div class="contact_box_wrappper">
-			<LMap class="contact_map" ref="map" :zoom="15" :center="[51.271428, 12.369805]" :use-global-leaflet="false">
-				<LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-					attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-					layer-type="base" name="OpenStreetMap" />
-				<l-marker :lat-lng="[51.271428, 12.369805]">
-				</l-marker>
-			</LMap>
+			<div class="contact_map">
+				<GoogleMap api-key="YOUR_GOOGLE_MAPS_API_KEY" :center="{ lat: 37.7749, lng: -122.4194 }" :zoom="12"
+					style="width: 100%; height: 400px;" />
+			</div>
 			<div class="contact_box">
 				<CountdownTimer />
 				<hr>

@@ -1,5 +1,13 @@
 export default defineNuxtConfig({
-	devtools: { enabled: true },
+	/// Tempoary Fix for https://github.com/nuxt/cli/issues/193
+	hooks: {
+		close: (nuxt) => {
+			if (!nuxt.options._prepare)
+				process.exit()
+		}
+	},
+	///
+
 	ssr: true,
 
 	devtools: { enabled: false },
@@ -15,7 +23,7 @@ export default defineNuxtConfig({
 						@import  "@/assets/styles/akzent_blue_cta.scss";
 						@import  "@/assets/styles/morphism_shadow.scss";
 						@import  "@/assets/styles/theme.scss";
-					`
+						`
 				},
 			},
 		},
@@ -27,7 +35,7 @@ export default defineNuxtConfig({
 		port: 8000, // default: 3000
 	},
 
-	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet"],
+	modules: ["@nuxt/image", "@nuxtjs/robots"],
 
 	robots: {
 		UserAgent: "*",
