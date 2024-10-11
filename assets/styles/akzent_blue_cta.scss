@@ -1,5 +1,7 @@
-$base_shadow: 4px 4px 12px #000000a1, -3px -3px 12px lighten($company_blue, 10%);
-$base_shadow_hover: 6px 6px 12px #000000a1, -5px -5px 12px lighten($company_blue, 12%);
+@use "sass:color";
+
+$base_shadow: 4px 4px 12px #000000a1, -3px -3px 12px color.adjust($company_blue, $lightness: 10%);
+$base_shadow_hover: 6px 6px 12px #000000a1, -5px -5px 12px color.adjust($company_blue, $lightness: 12%);
 $base_shadow_mono: 2px 2px 12px #000000a1, -3px -3px 12px #ffffff1a;
 $base_shadow_mono_hover: 6px 6px 12px #0000001a, -5px -5px 12px #ffffff1a;
 

@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"build": "nuxt build",
+		"build": "nuxt build --prerender",
 		"dev": "nuxt dev",
 		"dev:host": "nuxt dev --host 0.0.0.0 --port 8888",
 		"generate": "nuxt generate",
@@ -13,7 +13,7 @@
 		"@nuxt/image": "^1.0.0-rc.1",
 		"@nuxtjs/leaflet": "^1.2.2",
 		"@types/node": "^18.17.0",
-		"nuxt": "^3.6.5",
+		"nuxt": "^3.13.2",
 		"sass": "^1.58.3",
 		"sass-loader": "^13.2.0"
 	},

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.1.0]
+        node-version: [22.9.0]
     steps:
       - uses: actions/checkout@v4
       - uses: azure/login@v1
@@ -21,12 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-
-      - name: Ggenerate
-        uses: actions/setup-node@v3
-        if: always()
       - run: npm run generate
-        timeout-minutes: 5
 
       - name: Upload to blob storage
         uses: azure/CLI@v1
