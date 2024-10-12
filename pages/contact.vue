@@ -3,14 +3,12 @@
 		<PageTitelWrapper>
 			<h1>Kontakt</h1>
 		</PageTitelWrapper>
-		<div class="contact_box_wrappper">
+		<div class="contact_wrappper">
 			<div class="contact_map">
-				<GoogleMap api-key="YOUR_GOOGLE_MAPS_API_KEY" :center="{ lat: 37.7749, lng: -122.4194 }" :zoom="12"
-					style="width: 100%; height: 400px;" />
+				<MapComponent />
 			</div>
 			<div class="contact_box">
 				<CountdownTimer />
-				<hr>
 				<ul class="contact" v-for="(day, i) in openingHours" :key="i">
 					<li class="contact_item">
 						<p>{{ day.translated }}</p>
@@ -100,22 +98,24 @@ definePageMeta({
 	padding: 0;
 	margin: 0;
 
+	&_wrappper {
+		width: 100%;
+		height: 1000px !important;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 15px;
+		margin-bottom: 15px;
+	}
+
 	&_box {
+		display: flex;
+		flex-direction: column;
 		padding: 15px;
 		width: 100%;
 		max-width: 400px;
 		border-radius: $border-radius;
 		@include theme_based_morphism_shadow;
-
-		&_wrappper {
-			width: 100%;
-			height: max-content;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 15px;
-			margin-bottom: 15px;
-		}
 	}
 
 	&_item {

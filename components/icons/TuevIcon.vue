@@ -90,7 +90,7 @@ export default {
 
   &_outter {
     &_filler {
-      transition: all 1.2s;
+      transition: all 0.5s;
       fill-opacity: 0;
     }
   }

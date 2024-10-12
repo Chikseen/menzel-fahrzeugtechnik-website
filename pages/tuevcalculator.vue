@@ -133,8 +133,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	height: 100dvh;
+	max-width: calc(100vw - 60px);
 	margin-top: 20px;
+	user-select: none;
 
 	&_year {
 		&_buttons {
@@ -193,11 +194,13 @@ export default {
 	}
 
 	&_result {
-		font-size: 1.2rem;
-		height: 6rem;
+		max-width: calc(100vw - 50px);
+		min-height: 250px;
 
 		&_counter {
+			max-width: 100%;
 			display: flex;
+			flex-wrap: wrap;
 			gap: 5px;
 			margin: 0;
 			width: max-content;

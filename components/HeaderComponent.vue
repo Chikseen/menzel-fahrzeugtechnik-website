@@ -233,7 +233,7 @@ export default {
 		position: fixed;
 		top: $header_hight;
 		right: 0;
-		height: calc(100vh - $header_hight);
+		height: calc(100dvh - $header_hight);
 		width: calc(250px - 20px);
 		max-width: calc(50% - 20px);
 		padding: 10px;

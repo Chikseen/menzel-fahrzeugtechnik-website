@@ -1,7 +1,7 @@
 <template>
     <div class="serviceView_overview">
-        <NuxtLink class="serviceView_overview_container" to="/service/tuev">
-            <p>Hauptuntersuchung und Abgasuntersuchung</p>
+        <NuxtLink class="serviceView_overview_container" to="/tuevcalculator">
+            <p>Plaketten Rechner</p>
             <TuevIcon :fontSize="'1.5'" />
         </NuxtLink>
         <NuxtLink class="serviceView_overview_container" to="/service/ac">
@@ -24,8 +24,8 @@
             <p>Ölwechsel</p>
             <OilChangeIcon />
         </NuxtLink>
-        <NuxtLink class="serviceView_overview_container" to="/tuevcalculator">
-            <p>Plaketten Rechner</p>
+        <NuxtLink class="serviceView_overview_container" to="/service/tuev">
+            <p>Hauptuntersuchung und Abgasuntersuchung</p>
             <TuevIcon :fontSize="'1.5'" />
         </NuxtLink>
     </div>

@@ -1,8 +1,8 @@
 <template>
 	<div v-if="time != null" class="CountdownTimer" @click="cycleForceFrame()">
-		<p>{{ state }}</p>
+		<p class="CountdownTimer_text">{{ state }}</p>
 		<CounterComponent :input="time[0] * 1" style="margin: auto 5px; width: min-content" />
-		<p>{{ time[1] }}</p>
+		<p class="CountdownTimer_text">{{ time[1] }}</p>
 	</div>
 </template>
 
@@ -92,11 +92,19 @@ export default {
 	cursor: pointer;
 	user-select: none;
 	text-align: center;
-	margin: auto ;
+	margin: auto;
 	display: flex;
+	justify-content: flex-start;
 	flex-wrap: wrap;
+	height: calc(100% - 30px);
+	max-height: 100%;
 
+	&_text {
+		line-height: 0;
+	}
+	
 	p {
+		margin: auto 0;
 		text-wrap: nowrap;
 	}
 }

@@ -61,9 +61,9 @@ export default {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		height: 100%;
 		width: 100%;
 		margin: auto;
+		height: 100%;
 	}
 
 	&_gauge {
@@ -96,7 +96,6 @@ export default {
 				margin: 0;
 				padding: 0;
 				transition: scroll 0.25s;
-				text-align: center;
 			}
 		}
 	}

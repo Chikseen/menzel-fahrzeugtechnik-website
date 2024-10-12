@@ -32,6 +32,10 @@ body {
   @include theme_based_background;
 }
 
+.leaflet-bottom {
+  display: none;
+}
+
 .imageContainer {
   display: flex;
   flex-wrap: wrap;

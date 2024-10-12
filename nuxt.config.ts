@@ -35,11 +35,10 @@ export default defineNuxtConfig({
 		port: 8000, // default: 3000
 	},
 
-	modules: ["@nuxt/image", "@nuxtjs/robots"],
+	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet"],
 
 	robots: {
-		UserAgent: "*",
-		Disallow: "",
+		allow: '*',
 	},
 
 	image: {
