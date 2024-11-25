@@ -15,11 +15,18 @@ public class OpeningHoursService(
         if (openingHours is null)
             return await FetchAndUploadGoogleData();
 
+        bool? isOpen = openingHours.CurrentOpeningHours?.OpenNow;
         DateTime? nextOpenTime = openingHours?.CurrentOpeningHours?.NextOpenTime.ToUniversalTime();
+        DateTime? nextCloseTime = openingHours?.CurrentOpeningHours?.NextCloseTime.ToUniversalTime();
 
-        if (nextOpenTime is null || nextOpenTime < DateTime.UtcNow)
+        if (isOpen is null)
             return await FetchAndUploadGoogleData();
 
+        if (!(bool)isOpen && nextOpenTime < DateTime.UtcNow)
+            return await FetchAndUploadGoogleData();
+
+        if ((bool)isOpen && nextCloseTime < DateTime.UtcNow)
+            return await FetchAndUploadGoogleData();
 
         return openingHours;
     }
