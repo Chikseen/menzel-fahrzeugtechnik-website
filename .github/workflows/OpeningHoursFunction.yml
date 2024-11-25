@@ -6,7 +6,7 @@ on:
     - master
     paths:
       - BackendServices/OpeningHoursFunction/**
-      - workflows/**
+      - .github/workflows/**
 env:
   AZURE_FUNCTIONAPP_NAME: OpeningHoursFunction
   AZURE_FUNCTIONAPP_PACKAGE_PATH: OpeningHoursFunction/published
