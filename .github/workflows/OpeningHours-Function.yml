@@ -1,5 +1,4 @@
-name: OpeningHoursFunction
-
+name: Build and deploy .NET Core application to Function App OpeningHours-Function
 on:
   push:
     branches:
@@ -8,7 +7,7 @@ on:
       - BackendServices/OpeningHoursFunction/**
       - .github/workflows/**
 env:
-  AZURE_FUNCTIONAPP_NAME: OpeningHoursFunction
+  AZURE_FUNCTIONAPP_NAME: OpeningHours-Function
   AZURE_FUNCTIONAPP_PACKAGE_PATH: OpeningHoursFunction/published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
@@ -51,5 +50,5 @@ jobs:
       uses: Azure/functions-action@v1
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        publish-profile: ${{ secrets.OpeningHoursFunction_DBC2 }}
+        publish-profile: ${{ secrets.OpeningHours_Function_EAFF }}
         package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
