@@ -12,7 +12,7 @@ public class GoogleService(
 {
     public async Task<OpeningHours> GetGoogleOpeninghours()
     {
-        string url = $"https://places.googleapis.com/v1/places/{options.Value.GooglePlaceId}?fields=currentOpeningHours&key={options.Value.GoogleApiKey}";
+        string url = $"https://places.googleapis.com/v1/places/{options.Value.GooglePlaceId}?fields=currentOpeningHours&languageCode=de&key={options.Value.GoogleApiKey}";
 
         HttpClient request = new HttpClient();
         HttpResponseMessage response = await request.GetAsync(url);
