@@ -1,0 +1,42 @@
+name: Blob storage website CI
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - BackendServices/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22.9.0]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run generate
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch --account-name mfztmedia --auth-mode key -d '$web' -s . --source ./dist --overwrite
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az cdn endpoint purge --content-paths  "/*" --profile-name "mfzt-website-cdn" --name "mfzt-website-cdn.azureedge.net" --resource-group "Menzel-Fahrzeugtechnik"
+
+      - name: logout
+        run: |
+          az logout
+        if: always()

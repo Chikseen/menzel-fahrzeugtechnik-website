@@ -1,11 +1,14 @@
 name: Build and deploy .NET Core application to Function App OpeningHoursFunction
+
 on:
   push:
     branches:
     - master
+    paths:
+      - BackendServices/OpeningHoursFunction/**
 env:
-  AZURE_FUNCTIONAPP_NAME: OpeningHoursFunction
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: OpeningHoursFunction/published
+  AZURE_FUNCTIONAPP_NAME: BackendServices/OpeningHoursFunction
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: BackendServices/OpeningHoursFunction/published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: OpeningHoursFunction
