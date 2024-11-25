@@ -3,9 +3,8 @@ name: Blob storage website CI
 on:
   push:
     branches: [master]
-    paths:
-      - "!BackendServices/**"
-      - workflows/**
+    paths-ignore:
+      - BackendServices/**
 
 jobs:
   build:

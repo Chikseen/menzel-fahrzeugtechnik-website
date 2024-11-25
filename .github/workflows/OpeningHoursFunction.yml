@@ -6,12 +6,13 @@ on:
     - master
     paths:
       - BackendServices/OpeningHoursFunction/**
+      - workflows/**
 env:
-  AZURE_FUNCTIONAPP_NAME: BackendServices/OpeningHoursFunction
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: BackendServices/OpeningHoursFunction/published
+  AZURE_FUNCTIONAPP_NAME: OpeningHoursFunction
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: OpeningHoursFunction/published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
-  WORKING_DIRECTORY: OpeningHoursFunction
+  WORKING_DIRECTORY: BackendServices/OpeningHoursFunction
   DOTNET_CORE_VERSION_INPROC: 6.0.x
 jobs:
   build:
