@@ -8,7 +8,7 @@ on:
       - .github/workflows/**
 env:
   AZURE_FUNCTIONAPP_NAME: OpeningHours-Function
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: BackendServices/OpeningHoursFunction/published
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: OpeningHoursFunction/published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: BackendServices/OpeningHoursFunction
