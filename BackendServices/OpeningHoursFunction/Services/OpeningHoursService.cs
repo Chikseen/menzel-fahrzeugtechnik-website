@@ -28,7 +28,7 @@ public class OpeningHoursService(
         if ((bool)isOpen && nextCloseTime < DateTime.UtcNow)
             return await FetchAndUploadGoogleData();
 
-        return openingHours;
+        return openingHours!;
     }
 
     private async Task<OpeningHours> FetchAndUploadGoogleData()

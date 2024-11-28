@@ -1,10 +1,8 @@
-﻿using Azure.Identity;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Options;
 using OpeningHoursFunction.Models;
 using System;
-using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -29,7 +27,7 @@ public class AzureBlobService(
     {
         BlobDownloadResult downloadResult = await blob.DownloadContentAsync();
         string blobContents = downloadResult.Content.ToString();
-        OpeningHours openingHours = JsonSerializer.Deserialize<OpeningHours>(blobContents);
+        OpeningHours openingHours = JsonSerializer.Deserialize<OpeningHours>(blobContents)!;
 
         return openingHours;
     }
@@ -45,7 +43,7 @@ public class AzureBlobService(
 
     private BlobClient GetBlobClient()
     {
-        BlobServiceClient blobServiceClient = new BlobServiceClient(options.Value.AzureStorageConnectionString);
+        BlobServiceClient blobServiceClient = new(options.Value.AzureStorageConnectionString);
 
         BlobContainerClient blobContainer = blobServiceClient.GetBlobContainerClient("openinghours");
 
