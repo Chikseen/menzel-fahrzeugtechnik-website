@@ -10,7 +10,7 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_NAME: 'OpeningHoursFunction'
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'BackendServices/OpeningHoursFunction/published'    
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'BackendServices/OpeningHoursFunction'    
   DOTNET_VERSION: '8.0.x'
 
 jobs:
