@@ -1,4 +1,4 @@
-name: Deploy OpeningHours function to Azure
+name: Deploy Review function to Azure
 
 on:
   push:
