@@ -12,7 +12,7 @@ IHostBuilder host = new HostBuilder().ConfigureFunctionsWebApplication();
 host.ConfigureAppConfiguration((hostingContext, config) =>
 {
     config.AddJsonFile("secrets.json",
-        optional: false,
+        optional: true,
         reloadOnChange: true);
 });
 
