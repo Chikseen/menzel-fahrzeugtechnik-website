@@ -87,57 +87,7 @@ export default defineNuxtConfig({
 		public: {
 			contentBaseUrl: "https://mfzt-cdn.azureedge.net",
 			containerName: "images",
-			openingHours: [
-				{
-					name: "Sunday",
-					isOpen: false,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Sonntag",
-				},
-				{
-					name: "Monday",
-					isOpen: true,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Montag",
-				},
-				{
-					name: "Tuesday",
-					isOpen: true,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Dienstag",
-				},
-				{
-					name: "Wednesday",
-					isOpen: true,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Mittwoch",
-				},
-				{
-					name: "Thursday",
-					isOpen: true,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Donnerstag",
-				},
-				{
-					name: "Friday",
-					isOpen: true,
-					open: "08:00:00",
-					close: "13:00:00",
-					translated: "Freitag",
-				},
-				{
-					name: "Saturday",
-					isOpen: false,
-					open: "08:00:00",
-					close: "16:00:00",
-					translated: "Samstag",
-				},
-			],
+			openingHoursApi: "https://openinghours-function.azurewebsites.net/api/OpeningHoursFunction",
 		},
 	},
 

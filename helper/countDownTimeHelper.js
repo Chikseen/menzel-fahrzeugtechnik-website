@@ -1,5 +1,6 @@
 export function GetCountDown(forceFrame, future) {
-	const diff = (future - new Date().getTime()) / 1000;
+	const diff = (new Date(future).getTime() - new Date().getTime()) / 1000;
+
 	let timeText = "";
 	if (forceFrame == 0 || diff < 60) {
 		const d = diff.toFixed(0)

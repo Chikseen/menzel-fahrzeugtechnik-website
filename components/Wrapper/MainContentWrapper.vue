@@ -10,8 +10,9 @@
 .content {
 	position: relative;
 	width: $max_content_width;
-	margin: 0;
-	padding: 25px;
+	height: min-content;
+	margin: 10px;
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;

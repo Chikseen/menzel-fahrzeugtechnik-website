@@ -44,9 +44,11 @@
 				</span>
 				<span v-else-if="remaingTime[0] == 0">
 					<p>Deine Hauptuntersuchung läuft diesen Monat ab, vereinbare jetzt einen Termin bei Uns. </p>
+					<button class="cta-button" @click="$router.push('/contact')">Kontakt aufnehmen</button>
 				</span>
 				<span v-else>
 					<p>Deine Hauptuntersuchung ist fallig, vereinbare jetzt einen Termin bei Uns.</p>
+					<button class="cta-button" @click="$router.push('/contact')">Kontakt aufnehmen</button>
 				</span>
 			</span>
 		</div>

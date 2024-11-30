@@ -6,19 +6,16 @@
 		<div class="contact_wrappper">
 			<div class="contact_map">
 				<MapComponent />
+				<button class="cta-button contact_map_button" @click="startNavigation">Navigation starten</button>
 			</div>
 			<div class="contact_box">
 				<CountdownTimer />
-				<ul class="contact" v-for="(day, i) in openingHours" :key="i">
-					<li class="contact_item">
-						<p>{{ day.translated }}</p>
-						<span v-if="day.isOpen">
-							<p>{{ day.open.replace(":00", "") }} Uhr</p>
-							<p>{{ day.close.replace(":00", "") }} Uhr</p>
-						</span>
-						<p v-else>Geschlossen</p>
-					</li>
-					<hr>
+				<ul class="contact" v-for="(day, dayNumber) in weekdayDescriptions" :key="day">
+					<div class="contact_box_openingHoursText">
+						<p class="contact_box_openingHoursText_today" v-if="isToday(dayNumber)"></p>
+						<p> {{ day }} </p>
+					</div>
+					<hr v-if="dayNumber != weekdayDescriptions.length - 1">
 				</ul>
 			</div>
 			<div class="contact_box">
@@ -54,12 +51,26 @@
 </template>
 
 <script>
+import apiService from "../helper/apiService";
+
 export default {
-	computed: {
-		openingHours() {
-			return useRuntimeConfig()?.public?.openingHours
+	data() {
+		return {
+			weekdayDescriptions: null,
 		}
-	}
+	},
+	methods: {
+		isToday(dayNumber) {
+			return dayNumber == (new Date().getDay() - 1) % 7
+		},
+		startNavigation() {
+			window.open(`https://www.google.com/maps?saddr=My+Location&daddr=Städtelner+Str+62+04416+Markkleeberg`);
+		}
+	},
+	async mounted() {
+		const openingHours = await apiService.getOpeningHours()
+		this.weekdayDescriptions = openingHours?.CurrentOpeningHours?.WeekdayDescriptions
+	},
 }
 </script>
 
@@ -100,7 +111,8 @@ definePageMeta({
 
 	&_wrappper {
 		width: 100%;
-		height: 1000px !important;
+		height: 100%;
+		min-height: 500px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -109,13 +121,31 @@ definePageMeta({
 	}
 
 	&_box {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		padding: 15px;
-		width: 100%;
+		width: calc(100% - 30px);
 		max-width: 400px;
 		border-radius: $border-radius;
 		@include theme_based_morphism_shadow;
+
+		&_openingHoursText {
+			position: relative;
+			margin: 0;
+
+			&_today {
+				position: absolute;
+				top: -100%;
+				left: -$border-radius;
+				width: calc(100% + 2 * $border-radius);
+				height: 250%;
+				margin: 0;
+				background-color: $company_blue;
+				border-radius: $border-radius;
+				z-index: -1;
+			}
+		}
 	}
 
 	&_item {
@@ -129,14 +159,23 @@ definePageMeta({
 	}
 
 	&_map {
+		position: relative;
+		height: 500px;
 		width: 100%;
-		height: 100%;
-		max-width: 500px;
-		max-height: 500px;
+		max-width: 430px;
 		border-radius: $border-radius;
 		//overflow: hidden;
 		z-index: 5;
 		@include theme_based_morphism_shadow;
+
+		&_button {
+			position: absolute;
+			bottom: 15px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 10;
+			max-width: 100%;
+		}
 	}
 }
 </style>

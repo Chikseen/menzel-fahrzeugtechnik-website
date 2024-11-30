@@ -23,12 +23,17 @@
 			</div>
 			<div id="services" class="home_content_info">
 				<h2>Alles für dein Fahrzeug</h2>
+				<p class="serviceContent_banner">Unsere Werkstatt bietet eine Vielzahl von Dienstleistungen an, um
+					sicherzustellen, dass Ihr Fahrzeug
+					in bestem Zustand bleibt. Dazu gehören regelmäßige Inspektionen und Wartungen, Reparaturen aller
+					Art, Unfallinstandsetzungen, Reifenservice und -wechsel, Ölwechsel und Flüssigkeitsprüfungen,
+					Bremsenservice, Diagnose und Fehlerbehebung, Klimaanlagenservice sowie elektronische
+					Systemprüfungen.</p>
 				<ServiceSelection />
-				<div class="imageContainer">
-					<ImageComponent image="repair_area.webp" />
-					<ImageComponent image="home_gen_view.webp" />
-					<ImageComponent image="smart_in_transporter.webp" />
-				</div>
+			</div>
+			<div class="home_content_info">
+				<h2>Das sagen unsere Kunden</h2>
+				<CommentComponent />
 			</div>
 		</div>
 	</div>

@@ -57,10 +57,13 @@ body {
 .serviceContent {
   max-width: $max_content_width;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   &_banner {
     padding: 10px;
-    margin: 10px;
+    margin: 0 10px;
     border-radius: $border-radius;
     @include theme_based_morphism_shadow;
   }
@@ -71,24 +74,24 @@ body {
     text-align: left !important;
     line-height: 1.25rem;
   }
-
-  button {
-    width: 250px;
-    max-width: calc(100% - 30px);
-    margin: 15px auto;
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: $border-radius;
-    background-color: $company_blue;
-    color: $light-font-color;
-    @include theme_based_morphism_shadow;
-  }
 }
 
 button {
   &:active {
     animation: clickAnimation 0.25s;
   }
+}
+
+.cta-button {
+  width: 250px;
+  max-width: calc(100% - 30px);
+  margin: 15px auto;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: $border-radius;
+  background-color: $company_blue;
+  color: $light-font-color;
+  @include theme_based_morphism_shadow;
 }
 </style>

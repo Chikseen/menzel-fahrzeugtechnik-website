@@ -15,7 +15,7 @@
 		</div>
 		<span :class="['header_left', { 'header_left_active': isNavControllActive }]">
 			<h3 class="header_left_services" @click="scrollToSerivces">Leistungen</h3>
-			<h3 class="header_left_contact" @click="$router.push('contact')">Kontakt</h3>
+			<h3 class="header_left_contact" @click="$router.push('/contact')">Kontakt</h3>
 			<div id="header_left_menuIcon"
 				:class="['header_left_menuIcon', { 'header_left_menuIcon_active': isLoaded, 'header_left_menuIcon_open': isLoaded }]">
 				<MenuIcon @click="isMenuOpen = !isMenuOpen" :isMenuOpen="isMenuOpen" />

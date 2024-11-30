@@ -8,6 +8,7 @@
 
 <script>
 import { GetCountDown } from "@/helper/countDownTimeHelper.js"
+import apiService from "../helper/apiService";
 
 export default {
 	data() {
@@ -20,69 +21,42 @@ export default {
 		}
 	},
 	methods: {
-		setFuture() {
-			const days = useRuntimeConfig()?.public?.openingHours
-			const now = new Date;
-			const dayOfToday = now.getDay()
+		async setFuture() {
+			const openingHours = await apiService.getOpeningHours();
 
-			let today = days[dayOfToday]
-			const todayOpenHours = [...today.open.matchAll(/\d\d/g)]
-			const todayCloseHours = [...today.close.matchAll(/\d\d/g)]
-
-			let state = "Öffnet in"
-
-			let daysSkiped = 0
-
-			let future = null
-
-			while (!today.isOpen && daysSkiped < 7) {
-				daysSkiped++
-				today = days[(dayOfToday + daysSkiped) % 7]
-			}
-
-			if ((todayOpenHours[0][0] * 1 > now.getHours() * 1)) {
-				state = "Öffnet in"
-				future = now.setHours(todayOpenHours[0][0], todayOpenHours[1][0], 0)
-			}
-			else if (todayCloseHours[0][0] * 1 > now.getHours() * 1 && daysSkiped == 0) {
-				state = "Schließt in"
-				future = now.setHours(todayCloseHours[0][0], todayCloseHours[1][0], 0)
+			if (openingHours.CurrentOpeningHours.OpenNow) {
+				this.state = "Schließt in"
+				this.future = openingHours.CurrentOpeningHours.NextCloseTime
 			}
 			else {
-				state = "Öffnet in"
-				daysSkiped++
-				today = days[(dayOfToday + daysSkiped) % 7]
-				while (!today.isOpen && daysSkiped < 7) {
-					daysSkiped++
-					today = days[(dayOfToday + daysSkiped) % 7]
-				}
-				future = now.setHours(todayOpenHours[0][0], todayOpenHours[1][0], 0)
+				this.state = "Öffnet in"
+				this.future = openingHours.CurrentOpeningHours.NextOpenTime
 			}
-
-			future += (daysSkiped * 8.64e+7)
-
-			this.state = state
-			this.future = future
 		},
 		calc() {
 			this.time = GetCountDown(this.forceFrame, this.future);
-			this.timer = setTimeout(() => {
-				this.calc();
-			}, 1000);
 		},
 		cycleForceFrame() {
 			this.forceFrame++
 			if (this.forceFrame > 3)
 				this.forceFrame = 0
 			this.calc()
+		},
+		reCalcTrigger() {
+			setTimeout(() => {
+				this.calc()
+				this.reCalcTrigger();
+			}, 1000, "OpeningHourTimerId");
 		}
 	},
 	created() {
 		this.setFuture()
-		this.calc()
+	},
+	mounted() {
+		this.reCalcTrigger()
 	},
 	beforeDestroy() {
-		clearTimeout(this.timer);
+		clearTimeout("OpeningHourTimerId");
 	},
 }
 </script>
@@ -102,7 +76,7 @@ export default {
 	&_text {
 		line-height: 0;
 	}
-	
+
 	p {
 		margin: auto 0;
 		text-wrap: nowrap;
