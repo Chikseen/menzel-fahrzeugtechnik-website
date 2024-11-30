@@ -1,28 +1,41 @@
+using Domain.Models.OpeningHours;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using OpeningHoursFunction.Models;
+using Microsoft.Extensions.Logging;
 using OpeningHoursFunction.Services;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace OpeningHoursFunction;
+namespace OpeningHoursHttpFunction;
 
 public class OpeningHoursFunction(
+    ILogger<OpeningHoursFunction> logger,
     OpeningHoursService openingHoursService)
 {
     [Function(nameof(OpeningHoursFunction))]
     public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData request)
     {
-        OpeningHours openingHours = await openingHoursService.GetOpeningHours();
+        try
+        {
+            logger.LogInformation($"Fetched at {DateTime.UtcNow.ToString()}");
 
-        var response = request.CreateResponse(HttpStatusCode.OK);
+            OpeningHours openingHours = await openingHoursService.GetOpeningHours();
 
-        await response.WriteAsJsonAsync(openingHours);
-        response.Headers.Add("Cache-Control", "max-age=259200");
-        response.Headers.Add("Access-Control-Allow-Origin", "*");
-        response.Headers.Add("Access-Control-Allow-Methods", "GET");
-        response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Your-Custom-Header");
+            HttpResponseData response = request.CreateResponse(HttpStatusCode.OK);
 
-        return response;
+            await response.WriteAsJsonAsync(openingHours);
+            response.Headers.Add("Cache-Control", "max-age=300");
+            response.Headers.Add("Access-Control-Allow-Origin", "*");
+            response.Headers.Add("Access-Control-Allow-Methods", "GET");
+            response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Your-Custom-Header");
+
+            return response;
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception.Message);
+            return request.CreateResponse(HttpStatusCode.InternalServerError);
+        }
     }
 }

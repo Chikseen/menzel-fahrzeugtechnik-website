@@ -1,16 +1,18 @@
-﻿using OpeningHoursFunction.Models;
+﻿using AzureServices.Features;
+using Domain.Models.OpeningHours;
+using GoogleServices.Features;
 using System;
 using System.Threading.Tasks;
 
 namespace OpeningHoursFunction.Services;
 
 public class OpeningHoursService(
-    GoogleService googleService,
+    GoogleOpeningHoursService googleService,
     AzureBlobService azureBlobService)
 {
     public async Task<OpeningHours> GetOpeningHours()
     {
-        OpeningHours? openingHours = await azureBlobService.GetOpeningHours();
+        OpeningHours? openingHours = await azureBlobService.GetBlob<OpeningHours>();
 
         if (openingHours is null)
             return await FetchAndUploadGoogleData();
@@ -34,7 +36,7 @@ public class OpeningHoursService(
     private async Task<OpeningHours> FetchAndUploadGoogleData()
     {
         OpeningHours googleData = await googleService.GetGoogleOpeninghours();
-        azureBlobService.SaveOpeningHours(googleData);
+        azureBlobService.UploadBlob(googleData);
 
         return googleData;
     }

@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Options;
-using OpeningHoursFunction.Models;
-using System.Net.Http;
+﻿using Domain.Models.OpeningHours;
+using Domain.Models.Reviews;
+using Domain.Options;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace OpeningHoursFunction.Services;
+namespace GoogleServices.Features;
 
-public class GoogleService(
+public class GoogleOpeningHoursService(
     IOptions<FunctionOptions> options)
 {
     private readonly static JsonSerializerOptions JsonSerializerOptions = new()
