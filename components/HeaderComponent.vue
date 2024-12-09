@@ -101,7 +101,7 @@ export default {
 
 	&_left {
 		display: flex;
-		gap: 20px;
+		gap: $gap;
 		flex-direction: row;
 		transition: all 0.25s ease-out 0s;
 		opacity: 0;

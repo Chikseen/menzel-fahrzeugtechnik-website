@@ -1,4 +1,5 @@
 let openingHoursCache = null
+let reviewCache = null
 
 export default {
 	async getOpeningHours() {
@@ -10,5 +11,16 @@ export default {
 		const openingHours = await response.json()
 		openingHoursCache = openingHours
 		return openingHours;
+	},
+
+	async getReviews() {
+		if (reviewCache != null)
+			return reviewCache
+
+		const reviewEndpoint = useRuntimeConfig()?.public?.reviewApi
+		const response = await fetch(reviewEndpoint)
+		const reviews = await response.json()
+		reviewCache = reviews
+		return reviews;
 	}
 }

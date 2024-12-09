@@ -88,6 +88,7 @@ export default defineNuxtConfig({
 			contentBaseUrl: "https://mfzt-cdn.azureedge.net",
 			containerName: "images",
 			openingHoursApi: "https://openinghours-function.azurewebsites.net/api/OpeningHoursFunction",
+			reviewApi: "https://reviews-function.azurewebsites.net/api/ReviewHttpFunction",
 		},
 	},
 

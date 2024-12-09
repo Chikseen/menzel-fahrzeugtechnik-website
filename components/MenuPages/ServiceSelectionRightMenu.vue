@@ -30,7 +30,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		min-height: calc(100% - $header_hight);
-		gap: 15px;
+		gap: $gap;
 		z-index: 99;
 
 		&_section {

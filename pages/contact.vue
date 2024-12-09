@@ -9,14 +9,22 @@
 				<button class="cta-button contact_map_button" @click="startNavigation">Navigation starten</button>
 			</div>
 			<div class="contact_box">
-				<CountdownTimer />
-				<ul class="contact" v-for="(day, dayNumber) in weekdayDescriptions" :key="day">
-					<div class="contact_box_openingHoursText">
-						<p class="contact_box_openingHoursText_today" v-if="isToday(dayNumber)"></p>
-						<p> {{ day }} </p>
-					</div>
-					<hr v-if="dayNumber != weekdayDescriptions.length - 1">
-				</ul>
+				<template v-if="weekdayDescriptions">
+					<CountdownTimer />
+					<ul class="contact" v-for="(day, dayNumber) in weekdayDescriptions" :key="day">
+						<div class="contact_box_openingHoursText">
+							<p class="contact_box_openingHoursText_today" v-if="isToday(dayNumber)"></p>
+							<p :class="{ 'contact_box_openingHoursText_today_text': isToday(dayNumber) }"> {{
+								day.split(/:\s/)[0] }} </p>
+							<p :class="{ 'contact_box_openingHoursText_today_text': isToday(dayNumber) }"> {{
+								day.split(/:\s/)[1] }} </p>
+						</div>
+						<hr v-if="dayNumber != weekdayDescriptions.length - 1">
+					</ul>
+				</template>
+				<template v-else>
+					Öffnungszeiten werden geladen...
+				</template>
 			</div>
 			<div class="contact_box">
 				<ul class="contact">
@@ -61,7 +69,7 @@ export default {
 	},
 	methods: {
 		isToday(dayNumber) {
-			return dayNumber == (new Date().getDay() - 1) % 7
+			return dayNumber == (new Date().getDay()) + 6 % 7
 		},
 		startNavigation() {
 			window.open(`https://www.google.com/maps?saddr=My+Location&daddr=Städtelner+Str+62+04416+Markkleeberg`);
@@ -132,18 +140,30 @@ definePageMeta({
 
 		&_openingHoursText {
 			position: relative;
+			display: flex;
+			justify-content: space-between;
+
 			margin: 0;
+			height: 2rem;
 
 			&_today {
 				position: absolute;
-				top: -100%;
+				top: 0;
 				left: -$border-radius;
 				width: calc(100% + 2 * $border-radius);
-				height: 250%;
+				height: 100%;
 				margin: 0;
 				background-color: $company_blue;
 				border-radius: $border-radius;
 				z-index: -1;
+
+				&_text {
+					color: $light-font-color;
+				}
+			}
+
+			p {
+				margin: auto 0;
 			}
 		}
 	}
@@ -171,8 +191,8 @@ definePageMeta({
 		&_button {
 			position: absolute;
 			bottom: 15px;
-			left: 50%;
-			transform: translateX(-50%);
+			left: 0;
+			right: 0;
 			z-index: 10;
 			max-width: 100%;
 		}

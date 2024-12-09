@@ -87,7 +87,7 @@ export default {
     &_overview {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
+        gap: $gap;
         margin: 0 10px;
 
         &_container {
@@ -95,8 +95,8 @@ export default {
             display: flex;
             flex-direction: column;
             max-height: 250px;
-            padding: 15px;
-            width: calc(100% - 30px);
+            padding: $gap;
+            width: calc(100% - $gap * 2);
             border-radius: $border-radius;
             @include theme_based_morphism_shadow;
 

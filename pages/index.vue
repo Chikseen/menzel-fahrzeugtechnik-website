@@ -111,7 +111,7 @@ definePageMeta({
 			scroll-margin-top: calc($header_hight - $border-radius);
 			display: flex;
 			flex-direction: column;
-			gap: 20px;
+			gap: $gap;
 			min-height: calc(100vh - $header_hight);
 			padding: 15px;
 			z-index: 10;

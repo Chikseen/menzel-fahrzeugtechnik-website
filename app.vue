@@ -29,6 +29,7 @@ body {
   transition: 0.5s all ease-in-out;
   font-family: Manrope, sans-serif;
   touch-action: manipulation;
+  scrollbar-color: #80808080 #ffffff00;
   @include theme_based_background;
 }
 
@@ -59,7 +60,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: $gap;
 
   &_banner {
     padding: 10px;

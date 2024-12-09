@@ -1,12 +1,106 @@
 <template>
-	<div>
-		<a
-			href="https://www.google.com/search?sca_esv=15e1f8830cb52d8e&sxsrf=ADLYWIJQTZUvExqAbF8PlNS8hnJiH6jGkA:1732979137806&q=www.menzel+fahrzeugtechnik.de/&si=ACC90nwjPmqJHrCEt6ewASzksVFQDX8zco_7MgBaIawvaF4-7q3P4N6_mhvwphDV3Y56cVvSBcd3AHRsBYdiEno9XzPvXyloMfCkHdb248byca54bxZdVn4%3D&uds=ADvngMjDJRvCoZLRNaARKvvM3D8nCxNjVaGf_HdwbJPScB4AS5gS8jWfUlH1YMxO0COoJ2iSap-wLwcFdcB2tOE7KGNSEQX_oFe_DicJz8wK7DOKkkQk-9vOyV1FZIpiZLw0NT0V8H0Q&sa=X&ved=2ahUKEwi51qWvqoSKAxXUygIHHZvFJnYQ3PALegQIGxAE&biw=1224&bih=1030&dpr=1">Bewertungen</a>
+	<div v-if="reviews" class="reviews">
+		<a class="reviews_review" v-for="(review) in reviews.Reviews" :key="review.GoogleMapsUri"
+			:href="review.GoogleMapsUri">
+			<div>
+				<span class="reviews_review_content">
+					<span class="reviews_review_content_header">
+						<a :href="review.AuthorAttribution.Uri">
+							<img class="reviews_review_content_header_image" :src="review.AuthorAttribution.PhotoUri"
+								alt="userImage" lazy />
+						</a>
+						<span class="reviews_review_content_header_rating">
+							<StarIcon v-for="(_, i) in review.Rating" :key="i" />
+						</span>
+					</span>
+					<p>{{ review.OriginalText?.Text }}</p>
+				</span>
+				<span class="reviews_review_content_footer">
+					<a :href="review.AuthorAttribution.Uri">
+						<p>{{ review.AuthorAttribution?.DisplayName }}</p>
+					</a>
+					<p class="reviews_review_time">{{ review.RelativePublishTimeDescription }}</p>
+				</span>
+			</div>
+		</a>
 	</div>
 </template>
 
 <script>
-export default {
+import apiService from "../helper/apiService";
 
+export default {
+	data() {
+		return {
+			reviews: null
+		}
+	},
+	async mounted() {
+		this.reviews = await apiService.getReviews();
+	},
 }
 </script>
+
+<style lang="scss">
+.reviews {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	height: min-content;
+	gap: $gap;
+	padding: $gap;
+	max-width: 100%;
+	overflow-x: auto;
+
+	&_review {
+		height: calc(100%);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: $gap;
+		min-width: 350px;
+		border-radius: $border-radius;
+		text-decoration: none;
+		@include theme_based_background;
+		@include theme_based_morphism_shadow;
+
+
+
+		&_content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 100%;
+
+			&_header {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				&_rating {
+					display: flex;
+					width: 100%;
+					max-width: 100px;
+					justify-content: flex-end;
+
+					svg {
+						margin: auto 0;
+						height: 20px;
+					}
+				}
+
+				&_image {
+					max-height: 75px;
+				}
+			}
+
+			&_footer {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				font-size: 0.75rem;
+			}
+		}
+	}
+}
+</style>

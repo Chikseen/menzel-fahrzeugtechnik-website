@@ -143,8 +143,8 @@ export default {
 		&_buttons {
 			display: flex;
 			flex-direction: row;
-			gap: 15px;
-			padding: 15px;
+			gap: $gap;
+			padding: $gap;
 			max-height: 75px;
 
 			button {

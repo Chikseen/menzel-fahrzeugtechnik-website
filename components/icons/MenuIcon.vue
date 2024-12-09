@@ -29,7 +29,7 @@ export default {
 
 	&_top {
 		&_active {
-			transform: translateX(30%) rotateZ(-45deg);
+			transform: translateX(27%) rotateZ(-45deg);
 		}
 	}
 
