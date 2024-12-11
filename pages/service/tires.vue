@@ -33,7 +33,7 @@ useSeoMeta({
   title: "Menzel - Reifen und Räder",
   meta: [
     {
-      hid: 'description_tirest',
+      hid: 'description_tires',
       name: 'description',
       content: 'Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes Reifenprofil gewährleistet eine optimale Straßenhaftung. Auf Wunsch können die Reifen auch eingelagert werden.'
     },
@@ -45,9 +45,9 @@ useSeoMeta({
   ],
   link: [
     {
-      hid: 'canonical',
+      hid: 'service_tires_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/service/tires'
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/tires'
     }
   ]
 })

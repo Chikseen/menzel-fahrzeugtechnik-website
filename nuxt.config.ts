@@ -10,6 +10,21 @@ export default defineNuxtConfig({
 
 	ssr: true,
 
+	robots: {
+		groups: [
+			{
+				userAgent: ['*'],
+				disallow: [],
+				allow: ["*"],
+			},
+		]
+	},
+
+	site: {
+		url: 'https://www.menzel-fahrzeugtechnik.de',
+		name: 'Menzel Fahrzeugtechnik'
+	},
+
 	devtools: { enabled: false },
 
 	vite: {
@@ -35,11 +50,7 @@ export default defineNuxtConfig({
 		port: 8000, // default: 3000
 	},
 
-	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet"],
-
-	robots: {
-		allow: '*',
-	},
+	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet", "@nuxtjs/sitemap"],
 
 	image: {
 		format: ["webp"],

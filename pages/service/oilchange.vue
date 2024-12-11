@@ -93,9 +93,9 @@ useSeoMeta({
     ],
     link: [
         {
-            hid: 'canonical',
+            hid: 'service_oilchange_canonical',
             rel: 'canonical',
-            href: 'https://menzel-fahrzeugtechnik.de/service/oilchange'
+            href: 'https://www.menzel-fahrzeugtechnik.de/service/oilchange'
         }
     ]
 })

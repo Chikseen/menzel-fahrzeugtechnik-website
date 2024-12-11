@@ -95,9 +95,9 @@ useSeoMeta({
   ],
   spannk: [
     {
-      hid: 'canonical',
+      hid: 'service_tuev_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/service/tuev'
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/tuev'
     }
   ]
 })

@@ -76,9 +76,9 @@ useSeoMeta({
   ],
   link: [
     {
-      hid: 'canonical',
+      hid: 'service_glasService_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/service/glasService'
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/glasService'
     }
   ]
 })

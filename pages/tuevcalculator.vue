@@ -55,6 +55,35 @@
 	</MainContentWrapper>
 </template>
 
+<script setup>
+useSeoMeta({
+	title: "Menzel - Plaketten Rechner",
+	meta: [
+		{
+			hid: 'description_tuevcalc',
+			name: 'description',
+			content: 'Mit diesem Tool können Sie schnell und einfach herausfinden, wann Sie Ihren nächsten HU/AU Untersuchungs Termin planen sollten.'
+		},
+		{
+			hid: 'keywords_tuevcalc',
+			name: 'keywords',
+			content: 'Plaketten Rechner, tuev, hu, au, Hauptuntersuchung, Abgasuntersuchung, wann, nächter'
+		},
+	],
+	link: [
+		{
+			hid: 'tuevcalculator_canonical',
+			rel: 'canonical',
+			href: 'https://www.menzel-fahrzeugtechnik.de/tuevcalculator'
+		}
+	]
+})
+definePageMeta({
+	keepalive: true,
+	scrollToTop: false,
+})
+</script>
+
 <script>
 import { GetCountDown } from "@/helper/countDownTimeHelper.js"
 import { GetCurrentYear, GetCurrentMonth, GetTuevColor } from '@/helper/tuevHelper';
@@ -215,32 +244,3 @@ export default {
 	}
 }
 </style>
-
-<script setup>
-useSeoMeta({
-	title: "Menzel - Plaketten Rechner",
-	meta: [
-		{
-			hid: 'description_tuevcalc',
-			name: 'description',
-			content: 'Mit diesem Tool können Sie schnell und einfach herausfinden, wann Sie Ihren nächsten HU/AU Untersuchungs Termin planen sollten.'
-		},
-		{
-			hid: 'keywords_tuevcalc',
-			name: 'keywords',
-			content: 'Plaketten Rechner'
-		},
-	],
-	link: [
-		{
-			hid: 'canonical',
-			rel: 'canonical',
-			href: 'https://menzel-fahrzeugtechnik.de/tuevcalculator'
-		}
-	]
-})
-definePageMeta({
-	keepalive: true,
-	scrollToTop: false,
-})
-</script>

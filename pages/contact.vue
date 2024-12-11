@@ -40,11 +40,17 @@
 					<hr>
 					<li class="contact_item">
 						<p>E-Mail:</p>
-						<a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a>
+						<span>
+							<a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a>
+							<hr>
+							<a href="mailto:rechnungen@menzel-fahrzeugtechnik.de">rechnungen@menzel-fahrzeugtechnik.de</a>
+							<hr>
+							<a href="mailto:info@menzel-fahrzeugtechnik.de">info@menzel-fahrzeugtechnik.de</a>
+						</span>
 					</li>
 					<hr>
 					<li class="contact_item">
-						<p> Telefon:</p>
+						<p>Telefon:</p>
 						<a href="tel:+034135424333">0341 35424333</a>
 					</li>
 					<hr>
@@ -99,9 +105,9 @@ useSeoMeta({
 	],
 	link: [
 		{
-			hid: 'canonical',
+			hid: 'contact_canonical',
 			rel: 'canonical',
-			href: 'https://menzel-fahrzeugtechnik.de/contact'
+			href: 'https://www.menzel-fahrzeugtechnik.de/contact'
 		}
 	]
 })

@@ -74,9 +74,9 @@ useSeoMeta({
   ],
   link: [
     {
-      hid: 'canonical',
+      hid: 'service_repair_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/service/repair'
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/repair'
     }
   ]
 })

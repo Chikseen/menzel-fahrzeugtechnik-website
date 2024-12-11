@@ -33,6 +33,10 @@
 			</div>
 			<div class="home_content_info">
 				<h2>Das sagen unsere Kunden</h2>
+				<a
+					href="https://www.google.com/search?sa=X&sca_esv=d7e7d90bd6b3a957&hl=en&authuser=0&tbm=lcl&sxsrf=ADLYWILu7dQrFkJQe-s1xJ1tkCTQY6FGuQ:1733935207026&q=Menzel+Fahrzeugtechnik+Reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2MzM1NzY3NDIyMje1MLc0NDM03sDI-IpRzjc1ryo1R8EtMaOoKrU0vSQ1OSMvM1shKLUsM7W8eBErAQUASHqSVFwAAAA&rldimm=6657371222758791613&ved=2ahUKEwjA4s-AlKCKAxVCRvEDHew0Lu8Q9fQKegQIQBAF&biw=1119&bih=785&dpr=1#lkt=LocalPoiReviews">
+					<h6>Alle bewertungen</h6>
+				</a>
 				<CommentComponent />
 			</div>
 		</div>
@@ -74,9 +78,9 @@ useSeoMeta({
 	],
 	link: [
 		{
-			hid: 'canonical',
+			hid: 'home_canonical',
 			rel: 'canonical',
-			href: 'https://menzel-fahrzeugtechnik.de/home',
+			href: 'www.https://menzel-fahrzeugtechnik.de/home',
 		},
 	],
 })

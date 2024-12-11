@@ -31,7 +31,7 @@ useSeoMeta({
     {
       hid: 'description_about',
       name: 'description',
-      content: 'Alle Informationen über denn Inhaber von Menzel Fahrzeugtechnik'
+      content: 'Ich habe mich hier in der Städtelner Straße 62 in Markkleeberg im August 2018 selbständig gemacht.Ich bin seit 1995 KFZ Meister und wagte relativ spät den Schritt zur Selbstständigkeit. Mein erlernter Beruf ist für mich immer noch Berufung, ich repariere mit Leidenschaft und Engagement Fahrzeuge aller Art mit mindestens zwei Rädern.'
     },
     {
       hid: 'keywords_about',
@@ -41,9 +41,9 @@ useSeoMeta({
   ],
   link: [
     {
-      hid: 'canonical',
+      hid: 'about_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/about'
+      href: 'www.https://menzel-fahrzeugtechnik.de/about'
     }
   ]
 })

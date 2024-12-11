@@ -54,9 +54,9 @@ useSeoMeta({
   ],
   link: [
     {
-      hid: 'canonical',
+      hid: 'service_ac_canonical',
       rel: 'canonical',
-      href: 'https://menzel-fahrzeugtechnik.de/service/ac'
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/ac'
     }
   ]
 })
