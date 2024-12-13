@@ -4,6 +4,14 @@
     <div class="imageContainer">
       <ImageComponent image="teuv_sign.webp" />
     </div>
+    <div class="checked">
+      <div class="checked_list">
+        <p>Erhöhte Sicherheit</p>
+        <p>Schnell wieder unterwegs</p>
+        <p>Frühzeitige Erkennung von Mängeln</p>
+        <p>Reduzierte Umweltbelastung</p>
+      </div>
+    </div>
     <div class="serviceContent_banner">
       <h3>Prüfintervall</h3>
       <p>Neuwagen müssen nach drei Jahren zur Haupt- und Abgasuntersuchung, danach wechselt das Prüfintervall in den

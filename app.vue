@@ -95,4 +95,32 @@ button {
   color: $light-font-color;
   @include theme_based_morphism_shadow;
 }
+
+.checked {
+  margin: $gap 0;
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
+
+    p {
+      position: relative;
+      padding-left: 2rem;
+      margin: 0;
+    }
+
+    ::before {
+      content: url('/icons/checkmarkIcon.svg');
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      margin: auto;
+    }
+  }
+}
 </style>

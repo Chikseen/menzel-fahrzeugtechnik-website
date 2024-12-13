@@ -6,6 +6,14 @@
       <ImageComponent image="tire_machine_II.webp" />
       <ImageComponent image="tire_upclose.webp" />
     </div>
+    <div class="checked">
+      <div class="checked_list">
+        <p>Verbesserte Fahrsicherheit</p>
+        <p>Besserer Grip und Traktion</p>
+        <p>Erhöhter Fahrkomfort</p>
+        <p>Optimale Kraftstoffeffizienz</p>
+      </div>
+    </div>
     <div class="serviceContent_banner">
       <p>
         Der Reifenwechsel sollte zwei Mal im Jahr erfolgen, denn nur ein den Wetterverhältnissen angepasstes

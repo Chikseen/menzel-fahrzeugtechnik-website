@@ -10,6 +10,14 @@
         <div class="imageContainer">
             <ImageComponent image="oil_change_device.webp" />
         </div>
+        <div class="checked">
+            <div class="checked_list">
+                <p>Reduzierter Motorverschleiß</p>
+                <p>Verbesserte Schmierung</p>
+                <p>Erhöhte Zuverlässigkeit</p>
+                <p>Effiziente Leistung</p>
+            </div>
+        </div>
         <div class="serviceContent_banner">
             <h3>Empfohlene Intervalle</h3>
             <p>

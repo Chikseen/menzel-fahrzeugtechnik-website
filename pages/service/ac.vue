@@ -14,6 +14,14 @@
     <div class="imageContainer">
       <ImageComponent image="clima_device.webp" />
     </div>
+    <div class="checked">
+      <div class="checked_list">
+        <p>Verbesserte Luftqualität</p>
+        <p>Optimale Luftentfeuchtung</p>
+        <p>Vermeidung von Beschlag auf den Scheiben</p>
+        <p>Angenehme Temperatur im Auto</p>
+      </div>
+    </div>
     <div class="serviceContent_banner">
       <h3>So funktioniert die Klimaanlage im Auto</h3>
       <p>

@@ -5,6 +5,14 @@
       Parkrempler, größere Blechschäden oder umfangreiche Unfallschäden handelt - Wir stehen
       Ihnen zur Verfügung, um Ihr Fahrzeug wieder in einen verkehrssicheren und optisch einwandfreien Zustand zu
       versetzen.</p>
+    <div class="checked">
+      <div class="checked_list">
+        <p>Wiederherstellung der Fahrzeugstruktur</p>
+        <p>Verwendung von Originalteilen</p>
+        <p>Sicherstellung der Fahrzeugsicherheit</p>
+        <p>Vermeidung von Folgeschäden</p>
+      </div>
+    </div>
     <div class="serviceContent_banner">
       <h3>Schadensbegutachtung</h3>
       <p>

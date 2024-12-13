@@ -43,7 +43,8 @@
 						<span>
 							<a href="mailto:menzel-fahrzeugtechnik@t-online.de">menzel-fahrzeugtechnik@t-online.de</a>
 							<hr>
-							<a href="mailto:rechnungen@menzel-fahrzeugtechnik.de">rechnungen@menzel-fahrzeugtechnik.de</a>
+							<a
+								href="mailto:rechnungen@menzel-fahrzeugtechnik.de">rechnungen@menzel-fahrzeugtechnik.de</a>
 							<hr>
 							<a href="mailto:info@menzel-fahrzeugtechnik.de">info@menzel-fahrzeugtechnik.de</a>
 						</span>
@@ -75,7 +76,7 @@ export default {
 	},
 	methods: {
 		isToday(dayNumber) {
-			return dayNumber == (new Date().getDay()) + 6 % 7
+			return dayNumber == ((new Date().getDay()) + 6) % 7
 		},
 		startNavigation() {
 			window.open(`https://www.google.com/maps?saddr=My+Location&daddr=Städtelner+Str+62+04416+Markkleeberg`);

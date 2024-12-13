@@ -11,6 +11,14 @@
     <div class="imageContainer">
       <ImageComponent image="holding_windshield.webp" />
     </div>
+    <div class="checked">
+      <div class="checked_list">
+        <p>Verbesserte Sicht</p>
+        <p>Erhöhte Sicherheit</p>
+        <p>Weniger Blendung</p>
+        <p>Strukturelle Integrität des Fahrzeugs</p>
+      </div>
+    </div>
     <div class="serviceContent_banner">
       <h3>Steinschlagreparatur</h3>
       <p>
