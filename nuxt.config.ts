@@ -54,8 +54,10 @@ export default defineNuxtConfig({
 
 	image: {
 		format: ["webp"],
-		provider: "edgio",
-		baseURL: ""
+		provider: "cloudflare",
+		cloudflare: {
+			baseURL: 'https://cdn.menzel-fahrzeugtechnik.de'
+		}
 	},
 
 	app: {
@@ -96,7 +98,7 @@ export default defineNuxtConfig({
 	},
 	runtimeConfig: {
 		public: {
-			contentBaseUrl: "https://mfzt-cdn.azureedge.net",
+			contentBaseUrl: "https://cdn.menzel-fahrzeugtechnik.de",
 			containerName: "images",
 			openingHoursApi: "https://openinghours-function.azurewebsites.net/api/OpeningHoursFunction",
 			reviewApi: "https://reviews-function.azurewebsites.net/api/ReviewHttpFunction",

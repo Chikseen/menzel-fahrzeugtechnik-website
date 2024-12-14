@@ -5,7 +5,7 @@
 				<NuxtImg fit="outside"
 					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
 					:placeholder="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II_placeholder.webp'}`"
-					provider="edgio" quality="100" alt="background Image"
+					provider="cloudflare" quality="100" alt="background Image"
 					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960 2xl:2560 3xl:3840 " />
 				<span class="home_image_text">
 					<span class="home_image_text_titel">
