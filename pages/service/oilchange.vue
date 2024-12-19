@@ -99,13 +99,6 @@ useSeoMeta({
             content: 'Ölwechsel, Öl, tausch, wechsel, Motoren, Umweltgerecht'
         },
     ],
-    link: [
-        {
-            hid: 'service_oilchange_canonical',
-            rel: 'canonical',
-            href: 'https://www.menzel-fahrzeugtechnik.de/service/oilchange'
-        }
-    ]
 })
 definePageMeta({
     keepalive: true,

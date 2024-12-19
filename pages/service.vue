@@ -22,13 +22,6 @@ useSeoMeta({
 			content: 'Leistungen, Services, Übersicht, alle'
 		},
 	],
-	link: [
-		{
-			hid: 'service_canonical',
-			rel: 'canonical',
-			href: 'https://www.menzel-fahrzeugtechnik.de/service'
-		}
-	]
 })
 definePageMeta({
 	keepalive: true,

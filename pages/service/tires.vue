@@ -51,13 +51,6 @@ useSeoMeta({
       content: 'Reifen, Räder, Wechsel, Lagerung, Winterreifen, Sommerreifen, Felgen, umziehen, auswuchten'
     },
   ],
-  link: [
-    {
-      hid: 'service_tires_canonical',
-      rel: 'canonical',
-      href: 'https://www.menzel-fahrzeugtechnik.de/service/tires'
-    }
-  ]
 })
 definePageMeta({
   keepalive: true,

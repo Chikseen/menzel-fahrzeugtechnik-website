@@ -53,13 +53,6 @@ useSeoMeta({
 			content: 'Impressum'
 		},
 	],
-	link: [
-		{
-			hid: 'impressum_canonical',
-			rel: 'canonical',
-			href: 'https://www.menzel-fahrzeugtechnik.de/impressum'
-		}
-	]
 })
 definePageMeta({
 	keepalive: true,

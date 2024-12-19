@@ -101,13 +101,6 @@ useSeoMeta({
       content: 'Hauptuntersuchung, Abgasuntersuchung, TÜV, AU, Süd, '
     },
   ],
-  spannk: [
-    {
-      hid: 'service_tuev_canonical',
-      rel: 'canonical',
-      href: 'https://www.menzel-fahrzeugtechnik.de/service/tuev'
-    }
-  ]
 })
 definePageMeta({
   keepaspanve: true,

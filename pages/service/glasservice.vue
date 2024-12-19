@@ -82,13 +82,6 @@ useSeoMeta({
       content: 'Glasschäden, Frontscheibentausch, Garglas, Steinschlag, Riss, Scheibe, Tausch, '
     },
   ],
-  link: [
-    {
-      hid: 'service_glasService_canonical',
-      rel: 'canonical',
-      href: 'https://www.menzel-fahrzeugtechnik.de/service/glasService'
-    }
-  ]
 })
 definePageMeta({
   keepalive: true,
