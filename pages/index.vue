@@ -86,16 +86,6 @@ definePageMeta({
 	keepalive: true,
 	scrollToTop: false,
 })
-useSchemaOrg([
-	{
-		'@type': 'Review',
-		"reviewRating": {
-			"@type": "Rating",
-			"ratingValue": 5,
-			"bestRating": 5
-		},
-	}
-])
 </script>
 
 <style lang="scss" scoped>
