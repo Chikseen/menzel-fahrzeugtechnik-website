@@ -25,6 +25,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
   title: "Menzel - Über mich",
   meta: [
@@ -51,4 +53,12 @@ definePageMeta({
   keepalive: true,
   scrollToTop: false,
 })
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Über mich', item: '/about' }
+    ]
+  }),
+])
 </script>

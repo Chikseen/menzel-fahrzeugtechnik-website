@@ -15,7 +15,9 @@
 		"@nuxtjs/seo": "^2.0.2",
 		"@nuxtjs/sitemap": "^7.0.0",
 		"@types/node": "^18.17.0",
+		"@unhead/schema-org": "^1.11.14",
 		"nuxt": "3.13.1",
+		"nuxt-schema-org": "^4.0.4",
 		"nuxt3-leaflet": "^1.0.13",
 		"sass": "^1.58.3",
 		"sass-loader": "^13.2.0"

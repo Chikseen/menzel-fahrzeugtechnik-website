@@ -56,6 +56,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
 	title: "Menzel - Plaketten Rechner",
 	meta: [
@@ -74,7 +76,7 @@ useSeoMeta({
 		{
 			hid: 'tuevcalculator_canonical',
 			rel: 'canonical',
-			href: 'https://www.menzel-fahrzeugtechnik.de/tuevcalculator'
+			href: 'www.menzel-fahrzeugtechnik.de/tuevcalculator'
 		}
 	]
 })
@@ -82,6 +84,15 @@ definePageMeta({
 	keepalive: true,
 	scrollToTop: false,
 })
+useSchemaOrg([
+	defineBreadcrumb({
+		itemListElement: [
+			{ name: 'Home', item: '/' },
+			{ name: 'Plaketten Rechner', item: '/tuevcalculator' }
+		]
+	}),
+])
+
 </script>
 
 <script>

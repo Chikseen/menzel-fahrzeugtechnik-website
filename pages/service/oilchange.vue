@@ -85,6 +85,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
     title: "Menzel - Ölwechel",
     meta: [
@@ -111,4 +113,13 @@ definePageMeta({
     keepalive: true,
     scrollToTop: false,
 })
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Services', item: '/services' },
+      { name: 'Ölwechel', item: '/services/oilchange' }
+    ]
+  }),
+])
 </script>

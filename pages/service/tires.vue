@@ -37,6 +37,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
   title: "Menzel - Reifen und Räder",
   meta: [
@@ -63,4 +65,13 @@ definePageMeta({
   keepalive: true,
   scrollToTop: false,
 })
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Services', item: '/services' },
+      { name: 'Reifen und Räder', item: '/services/tires' }
+    ]
+  }),
+])
 </script>

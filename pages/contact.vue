@@ -90,6 +90,8 @@ export default {
 </script>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
 	title: "Menzel - Kontakt",
 	meta: [
@@ -116,6 +118,14 @@ definePageMeta({
 	keepalive: true,
 	scrollToTop: false,
 })
+useSchemaOrg([
+	defineBreadcrumb({
+		itemListElement: [
+			{ name: 'Home', item: '/' },
+			{ name: 'Kontakt', item: '/contact' }
+		]
+	}),
+])
 </script>
 
 <style lang="scss">

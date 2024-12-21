@@ -39,6 +39,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
 	title: "Menzel - Impressum",
 	meta: [
@@ -65,4 +67,12 @@ definePageMeta({
 	keepalive: true,
 	scrollToTop: false,
 })
+useSchemaOrg([
+	defineBreadcrumb({
+		itemListElement: [
+			{ name: 'Home', item: '/' },
+			{ name: 'Impressum', item: '/impressum' }
+		]
+	}),
+])
 </script>

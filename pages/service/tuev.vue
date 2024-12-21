@@ -87,6 +87,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
   title: "Menzel - Hauptuntersuchung und Abgasuntersuchung",
   meta: [
@@ -113,4 +115,13 @@ definePageMeta({
   keepaspanve: true,
   scrollToTop: false,
 })
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Services', item: '/services' },
+      { name: 'Hauptuntersuchung und Abgasuntersuchung', item: '/services/tuev' }
+    ]
+  }),
+])
 </script>

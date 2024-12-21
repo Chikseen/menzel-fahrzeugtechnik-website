@@ -68,6 +68,8 @@
 </template>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
   title: "Menzel - Glasschäden",
   meta: [
@@ -94,4 +96,13 @@ definePageMeta({
   keepalive: true,
   scrollToTop: false,
 })
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Services', item: '/services' },
+      { name: 'Glasschäden', item: '/services/glasService' }
+    ]
+  }),
+])
 </script>

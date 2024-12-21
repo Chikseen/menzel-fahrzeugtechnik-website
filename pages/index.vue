@@ -32,7 +32,7 @@
 				<ServiceSelection />
 			</div>
 			<div class="home_content_info">
-				<h2>Das sagen unsere Kunden</h2>	
+				<h2>Das sagen unsere Kunden</h2>
 				<CommentComponent />
 			</div>
 		</div>
@@ -57,6 +57,8 @@ export default {
 </script>
 
 <script setup>
+import { useSchemaOrg } from '#imports'
+
 useSeoMeta({
 	title: 'Menzel - Home',
 	meta: [
@@ -76,14 +78,24 @@ useSeoMeta({
 		{
 			hid: 'home_canonical',
 			rel: 'canonical',
-			href: 'www.https://menzel-fahrzeugtechnik.de/home',
+			href: 'www.menzel-fahrzeugtechnik.de',
 		},
-	],
+	]
 })
 definePageMeta({
 	keepalive: true,
 	scrollToTop: false,
 })
+useSchemaOrg([
+	{
+		'@type': 'Review',
+		"reviewRating": {
+			"@type": "Rating",
+			"ratingValue": 5,
+			"bestRating": 5
+		},
+	}
+])
 </script>
 
 <style lang="scss" scoped>

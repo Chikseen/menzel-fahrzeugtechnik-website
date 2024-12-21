@@ -1,3 +1,5 @@
+import { defineLocalBusiness } from 'nuxt-schema-org/schema'
+
 export default defineNuxtConfig({
 	/// Tempoary Fix for https://github.com/nuxt/cli/issues/193
 	hooks: {
@@ -50,7 +52,7 @@ export default defineNuxtConfig({
 		port: 8000, // default: 3000
 	},
 
-	modules: ["@nuxt/image", "nuxt3-leaflet", "@nuxtjs/robots", "@nuxtjs/leaflet", "@nuxtjs/sitemap"],
+	modules: ["@nuxt/image", "@nuxtjs/robots", "@nuxtjs/leaflet", "@nuxtjs/sitemap", "nuxt-schema-org"],
 
 	image: {
 		format: ["webp"],
@@ -106,4 +108,66 @@ export default defineNuxtConfig({
 	},
 
 	compatibilityDate: "2024-08-16",
+
+	schemaOrg: {
+		identity: defineLocalBusiness({
+			'@type': 'AutomotiveBusiness',
+
+			'name': 'Menzel Fahrzeugtechnik',
+			'description': 'Ihre freie Kfz-Meisterwerkstatt in Markkleeberg',
+			'url': 'www.menzel-fahrzeugtechnik.de',
+
+			'address': {
+				streetAddress: 'Städtelner Str. 62',
+				addressLocality: 'Markkleeberg',
+				postalCode: '04416',
+				addressCountry: 'DE'
+			},
+
+			'geo': {
+				'@type': 'GeoCoordinates',
+				'latitude': '51.271718',
+				'longitude': '12.3698214'
+			},
+
+			'telephone': '+49 0160 7725199',
+			'email': 'info@menzel-fahrzeugtechnik.de',
+			'openingHoursSpecification': [
+				{
+					dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+					opens: '08:00:00',
+					closes: '16:00:00'
+				}
+			],
+
+			'priceRange': '$',
+
+			'image': [
+				'https://cdn.menzel-fahrzeugtechnik.de/images/standing_under_car_II.webp',
+				'https://cdn.menzel-fahrzeugtechnik.de/images/teuv_sign.webp',
+				'https://cdn.menzel-fahrzeugtechnik.de/images/holding_windshield.webp'
+			],
+			'logo': 'https://www.menzel-fahrzeugtechnik.de/favicon.ico',
+
+			'paymentAccepted': [
+				'Cash',
+				'Credit Card'
+			],
+			'currenciesAccepted': 'EUR',
+
+			'isAccessibleForDisabled': true,
+			'amenityFeature': [
+				{
+					'@type': 'LocationFeatureSpecification',
+					'name': 'Parking',
+					'value': true
+				},
+				{
+					'@type': 'LocationFeatureSpecification',
+					'name': 'Wheelchair Accessible',
+					'value': true
+				}
+			],
+		}),
+	}
 });

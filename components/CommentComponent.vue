@@ -1,5 +1,5 @@
 <template>
-	<div v-if="reviews" class="reviews">
+	<div v-if="reviews" class="reviews" data-nosnippet>
 		<a class="reviews_review" v-for="(review) in reviews.Reviews" :key="review.GoogleMapsUri"
 			:href="review.GoogleMapsUri">
 			<div>

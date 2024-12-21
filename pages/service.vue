@@ -12,14 +12,8 @@ useSeoMeta({
 	title: "Menzel - Leistungen",
 	meta: [
 		{
-			hid: 'description_service',
-			name: 'description',
-			content: 'Alle Leistungen und Angebote von Menzel Fahrzeugtechnik'
-		},
-		{
-			hid: 'keywords_service',
-			name: 'keywords',
-			content: 'Leistungen, Services, Übersicht, alle'
+			name: 'robots',
+			content: 'noindex'
 		},
 	],
 	link: [
@@ -28,7 +22,7 @@ useSeoMeta({
 			rel: 'canonical',
 			href: 'https://www.menzel-fahrzeugtechnik.de/service'
 		}
-	]
+	],
 })
 definePageMeta({
 	keepalive: true,
