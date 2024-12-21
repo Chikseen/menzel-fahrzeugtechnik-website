@@ -72,6 +72,13 @@ useSeoMeta({
 			content: 'Home. index, KFZ, services, Leistungen',
 		},
 	],
+	link: [
+		{
+			hid: 'home_canonical',
+			rel: 'canonical',
+			href: 'www.https://menzel-fahrzeugtechnik.de/home',
+		},
+	],
 })
 definePageMeta({
 	keepalive: true,

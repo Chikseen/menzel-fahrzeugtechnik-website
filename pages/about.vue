@@ -39,6 +39,13 @@ useSeoMeta({
       content: 'About, Menzel, Dirk, Inhaber, Meister, Silbern'
     },
   ],
+  link: [
+    {
+      hid: 'about_canonical',
+      rel: 'canonical',
+      href: 'www.https://menzel-fahrzeugtechnik.de/about'
+    }
+  ]
 })
 definePageMeta({
   keepalive: true,

@@ -80,6 +80,13 @@ useSeoMeta({
       content: 'Unfall, Reperatur, Unabhänig, Frei, schnell, gut, Versicherung, Abhol, Bring, Service, Ersatz, Wagen'
     },
   ],
+  link: [
+    {
+      hid: 'service_repair_canonical',
+      rel: 'canonical',
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/repair'
+    }
+  ]
 })
 definePageMeta({
   keepalive: true,

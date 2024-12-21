@@ -102,6 +102,13 @@ export default {
                     content: 'Leistungen'
                 },
             ],
+            link: [
+                {
+                    hid: 'canonical',
+                    rel: 'canonical',
+                    href: 'https://menzel-fahrzeugtechnik.de/service'
+                }
+            ]
         }
     },
     methods: {

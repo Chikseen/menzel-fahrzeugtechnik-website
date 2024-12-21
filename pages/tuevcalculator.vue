@@ -70,6 +70,13 @@ useSeoMeta({
 			content: 'Plaketten Rechner, tuev, hu, au, Hauptuntersuchung, Abgasuntersuchung, wann, nächter'
 		},
 	],
+	link: [
+		{
+			hid: 'tuevcalculator_canonical',
+			rel: 'canonical',
+			href: 'https://www.menzel-fahrzeugtechnik.de/tuevcalculator'
+		}
+	]
 })
 definePageMeta({
 	keepalive: true,

@@ -104,6 +104,13 @@ useSeoMeta({
 			content: 'Öffnungszeiten, Adresse, Anschrift, EMail, Telefon, Karte'
 		},
 	],
+	link: [
+		{
+			hid: 'contact_canonical',
+			rel: 'canonical',
+			href: 'https://www.menzel-fahrzeugtechnik.de/contact'
+		}
+	]
 })
 definePageMeta({
 	keepalive: true,

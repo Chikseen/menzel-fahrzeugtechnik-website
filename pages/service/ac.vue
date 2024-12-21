@@ -60,6 +60,13 @@ useSeoMeta({
       content: 'Klimaanlagenservice, Klima, AC, Tausch'
     },
   ],
+  link: [
+    {
+      hid: 'service_ac_canonical',
+      rel: 'canonical',
+      href: 'https://www.menzel-fahrzeugtechnik.de/service/ac'
+    }
+  ]
 })
 definePageMeta({
   keepalive: true,
