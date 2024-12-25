@@ -1,5 +1,6 @@
 let openingHoursCache = null
 let reviewCache = null
+let isVaction = false
 
 export default {
 	async getOpeningHours() {
@@ -10,6 +11,10 @@ export default {
 		const response = await fetch(openingHoursEndpoint)
 		const openingHours = await response.json()
 		openingHoursCache = openingHours
+
+		if (openingHours.CurrentOpeningHours.NextOpenTime == openingHours.CurrentOpeningHours.NextCloseTime)
+			isVaction = true
+
 		return openingHours;
 	},
 
@@ -22,5 +27,7 @@ export default {
 		const reviews = await response.json()
 		reviewCache = reviews
 		return reviews;
-	}
+	},
+
+	isVaction 
 }

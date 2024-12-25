@@ -8,13 +8,6 @@
 </template>
 
 <style lang="scss">
-/*
-* {
-  outline: 1px #df0808 solid;
-  background-color: #5abd321a;
-}
-*/
-
 html,
 body {
   padding: 0;
@@ -63,8 +56,7 @@ body {
   gap: $gap;
 
   &_banner {
-    padding: 10px;
-    margin: 0 10px;
+    padding: 15px;
     border-radius: $border-radius;
     @include theme_based_morphism_shadow;
   }

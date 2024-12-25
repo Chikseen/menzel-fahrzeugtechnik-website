@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .counter {
 	display: flex;
 	justify-content: center;

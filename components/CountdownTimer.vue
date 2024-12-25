@@ -1,5 +1,8 @@
 <template>
-	<div v-if="time != null" class="CountdownTimer" @click="cycleForceFrame()">
+	<div v-if="isHoliday" class="CountdownTimer">
+		<p class="CountdownTimer_vaction">{{ state }}</p>
+	</div>
+	<div v-else-if="time != null" class="CountdownTimer" @click="cycleForceFrame()">
 		<p class="CountdownTimer_text">{{ state }}</p>
 		<CounterComponent :input="time[0] * 1" style="margin: auto 5px; width: min-content" />
 		<p class="CountdownTimer_text">{{ time[1] }}</p>
@@ -18,19 +21,29 @@ export default {
 			time: null,
 			forceFrame: -1,
 			timer: null,
+			isHoliday: false
 		}
 	},
 	methods: {
 		async setFuture() {
 			const openingHours = await apiService.getOpeningHours();
 
+			const nextOpenTime = openingHours.CurrentOpeningHours.NextOpenTime
+			const nextCloseTime = openingHours.CurrentOpeningHours.NextCloseTime
+
+			if (nextOpenTime == nextCloseTime) {
+				this.state = "Vorübergehend wegen Urlaub geschlossen, besuchen sie uns später wieder."
+				this.isHoliday = true
+				return
+			}
+
 			if (openingHours.CurrentOpeningHours.OpenNow) {
 				this.state = "Schließt in"
-				this.future = openingHours.CurrentOpeningHours.NextCloseTime
+				this.future = nextCloseTime
 			}
 			else {
 				this.state = "Öffnet in"
-				this.future = openingHours.CurrentOpeningHours.NextOpenTime
+				this.future = nextOpenTime
 			}
 		},
 		calc() {
@@ -75,11 +88,12 @@ export default {
 
 	&_text {
 		line-height: 0;
-	}
-
-	p {
 		margin: auto 0;
 		text-wrap: nowrap;
+	}
+
+	&_vaction {
+		margin: auto 0;
 	}
 }
 </style>

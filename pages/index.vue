@@ -23,7 +23,8 @@
 			</div>
 			<div id="services" class="home_content_info">
 				<h2>Alles für dein Fahrzeug</h2>
-				<p class="serviceContent_banner">Unsere Werkstatt bietet eine Vielzahl von Dienstleistungen an, um
+				<p style="margin: 10px;" class="serviceContent_banner">Unsere Werkstatt bietet eine Vielzahl von
+					Dienstleistungen an, um
 					sicherzustellen, dass Ihr Fahrzeug
 					in bestem Zustand bleibt. Dazu gehören regelmäßige Inspektionen und Wartungen, Reparaturen aller
 					Art, Unfallinstandsetzungen, Reifenservice und -wechsel, Ölwechsel und Flüssigkeitsprüfungen,
@@ -31,6 +32,7 @@
 					Systemprüfungen.</p>
 				<ServiceSelection />
 			</div>
+
 			<div class="home_content_info">
 				<h2>Das sagen unsere Kunden</h2>
 				<CommentComponent />
@@ -57,8 +59,6 @@ export default {
 </script>
 
 <script setup>
-import { useSchemaOrg } from '#imports'
-
 useSeoMeta({
 	title: 'Menzel - Home',
 	meta: [
@@ -99,8 +99,6 @@ definePageMeta({
 	width: 100%;
 	height: 100vh;
 	padding: 0;
-	//overflow-x: hidden;
-	//overflow-y: scroll;
 	scroll-behavior: smooth;
 
 	&_content {
@@ -115,9 +113,13 @@ definePageMeta({
 			flex-direction: column;
 			gap: $gap;
 			min-height: calc(100vh - $header_hight);
-			padding: 15px;
+			padding: 15px 0;
 			z-index: 10;
 			@include theme_based_background;
+
+			>h2 {
+				margin: 15px;
+			}
 		}
 	}
 

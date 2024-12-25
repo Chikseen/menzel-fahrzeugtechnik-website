@@ -34,13 +34,7 @@ export default defineNuxtConfig({
 			preprocessorOptions: {
 				scss: {
 					api: 'modern-compiler',
-					additionalData: `
-						@import  "@/assets/styles/global.scss";
-						@import  "@/assets/styles/globalAnimations.scss";
-						@import  "@/assets/styles/akzent_blue_cta.scss";
-						@import  "@/assets/styles/morphism_shadow.scss";
-						@import  "@/assets/styles/theme.scss";
-						`
+					additionalData: '@use "@/assets/styles/_global.scss" as *;',
 				},
 			},
 		},

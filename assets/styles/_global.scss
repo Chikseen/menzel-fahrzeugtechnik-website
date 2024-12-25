@@ -1,0 +1,76 @@
+@use "sass:color";
+
+@forward "@/assets/styles/_morphism_shadow.scss";
+@forward "@/assets/styles/_globalAnimations.scss";
+
+$company_blue: #121F3A;
+$akzent_blue: #0e317c;
+
+$icon_base_grey: #d1d1d1;
+$icon_active_grey: #474747;
+
+$header_hight: 4rem;
+$mobile_threshold: 450px;
+$max_content_width: 1000px;
+
+$border-radius: 10px;
+$gap: 20px;
+
+// theme
+$light-font-color: #ebecf0;
+$dark-font-color: #181818;
+
+$light-background-color: #ffffff;
+$dark-background-color: #181818;
+
+@mixin theme_based_background() {
+	@media (prefers-color-scheme: dark) {
+		background-color: $dark-background-color;
+		color: $light-font-color;
+		transition: 1s all;
+
+		a {
+			color: $light-font-color;
+		}
+	}
+
+	@media (prefers-color-scheme: light) {
+		background-color: $light-background-color;
+		color: $dark-font-color;
+		transition: 1s all;
+
+		a {
+			color: $dark-font-color;
+		}
+	}
+}
+
+// akzent_blue_cta
+$base_shadow: 4px 4px 12px #000000a1, -3px -3px 12px color.adjust($company_blue, $lightness: 10%);
+$base_shadow_hover: 6px 6px 12px #000000a1, -5px -5px 12px color.adjust($company_blue, $lightness: 12%);
+$base_shadow_mono: 2px 2px 12px #000000a1, -3px -3px 12px #ffffff1a;
+$base_shadow_mono_hover: 6px 6px 12px #0000001a, -5px -5px 12px #ffffff1a;
+
+@mixin akzent_blue_cta() {
+	background-color: $company_blue;
+	color: $light-font-color;
+	box-shadow: $base_shadow;
+	border-radius: $border-radius;
+	transition: all 0.15s;
+
+	&:hover {
+		box-shadow: $base_shadow_hover;
+	}
+}
+
+@mixin mono_akzent_blue_cta() {
+	background-color: $company_blue;
+	color: $light-font-color;
+	box-shadow: $base_shadow_mono;
+	border-radius: $border-radius;
+	transition: all 0.15s;
+
+	&:hover {
+		box-shadow: $base_shadow_mono_hover;
+	}
+}

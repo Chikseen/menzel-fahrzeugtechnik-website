@@ -68,8 +68,6 @@ export default {
 		@include theme_based_background;
 		@include theme_based_morphism_shadow;
 
-
-
 		&_content {
 			display: flex;
 			flex-direction: column;
@@ -89,12 +87,12 @@ export default {
 
 					svg {
 						margin: auto 0;
-						height: 20px;
+						height: 14px;
 					}
 				}
 
 				&_image {
-					max-height: 75px;
+					height: 2rem;
 				}
 			}
 
