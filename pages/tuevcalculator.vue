@@ -238,9 +238,13 @@ export default {
 	&_result {
 		max-width: calc(100vw - 50px);
 		min-height: 250px;
+		margin: auto;
+
 
 		&_counter {
 			max-width: 100%;
+			height: 1rem;
+			line-height: 1rem;
 			display: flex;
 			flex-wrap: wrap;
 			gap: 5px;
@@ -251,6 +255,10 @@ export default {
 				display: flex;
 				gap: 5px;
 			}
+		}
+
+		p {
+			font-size: 1.5rem !important;
 		}
 	}
 }

@@ -13,6 +13,10 @@
 			<NuxtLink class="menuServiceView_overview_section_container" to="/impressum">
 				<p>Impressum</p>
 			</NuxtLink>
+			<NuxtLink class="menuServiceView_overview_section_container"  style="padding: 5px;" to="https://www.keutelwebservices.de/">
+				<p>Erstellt und verwaltet von</p>
+				<TKWSLogo />
+			</NuxtLink>
 		</span>
 		<span class="menuServiceView_overview_section">
 			<NuxtLink class="menuServiceView_overview_section_container" to="/tuevcalculator">

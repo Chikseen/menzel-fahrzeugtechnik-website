@@ -44,6 +44,7 @@
 				height: 75px;
 				width: 100%;
 				border-bottom: 1px solid $icon_base_grey;
+				box-sizing: border-box;
 
 				&_openhours {
 					margin-top: auto;

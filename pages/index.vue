@@ -4,9 +4,8 @@
 			<div class="home_image">
 				<NuxtImg fit="outside"
 					:src="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II.webp'}`"
-					:placeholder="`${config.public.contentBaseUrl}/${config.public.containerName}/${'standing_under_car_II_placeholder.webp'}`"
-					provider="cloudflare" quality="100" alt="background Image"
-					sizes="150px xs:300px sm:500px md:750px lg:1250 xl:1500 xxl:1960 2xl:2560 3xl:3840 " />
+					provider="cloudflare" quality="90" alt="background Image"
+					sizes="xs:250px sm:400px md:600px lg:900 xl:1250 xxl:1980" />
 				<span class="home_image_text">
 					<span class="home_image_text_titel">
 						<span>

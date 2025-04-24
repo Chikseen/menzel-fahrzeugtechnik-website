@@ -20,20 +20,16 @@
 		<hr>
 		<div>
 			<h2>Betreiber der Webseite</h2>
-			<p>Name: Tim Keutel</p>
+			<NuxtLink to="https://www.keutelwebservices.de/">
+				<TKWSLogo style="padding: 5px; height: 100px; " />
+			</NuxtLink>
+			<p>Name: Tim Keutel Web Services</p>
 			<p>Adresse: 04564 Böhlen Germany</p>
-			<p>Telefon: <a href="tel:+49 62929704">0176 62929704</a></p>
+			<p>Telefon: <a href=" tel:+49 176 560 870 39">0176 560 870 39</a></p>
 			<p>
 				E-Mail:
-				<a href="mailto:tim@keutel.me">tim@keutel.me</a>
+				<a href="mailto:tim@keutelwebservices.de">tim@keutelwebservices.de</a>
 			</p>
-			<p>
-				Source:
-				<a
-					href="https://github.com/Chikseen/menzel-fahrzeugtechnik-website">Github/Chikseen/menzel-fahrzeugtechnik-website</a>
-			</p>
-			<p>Sie haben interesse an einer eigenen Website?</p>
-			<p>Kontakieren sie mich!</p>
 		</div>
 	</MainContentWrapper>
 </template>
