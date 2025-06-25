@@ -7,13 +7,21 @@ export default {
 		if (openingHoursCache != null)
 			return openingHoursCache
 
-		const openingHoursEndpoint = useRuntimeConfig()?.public?.openingHoursApi
-		const response = await fetch(openingHoursEndpoint)
-		const openingHours = await response.json()
-		openingHoursCache = openingHours
 
-		if (openingHours.CurrentOpeningHours.NextOpenTime == openingHours.CurrentOpeningHours.NextCloseTime)
-			isVaction = true
+		const openingHours = {
+			CurrentOpeningHours:
+			{
+				WeekdayDescriptions: [
+					"Monatg: 8 Uhr - 16 Uhr",
+					"Dienstag: 8 Uhr - 16 Uhr",
+					"Mittwoch: 8 Uhr - 16 Uhr",
+					"Donerstag: 8 Uhr - 16 Uhr",
+					"Freitag: 8 Uhr - 16 Uhr",
+					"Samstag: Geschlossen",
+					"Sonntag: Geschlossen"
+				]
+			}
+		}
 
 		return openingHours;
 	},
@@ -29,5 +37,5 @@ export default {
 		return reviews;
 	},
 
-	isVaction 
+	isVaction
 }

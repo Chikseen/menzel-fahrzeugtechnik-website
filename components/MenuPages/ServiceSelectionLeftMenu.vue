@@ -23,7 +23,7 @@
 				<p>Plaketten Rechner</p>
 			</NuxtLink>
 			<div class="menuServiceView_overview_section_container menuServiceView_overview_container_openhours">
-				<CountdownTimer />
+
 			</div>
 		</span>
 	</div>

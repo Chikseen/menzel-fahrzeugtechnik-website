@@ -10,20 +10,16 @@
 			</div>
 			<div class="contact_box">
 				<template v-if="weekdayDescriptions">
-					<CountdownTimer />
 					<ul class="contact" v-for="(day, dayNumber) in weekdayDescriptions" :key="day">
 						<div class="contact_box_openingHoursText">
 							<p class="contact_box_openingHoursText_today" v-if="isToday(dayNumber)"></p>
 							<p :class="{ 'contact_box_openingHoursText_today_text': isToday(dayNumber) }"> {{
-								day.split(/:\s/)[0] }} </p>
+								day.split(/:/)[0] }} </p>
 							<p :class="{ 'contact_box_openingHoursText_today_text': isToday(dayNumber) }"> {{
-								day.split(/:\s/)[1] }} </p>
+								day.split(/:/)[1] }} </p>
 						</div>
 						<hr v-if="dayNumber != weekdayDescriptions.length - 1">
 					</ul>
-				</template>
-				<template v-else>
-					Öffnungszeiten werden geladen...
 				</template>
 			</div>
 			<div class="contact_box">
